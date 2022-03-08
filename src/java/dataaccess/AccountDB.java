@@ -21,9 +21,11 @@ public class AccountDB {
                 int account_id = rs.getInt(1);
                 String user_name = rs.getString(2);
                 String password = rs.getString(3);
-                String profile = rs.getString(4);                
+                String profile = rs.getString(4); 
+                String resetPasswordUuid = rs.getString(5);
+                String salt = rs.getString(6);               
                 
-                Account account = new Account(account_id, user_name, password, profile);
+                Account account = new Account(account_id, user_name, password, profile, resetPasswordUuid, salt);
                 accounts.add(account);
             }
         } finally {
@@ -52,8 +54,10 @@ public class AccountDB {
                 int account_id = rs.getInt(1);
                 String password = rs.getString(3);
                 String profile = rs.getString(4);  
+                String resetPasswordUuid = rs.getString(5);  
+                String salt = rs.getString(6);  
                 
-                account = new Account(account_id, user_name, password, profile);
+                account = new Account(account_id, user_name, password, profile, resetPasswordUuid, salt);
             }
         } finally {
             DBUtil.closeResultSet(rs);
