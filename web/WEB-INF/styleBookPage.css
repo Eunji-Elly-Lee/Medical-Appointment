@@ -1,0 +1,120 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 10, 2022, 4:25:16 PM
+    Author     : 854276
+*/
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: content-box;
+}
+.book-wrapper{
+    margin:30px 0px ; 
+}
+#form_heading{
+    border: 1px solid black;
+}
+#form_heading h1, #form_heading p{
+    display: block;
+    margin-left: 30px;
+}
+
+#book{
+    width: 55%;
+    
+    
+    margin: 0 auto;
+    
+    
+}
+#book_form{
+    padding-left: 30px;
+    background-color: #017C83;
+    border: 1px solid black;
+}
+#signup_form label{
+    color:white;
+}
+#book_form_flex{
+    width: 100%;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+}
+#book_form_flex label{
+    display:block;
+    width: 180px;
+}
+#book_form_flex input{
+    display:block;
+    width: 230px;
+    height:32px;
+    border-radius: 5px;
+    padding:2px 5px;
+    
+}
+#book_form_flex div{
+    flex:50%;
+    margin:5px 0px;
+}
+.signup_radio_btns{
+    display: flex;
+    justify-content: space-around;
+    
+}
+.gender,.prefered_notification{
+    flex:50%;
+}
+.gender_option,.prefered_notification_option{
+    display: flex;
+    
+    
+}
+.gender_option label,.prefered_notification_option label{
+    margin-right: 40px;
+    
+}
+.signup_location input{
+    display: block;
+    height: 32px;
+    border-radius: 5px;
+    padding:2px 5px;
+    margin-bottom: 20px;
+    
+}
+.signup_address_field input ,.signup_postal_code input{
+    width:85%;
+} 
+.signup_city_state_province{
+    display:flex;
+    
+}
+.signup_city_state_province input:first-child{
+    margin-right: 20px;
+    
+    
+}
+.signup_city_state_province input{
+    width:41.2%;
+}
+.book_appointment_banner{
+    position: relative;
+    margin-top: 15px;
+}
+.book_appointment_banner_text{
+    display: block;
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    font-size: 35px;
+}
+a{
+    color:black !important;
+}

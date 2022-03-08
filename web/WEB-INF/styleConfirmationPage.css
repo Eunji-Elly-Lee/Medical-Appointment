@@ -1,0 +1,159 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 11, 2022, 6:57:57 PM
+    Author     : 816386
+*/
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: content-box;
+}
+.schedule-wrapper{
+    margin:30px 0px ; 
+}
+
+#form_heading h1, #form_heading p{
+    display: block;
+    margin-left: 30px;
+}
+
+#schedule{
+    width: 55%;   
+    margin: 0 auto;
+}
+div#form_heading span {
+    display: inline-flex;
+}
+/* Style the header of the grid to be different than the rows in the grid*/
+header {
+    display : block;
+    background-color :#93A2BF;
+    color : white;
+    margin:10px 0px ; 
+    text-align: center;
+}
+/* Style the individual columns */
+span#hdr-Id,
+span.Row-Id {
+    width: 50px;
+    margin:20px 0px ; 
+
+}
+span#hdr-FirstName,
+span#hdr-LastName,
+span#hdr-Date {
+    width: 200px;
+    margin:10px 0px ; 
+}
+span#hdr-Time{
+    width: 100px;
+        margin:10px 0px ; 
+
+}
+#schedule_form{
+    padding-left: 30px;
+    background-color: white;
+    
+}
+#signup_form label{
+    color:white;
+}
+#schedule_form_flex{
+    width: 100%;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+}
+#schedule_form_flex label{
+    display:block;
+    width: 180px;
+}
+#schedule_form_flex input{
+    display:block;
+    width: 230px;
+    height:32px;
+    border-radius: 5px;
+    padding:2px 5px;
+    align-content: space-around;
+    margin-right: 25%;
+}
+#schedule_form_flex div{
+    flex:50%;
+    margin:5px 0px;
+}
+.Row{
+    display : block;
+    /*background-color :#93A2BF;*/
+    color : black;
+    margin:10px 0px ; 
+}
+
+/*POPUP Box*/
+.popup {
+  width: 33.333333%;
+  padding: 15px;
+  left: 0;
+  margin-left: 33.333333%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: white;
+  position: absolute;
+  top: 15%;
+  box-shadow: 5px 5px 5px #000;
+  z-index: 10001;
+}
+.overlay {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /*background: rgba(0,0,0,.85);*/
+  background: rgba(226, 225, 225, 0.493);
+  z-index: 10000;
+}
+.btn-print{
+    margin-right: 20%
+}
+.btn-close{
+    margin-right: 30%
+}
+.btn_area_confirm{
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+.btn_area_confirm button{
+    
+    border: 2px solid black;
+    background-color: white;
+    width: 125px;
+    padding: 5px;
+    border-radius: 15px;
+    
+}
+@media (min-width: 768px) {
+  .popup {
+    width: 66.66666666%;
+    margin-left: 16.666666%;
+  }
+}
+@media (min-width: 992px) {
+  .popup {
+    width: 50%;
+    margin-left: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  .popup {
+    width: 33.33333%;
+    margin-left: 33.33333%;
+  }
+}
