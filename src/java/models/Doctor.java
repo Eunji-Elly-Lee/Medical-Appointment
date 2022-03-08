@@ -9,9 +9,16 @@ public class Doctor {
     private String alt_phone;
     private String pref_contact_type;
     private int account_id;
+    private String gender;
+    private String birth_date;
+    private String street_address;
+    private String city;
+    private String province;
+    private String postal_code;
 
     public Doctor(int doctor_id, String first_name, String last_name, String email,
-            String mobile_phone,String alt_phone, String pref_contact_type, int account_id) {
+            String mobile_phone,String alt_phone,String pref_contact_type, int account_id, String gender,
+            String birth_date, String street_address, String city, String province, String postal_code) {
         this.doctor_id = doctor_id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -20,6 +27,12 @@ public class Doctor {
         this.alt_phone = alt_phone;
         this.pref_contact_type = pref_contact_type;
         this.account_id = account_id;
+        this.gender = gender;
+        this.birth_date = birth_date;
+        this.street_address = street_address;
+        this.city = city;
+        this.province = province;
+        this.postal_code = postal_code;
     }
 
     public int getDoctor_id() {
@@ -86,6 +99,54 @@ public class Doctor {
         this.account_id = account_id;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getBirth_date() {
+        return birth_date;
+    }
+
+    public void setBirth_date(String birth_date) {
+        this.birth_date = birth_date;
+    }
+
+    public String getStreet_address() {
+        return street_address;
+    }
+
+    public void setStreet_address(String street_address) {
+        this.street_address = street_address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getPostal_code() {
+        return postal_code;
+    }
+
+    public void setPostal_code(String postal_code) {
+        this.postal_code = postal_code;
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +
@@ -97,6 +158,12 @@ public class Doctor {
                 ", alt_phone='" + alt_phone + '\'' +
                 ", pref_contact_type='" + pref_contact_type + '\'' +
                 ", account_id=" + account_id +
+                ", gender='" + gender + '\'' +
+                ", birth_date='" + birth_date + '\'' +
+                ", street_address='" + street_address + '\'' +
+                ", city='" + city + '\'' +
+                ", province='" + province + '\'' +
+                ", postal_code='" + postal_code + '\'' +
                 '}';
     }
 }
