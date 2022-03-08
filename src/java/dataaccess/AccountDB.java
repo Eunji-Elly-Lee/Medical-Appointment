@@ -73,15 +73,17 @@ public class AccountDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         String sql = "INSERT INTO account "
-                + "(account_id, user_name, password, profile) "
-                + "VALUES (?, ?, ?, ?)";
+                + "(account_id, user_name, password, profile, resetPasswordUuid, salt)"
+                + "VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, account.getAccount_id());
             ps.setString(2, account.getUser_name());
             ps.setString(3, account.getPassword());
-            ps.setString(4, account.getProfile());           
+            ps.setString(4, account.getProfile());  
+            ps.setString(5, account.getResetPasswordUuid());
+            ps.setString(6, account.getSalt());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -93,7 +95,8 @@ public class AccountDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE account SET account_id = ?, user_name = ?, password = ?, profile = ?";
+        String sql = "UPDATE account SET account_id = ?, user_name = ?, " +
+                "password = ?, profile = ?, resetPasswordUuid = ?, salt = ?";
         
         try {
             ps = con.prepareStatement(sql);
@@ -101,6 +104,8 @@ public class AccountDB {
             ps.setString(2, account.getUser_name());
             ps.setString(3, account.getPassword());
             ps.setString(4, account.getProfile());
+            ps.setString(5, account.getResetPasswordUuid());
+            ps.setString(6, account.getSalt());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
