@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
             return;
         } else {
             session.setAttribute("user_name", user_name);
-            getServletContext().getRequestDispatcher("/WEB-INF/welcome.jsp").forward(request, response);
+            response.sendRedirect("welcome");
             return;
         }
     }
