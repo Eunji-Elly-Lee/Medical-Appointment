@@ -32,6 +32,10 @@
         <servlet-name>AppointmentConfirmationServlet</servlet-name>
         <servlet-class>servlets.AppointmentConfirmationServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewPatientInfo</servlet-name>
+        <servlet-class>servlets.ViewPatientInfo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WelcomeServlet</servlet-name>
         <url-pattern>/welcome</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>AppointmentConfirmationServlet</servlet-name>
         <url-pattern>/confirmation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPatientInfo</servlet-name>
+        <url-pattern>/ViewPatientInfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
