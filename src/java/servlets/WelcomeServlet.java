@@ -6,30 +6,44 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.logging.*;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
+import models.Account;
+import service.AccountService;
 
 /**
  *
  * @author ADMIN
  */
 public class WelcomeServlet extends HttpServlet {
-
-   
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/welcome.jsp").forward(request, response);
-        return;
+        HttpSession session = request.getSession();
+        String user_name = (String)session.getAttribute("user_name");
         
+        if(request.getParameter("logout") != null) {
+            session.invalidate();
+            session = request.getSession();
+        } else {
+            if(user_name != null && !user_name.equals("")) {
+                AccountService accountService = new AccountService();
+
+                try {
+                    Account user = accountService.get(user_name);
+                    request.setAttribute("user", user);
+                } catch(Exception ex) {
+                    Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }   
+            }        
+        }
+        
+        getServletContext().getRequestDispatcher("/WEB-INF/welcome.jsp").forward(request, response);
+        return;        
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
     }
-
-
 }
