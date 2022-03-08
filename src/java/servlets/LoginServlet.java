@@ -6,21 +6,16 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
+import models.Account;
+import service.AccountService;
 
 /**
  *
  * @author ADMIN
  */
 public class LoginServlet extends HttpServlet {
-
-   
-
-   
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
@@ -31,10 +26,20 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String user_name = request.getParameter("username_input");
+        String password = request.getParameter("password_input");        
+        request.setAttribute("username_input", user_name);
         
+        AccountService accountService = new AccountService();
+        Account account = accountService.login(user_name, password);
+        
+        if(account == null) {
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
+            return;
+        } else {
+            getServletContext().getRequestDispatcher("/WEB-INF/welcome.jsp").forward(request, response);
+            return;
+        }
     }
-
-   
-  
-
 }
