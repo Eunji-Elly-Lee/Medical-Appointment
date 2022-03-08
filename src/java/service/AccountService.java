@@ -45,6 +45,11 @@ public class AccountService {
         AccountDB accountDB = new AccountDB();
         Account origin = get(user_name);
         String salt = origin.getSalt();
+        
+        if(salt == null) {
+            salt = PasswordUtil.getSalt();
+        }
+        
         Account account = new Account(account_id, user_name, PasswordUtil.hashAndSaltPassword(password, salt), profile, null, salt);
         accountDB.update(account);
     }
