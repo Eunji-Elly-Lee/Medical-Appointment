@@ -41,7 +41,7 @@ public class AccountDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM acount WHERE user_name = ?";
+        String sql = "SELECT * FROM account WHERE user_name = ?";
         
         try {
             ps = con.prepareStatement(sql);
