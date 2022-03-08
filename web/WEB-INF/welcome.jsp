@@ -1,7 +1,7 @@
 <%-- 
     Document   : Welcome page
     Created on : Feb 13, 2022
-    Author     : ADMIN, Eunji Elly Lee
+    Author     : ADMIN
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -54,9 +54,18 @@
                 </div>
 
                 <div id="functional_links_welcomePage">
-                    <a href="login">Login</a>
-                    <a href="signup">Register</a>
-                    <a href="forgot">Find Account/Password</a>
+                    <c:choose>
+                        <c:when test="${login == null}">
+                            <a href="login">Login</a>
+                            <a href="signup">Register</a>
+                            <a href="forgot">Find Account/Password</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="setting">Manage Account</a>
+                            <a href="welcome?logout">Logout</a>
+                        </c:otherwise>
+                    </c:choose>
+                            
                     <div class="clear"></div>
                 </div>
                 
