@@ -46,6 +46,10 @@
                                             </ul>
                                         </li>
                                         <li><a href="doctorschedule">Doctor schedule</a></li>
+                                        <c:if test="${user.profile == 'DOCTOR'}">
+                                            <li><a href="ViewPatientInfo">Patient</a></li>
+                                            <li><a href="">Staff</a></li>
+                                        </c:if>
                                     </ul>
                                 </nav>
                             </div>
@@ -108,7 +112,7 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="">Home</a>
+                                        <a class="nav-link" href="welcome">Home</a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -116,13 +120,21 @@
                                           Appointment
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                          <li class="ms-3 p-1"><a href="#">Book Appointment</a></li>
+                                          <li class="ms-3 p-1"><a href="book">Book Appointment</a></li>
                                           <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="">Doctor schedule</a>
+                                        <a class="nav-link" href="doctorschedule">Doctor schedule</a>
                                     </li>
+                                    <c:if test="${user.profile == 'DOCTOR'}">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="ViewPatientInfo">Patient</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="">Staff</a>
+                                        </li>
+                                    </c:if>
                                 </ul>
                             </div>
                         </div>
