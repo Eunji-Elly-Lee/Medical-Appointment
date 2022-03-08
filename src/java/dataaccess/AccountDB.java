@@ -35,21 +35,21 @@ public class AccountDB {
         return accounts;
     }
     
-    public Account get(int account_id) throws Exception {
+    public Account get(String user_name) throws Exception {
         Account account = null;
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM acount WHERE account_id = ?";
+        String sql = "SELECT * FROM acount WHERE user_name = ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, account_id);
+            ps.setString(1, user_name);
             rs = ps.executeQuery();
             
             if(rs.next()) {
-                String user_name = rs.getString(2);
+                int account_id = rs.getInt(1);
                 String password = rs.getString(3);
                 String profile = rs.getString(4);  
                 
