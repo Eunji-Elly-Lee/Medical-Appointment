@@ -1,6 +1,6 @@
 package service;
 
-import dataaccess.AccountDB;
+import dataaccess.*;
 import java.util.List;
 import models.Account;
 
@@ -10,8 +10,11 @@ public class AccountService {
         
         try {
             Account account = get(user_name);
+            String salt = account.getSalt();
+            String userPassword = account.getPassword();
             
-            if(password.equals(account.getPassword())) {
+            if((salt == null && password.equals(userPassword)) ||
+                    (salt != null && userPassword.equals(PasswordUtil.hashAndSaltPassword(password, salt)))) {
                 return account;
             }
         } catch(Exception e) {}
@@ -32,14 +35,17 @@ public class AccountService {
     }
     
     public void insert(int account_id, String user_name, String password, String profile) throws Exception {
-        Account account = new Account(account_id, user_name, password, profile);
+        String salt = PasswordUtil.getSalt();
+        Account account = new Account(account_id, user_name, PasswordUtil.hashAndSaltPassword(password, salt), profile, null, salt);
         AccountDB accountDB = new AccountDB();
         accountDB.insert(account);
     }
     
     public void update(int account_id, String user_name, String password, String profile) throws Exception {
-        Account account = new Account(account_id, user_name, password, profile);
         AccountDB accountDB = new AccountDB();
+        Account origin = get(user_name);
+        String salt = origin.getSalt();
+        Account account = new Account(account_id, user_name, PasswordUtil.hashAndSaltPassword(password, salt), profile, null, salt);
         accountDB.update(account);
     }
     
