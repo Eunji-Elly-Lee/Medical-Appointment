@@ -1,2 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/capstone"/>
+<Context path="/capstone">
+    <Resource
+        name=""
+        auth="Container"
+        driverClassName=""
+        url=""
+        username=""
+        password=""
+        maxActive="100"
+        maxIdle="30"
+        maxWait="10000"
+        logAbandoned="true"
+        removeAbandoned="true"
+        removeAbandonedTimeout="60"
+        type="javax.sql.DataSource"
+    />
+</Context>
