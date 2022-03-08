@@ -1,0 +1,14 @@
+Feb 10, 2022
+Main page, Sign-up page, Registration page - Kevin
+Confirmation page - Fied
+Database script - Jonghan, Jihoon, Eunji, Yison
+
+Feb 17, 2022
+Booking appointment page - Fied
+Doctor schedule page - Samia
+View appointment page - Jihoon 
+Find account/password page - Jonghan
+Rebuild Main page and Registration page - Eunji
+
+Mar 3, 2022 
+View Patient Info page - Yisong
