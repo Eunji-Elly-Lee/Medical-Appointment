@@ -131,7 +131,7 @@
                     <div class="row align-items-start">
                         <div class="col-md-5">
                             <label for="password">Password </label> <br>
-                            <input type="text" id="password" name="password">
+                            <input type="text" id="password" name="password" placeholder="Enter New Password">
                         </div>
                        
                         <div class="col-md-5">
