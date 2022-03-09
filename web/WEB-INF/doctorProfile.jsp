@@ -35,13 +35,18 @@
                                             Appointment <i class="bi bi-caret-down-fill"></i>
                                         </a>
                                         <ul class="subnav">
-                                            <li><a href="">Book Appointment</a></li>
+                                            <li><a href="book">Book Appointment</a></li>
                                             <li><a href="ViewAppointment">View Appointment</a></li>
+                                            <c:if test="${account.profile == 'ADMIN'}">
+                                                <li><a href="confirmation">Confirm Appointment</a></li>
+                                            </c:if>
                                         </ul>
                                     </li>
-                                    <li><a href=""> schedule</a></li>
-                                      <li><a href=""> Patient</a></li>
-                                      <li><a href=""> Staff</a></li>  
+                                    <li><a href="doctorschedule">Doctor schedule</a></li>
+                                    <c:if test="${account.profile == 'DOCTOR' || account.profile == 'ADMIN'}">
+                                        <li><a href="ViewPatientInfo">Patient</a></li>
+                                        <li><a href="">Staff</a></li>
+                                    </c:if>
                                 </ul>
                             </nav>
                         </div>
@@ -50,8 +55,8 @@
             </div>
 
             <div id="functional_links_welcomePage">
-                <a href="login">Login out</a>
-                 <a href="account_setting">Account setting</a>
+                <a href="profile">Manage Account</a>
+                <a href="welcome?logout">Logout</a>
                 <div class="clear"></div>
             </div>
 
@@ -104,11 +109,22 @@
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li class="ms-3 p-1"><a href="#">Book Appointment</a></li>
                                         <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                        <c:if test="${account.profile == 'ADMIN'}">
+                                            <li class="ms-3 p-1"><a href="confirmation">Confirm Appointment</a></li>
+                                        </c:if>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="">Doctor schedule</a>
                                 </li>
+                                <c:if test="${account.profile == 'DOCTOR' || account.profile == 'ADMIN'}">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="ViewPatientInfo">Patient</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="">Staff</a>
+                                    </li>
+                                </c:if>
                             </ul>
                         </div>
                     </div>
@@ -136,7 +152,7 @@
                        
                         <div class="col-md-5">
                             <label for="repassword">Re-enter Password: </label> <br>
-                           <input type="text" id="repassword" name="repassword" value="" placeholder="Re-enter New Password">
+                           <input type="text" id="repassword" name="repassword" placeholder="Re-enter New Password">
                         </div>
                     </div>
                     <div class="row align-items-second">
@@ -158,7 +174,7 @@
                      
                        <div class="col-md-5">
                             <label>pref contract type</label><br>
-                            <select id="pref_contact_type">
+                            <select id="pref_contact_type" name="pref_contact_type">
                                 <option value="MOBILE_PHONE"
                                         <c:if test="${doctor.pref_contact_type == 'MOBILE_PHONE'}">selected</c:if>>
                                     Mobile phone
@@ -173,8 +189,8 @@
                     <div class="row align-items-fourth">
                         <div class="col-lg-10">
                             <label for="address">Address: </label> <br>
-                           <input type="text" id="address" name="address" value="${doctor.street_address}"><br>
-                           <input type="text" id="address_second" name="second" value="${doctor.postal_code}">
+                           <input type="text" id="address" name="street_address" value="${doctor.street_address}"><br>
+                           <input type="text" id="address_second" name="postal_code" value="${doctor.postal_code}">
                         </div>                       
                     </div>
                 </div>
