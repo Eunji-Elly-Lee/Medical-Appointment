@@ -96,7 +96,7 @@ public class AccountDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         String sql = "UPDATE account SET account_id = ?, user_name = ?, " +
-                "password = ?, profile = ?, resetPasswordUuid = ?, salt = ? WHERE account_id = ?";
+                "password = ?, profile = ?, reset_password_uuid = ?, salt = ? WHERE account_id = ?";
         
         try {
             ps = con.prepareStatement(sql);
