@@ -123,7 +123,7 @@
             </div>
         </div>
        <div class="accountForm">
-            <form action="forgot" method="post">
+            <form action="profile" method="post">
                 <h2>Edit your account</h2>
                 <p> Please enter your  information for your account. </p>
                 
@@ -131,7 +131,7 @@
                     <div class="row align-items-start">
                         <div class="col-md-5">
                             <label for="password">Password </label> <br>
-                            <input type="text" id="password" name="password" value="" placeholder=" New Password ">
+                            <input type="text" id="password" name="password">
                         </div>
                        
                         <div class="col-md-5">
@@ -142,33 +142,39 @@
                     <div class="row align-items-second">
                          <div class="col-md-5">
                             <label for="phone_number">Phone number: </label> <br>
-                           <input type="text" id="phone_number" name="phone_number" value="" placeholder="Phone Number">
+                           <input type="text" id="phone_number" name="phone_number" value="${doctor.mobile_phone}">
                         </div>
                       
                       <div class="col-md-5">
                             <label for="alter_Phone_number">Alter Phone number: </label> <br>
-                           <input type="text" id="alter_Phone_number" name="alter_Phone_number" value="" placeholder="Alternate Phone number">
+                           <input type="text" id="alter_Phone_number" name="alter_Phone_number" value="${doctor.alt_phone}">
                         </div>
                     </div>
                     <div class="row align-items-third">
                         <div class="col-md-5">
                             <label for="email">Email: </label> <br>
-                           <input type="text" id="email" name="email" value="" placeholder="Email">
+                           <input type="text" id="email" name="email" value="${doctor.email}">
                         </div>
                      
                        <div class="col-md-5">
                             <label>pref contract type</label><br>
-                            <select>
-                            <option >Mobile phone</option>
-                            <option >Email </option>
+                            <select id="pref_contact_type">
+                                <option value="MOBILE_PHONE"
+                                        <c:if test="${doctor.pref_contact_type == 'MOBILE_PHONE'}">selected</c:if>>
+                                    Mobile phone
+                                </option>
+                                <option value="EMAIL"
+                                        <c:if test="${doctor.pref_contact_type == 'EMAIL'}">selected</c:if>>
+                                    Email
+                                </option>
                             </select>  
                         </div>
                     </div>
                     <div class="row align-items-fourth">
                         <div class="col-lg-10">
                             <label for="address">Address: </label> <br>
-                           <input type="text" id="address" name="address" value="" placeholder="Address"><br>
-                           <input type="text" id="address_second" name="second" value="" placeholder="Address">
+                           <input type="text" id="address" name="address" value="${doctor.street_address}"><br>
+                           <input type="text" id="address_second" name="second" value="${doctor.postal_code}">
                         </div>                       
                     </div>
                 </div>
