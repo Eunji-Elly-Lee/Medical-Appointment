@@ -11,9 +11,9 @@ public class DoctorService {
         return doctors;
     }
     
-    public Doctor get(int doctor_id) throws Exception {
+    public Doctor get(int account_id) throws Exception {
         DoctorDB doctorDB = new DoctorDB();
-        Doctor doctor = doctorDB.get(doctor_id);
+        Doctor doctor = doctorDB.get(account_id);
         return doctor;
     }
     
@@ -35,8 +35,8 @@ public class DoctorService {
         doctorDB.update(doctor);
     }
     
-    public void delete(int doctor_id) throws Exception {
-        Doctor doctor = get(doctor_id);
+    public void delete(int account_id) throws Exception {
+        Doctor doctor = get(account_id);
         DoctorDB doctorDB = new DoctorDB();
         doctorDB.delete(doctor);
     }
