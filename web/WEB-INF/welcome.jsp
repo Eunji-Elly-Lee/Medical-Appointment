@@ -43,13 +43,13 @@
                                             <ul class="subnav">
                                                 <li><a href="book">Book Appointment</a></li>
                                                 <li><a href="ViewAppointment">View Appointment</a></li>
-                                                <c:if test="${user.profile == 'ADMIN'}">
+                                                <c:if test="${account.profile == 'ADMIN'}">
                                                     <li><a href="confirmation">Confirm Appointment</a></li>
                                                 </c:if>
                                             </ul>
                                         </li>
                                         <li><a href="doctorschedule">Doctor schedule</a></li>
-                                        <c:if test="${user.profile == 'DOCTOR' || user.profile == 'ADMIN'}">
+                                        <c:if test="${account.profile == 'DOCTOR' || account.profile == 'ADMIN'}">
                                             <li><a href="ViewPatientInfo">Patient</a></li>
                                             <li><a href="">Staff</a></li>
                                         </c:if>
@@ -125,7 +125,7 @@
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                           <li class="ms-3 p-1"><a href="book">Book Appointment</a></li>
                                           <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
-                                          <c:if test="${user.profile == 'ADMIN'}">
+                                          <c:if test="${account.profile == 'ADMIN'}">
                                             <li class="ms-3 p-1"><a href="confirmation">Confirm Appointment</a></li>
                                           </c:if>
                                         </ul>
@@ -133,7 +133,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="doctorschedule">Doctor schedule</a>
                                     </li>
-                                    <c:if test="${user.profile == 'DOCTOR' || user.profile == 'ADMIN'}">
+                                    <c:if test="${account.profile == 'DOCTOR' || account.profile == 'ADMIN'}">
                                         <li class="nav-item">
                                             <a class="nav-link" href="ViewPatientInfo">Patient</a>
                                         </li>
