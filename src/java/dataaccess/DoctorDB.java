@@ -46,27 +46,27 @@ public class DoctorDB {
         return doctors;
     }
     
-    public Doctor get(int doctor_id) throws Exception {
+    public Doctor get(int account_id) throws Exception {
         Doctor doctor = null;
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM doctor WHERE doctor_id = ?";
+        String sql = "SELECT * FROM doctor WHERE account_id = ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, doctor_id);
+            ps.setInt(1, account_id);
             rs = ps.executeQuery();
             
             if(rs.next()) {
+                int doctor_id = rs.getInt(1);
                 String first_name = rs.getString(2);
                 String last_name = rs.getString(3);
                 String email = rs.getString(4); 
                 String mobile_phone = rs.getString(5);
                 String alt_phone = rs.getString(6);    
                 String pref_contact_type = rs.getString(7); 
-                int account_id = rs.getInt(8);
                 String gender = rs.getString(9);  
                 String birth_date = rs.getString(10);
                 String street_address = rs.getString(11);
@@ -124,7 +124,7 @@ public class DoctorDB {
         PreparedStatement ps = null;
         String sql = "UPDATE doctor SET doctor_id = ?, first_name = ?, last_name = ?, email = ?, " +
                 "mobile_phone = ?, alt_phone = ?, pref_contact_type = ?, account_id = ?, gender = ?, " +
-                "birth_date = ?, street_address = ?, city = ?, province = ?, postal_code = ?";
+                "birth_date = ?, street_address = ?, city = ?, province = ?, postal_code = ? WHERE account_id = ?";
         
         try {
             ps = con.prepareStatement(sql);
@@ -142,6 +142,7 @@ public class DoctorDB {
             ps.setString(12, doctor.getCity());
             ps.setString(13, doctor.getProvince());
             ps.setString(14, doctor.getPostal_code());
+            ps.setInt(15, doctor.getAccount_id());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -153,11 +154,11 @@ public class DoctorDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "DELETE FROM doctor WHERE doctor_id = ?";
+        String sql = "DELETE FROM doctor WHERE account_id = ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, doctor.getDoctor_id());
+            ps.setInt(1, doctor.getAccount_id());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
