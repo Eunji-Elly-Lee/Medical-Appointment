@@ -42,15 +42,9 @@ public class AccountService {
     }
     
     public void update(int account_id, String user_name, String password, String profile) throws Exception {
-        AccountDB accountDB = new AccountDB();
-        Account origin = get(user_name);
-        String salt = origin.getSalt();
-        
-        if(salt == null) {
-            salt = PasswordUtil.getSalt();
-        }
-        
+        String salt = PasswordUtil.getSalt();
         Account account = new Account(account_id, user_name, PasswordUtil.hashAndSaltPassword(password, salt), profile, null, salt);
+        AccountDB accountDB = new AccountDB();
         accountDB.update(account);
     }
     
