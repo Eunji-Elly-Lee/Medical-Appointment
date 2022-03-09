@@ -68,7 +68,7 @@
                             <a href="forgot">Find Account/Password</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="setting">Manage Account</a>
+                            <a href="profile">Manage Account</a>
                             <a href="welcome?logout">Logout</a>
                         </c:otherwise>
                     </c:choose>
