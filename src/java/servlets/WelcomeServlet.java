@@ -30,8 +30,8 @@ public class WelcomeServlet extends HttpServlet {
                 AccountService accountService = new AccountService();
 
                 try {
-                    Account user = accountService.get(user_name);
-                    request.setAttribute("user", user);
+                    Account account = accountService.get(user_name);
+                    request.setAttribute("account", account);
                     request.setAttribute("login", "login");
                 } catch(Exception ex) {
                     Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
