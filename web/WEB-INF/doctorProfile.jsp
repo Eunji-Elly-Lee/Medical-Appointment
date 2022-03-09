@@ -3,16 +3,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <style><%@include file="/WEB-INF/forgot.css"%></style>
         <style><%@include file="/WEB-INF/styleWelcomePage.css"%></style>
         <title> Edit Doctor profile</title>
     </head>
@@ -40,10 +40,7 @@
                                     </li>
                                     <li><a href=""> schedule</a></li>
                                       <li><a href=""> Patient</a></li>
-                                      <li><a href=""> Staff</a></li>
-                                    
-                                    
-                                    
+                                      <li><a href=""> Staff</a></li>  
                                 </ul>
                             </nav>
                         </div>
@@ -128,9 +125,7 @@
             <form action="forgot" method="post">
                 <h2>Edit your account</h2>
                 <p> Please enter your  information for your account. </p>
-
-
-
+                
                 <div class="container">
                     <div class="row align-items-start">
                         <div class="col-md-5">
@@ -165,32 +160,21 @@
                             <select>
                             <option >Mobile phone</option>
                             <option >Email </option>
-
                             </select>  
                         </div>
                     </div>
                     <div class="row align-items-fourth">
                         <div class="col-lg-10">
-                            <label for="address">Addrss: </label> <br>
+                            <label for="address">Address: </label> <br>
                            <input type="text" id="address" name="address" value="" placeholder="Address"><br>
                            <input type="text" id="address_second" name="second" value="" placeholder="Address">
-                        </div>
-                       
+                        </div>                       
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
+                
                 <input type="submit" value="Submit">
                 <input type="hidden" name ="action" value="forgot">
             </form>
         </div>
-
     </body>
 </html>
