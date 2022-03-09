@@ -73,7 +73,7 @@ public class AccountDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         String sql = "INSERT INTO account "
-                + "(account_id, user_name, password, profile, resetPasswordUuid, salt)"
+                + "(account_id, user_name, password, profile, reset_password_uuid, salt)"
                 + "VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
