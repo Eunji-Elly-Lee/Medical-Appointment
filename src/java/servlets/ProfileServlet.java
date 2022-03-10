@@ -14,13 +14,26 @@ public class ProfileServlet extends HttpServlet {
         String user_name = (String)session.getAttribute("user_name");        
         AccountService accountService = new AccountService();
         DoctorService doctorService = new DoctorService();
+        PatientService patientService = new PatientService();
         
+        Account account = null;
         try {
-            Account account = accountService.get(user_name);
-            Doctor doctor = doctorService.get(account.getAccount_id());
-            
-            request.setAttribute("account", account);
-            request.setAttribute("doctor", doctor);
+            account = accountService.get(user_name);
+            if (account.getProfile().equals("DOCTOR")) {
+                Doctor doctor = doctorService.get(account.getAccount_id());
+
+                request.setAttribute("account", account);
+                request.setAttribute("doctor", doctor);
+                getServletContext().getRequestDispatcher("/WEB-INF/doctorProfile.jsp").forward(request, response);
+            } else if (account.getProfile().equals("PATIENT")) {
+                Patient patient = patientService.get(account.getAccount_id());
+                request.setAttribute("account", account);
+                request.setAttribute("patient", patient);
+                System.out.println(patient.getPref_contact_type());
+                getServletContext().getRequestDispatcher("/WEB-INF/patientProfile.jsp").forward(request, response);
+
+            }
+
         } catch(Exception ex) {
             Logger.getLogger(ProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
