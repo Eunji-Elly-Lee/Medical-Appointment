@@ -11,4 +11,13 @@ Find account/password page - Jonghan
 Rebuild Main page and Registration page - Eunji
 
 Mar 3, 2022 
-View Patient Info page - Yisong
+View patient info page - Yisong
+
+Mar 9, 2022
+Doctor profile page - Jihoon
+Patient profile page - Kevin
+Profile back-end - Eunji
+Account model - Eunji
+Doctor model, patient model - Kevin
+AccountDB, DoctorDB - Eunji
+Account service, doctor service - Eunji
