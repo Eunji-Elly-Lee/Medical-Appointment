@@ -48,7 +48,10 @@
                                                 </c:if>
                                             </ul>
                                         </li>
-                                        <li><a href="doctorschedule">Doctor schedule</a></li>
+                                        <c:if test="${account.profile == 'DOCTOR' }">
+                                            <li><a href="doctorschedule">Doctor schedule</a></li>
+                                        </c:if>
+                                        
                                         <c:if test="${account.profile == 'DOCTOR' || account.profile == 'ADMIN'}">
                                             <li><a href="ViewPatientInfo">Patient</a></li>
                                             <li><a href="">Staff</a></li>
