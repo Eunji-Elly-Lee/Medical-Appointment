@@ -43,26 +43,53 @@
                                 <nav>
                                     <ul>
                                         <li><a href="welcome">Home</a></li>
-                                        <li>
-                                            <a class="drop-down-tab" href="">
-                                                Appointment <i class="bi bi-caret-down-fill"></i>
-                                            </a>
-                                            <ul class="subnav">
-                                                <li><a href="book">Book Appointment</a></li>
-                                                <li><a href="ViewAppointment">View Appointment</a></li>
-                                                <c:if test="${account.profile == 'ADMIN'}">
-                                                    <li><a href="confirmation">Confirm Appointment</a></li>
-                                                </c:if>
-                                            </ul>
-                                        </li>
-                                        <c:if test="${account.profile == 'DOCTOR' }">
-                                            <li><a href="doctorschedule">Doctor schedule</a></li>
-                                        </c:if>
                                         
-                                        <c:if test="${account.profile == 'DOCTOR' || account.profile == 'ADMIN'}">
-                                            <li><a href="ViewPatientInfo">Patient</a></li>
-                                            <li><a href="">Staff</a></li>
-                                        </c:if>
+                                        <c:choose>
+                                            <c:when test="${account.profile == 'DOCTOR'}">
+                                                <li>
+                                                    <a class="drop-down-tab" href="">
+                                                        Appointment <i class="bi bi-caret-down-fill"></i>
+                                                    </a>
+                                                    <ul class="subnav">
+                                                        <li><a href="book">Book Appointment</a></li>
+                                                        <li><a href="view_appointment">View Appointment</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="doctor_schedule">Doctor schedule</a></li>
+                                                <li><a href="view_patient">Patient</a></li>
+                                                <li><a href="view_staff">Staff</a></li>
+                                            </c:when>
+                                            <c:when test="${account.profile == 'ADMIN'}">
+                                                <li>
+                                                    <a class="drop-down-tab" href="">
+                                                        Appointment <i class="bi bi-caret-down-fill"></i>
+                                                    </a>
+                                                    <ul class="subnav">
+                                                        <li><a href="book">Book Appointment</a></li>
+                                                        <li><a href="view_appointment">View Appointment</a></li>
+                                                        <li><a href="confirm_appointment">Confirm Appointment</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="view_patient">Patient</a></li>
+                                                <li><a href="view_staff">Staff</a></li>
+                                            </c:when>
+                                            <c:when test="${account.profile == 'SYSADMIN'}">
+                                                <li><a href="view_staff">Staff</a></li>
+                                                <li><a href="signup_staff">Register Staff</a></li>
+                                                <li><a href="backup">Backup&Restore</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li>
+                                                    <a class="drop-down-tab" href="">
+                                                        Appointment <i class="bi bi-caret-down-fill"></i>
+                                                    </a>
+                                                    <ul class="subnav">
+                                                        <li><a href="book">Book Appointment</a></li>
+                                                        <li><a href="view_appointment">View Appointment</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </ul>
                                 </nav>
                             </div>
@@ -70,7 +97,7 @@
                     </div>
                 </div>
 
-                <div id="functional_links_welcomePage">
+                <div id="functional_links">
                     <c:choose>
                         <c:when test="${login == null}">
                             <a href="login">Login</a>
