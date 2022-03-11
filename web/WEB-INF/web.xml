@@ -58,23 +58,23 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewAppointment</servlet-name>
-        <url-pattern>/ViewAppointment</url-pattern>
+        <url-pattern>/view_appointment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookAppointmentServlet</servlet-name>
-        <url-pattern>/book</url-pattern>
+        <url-pattern>/book_appointment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DoctorScheduleServlet</servlet-name>
-        <url-pattern>/doctorschedule</url-pattern>
+        <url-pattern>/doctor_schedule</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AppointmentConfirmationServlet</servlet-name>
-        <url-pattern>/confirmation</url-pattern>
+        <url-pattern>/confirm_appointment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewPatientInfo</servlet-name>
-        <url-pattern>/ViewPatientInfo</url-pattern>
+        <url-pattern>/view_patient</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProfileServlet</servlet-name>
