@@ -21,3 +21,6 @@ Account model - Eunji
 Doctor model, patient model - Kevin
 AccountDB, DoctorDB - Eunji
 Account service, doctor service - Eunji
+
+Mar 10, 2022
+Administrator model - Jonghan
