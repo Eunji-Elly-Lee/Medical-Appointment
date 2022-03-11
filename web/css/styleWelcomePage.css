@@ -1,6 +1,6 @@
 @charset "utf-8";
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 body{
     font-family: 'Lato', sans-serif;
@@ -18,7 +18,7 @@ a, a:hover{
 .headers{
     font-family: 'Open Sans', sans-serif;    
 }
-.fixed_position_welcome_page{
+.fixed_position_header{
     display: none;
     position: fixed;
     width: 100%;
@@ -30,7 +30,7 @@ a, a:hover{
     height: 15px;
     background-color: #AEE8FE;
 }
-.topnav-wrapper{
+.topnav_wrapper{
     border-bottom: 1px solid #DDD4DD;
     background-color: #F8F5F8;
 }
@@ -39,32 +39,32 @@ a, a:hover{
     justify-content: space-between;
     margin-right: 5%;
 }
-.topnav-left{
+.topnav_left{
     float: left;
 }
-.topnav-left img{
+.topnav_left img{
     position: absolute;
 }
-.topnav-right nav{
+.topnav_right nav{
     width:100%;
     height: 80px;
 }
-.topnav-right nav ul{
+.topnav_right nav ul{
     float:left;
     margin-bottom: 0px;
 }
-.topnav-right nav ul li{
+.topnav_right nav ul li{
     list-style: none;
     float:left;
     position:relative;
 }
-.topnav-right nav ul li a{
+.topnav_right nav ul li a{
     display:block;
     float:left;
     padding:30px 14px;
     font-size:18px;
 }
-.topnav-right nav ul li ul{
+.topnav_right nav ul li ul{
     display: none;
     position:absolute;
     top:88px;
@@ -72,14 +72,14 @@ a, a:hover{
     background-color: #F8F5F8;
     margin-bottom: 0px;
 }
-.topnav-right nav ul li ul li a{
+.topnav_right nav ul li ul li a{
     padding:12px 14px;
 }
-.topnav-right nav a:hover{
+.topnav_right nav a:hover{
     background-color: grey; 
     text-decoration: none;
 }
-.topnav-right nav ul li:hover ul{
+.topnav_right nav ul li:hover ul{
     display: block;
 }
 #functional_links_welcomePage{
@@ -157,7 +157,7 @@ a, a:hover{
     body{
         background-color: transparent;
     }
-    .fixed_position_welcome_page{
+    .fixed_position_header{
         display: block;
     }
     #functional_links_welcomePage{
