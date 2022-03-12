@@ -140,7 +140,7 @@ public class AccountService {
         }
     }
     
-    public Account findAnAccount(String firstName, String lastName, String email) throws Exception {
+    public Account findAccount(String firstName, String lastName, String email) throws Exception {
         AccountDB accountDB = new AccountDB();
         DoctorDB doctorDB = new DoctorDB();
         PatientDB patientDB = new PatientDB();
@@ -170,7 +170,7 @@ public class AccountService {
         return null;
     }
     
-    public Account sendAnAccount(String email, String firstName, String LastName, String path) throws Exception {
+    public Account sendAccount(String email, String firstName, String LastName, String path) throws Exception {
         String to = email;
         String subject = "Your ID From Surpass Health Clinic";
         String template = path + "/emailtemplates/findaccount.html";
