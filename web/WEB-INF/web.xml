@@ -13,8 +13,8 @@
         <servlet-class>servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ForgotPassword</servlet-name>
-        <servlet-class>servlets.ForgotPassword</servlet-class>
+        <servlet-name>ForgotServlet</servlet-name>
+        <servlet-class>servlets.ForgotServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewAppointment</servlet-name>
@@ -53,7 +53,7 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ForgotPassword</servlet-name>
+        <servlet-name>ForgotServlet</servlet-name>
         <url-pattern>/forgot</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
