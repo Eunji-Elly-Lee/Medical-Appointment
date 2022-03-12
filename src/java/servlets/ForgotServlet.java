@@ -18,26 +18,31 @@ public class ForgotServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");
+        String user_name = (String) session.getAttribute("user_name");
         String query = null;
         
-         try {
-            query = request.getQueryString().toString();
-        } catch (Exception ex) {
-            getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
+        if (user_name != null && !user_name.equals("")) {
+            response.sendRedirect("welcome");
             return;
-        }
-
-        if (account == null) {
-            getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
-            return;
-
-        } else if (account.getReset_password_uuid() != null) {
-            if (query.contains(account.getReset_password_uuid())) {
-                getServletContext().getRequestDispatcher("/WEB-INF/resetNewPassword.jsp").forward(request, response);
-                return;
-            } else {
+        } else {
+            try {
+                query = request.getQueryString().toString();
+            } catch (Exception ex) {
                 getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
                 return;
+            }
+
+            if (account == null) {
+                getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
+                return;
+            } else if (account.getReset_password_uuid() != null) {
+                if (query.contains(account.getReset_password_uuid())) {
+                    getServletContext().getRequestDispatcher("/WEB-INF/resetNewPassword.jsp").forward(request, response);
+                    return;
+                } else {
+                    getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
+                    return;
+                }
             }
         }
     }
