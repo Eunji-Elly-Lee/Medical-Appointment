@@ -23,10 +23,8 @@
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-        <style>
-            <%@ include file="/css/styleCommon.css" %>
-            <%@ include file="/css/styleWelcomePage.css" %>
-        </style>  
+        <style><%@ include file="/css/styleCommon.css" %></style>  
+        <style><%@ include file="/css/styleWelcomePage.css" %></style>  
         <title>Surpass Health Clinic</title>      
     </head>
     
