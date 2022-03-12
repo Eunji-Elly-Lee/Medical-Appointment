@@ -43,10 +43,6 @@ public class Doctor {
         return doctor_id;
     }
 
-    public void setDoctor_id(int doctor_id) {
-        this.doctor_id = doctor_id;
-    }
-
     public String getFirst_name() {
         return first_name;
     }
