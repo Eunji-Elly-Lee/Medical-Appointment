@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <style><%@ include file="/css/styleCommon.css" %></style>  
         <style><%@ include file="/css/styleForgotPage.css" %></style>  
-        <title>Forgot Password Page</title>
+        <title>Forgot Page</title>
     </head>
     
     <body>
@@ -128,7 +128,7 @@
                 </div>
             </div>
             
-            <div class="error_mesaage">
+            <div class="error_message">
                 <br>
                 <h3>${resetPwd}</h3>
                 <h3>${resetMessage}</h3>
