@@ -1,0 +1,75 @@
+@charset "utf-8";
+
+.banner_field{
+    background-image: url("img/forgot_banner.png");
+    margin-top: 19px;
+    min-height: 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.banner{
+    text-align: center;
+    font-size: 35px;
+    line-height: 250%;
+}
+.mesaage {
+    text-align: center;
+}
+.accountForm, 
+.newPassword{
+    border-radius: 5px;
+    background-color: #F8F5F8;
+    padding: 20px;
+    box-shadow: 5px 5px 10px #000000;
+    box-sizing: content-box;
+    width: 50%;
+    margin: 30px auto;
+}
+.passwordForm {
+    border-radius: 5px;
+    background-color: #F8F5F8;
+    padding: 20px;
+    box-shadow: 5px 5px 10px #000000;
+    box-sizing: content-box;
+    width: 50%;
+    margin: 60px auto;
+}
+input[type=text],
+input[type=email],
+input[type=number],
+input[type=password]{
+    width: 100%;
+    padding: 10px 20px;
+    margin: 3px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=submit]{
+    width: 50%;
+    font-size: 18px;
+    background-color: #017C83;
+    color: white;
+    padding: 14px 20px;
+    margin: 20px 22% 0px 22%;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+input[type=submit]:hover{
+    background-color: #01886f;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+@media screen and (min-width: 768px) {
+    .banner_field{
+        margin-top: 15px;
+    }
+    .banner{
+        font-size: 40px;
+        line-height: 230%;
+    }
+}
