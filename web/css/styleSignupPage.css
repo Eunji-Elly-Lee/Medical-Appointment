@@ -1,46 +1,32 @@
 @charset "utf-8";
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
-.signup-wrapper{
-    
+.banner_field{
+    background-image: url("img/signup_banner.png");
+    margin-top: 19px;
+    min-height: 100px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-.signup_header{
-    margin: 0 auto;
-    margin-top: 19px;    
-    width: 93.8%;
-    height: 100px;    
-    position: relative;
+.banner{
+    text-align: center;
+    font-size: 35px;
+    line-height: 265%;
 }
-.signup_header img{  
-    width:100%;
-    height: 100%;
-    opacity: 0.7;
-    object-fit: cover;
-    object-position: 0 77%;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border: 1px solid #DDD4DD;
-}
-.signup_header p{
-    position: absolute;
-    top: 38px;
-    left: 39%;
-}
-#signup{
+.signup{
     width: 93.8%; 
     margin: 0 auto;    
     margin-top: 19px; 
 }
-#form_heading{
+.form_heading{
     border: 1px solid black;
-    display: none;
 }
-#form_heading h1, #form_heading p{
+.form_heading h1,
+.form_heading p{
     display: block;
     margin-left: 30px;
 }
-#signup_form{
+.signup_form{
     margin-bottom: 5px;
     padding-left: 11%;
     background-color: #017C83;
@@ -48,54 +34,45 @@
     -webkit-border-radius: 5px;
     border: 1px solid #DDD4DD;
 }
-#signup_form label{
+.signup_form label{
     color: white;
 }
-#signup_form_flex{
+.signup_form_flex{
     width: 100%;
     display:flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
-#signup_form_flex label{
+.signup_form_flex label{
     display:block;
     width: 85%;
 }
-#signup_form_flex input{
+.signup_form_flex input{
     display:block;
     width: 85%;
     height:32px;
     border-radius: 5px;
     padding:2px 5px;
 }
-#signup_form_flex div{
+.signup_form_flex div{
     flex:100%;
     margin:5px 0px;
-}
-.mobileLable{
-    margin: 13px 0 3px -12.5%;
-    padding: 5px 0 0 5px;
-    background-color: white;
-    width: 86.3%;
-    height: 32px;
-    text-align: left;
-    vertical-align: bottom;
-    display: block;
-    border-radius: 5px;
-    border: 1px solid #DDD4DD;
 }
 .signup_radio_btns{
     display: flex;
     justify-content: space-around;
 }
-.gender,.prefered_notification{
+.gender,
+.prefered_notification{
     margin-top: 3px;
     flex:50%;
 }
-.gender_option,.prefered_notification_option{
+.gender_option,
+.prefered_notification_option{
     display: flex;
 }
-.gender_option label,.prefered_notification_option label{
+.gender_option label,
+.prefered_notification_option label{
     margin-right: 15px;
 }
 .signup_location input{
@@ -105,7 +82,8 @@
     padding:2px 5px;
     margin-bottom: 20px;
 }
-.signup_address_field input ,.signup_postal_code input{
+.signup_address_field input,
+.signup_postal_code input{
     width:85%;
 } 
 .signup_city_state_province{
@@ -127,10 +105,7 @@
 }
 
 @media screen and (min-width: 576px) {
-    .signup_header{   
-        width: 94.5%;
-    }
-    #signup{
+    .signup{
         width: 94.5%;
     }
     .gender_option label,.prefered_notification_option label{
@@ -145,32 +120,18 @@
 }
 
 @media screen and (min-width: 768px) {
-    .signup_header{ 
-        margin-top: 15px;   
-        width: 100%;
-    }
-    .signup_header img{
-        -moz-border-radius: 0px;
-        -webkit-border-radius: 0px;
-    }
-    #signup{
+    .signup{
         width: 75%;
     }
-    #form_heading{
-        display: block;
-    }
-    #signup_form{
+    .signup_form{
         padding-left: 5%;
         border: 1px solid black;
         -moz-border-radius: 0px;
         -webkit-border-radius: 0px;
     }
-    #signup_form_flex div{
+    .signup_form_flex div{
         flex:50%;
     }
-    .mobileLable{
-        display: none;
-    }    
     .gender_option label,.prefered_notification_option label{
         margin-right: 35px;
     }    
@@ -212,7 +173,7 @@
 }
 
 @media screen and (min-width: 1400px) {    
-    #signup{
+    .signup{
         width: 70%;
     }
     .register_btn input{
