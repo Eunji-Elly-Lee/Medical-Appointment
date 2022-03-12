@@ -1,17 +1,12 @@
 package servlets;
 
-import dataaccess.AdministratorDB;
-import dataaccess.DoctorDB;
-import dataaccess.PatientDB;
+import dataaccess.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import models.Account;
-import models.Administrator;
-import models.Doctor;
-import models.Patient;
+import models.*;
 import service.AccountService;
 
 /**
