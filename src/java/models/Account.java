@@ -1,5 +1,9 @@
 package models;
 
+/**
+ *
+ * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
+ */
 public class Account {
     private int account_id;
     private String user_name;
