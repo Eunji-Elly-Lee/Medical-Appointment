@@ -20,6 +20,9 @@ public class Administrator {
     private String province;
     private String postal_code;
 
+    public Administrator() {
+    }
+    
     public Administrator(int admin_id, String first_name, String last_name, String email,
             String mobile_phone, String alt_phone, String pref_contact_type, int account_id, String gender,
             String birth_date, String street_address, String city, String province, String postal_code) {
