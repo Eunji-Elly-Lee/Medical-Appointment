@@ -97,11 +97,16 @@ ul, li{
     -webkit-border-radius: 5px;
 }
 .functional_links{
-    margin-left: 0.5%;
+    margin: 0 0.5%;
 }
 .functional_links a {
     display: block;
     float: left;
+    margin: 0 15px;
+}
+.functional_links span{
+    display: none;
+    float: right;
     margin: 0 15px;
 }
 .clear{
@@ -123,6 +128,9 @@ ul, li{
     }
     .functional_links{
         margin: 120px 2% 0;
+    }
+    .functional_links span{
+        display: block;
     }
 }
 
