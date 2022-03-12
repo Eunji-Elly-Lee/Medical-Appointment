@@ -1,5 +1,9 @@
 package models;
 
+/**
+ *
+ * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
+ */
 public class Patient {
     private int patient_id;
     private String healthcare_id;
@@ -41,10 +45,6 @@ public class Patient {
 
     public int getPatient_id() {
         return patient_id;
-    }
-
-    public void setPatient_id(int patient_id) {
-        this.patient_id = patient_id;
     }
 
     public String getHealthcare_id() {
