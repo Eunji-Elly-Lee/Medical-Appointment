@@ -24,6 +24,7 @@
               crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <style>
+            <%@ include file="/css/styleHeader.css" %>
             <%@ include file="/css/styleWelcomePage.css" %>
         </style>  
         <title>Surpass Health Clinic</title>      
@@ -51,7 +52,7 @@
                                                         Appointment <i class="bi bi-caret-down-fill"></i>
                                                     </a>
                                                     <ul class="subnav">
-                                                        <li><a href="book">Book Appointment</a></li>
+                                                        <li><a href="book_appointment">Book Appointment</a></li>
                                                         <li><a href="view_appointment">View Appointment</a></li>
                                                     </ul>
                                                 </li>
@@ -65,7 +66,7 @@
                                                         Appointment <i class="bi bi-caret-down-fill"></i>
                                                     </a>
                                                     <ul class="subnav">
-                                                        <li><a href="book">Book Appointment</a></li>
+                                                        <li><a href="book_appointment">Book Appointment</a></li>
                                                         <li><a href="view_appointment">View Appointment</a></li>
                                                         <li><a href="confirm_appointment">Confirm Appointment</a></li>
                                                     </ul>
@@ -84,7 +85,7 @@
                                                         Appointment <i class="bi bi-caret-down-fill"></i>
                                                     </a>
                                                     <ul class="subnav">
-                                                        <li><a href="book">Book Appointment</a></li>
+                                                        <li><a href="book_appointment">Book Appointment</a></li>
                                                         <li><a href="view_appointment">View Appointment</a></li>
                                                     </ul>
                                                 </li>
@@ -96,28 +97,11 @@
                         </div>
                     </div>
                 </div>
-
-                <div id="functional_links">
-                    <c:choose>
-                        <c:when test="${login == null}">
-                            <a href="login">Login</a>
-                            <a href="signup">Register</a>
-                            <a href="forgot">Find Account/Password</a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="profile">Manage Account</a>
-                            <a href="welcome?logout">Logout</a>
-                        </c:otherwise>
-                    </c:choose>
-                            
-                    <div class="clear"></div>
-                </div>
                 
-                <div class="p-0 mobileNav">
-                    <div class="pe-2 mobileHeader">
-                        <a href="welcome"><img src="img/logo.png" width="105"></a>
-                        <a class="pe-4 fs-4" href="welcome">Home</a>
-                        <a href="login">Login
+                <div class="p-0 mobile_nav">
+                    <div class="pe-2 mobile_header">
+                        <a href="welcome"><img src="img/logo.png" width="105px"></a>
+                        <div><span class="hello">Hello ${user.mobile_phone}</span>
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABmJLR0QA/wD/
                                 AP+gvaeTAAAD40lEQVRYhe2XS2xUZRTHf+eb6YOqpYD0laghdkAw7HwUEeLCqKnR0qJ1Y2JcWE3YqtWdS+
@@ -138,7 +122,7 @@
                                 PLqVAnwTdyLGE7kunvQ/A3uPWPkmY2YGeFvu9Kpg8oBiwLy9iEekr57loCH54qd1u5EwnZ9SwAo855/
                                 XI7A20bva5YGbdfiAVYSDzaS6nvC+E9ZXwT5P5i7wJbAFagMLRQqAToZB7u9ITDdzhRufUaaZBxOGgMcA5hw0cabXvgzhX/
                                 689r460OJIdjPYDO/LMC8BPMjsdNmLlftg2BaZQJn5TnVdLg1vhRn7TuyubKf8DPbd2zmO//zkAAAAASUVORK5CYII=">
-                        </a>
+                        </div>
                     </div>
                     
                     <nav class="navbar navbar-expand-md navbar-light m-3">
@@ -154,48 +138,91 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="welcome">Home</a>
                                     </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                           data-bs-toggle="dropdown" aria-expanded="false">
-                                          Appointment
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                          <li class="ms-3 p-1"><a href="book">Book Appointment</a></li>
-                                          <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
-                                          <c:if test="${account.profile == 'ADMIN'}">
-                                            <li class="ms-3 p-1"><a href="confirmation">Confirm Appointment</a></li>
-                                          </c:if>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="doctorschedule">Doctor schedule</a>
-                                    </li>
-                                    <c:if test="${account.profile == 'DOCTOR' || account.profile == 'ADMIN'}">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="ViewPatientInfo">Patient</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">Staff</a>
-                                        </li>
-                                    </c:if>
+                                    
+                                    <c:choose>
+                                        <c:when test="${account.profile == 'DOCTOR'}">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                   Appointment
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="nav-item"><a class="nav-link" href="doctor_schedule">Doctor schedule</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="view_patient">Patient</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
+                                        </c:when>
+                                        <c:when test="${account.profile == 'ADMIN'}">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                   Appointment
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="confirm_appointment">Confirm Appointment</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="nav-item"><a class="nav-link" href="view_patient">Patient</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
+                                        </c:when>
+                                        <c:when test="${account.profile == 'SYSADMIN'}">
+                                            <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="signup_staff">Register Staff</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="backup">Backup&Restore</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                   Appointment
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                </ul>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </ul>
                             </div>
                         </div>
                     </nav>
                 </div>
+                
+                <div class="functional_links">
+                    <c:choose>
+                        <c:when test="${login == null}">
+                            <a href="login">Login</a>
+                            <a href="signup">Register</a>
+                            <a href="forgot">Find Account/Password</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="profile">Manage Account</a>
+                            <a href="welcome?logout">Logout</a>
+                        </c:otherwise>
+                    </c:choose>
+                            
+                    <div class="clear"></div>
+                </div>
             </div>
             
-            <div id="book_appointment_area_wrapper">
-                <div id="book_appointment_area">
-                    <img class="img-fluid" src="img/img01.jpg"/>
+            <div class="content_wrapper">
+                <div class="main_image_area">
+                    <img class="img-fluid" src="img/welcome_main.jpg"/>
                 </div>
+                
                 <div class="book_appointment_field">
                     <p class="mb-2">Individual approach to each patient</p>
                     <h1>Medical Service</h1>
                     <h4 class="ps-3">Medical Service</h4>
-                    <form action="book">
-                        <input class="book_appointment_btn" type="submit" value="Book an appointment" />
-                    </form>
+                    <a href="book_appointment">
+                        <input class="book_appointment_btn" type="button" value="Book an appointment">
+                    </a>
                 </div>
             </div>
         </div>
