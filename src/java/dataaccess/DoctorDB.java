@@ -21,7 +21,7 @@ public class DoctorDB {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
-            while(rs.next()) {
+            while (rs.next()) {
                 int doctor_id = rs.getInt(1);
                 String first_name = rs.getString(2);
                 String last_name = rs.getString(3);
@@ -63,7 +63,7 @@ public class DoctorDB {
             ps.setInt(1, account_id);
             rs = ps.executeQuery();
             
-            if(rs.next()) {
+            if (rs.next()) {
                 int doctor_id = rs.getInt(1);
                 String first_name = rs.getString(2);
                 String last_name = rs.getString(3);
@@ -103,7 +103,7 @@ public class DoctorDB {
             ps.setString(1, email);
             rs = ps.executeQuery();
             
-            if(rs.next()) {
+            if (rs.next()) {
                 int doctor_id = rs.getInt(1);
                 String first_name = rs.getString(2);
                 String last_name = rs.getString(3);
