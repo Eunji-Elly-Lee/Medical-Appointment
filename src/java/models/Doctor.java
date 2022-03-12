@@ -1,5 +1,9 @@
 package models;
 
+/**
+ *
+ * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
+ */
 public class Doctor {
     private int doctor_id;
     private String first_name;
