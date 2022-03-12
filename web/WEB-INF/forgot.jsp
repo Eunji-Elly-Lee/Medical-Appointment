@@ -42,53 +42,15 @@
                                 <nav>
                                     <ul>
                                         <li><a href="welcome">Home</a></li>
-                                        
-                                        <c:choose>
-                                            <c:when test="${account.profile == 'DOCTOR'}">
-                                                <li>
-                                                    <a class="drop-down-tab" href="">
-                                                        Appointment <i class="bi bi-caret-down-fill"></i>
-                                                    </a>
-                                                    <ul class="subnav">
-                                                        <li><a href="book_appointment">Book Appointment</a></li>
-                                                        <li><a href="view_appointment">View Appointment</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="doctor_schedule">Doctor schedule</a></li>
-                                                <li><a href="view_patient">Patient</a></li>
-                                                <li><a href="view_staff">Staff</a></li>
-                                            </c:when>
-                                            <c:when test="${account.profile == 'ADMIN'}">
-                                                <li>
-                                                    <a class="drop-down-tab" href="">
-                                                        Appointment <i class="bi bi-caret-down-fill"></i>
-                                                    </a>
-                                                    <ul class="subnav">
-                                                        <li><a href="book_appointment">Book Appointment</a></li>
-                                                        <li><a href="view_appointment">View Appointment</a></li>
-                                                        <li><a href="confirm_appointment">Confirm Appointment</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="view_patient">Patient</a></li>
-                                                <li><a href="view_staff">Staff</a></li>
-                                            </c:when>
-                                            <c:when test="${account.profile == 'SYSADMIN'}">
-                                                <li><a href="view_staff">Staff</a></li>
-                                                <li><a href="signup_staff">Register Staff</a></li>
-                                                <li><a href="backup">Backup&Restore</a></li>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <li>
-                                                    <a class="drop-down-tab" href="">
-                                                        Appointment <i class="bi bi-caret-down-fill"></i>
-                                                    </a>
-                                                    <ul class="subnav">
-                                                        <li><a href="book_appointment">Book Appointment</a></li>
-                                                        <li><a href="view_appointment">View Appointment</a></li>
-                                                    </ul>
-                                                </li>
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <li>
+                                            <a class="drop-down-tab" href="">
+                                                Appointment <i class="bi bi-caret-down-fill"></i>
+                                            </a>
+                                            <ul class="subnav">
+                                                <li><a href="book_appointment">Book Appointment</a></li>
+                                                <li><a href="view_appointment">View Appointment</a></li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -99,7 +61,7 @@
                 <div class="p-0 mobile_nav">
                     <div class="pe-2 mobile_header">
                         <a href="welcome"><img src="img/logo.png" width="105px"></a>
-                        <div><span class="hello">Hello ${user.first_name}</span>
+                        <div><span class="hello">Hello</span>
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABmJLR0QA/wD/
                                 AP+gvaeTAAAD40lEQVRYhe2XS2xUZRTHf+eb6YOqpYD0laghdkAw7HwUEeLCqKnR0qJ1Y2JcWE3YqtWdS+
@@ -136,56 +98,16 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="welcome">Home</a>
                                     </li>
-                                    
-                                    <c:choose>
-                                        <c:when test="${account.profile == 'DOCTOR'}">
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Appointment
-                                                </a>
-                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link" href="doctor_schedule">Doctor schedule</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="view_patient">Patient</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
-                                        </c:when>
-                                        <c:when test="${account.profile == 'ADMIN'}">
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Appointment
-                                                </a>
-                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="confirm_appointment">Confirm Appointment</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link" href="view_patient">Patient</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
-                                        </c:when>
-                                        <c:when test="${account.profile == 'SYSADMIN'}">
-                                            <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="signup_staff">Register Staff</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="backup">Backup&Restore</a></li>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Appointment
-                                                </a>
-                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
-                                                </ul>
-                                            </li>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Appointment
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                            <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -193,53 +115,52 @@
                 </div>
                 
                 <div class="functional_links">
-                    <c:choose>
-                        <c:when test="${login == null}">
-                            <a href="login">Login</a>
-                            <a href="signup">Register</a>
-                            <a href="forgot">Find Account/Password</a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="profile">Manage Account</a>
-                            <a href="welcome?logout">Logout</a>
-                            <span>Hello, ${user.first_name} ${user.last_name}</span>
-                        </c:otherwise>
-                    </c:choose>
-                            
+                    <a href="login">Login</a>
+                    <a href="signup">Register</a>
+                    <a href="forgot">Find Account/Password</a>
                     <div class="clear"></div>
                 </div>
             </div>
 
-        <br/>
-        <div class="bg-img">
-            <div class="bg-img-h1">
-                <p>Find Account / Password</p>
+            <div class="banner_field">
+                <div class="banner">
+                    <p>Find Account / Password</p>
+                </div>
             </div>
-        </div>
-        <div class="accountForm">
-            <form action="forgot" method="post">
-                <h2>Find Your Account</h2>
-                <p> Please enter your personal information to search for your account. </p>
-                <label for="firstName">First name: </label> 
-                <input type="text" id="firstName" name="firstName" value="" placeholder="First name"><br>
-                <label for="lastName">Last name: </label> 
-                <input type="text" id="lastName" name="lastName" value="" placeholder="Last name"><br>
-                <label for="email-accountForm">Email: </label> 
-                <input type="email" id="email-accountForm" name="email-accountForm" value="" placeholder="Email"><br>
-                <input type="submit" value="Submit">
-                <input type="hidden" name ="action" value="forgot">
-            </form>
-        </div>
-        <div class="passwordForm">
-            <form action="forgot" method="post">
-                <h2>Find Your Password</h2>
-                <p> Please enter your email address to find your account. </p>
-                <label for="email">Email Address: </label> 
-                <input type="email" id="email" name="resetEmail" value="" placeholder="Email address"><br>
-                <input type="submit" value="Submit">
-                <input type="hidden" name ="action" value="forgot">
-            </form>
-        </div>
+            
+            <div class="error_mesaage">
+                <br>
+                <h3>${resetPwd}</h3>
+                <h3>${resetMessage}</h3>
+            </div>
+                
+            <div class="accountForm">
+                <form action="forgot" method="post">
+                    <h2>Find Your Account</h2>
+                    <p> Please enter your personal information to search for your account. </p>
+
+                    <label for="firstName">First name: </label> 
+                    <input type="text" id="firstName" name="firstName" value="" placeholder="First name"><br>
+                    <label for="lastName">Last name: </label> 
+                    <input type="text" id="lastName" name="lastName" value="" placeholder="Last name"><br>
+                    <label for="email-accountForm">Email: </label> 
+                    <input type="email" id="email-accountForm" name="email-accountForm" value="" placeholder="Email"><br>
+                    <input type="submit" value="Submit">
+                    <input type="hidden" name ="action" value="findAcc">
+                </form>
+            </div>
+                
+            <div class="passwordForm">
+                <form action="forgot" method="post">
+                    <h2>Find Your Password</h2>
+                    <p> Please enter your email address to find your account. </p>
+
+                    <label for="email">Email Address: </label> 
+                    <input type="email" id="email" name="resetEmail" value="" placeholder="Email address"><br>
+                    <input type="submit" value="Submit">
+                    <input type="hidden" name ="action" value="findPwd">
+                </form>
+            </div>
         </div>
     </body>
 </html>
