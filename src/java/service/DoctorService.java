@@ -4,6 +4,10 @@ import dataaccess.DoctorDB;
 import java.util.List;
 import models.Doctor;
 
+/**
+ *
+ * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
+ */
 public class DoctorService {
     public List<Doctor> getAll() throws Exception {
         DoctorDB doctorDB = new DoctorDB();
