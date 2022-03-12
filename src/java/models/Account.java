@@ -5,15 +5,15 @@ public class Account {
     private String user_name;
     private String password;
     private String profile;
-    private String resetPasswordUuid;
+    private String reset_password_uuid;
     private String salt;
     
-    public Account(int account_id, String user_name, String password, String profile, String resetPasswordUuid, String salt) {
+    public Account(int account_id, String user_name, String password, String profile, String reset_password_uuid, String salt) {
         this.account_id = account_id;
         this.user_name = user_name;
         this.password = password;
         this.profile = profile;
-        this.resetPasswordUuid = resetPasswordUuid;
+        this.reset_password_uuid = reset_password_uuid;
         this.salt = salt;
     }
     
@@ -45,12 +45,12 @@ public class Account {
         this.profile = profile;
     }
     
-    public String getResetPasswordUuid() {
-        return resetPasswordUuid;
+    public String getReset_password_uuid() {
+        return reset_password_uuid;
     }
 
-    public void setResetPasswordUuid(String resetPasswordUuid) {
-        this.resetPasswordUuid = resetPasswordUuid;
+    public void setReset_password_uuid(String reset_password_uuid) {
+        this.reset_password_uuid = reset_password_uuid;
     }
     
     public String getSalt() {
