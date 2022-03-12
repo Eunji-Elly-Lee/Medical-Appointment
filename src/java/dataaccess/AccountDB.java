@@ -21,7 +21,7 @@ public class AccountDB {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
-            while(rs.next()) {
+            while (rs.next()) {
                 int account_id = rs.getInt(1);
                 String user_name = rs.getString(2);
                 String password = rs.getString(3);
@@ -54,7 +54,7 @@ public class AccountDB {
             ps.setString(1, user_name);
             rs = ps.executeQuery();
             
-            if(rs.next()) {
+            if (rs.next()) {
                 int account_id = rs.getInt(1);
                 String password = rs.getString(3);
                 String profile = rs.getString(4);  
@@ -85,7 +85,7 @@ public class AccountDB {
             ps.setInt(1, account_id);
             rs = ps.executeQuery();
             
-            if(rs.next()) {
+            if (rs.next()) {
                 String user_name = rs.getString(2);
                 String password = rs.getString(3);
                 String profile = rs.getString(4);  
@@ -129,7 +129,8 @@ public class AccountDB {
         List<Account> accounts = accountDB.getAll();
         
         for (int i=0; i < accounts.size(); i++){
-            if (accounts.get(i).getReset_password_uuid() != null && accounts.get(i).getReset_password_uuid().equals(uuid)) {
+            if (accounts.get(i).getReset_password_uuid() != null &&
+                    accounts.get(i).getReset_password_uuid().equals(uuid)) {
                 return accounts.get(i);
             }
         }
