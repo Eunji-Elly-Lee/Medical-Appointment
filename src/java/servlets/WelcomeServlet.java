@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import java.io.IOException;
@@ -14,13 +9,15 @@ import service.AccountService;
 
 /**
  *
- * @author ADMIN
+ * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
  */
 public class WelcomeServlet extends HttpServlet {
+    
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String user_name = (String)session.getAttribute("user_name");
+        String user_name = (String) session.getAttribute("user_name");
         
         if(request.getParameter("logout") != null) {
             session.invalidate();
@@ -43,6 +40,7 @@ public class WelcomeServlet extends HttpServlet {
         return;        
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
