@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <style><%@ include file="/css/styleCommon.css" %></style>  
         <style><%@ include file="/css/styleViewPatientPage.css" %></style>  
+        <title>View Patient Page</title>
     </head>
 
     <body>
