@@ -24,9 +24,7 @@
               crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <style><%@ include file="/css/styleCommon.css" %></style>  
-        <style><%@ include file="/css/styleConfirmAppointmentPage.css" %></style>  
-
-        <style><%@include file="/WEB-INF/styleSchedulePage.css"%></style>
+        <style><%@ include file="/css/styleConfirmAppointmentPage.css" %></style>
         <title>Confirm Appointment Page</title>
     </head>
     
@@ -154,11 +152,11 @@
                             <!-- mockup -->
                             <!--<div class="Row" id="row-0">
                                 <span class="Row-radiobutton"><input type="radio" id="select" 
-                                            name="select" value="0" style="margin-right:50px ;" onchange="ToggleClassState('confirmation-popup','hidden',true)"></span>
-                                    <span class="Row-FirstName">Doug </span>
-                                    <span class="Row-LastName">Shier</span>
-                                    <span class="Row-Date">Thu, 02 Dec</span>
-                                    <span class="Row-Time">11:00 am</span>
+                                        name="select" value="0" style="margin-right:50px ;" onchange="ToggleClassState('confirmation-popup','hidden',true)"></span>
+                                <span class="Row-FirstName">Doug </span>
+                                <span class="Row-LastName">Shier</span>
+                                <span class="Row-Date">Thu, 02 Dec</span>
+                                <span class="Row-Time">11:00 am</span>
                             </div>-->
                             <br>
                             <input type="submit" value="Appointment" class="confirm_button">
