@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>WelcomeServlet</servlet-name>
         <servlet-class>servlets.WelcomeServlet</servlet-class>
@@ -31,8 +29,8 @@
         <servlet-class>servlets.DoctorScheduleServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AppointmentConfirmationServlet</servlet-name>
-        <servlet-class>servlets.AppointmentConfirmationServlet</servlet-class>
+        <servlet-name>ConfirmAppointmentServlet</servlet-name>
+        <servlet-class>servlets.ConfirmAppointmentServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewPatientInfo</servlet-name>
@@ -71,7 +69,7 @@
         <url-pattern>/doctor_schedule</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AppointmentConfirmationServlet</servlet-name>
+        <servlet-name>ConfirmAppointmentServlet</servlet-name>
         <url-pattern>/confirm_appointment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -93,11 +91,11 @@
     <env-entry>
         <env-entry-name>webmail-username</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value></env-entry-value>
+        <env-entry-value/>
     </env-entry>
     <env-entry>
         <env-entry-name>webmail-password</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value></env-entry-value>
+        <env-entry-value/>
     </env-entry>
 </web-app>
