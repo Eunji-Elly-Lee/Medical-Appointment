@@ -23,28 +23,7 @@ public class ProfileServlet extends HttpServlet {
             response.sendRedirect("welcome");
             return;
         } else {
-            AccountService accountService = new AccountService();
-            
-            try {
-                Account account = accountService.get(user_name);
-                request.setAttribute("account", account);
-                
-                if (account.getProfile().equals("DOCTOR")) {
-                    DoctorService doctorService = new DoctorService();
-                    Doctor doctor = doctorService.get(account.getAccount_id());
-                    request.setAttribute("user", doctor);
-                } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
-                    AdministratorService administratorService = new AdministratorService();
-                    Administrator administrator = administratorService.get(account.getAccount_id());
-                    request.setAttribute("user", administrator);
-                } else if (account.getProfile().equals("PATIENT")) {
-                    PatientService patientService = new PatientService();
-                    Patient patient = patientService.get(account.getAccount_id());
-                    request.setAttribute("user", patient);
-                }
-            } catch(Exception ex) {
-                    Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            displayInformation(request, user_name);
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
@@ -76,6 +55,7 @@ public class ProfileServlet extends HttpServlet {
                 birth_date == null || birth_date.equals("") || street_address == null || street_address.equals("") ||
                 city == null || city.equals("") || postal_code == null || postal_code.equals("") ||
                 province == null || province.equals("")) {
+            displayInformation(request, user_name);
             request.setAttribute("message", "Please fill out all the required information.");        
         } else {
             AccountService accountService = new AccountService();
@@ -123,7 +103,32 @@ public class ProfileServlet extends HttpServlet {
             }
         }
         
-        getServletContext().getRequestDispatcher("/WEB-INF/doctorProfile.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
         return;
+    }
+
+    private void displayInformation(HttpServletRequest request, String user_name) {
+        AccountService accountService = new AccountService();
+            
+        try {
+            Account account = accountService.get(user_name);
+            request.setAttribute("account", account);
+                
+            if (account.getProfile().equals("DOCTOR")) {
+                DoctorService doctorService = new DoctorService();
+                Doctor doctor = doctorService.get(account.getAccount_id());
+                request.setAttribute("user", doctor);
+            } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
+                AdministratorService administratorService = new AdministratorService();
+                Administrator administrator = administratorService.get(account.getAccount_id());
+                request.setAttribute("user", administrator);
+            } else if (account.getProfile().equals("PATIENT")) {
+                PatientService patientService = new PatientService();
+                Patient patient = patientService.get(account.getAccount_id());
+                request.setAttribute("user", patient);
+            }
+        } catch(Exception ex) {
+                Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
