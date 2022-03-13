@@ -14,6 +14,7 @@ public class ViewAppointmentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
           getServletContext().getRequestDispatcher("/WEB-INF/viewAppointment.jsp").forward(request, response);
+          return;
     }
   
     @Override
