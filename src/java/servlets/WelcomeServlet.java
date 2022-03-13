@@ -45,7 +45,7 @@ public class WelcomeServlet extends HttpServlet {
                         Patient patient = patientService.get(account.getAccount_id());
                         request.setAttribute("user", patient);
                     }
-                } catch(Exception ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }   
             }        
