@@ -18,7 +18,7 @@
     <body>
         <a href="welcome">return to previous page</a>
         <div>
-            <form class="login_field" action="login" method="POST">
+            <form class="login_field" action="login" method="post">
                 <h1>Surpass Health Clinic</h1>
                 <h3>Login</h3>
                 <label>Username</label>
