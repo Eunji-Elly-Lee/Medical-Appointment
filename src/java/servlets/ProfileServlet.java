@@ -56,7 +56,7 @@ public class ProfileServlet extends HttpServlet {
                 city == null || city.equals("") || postal_code == null || postal_code.equals("") ||
                 province == null || province.equals("")) {
             displayInformation(request, user_name);
-            request.setAttribute("message", "Please fill out all the required information.");        
+            request.setAttribute("message", "Please fill out all the required information.");
         } else {
             AccountService accountService = new AccountService();
         
@@ -98,6 +98,7 @@ public class ProfileServlet extends HttpServlet {
 
                 Account updatedAccount = accountService.get(user_name);
                 request.setAttribute("account", updatedAccount);
+                request.setAttribute("message", "Your informaiotn has been updated successfully.");  
             } catch (Exception ex) {
                 Logger.getLogger(ProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
