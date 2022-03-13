@@ -1,26 +1,26 @@
 Feb 10, 2022
-Main page, Sign-up page, Registration page - Kevin
+Welcome page, sign-up page, login page - Kevin
 Confirmation page - Fied
 Database script - Jonghan, Jihoon, Eunji, Yison
 
 Feb 17, 2022
-Booking appointment page - Fied
+Book appointment page - Fied
 Doctor schedule page - Samia
 View appointment page - Jihoon 
 Find account/password page - Jonghan
-Rebuild Main page and Registration page - Eunji
+Rebuild welcome page, sign-up page - Eunji
 
 Mar 3, 2022 
-View patient info page - Yisong
+View patient page - Yisong
 
 Mar 9, 2022
+Patient profile page, doctor model, patient model - Kevin
 Doctor profile page - Jihoon
-Patient profile page - Kevin
-Profile back-end - Eunji
-Account model - Eunji
-Doctor model, patient model - Kevin
-AccountDB, DoctorDB - Eunji
-Account service, doctor service - Eunji
+Account model, account db, doctor db, account service, doctor service, login back-end, profile back-end - Eunji
 
 Mar 10, 2022
-Administrator model - Jonghan
+Appointment model, appointment type model, calendar model, book appointment back-end - Jihoon
+Administrator model, administrator db, forgot back-end - Jonghan
+Availability model, patient db, appointment db, appointment type db, calendar db, availability db
+administrator service, patient service, appointment service, appointment type service, calendar service, availability service,
+book appointment back-end - Eunji
