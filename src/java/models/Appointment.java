@@ -5,47 +5,38 @@ package models;
  * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
  */
 public class Appointment {
-   private int doctor_id;
-    private String date;
-    private String time;
+    private int doctor_id;
+    private String start_date_time;
     private int patient_id;
     private int duration;
     private int type;
     private String reason;
+    private boolean patient_attended;
 
-    public Appointment(int doctor_id, String date, String time, int patient_id, int duration, int type, String reason)
-    {
+    public Appointment() {
+    }
+    
+    public Appointment(int doctor_id, String start_date_time, int patient_id,
+            int duration, int type, String reason, boolean patient_attended) {
         this.doctor_id = doctor_id;
-        this.date = date;
-        this.time = time;
+        this.start_date_time = start_date_time;
         this.patient_id = patient_id;
         this.duration = duration;
         this.type = type;
         this.reason = reason;
+        this.patient_attended = patient_attended;
     }
 
     public int getDoctor_id() {
         return doctor_id;
     }
 
-    public void setDoctor_id(int doctor_id) {
-        this.doctor_id = doctor_id;
+    public String getStart_date_time() {
+        return start_date_time;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    public void setStart_date_time(String start_date_time) {
+        this.start_date_time = start_date_time;
     }
 
     public int getPatient_id() {
@@ -78,5 +69,26 @@ public class Appointment {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+    
+    public boolean getPatient_attended() {
+        return patient_attended;
+    }
+
+    public void setPatient_attended(boolean patient_attended) {
+        this.patient_attended = patient_attended;
+    }
+                    
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "doctor_id=" + doctor_id +
+                ", start_date_time='" + start_date_time + '\'' +
+                ", patient_id='" + patient_id + '\'' +
+                ", duration='" + duration + '\'' +
+                ", type='" + type + '\'' +
+                ", reason='" + reason + '\'' +
+                ", patient_attended='" + patient_attended + '\'' +
+                '}';
     }
 }
