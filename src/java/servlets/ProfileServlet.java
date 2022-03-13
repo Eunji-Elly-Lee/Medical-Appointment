@@ -28,7 +28,6 @@ public class ProfileServlet extends HttpServlet {
             try {
                 Account account = accountService.get(user_name);
                 request.setAttribute("account", account);
-                request.setAttribute("login", "login");
                 
                 if (account.getProfile().equals("DOCTOR")) {
                     DoctorService doctorService = new DoctorService();
@@ -84,7 +83,7 @@ public class ProfileServlet extends HttpServlet {
             try {
                 Account account = accountService.get(user_name);
 
-                if(password != null && !password.equals("") && password.equals(repassword)) {
+                if (password != null && !password.equals("") && password.equals(repassword)) {
                     accountService.update(account.getAccount_id(), user_name, password, account.getProfile()); 
                 }
 
@@ -119,7 +118,7 @@ public class ProfileServlet extends HttpServlet {
 
                 Account updatedAccount = accountService.get(user_name);
                 request.setAttribute("account", updatedAccount);
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(ProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
