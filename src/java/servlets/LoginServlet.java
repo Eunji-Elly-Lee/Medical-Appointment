@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import java.io.IOException;
@@ -13,28 +8,29 @@ import service.AccountService;
 
 /**
  *
- * @author ADMIN
+ * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
  */
 public class LoginServlet extends HttpServlet {
+    
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         return;
     }
-
    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String user_name = request.getParameter("username_input");
-        String password = request.getParameter("password_input");        
+        String password = request.getParameter("password_input");
         request.setAttribute("username_input", user_name);
         
         AccountService accountService = new AccountService();
         Account account = accountService.login(user_name, password);
         
-        if(account == null) {
+        if (account == null) {
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
             return;
         } else {
