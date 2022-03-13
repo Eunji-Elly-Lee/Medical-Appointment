@@ -14,6 +14,7 @@ public class ConfirmAppointmentServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         getServletContext().getRequestDispatcher("/WEB-INF/confirmAppointment.jsp").forward(request, response);
+        return;
     }
     
     @Override
