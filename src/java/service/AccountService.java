@@ -174,7 +174,7 @@ public class AccountService {
         String to = email;
         String subject = "Your ID From Surpass Health Clinic";
         String template = path + "/email_templates/find_account.html";
-        String url2 = "http://localhost:8084/capstoneUpdate/";
+        String url2 = "http://localhost:8084/capstone/";
         AccountDB accountDB = new AccountDB();        
         Account account = null;
         
