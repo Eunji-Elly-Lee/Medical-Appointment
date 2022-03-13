@@ -4,14 +4,21 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-public class ViewPatientInfo extends HttpServlet {
+/**
+ *
+ * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
+ */
+public class ViewPatientServlet extends HttpServlet {
+    
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       getServletContext().getRequestDispatcher("/WEB-INF/ViewPatientInfo.jsp").forward(request, response);
+       getServletContext().getRequestDispatcher("/WEB-INF/viewPatient.jsp").forward(request, response);
+       return;
     }
     
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+            throws ServletException, IOException {        
     }
 }

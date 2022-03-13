@@ -33,8 +33,8 @@
         <servlet-class>servlets.ConfirmAppointmentServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewPatientInfo</servlet-name>
-        <servlet-class>servlets.ViewPatientInfo</servlet-class>
+        <servlet-name>ViewPatientServlet</servlet-name>
+        <servlet-class>servlets.ViewPatientServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProfileServlet</servlet-name>
@@ -73,7 +73,7 @@
         <url-pattern>/confirm_appointment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewPatientInfo</servlet-name>
+        <servlet-name>ViewPatientServlet</servlet-name>
         <url-pattern>/view_patient</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
