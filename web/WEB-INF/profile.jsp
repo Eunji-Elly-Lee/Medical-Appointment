@@ -193,19 +193,9 @@
                 </div>
                 
                 <div class="functional_links">
-                    <c:choose>
-                        <c:when test="${account == null}">
-                            <a href="login">Login</a>
-                            <a href="signup">Register</a>
-                            <a href="forgot">Find Account/Password</a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="profile">Manage Account</a>
-                            <a href="welcome?logout">Logout</a>
-                            <span>Hello, ${user.first_name} ${user.last_name}</span>
-                        </c:otherwise>
-                    </c:choose>
-                            
+                    <a href="profile">Manage Account</a>
+                    <a href="welcome?logout">Logout</a>
+                    <span>Hello, ${user.first_name} ${user.last_name}</span>
                     <div class="clear"></div>
                 </div>
             </div>
