@@ -194,7 +194,7 @@
                 
                 <div class="functional_links">
                     <c:choose>
-                        <c:when test="${login == null}">
+                        <c:when test="${account == null}">
                             <a href="login">Login</a>
                             <a href="signup">Register</a>
                             <a href="forgot">Find Account/Password</a>
