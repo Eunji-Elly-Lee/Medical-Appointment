@@ -122,44 +122,46 @@
                 </div>
             </div>
 
-            <div class="banner_field">
-                <div class="banner">
-                    <p>Find Account / Password</p>
+            <div>
+                <div class="banner_field">
+                    <div class="banner">
+                        <p>Find Account / Password</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="error_message">
-                <br>
-                <h3>${resetPwd}</h3>
-                <h3>${resetMessage}</h3>
-            </div>
-                
-            <div class="accountForm">
-                <form action="forgot" method="post">
-                    <h2>Find Your Account</h2>
-                    <p> Please enter your personal information to search for your account. </p>
 
-                    <label for="firstName">First name: </label> 
-                    <input type="text" id="firstName" name="firstName" value="" placeholder="First name"><br>
-                    <label for="lastName">Last name: </label> 
-                    <input type="text" id="lastName" name="lastName" value="" placeholder="Last name"><br>
-                    <label for="email_accountForm">Email: </label> 
-                    <input type="email" id="email_accountForm" name="email_accountForm" value="" placeholder="Email"><br>
-                    <input type="submit" value="Submit">
-                    <input type="hidden" name ="action" value="findAcc">
-                </form>
-            </div>
-                
-            <div class="passwordForm">
-                <form action="forgot" method="post">
-                    <h2>Find Your Password</h2>
-                    <p> Please enter your email address to find your account. </p>
+                <div class="error_message">
+                    <br>
+                    <h3>${resetPwd}</h3>
+                    <h3>${resetMessage}</h3>
+                </div>
 
-                    <label for="email">Email Address: </label> 
-                    <input type="email" id="email" name="resetEmail" value="" placeholder="Email address"><br>
-                    <input type="submit" value="Submit">
-                    <input type="hidden" name ="action" value="findPwd">
-                </form>
+                <div class="accountForm">
+                    <form action="forgot" method="post">
+                        <h2>Find Your Account</h2>
+                        <p> Please enter your personal information to search for your account. </p>
+
+                        <label for="firstName">First name: </label> 
+                        <input type="text" id="firstName" name="firstName" value="" placeholder="First name"><br>
+                        <label for="lastName">Last name: </label> 
+                        <input type="text" id="lastName" name="lastName" value="" placeholder="Last name"><br>
+                        <label for="email_accountForm">Email: </label> 
+                        <input type="email" id="email_accountForm" name="email_accountForm" value="" placeholder="Email"><br>
+                        <input type="submit" value="Submit">
+                        <input type="hidden" name ="action" value="findAcc">
+                    </form>
+                </div>
+
+                <div class="passwordForm">
+                    <form action="forgot" method="post">
+                        <h2>Find Your Password</h2>
+                        <p> Please enter your email address to find your account. </p>
+
+                        <label for="email">Email Address: </label> 
+                        <input type="email" id="email" name="resetEmail" value="" placeholder="Email address"><br>
+                        <input type="submit" value="Submit">
+                        <input type="hidden" name ="action" value="findPwd">
+                    </form>
+                </div>
             </div>
         </div>
     </body>

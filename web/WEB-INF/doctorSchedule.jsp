@@ -127,48 +127,50 @@
                     <div class="clear"></div>
                 </div>
             </div>
-
-            <div class="banner_field">
-                <div class="banner">
-                    <p>Doctor Schedule</p>
-                </div>
-            </div>
-
-            <div class="schedule_wrapper">
-                <div class="schedule">
-                    <div class="form_heading">
-                        <header>
-                            <span id="hdr-Id"></span>
-                            <span class="hdr-radiobutton"></span>
-                            <span id="hdr-FirstName">FIRST NAME</span>
-                            <span id="hdr-LastName">LAST NAME</span>
-                            <span id="hdr-Date">DATE</span>
-                            <span id="hdr-Time">TIME</span>
-                        </header>
+                    
+            <div>
+                <div class="banner_field">
+                    <div class="banner">
+                        <p>Doctor Schedule</p>
                     </div>
+                </div>
 
-                    <form class="schedule_form">
-                        <div class="schedule_form_flex">
-                            <!-- mockup -->
-                            <!--<div class="Row" id="row-0">
-                                <span class="Row-radiobutton"><input type="radio" id="select" 
-                                        name="select" value="0" style="margin-right:50px ;" onchange="ToggleClassState('confirmation-popup','hidden',true)"></span>
-                                <span class="Row-FirstName">Doug </span>
-                                <span class="Row-LastName">Shier</span>
-                                <span class="Row-Date">Thu, 02 Dec</span>
-                                <span class="Row-Time">11:00 am</span>
-                            </div>-->                            
-                            <br>
-
-                            <!-- for now use this link to go to confirmation page-->
-                            <li><a href="confirmation">appt confirmation </a></li>
-
-                            <!-- The button below does not work -->
-                            <form action="appointmentConfirmation">
-                                <input type="submit" value="Appointment" class="confirm_button">
-                            </form>
+                <div class="schedule_wrapper">
+                    <div class="schedule">
+                        <div class="form_heading">
+                            <header>
+                                <span id="hdr-Id"></span>
+                                <span class="hdr-radiobutton"></span>
+                                <span id="hdr-FirstName">FIRST NAME</span>
+                                <span id="hdr-LastName">LAST NAME</span>
+                                <span id="hdr-Date">DATE</span>
+                                <span id="hdr-Time">TIME</span>
+                            </header>
                         </div>
-                    </form>
+
+                        <form class="schedule_form">
+                            <div class="schedule_form_flex">
+                                <!-- mockup -->
+                                <!--<div class="Row" id="row-0">
+                                    <span class="Row-radiobutton"><input type="radio" id="select" 
+                                            name="select" value="0" style="margin-right:50px ;" onchange="ToggleClassState('confirmation-popup','hidden',true)"></span>
+                                    <span class="Row-FirstName">Doug </span>
+                                    <span class="Row-LastName">Shier</span>
+                                    <span class="Row-Date">Thu, 02 Dec</span>
+                                    <span class="Row-Time">11:00 am</span>
+                                </div>-->                            
+                                <br>
+
+                                <!-- for now use this link to go to confirmation page-->
+                                <li><a href="confirmation">appt confirmation </a></li>
+
+                                <!-- The button below does not work -->
+                                <form action="appointmentConfirmation">
+                                    <input type="submit" value="Appointment" class="confirm_button">
+                                </form>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

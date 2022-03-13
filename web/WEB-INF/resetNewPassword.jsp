@@ -122,29 +122,31 @@
                 </div>
             </div>
             
-            <div class="banner_field">
-                <div class="banner">
-                    <p>Reset Password</p>
+            <div>
+                <div class="banner_field">
+                    <div class="banner">
+                        <p>Reset Password</p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="error_message">
-                <br>
-                <h3>${newPswMessage}</h3>
-            </div>
-            
-            <div class="newPassword">
-                <form action="forgot" method="post">
-                    <h2>Enter a New Password</h2>
-                    <p> Please enter your new password. </p>
 
-                    <label for="resetPassword">* Enter New Password: </label> 
-                    <input type="password" name="resetPassword" value="${resetPassword}"><br>
-                    <label for="resetConfirmPassword">* Confirm New Password: </label> 
-                    <input type="password" name="resetConfirmPassword" value="${resetConfirmPassword}"><br>
-                    <input type="submit" value="Submit">
-                    <input type="hidden" name ="action" value="newPassword">
-                </form>
+                <div class="error_message">
+                    <br>
+                    <h3>${newPswMessage}</h3>
+                </div>
+
+                <div class="newPassword">
+                    <form action="forgot" method="post">
+                        <h2>Enter a New Password</h2>
+                        <p> Please enter your new password. </p>
+
+                        <label for="resetPassword">* Enter New Password: </label> 
+                        <input type="password" name="resetPassword" value="${resetPassword}"><br>
+                        <label for="resetConfirmPassword">* Confirm New Password: </label> 
+                        <input type="password" name="resetConfirmPassword" value="${resetConfirmPassword}"><br>
+                        <input type="submit" value="Submit">
+                        <input type="hidden" name ="action" value="newPassword">
+                    </form>
+                </div>
             </div>
         </div>
     </body>
