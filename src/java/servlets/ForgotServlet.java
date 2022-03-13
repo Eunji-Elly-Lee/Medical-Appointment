@@ -100,7 +100,7 @@ public class ForgotServlet extends HttpServlet {
         } else if (action.equals("findAcc")) {
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
-            String emailFind = request.getParameter("email-accountForm");
+            String emailFind = request.getParameter("email_accountForm");
             
             if (firstName != null && !firstName.equals("")
                     && lastName != null && !lastName.equals("") 
