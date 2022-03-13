@@ -143,8 +143,8 @@
                     <input type="text" id="firstName" name="firstName" value="" placeholder="First name"><br>
                     <label for="lastName">Last name: </label> 
                     <input type="text" id="lastName" name="lastName" value="" placeholder="Last name"><br>
-                    <label for="email-accountForm">Email: </label> 
-                    <input type="email" id="email-accountForm" name="email-accountForm" value="" placeholder="Email"><br>
+                    <label for="email_accountForm">Email: </label> 
+                    <input type="email" id="email_accountForm" name="email_accountForm" value="" placeholder="Email"><br>
                     <input type="submit" value="Submit">
                     <input type="hidden" name ="action" value="findAcc">
                 </form>
