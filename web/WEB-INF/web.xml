@@ -17,8 +17,8 @@
         <servlet-class>servlets.ForgotServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewAppointment</servlet-name>
-        <servlet-class>servlets.ViewAppointment</servlet-class>
+        <servlet-name>ViewAppointmentServlet</servlet-name>
+        <servlet-class>servlets.ViewAppointmentServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BookAppointmentServlet</servlet-name>
@@ -57,7 +57,7 @@
         <url-pattern>/forgot</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewAppointment</servlet-name>
+        <servlet-name>ViewAppointmentServlet</servlet-name>
         <url-pattern>/view_appointment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
