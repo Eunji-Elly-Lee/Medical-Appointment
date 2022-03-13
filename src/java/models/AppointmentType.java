@@ -22,7 +22,7 @@ public class AppointmentType {
         return type;
     }  
 
-     public String getDescription() {
+    public String getDescription() {
         return description;
     }   
 
