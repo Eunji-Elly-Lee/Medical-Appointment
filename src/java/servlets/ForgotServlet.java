@@ -59,6 +59,7 @@ public class ForgotServlet extends HttpServlet {
         
         if (action.equals("findPwd")) {
             String email = request.getParameter("resetEmail");
+            
             if (account == null && email != null && !email.equals("")) {
                 Account account2 = accountService.resetPassword(email, path, url);
                 session.setAttribute("account", account2);
