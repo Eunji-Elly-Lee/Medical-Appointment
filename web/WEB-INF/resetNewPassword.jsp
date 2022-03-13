@@ -1,5 +1,5 @@
 <%-- 
-    Document   : Reset New Password Page
+    Document   : Reset new password page
     Created on : Mar 12, 2022
     Author     : Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
 --%>
