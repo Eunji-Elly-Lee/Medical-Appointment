@@ -1,41 +1,41 @@
 <%-- 
-    Document   : login
-    Created on : Feb 5, 2022, 3:18:12 PM
-    Author     : ADMIN
+    Document   : Login page
+    Created on : Feb 5, 2022
+    Author     : Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <style><%@include file="/WEB-INF/styleLoginPage.css"%></style>
+        <meta name="viewport" content="width=device-width, initial-scale=1">  
+        <style><%@ include file="/css/styleLoginPage.css" %></style>  
+        <title>Login Page</title>
     </head>
+    
     <body>
-        <a  class="return to previous page" href="welcome">return to previous page</a>
-        <div >
-            <form id="login_field" action="login" method="POST">
+        <a href="welcome">return to previous page</a>
+        <div>
+            <form class="login_field" action="login" method="POST">
                 <h1>Surpass Health Clinic</h1>
                 <h3>Login</h3>
                 <label>Username</label>
-                <input type="text" name="username_input" size="30"/>
+                <input type="text" name="username_input" size="30">
                 <br/>
                 <label>Password</label>
-                <input type="text" name="password_input" size="30"/>
-                <br/>
-                <br/>
-                <input id="login_btn" type="submit" value="Log in" size="30" />
-                <br/>
+                <input type="text" name="password_input" size="30">
                 <br>
-                <a id="forget_pwd" href="forgot"> Forgot your password?</a>
-                <br/>
-
-
-
+                <br>
+                <input id="login_btn" type="submit" value="Log in" size="30">
+                <br>
+                <br>
+                <a class="forget_pwd" href="forgot"> Forgot your password?</a>
+                <br>
             </form>
             <span>Need an account?</span>
-            <a id="sign_up" href="signup">Sign up</a>
+            <a class="sign_up" href="signup">Sign up</a>
         </div>
     </body>
 </html>
