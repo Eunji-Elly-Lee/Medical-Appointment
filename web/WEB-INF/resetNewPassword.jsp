@@ -134,7 +134,7 @@
             </div>
             
             <div class="newPassword">
-                <form action="newPassword" method="post">
+                <form action="forgot" method="post">
                     <h2>Enter a New Password</h2>
                     <p> Please enter your new password. </p>
 
