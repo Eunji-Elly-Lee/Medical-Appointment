@@ -221,65 +221,96 @@
                 <h3>${message}</h3>
             </div>
                             
-            <div class="accountForm">
-                 <form action="profile" method="post">
-                     <h2>Edit your account</h2>
-                     <p> Please enter your  information for your account. </p>
+            <div class="profileForm">
+                <form action="profile" method="post">
+                    <h2>Edit your account</h2>
+                    <p>Please enter your information for your account.</p>
 
-                     <div class="container">
-                         <div class="row align-items-start">
-                             <div class="col-md-5">
-                                 <label for="password">Password </label> <br>
-                                 <input type="text" id="password" name="password" placeholder="Enter New Password">
-                             </div>
-
-                             <div class="col-md-5">
-                                 <label for="repassword">Re-enter Password: </label> <br>
-                                <input type="text" id="repassword" name="repassword" placeholder="Re-enter New Password">
-                             </div>
-                         </div>
-                         <div class="row align-items-second">
-                              <div class="col-md-5">
-                                 <label for="phone_number">Phone number: </label> <br>
-                                <input type="text" id="phone_number" name="phone_number" value="${doctor.mobile_phone}">
-                             </div>
-
-                           <div class="col-md-5">
-                                 <label for="alter_Phone_number">Alter Phone number: </label> <br>
-                                <input type="text" id="alter_Phone_number" name="alter_Phone_number" value="${doctor.alt_phone}">
-                             </div>
-                         </div>
-                         <div class="row align-items-third">
-                             <div class="col-md-5">
-                                 <label for="email">Email: </label> <br>
-                                <input type="text" id="email" name="email" value="${doctor.email}">
-                             </div>
-
+                    <div class="container">
+                        <div class="row align-items-start">
                             <div class="col-md-5">
-                                 <label>pref contract type</label><br>
-                                 <select id="pref_contact_type" name="pref_contact_type">
-                                     <option value="MOBILE_PHONE"
-                                             <c:if test="${doctor.pref_contact_type == 'MOBILE_PHONE'}">selected</c:if>>
-                                         Mobile phone
-                                     </option>
-                                     <option value="EMAIL"
-                                             <c:if test="${doctor.pref_contact_type == 'EMAIL'}">selected</c:if>>
-                                         Email
-                                     </option>
-                                 </select>  
-                             </div>
-                         </div>
-                         <div class="row align-items-fourth">
-                             <div class="col-lg-10">
-                                 <label for="address">Address: </label> <br>
-                                <input type="text" id="address" name="street_address" value="${doctor.street_address}"><br>
-                                <input type="text" id="address_second" name="postal_code" value="${doctor.postal_code}">
-                             </div>                       
-                         </div>
-                     </div>
+                                <label for="first_name">First name</label> <br>
+                                <input type="text" id="first_name" name="first_name" value="${user.first_name}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="last_name">Last name</label> <br>
+                                <input type="text" id="last_name" name="last_name" value="${user.last_name}">
+                            </div>
+                        </div>
+                        <div class="row align-items-second">
+                            <div class="col-md-5">
+                                <label for="password">Password</label> <br>
+                                <input type="password" id="password" name="password" placeholder="Enter New Password">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="repassword">Re-enter Password</label> <br>
+                                <input type="password" id="repassword" name="repassword" placeholder="Re-enter New Password">
+                            </div>
+                        </div>                            
+                        <div class="row align-items-third">
+                            <div class="col-md-5">
+                                <label for="phone_number">Phone number</label> <br>
+                                <input type="text" id="phone_number" name="phone_number" value="${user.mobile_phone}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="alt_phone">Alter Phone number</label> <br>
+                                <input type="text" id="alt_phone" name="alt_phone" value="${user.alt_phone}">
+                            </div>
+                        </div>                            
+                        <div class="row align-items-fourth">
+                            <div class="col-md-5">
+                                <label for="email">Email</label> <br>
+                                <input type="text" id="email" name="email" value="${user.email}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="pref_contact_type">Preferred Notification</label><br>
+                                <select id="pref_contact_type" name="pref_contact_type">
+                                    <c:if test="${user.pref_contact_type == 'MOBILE_PHONE'}">
+                                        <option value="MOBILE_PHONE" selected>Phone</option>
+                                        <option value="EMAIL" >Email</option>
+                                    </c:if>
+                                    <c:if test="${user.pref_contact_type == 'EMAIL'}">
+                                        <option value="EMAIL" selected>Email</option>
+                                        <option value="MOBILE_PHONE" >Phone</option>
+                                    </c:if>
+                                </select>  
+                            </div>
+                        </div>
+                        <div class="row align-items-fifth">
+                            <div class="col-md-5">
+                                <label for="birth_date">Birth date</label> <br>
+                                <input type="text" id="birth_date" name="birth_date" value="${user.birth_date}">
+                            </div>
+                            <div class="col-md-5">
+                                <label for="gender">Preferred Notification</label><br>
+                                <select id="gender" name="gender">
+                                    <c:if test="${user.gender == 'male'}">
+                                        <option value="male" selected>Male</option>
+                                        <option value="female" >Email</option>
+                                    </c:if>
+                                    <c:if test="${user.gender == 'female'}">
+                                        <option value="female" selected>Female</option>
+                                        <option value="male" >Male</option>
+                                    </c:if>
+                                </select>  
+                            </div>
+                        </div>
+                        <div class="row align-items-sixth">
+                            <div class="col-lg-10">
+                                <label>Address</label> <br>
+                                <input type="text" id="street_address" name="street_address" value="${user.street_address}"><br>
+                                <input type="text" id="city" name="city" value="${user.city}">
+                            </div>                       
+                        </div>
+                        <div class="row align-items-seventh">
+                            <div class="col-lg-10">
+                                <input type="text" id="postal_code" name="postal_code" value="${user.postal_code}"><br>
+                                <input type="text" id="province" name="province" value="${user.province}">
+                            </div>                       
+                        </div>
+                    </div>
 
-                     <input type="submit" value="Submit">
-                     <input type="hidden" name ="action" value="forgot">
+                    <input type="submit" value="Submit">
                  </form>
              </div>
         </div>

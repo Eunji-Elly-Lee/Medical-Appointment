@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 .banner_field{
-    background-image: url("img/forgot_banner.png");
+    background-image: url("img/profile_banner.png");
     margin-top: 19px;
     min-height: 100px;
     background-position: center;
@@ -13,39 +13,35 @@
     font-size: 35px;
     line-height: 250%;
 }
-.mesaage {
+.message {
     text-align: center;
 }
-.accountForm, 
-.newPassword{
+.profileForm{
     border-radius: 5px;
     background-color: #F8F5F8;
     padding: 20px;
     box-shadow: 5px 5px 10px #000000;
     box-sizing: content-box;
-    width: 50%;
+    width: 70%;
     margin: 30px auto;
 }
-.passwordForm {
-    border-radius: 5px;
-    background-color: #F8F5F8;
-    padding: 20px;
-    box-shadow: 5px 5px 10px #000000;
-    box-sizing: content-box;
-    width: 50%;
-    margin: 60px auto;
+.container{
+    width: 98%;
+    margin-left: -20px;
 }
-input[type=text],
-input[type=email],
-input[type=number],
-input[type=password]{
-    width: 100%;
+.container input{
+    width: 95%;
     padding: 10px 20px;
-    margin: 3px 0;
+    margin: 0 0 8px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+.container select{
+    width: 82%;
+    margin-bottom: 10px;
+    padding: 10px 20px;
 }
 input[type=submit]{
     width: 50%;
@@ -64,6 +60,15 @@ input[type=submit]:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+@media screen and (min-width: 576px) {
+    .container{
+        margin-left: -15px;
+    }
+    .container select{
+        width: 86%;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .banner_field{
         margin-top: 15px;
@@ -71,5 +76,14 @@ input[type=submit]:hover{
     .banner{
         font-size: 40px;
         line-height: 230%;
+    }
+    .profileForm{
+        width: 50%;
+    }
+    .container input{
+        width: 100%;
+    }
+    .col-lg-10{
+        width: 95%;
     }
 }
