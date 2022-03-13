@@ -1,13 +1,12 @@
 package servlets;
 
-import dataaccess.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import models.*;
-import service.AccountService;
+import service.*;
 
 /**
  *
@@ -32,19 +31,18 @@ public class WelcomeServlet extends HttpServlet {
                 try {
                     Account account = accountService.get(user_name);
                     request.setAttribute("account", account);
-                    request.setAttribute("login", "login");
                     
                     if (account.getProfile().equals("DOCTOR")) {
-                        DoctorDB doctorDB = new DoctorDB();
-                        Doctor doctor = doctorDB.get(account.getAccount_id());
+                        DoctorService doctorService = new DoctorService();
+                        Doctor doctor = doctorService.get(account.getAccount_id());
                         request.setAttribute("user", doctor);
                     } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
-                        AdministratorDB administratorDB = new AdministratorDB();
-                        Administrator administrator = administratorDB.get(account.getAccount_id());
+                        AdministratorService administratorService = new AdministratorService();
+                        Administrator administrator = administratorService.get(account.getAccount_id());
                         request.setAttribute("user", administrator);
                     } else if (account.getProfile().equals("PATIENT")) {
-                        PatientDB patientDB = new PatientDB();
-                        Patient patient = patientDB.get(account.getAccount_id());
+                        PatientService patientService = new PatientService();
+                        Patient patient = patientService.get(account.getAccount_id());
                         request.setAttribute("user", patient);
                     }
                 } catch(Exception ex) {
@@ -59,8 +57,7 @@ public class WelcomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-       
+            throws ServletException, IOException {       
     }
     
     public void allPasswordEncrypted(HttpServletRequest request, HttpServletResponse response)
