@@ -63,7 +63,7 @@ public class AccountService {
         String uuid = UUID.randomUUID().toString();
         String to = email;
         String subject = "Surpass Health Clinic Reset Password";
-        String template = path + "/emailtemplates/resetpassword.html";
+        String template = path + "/email_templates/reset_password.html";
         String link = url + "?uuid=" + uuid;
         AccountDB accountDB = new AccountDB();
         Account account = null;
@@ -173,7 +173,7 @@ public class AccountService {
     public Account sendAccount(String email, String firstName, String LastName, String path) throws Exception {
         String to = email;
         String subject = "Your ID From Surpass Health Clinic";
-        String template = path + "/emailtemplates/findaccount.html";
+        String template = path + "/email_templates/find_account.html";
         String url2 = "http://localhost:8084/capstoneUpdate/";
         AccountDB accountDB = new AccountDB();        
         Account account = null;
