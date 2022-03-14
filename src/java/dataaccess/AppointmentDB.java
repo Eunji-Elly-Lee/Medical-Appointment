@@ -43,7 +43,7 @@ public class AppointmentDB {
         return appointments;
     }
     
-    public Appointment get(int doctor_id) throws Exception {
+    public Appointment getByDoctorID(int doctor_id) throws Exception {
         Appointment appointment = null;
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
@@ -58,6 +58,72 @@ public class AppointmentDB {
             
             if (rs.next()) {
                 String start_date_time = rs.getString(2);
+                int patient_id = rs.getInt(3);
+                int duration = rs.getInt(4); 
+                int type = rs.getInt(5); 
+                String reason = rs.getString(6);
+                boolean patient_attended = rs.getBoolean(7);   
+                
+                appointment =
+                        new Appointment(doctor_id, start_date_time, patient_id, duration, type, reason, patient_attended);
+            }
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+        
+        return appointment;
+    }
+    
+    public Appointment getByPatientID(int patient_id) throws Exception {
+        Appointment appointment = null;
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM appointment WHERE patient_id = ?";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, patient_id);
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                int doctor_id = rs.getInt(1);
+                String start_date_time = rs.getString(2);
+                int duration = rs.getInt(4); 
+                int type = rs.getInt(5); 
+                String reason = rs.getString(6);
+                boolean patient_attended = rs.getBoolean(7);   
+                
+                appointment =
+                        new Appointment(doctor_id, start_date_time, patient_id, duration, type, reason, patient_attended);
+            }
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+        
+        return appointment;
+    }
+    
+    public Appointment getByDate(String start_date_time) throws Exception {
+        Appointment appointment = null;
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM appointment WHERE start_date_time = ?";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, start_date_time);
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                int doctor_id = rs.getInt(1);
                 int patient_id = rs.getInt(3);
                 int duration = rs.getInt(4); 
                 int type = rs.getInt(5); 
