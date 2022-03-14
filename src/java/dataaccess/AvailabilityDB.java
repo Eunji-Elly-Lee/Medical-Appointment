@@ -53,6 +53,7 @@ public class AvailabilityDB {
             rs = ps.executeQuery();
             
             while (rs.next()) {
+                start_date_time = rs.getString(2);
                 int duration = rs.getInt(3);               
                 
                 Availability availability = new Availability(doctor_id, start_date_time, duration);
