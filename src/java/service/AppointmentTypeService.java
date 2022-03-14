@@ -11,8 +11,8 @@ import models.AppointmentType;
 public class AppointmentTypeService {
     public List<AppointmentType> getAll() throws Exception {
         AppointmentTypeDB appointmentTypeDB = new AppointmentTypeDB();
-        List<AppointmentType> appointments = appointmentTypeDB.getAll();
-        return appointments;
+        List<AppointmentType> appointmentTypes = appointmentTypeDB.getAll();
+        return appointmentTypes;
     }
     
     public AppointmentType get(int type) throws Exception {
