@@ -35,10 +35,6 @@ public class Appointment {
         return start_date_time;
     }
 
-    public void setStart_date_time(String start_date_time) {
-        this.start_date_time = start_date_time;
-    }
-
     public int getPatient_id() {
         return patient_id;
     }
