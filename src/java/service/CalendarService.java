@@ -15,6 +15,13 @@ public class CalendarService {
         return calendars;
     }
     
+    public List<Calendar> getAllAvailable(String start_date_time,
+            String end_date_time, int doctor_id) throws Exception {
+        CalendarDB calendarDB = new CalendarDB();
+        List<Calendar> calendars = calendarDB.getAllAvailable(start_date_time, end_date_time, doctor_id);
+        return calendars;
+    }
+    
     public Calendar get(String date_time) throws Exception {
         CalendarDB calendarDB = new CalendarDB();
         Calendar calendar = calendarDB.get(date_time);
