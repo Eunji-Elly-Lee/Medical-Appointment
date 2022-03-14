@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -54,6 +55,7 @@ public class BookAppointmentServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user_name");       
         
+        displayInformation(request, user_name);
         String appointment_date = request.getParameter("appointment_date");
         String action = request.getParameter("action");
         
@@ -63,12 +65,10 @@ public class BookAppointmentServlet extends HttpServlet {
                     break;
                 
                 case "book_appointment":
-                    System.out.println("date: " + appointment_date);
-                    System.out.println("docort: " + request.getParameter("assigned_doctor"));
                     request.setAttribute("step", "1");
                     break;
         }
-        displayInformation(request, user_name);
+        
         getServletContext().getRequestDispatcher("/WEB-INF/bookAppointment.jsp").forward(request, response);
         return;
     }
@@ -79,7 +79,7 @@ public class BookAppointmentServlet extends HttpServlet {
         DoctorService doctorService = new DoctorService();
         PatientService patientService = new PatientService();
         AppointmentTypeService appointmentTypeService = new AppointmentTypeService();
-            
+        
         try {
             Account account = accountService.get(user_name);
             List<AppointmentType> types = new ArrayList<>();
@@ -98,8 +98,8 @@ public class BookAppointmentServlet extends HttpServlet {
                 if (patient.getDoctor_id() == 0) {
                     types.add(appointmentTypeService.get(4));
                 } else {
-//                    Doctor doctor = doctorService.getByDoctorID(patient.getDoctor_id());                   
-//                    request.setAttribute("doctor", doctor);
+                    Doctor doctor = doctorService.getByDoctorID(patient.getDoctor_id());                   
+                    request.setAttribute("doctor", doctor);
                     types.add(appointmentTypeService.get(1));
                     types.add(appointmentTypeService.get(2));                    
                 }
@@ -112,5 +112,8 @@ public class BookAppointmentServlet extends HttpServlet {
         } catch (Exception ex) {
                 Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+//        System.out.println("date: " + tomorrow); 
     }
 }
