@@ -37,7 +37,8 @@ public class CalendarDB {
         return calendars;
     }
     
-    public List<Calendar> getAllAvailable(String start_date_time, String end_date_time, int doctor_id) throws Exception {
+    public List<Calendar> getAllAvailable(String start_date_time,
+            String end_date_time, int doctor_id) throws Exception {
         List<Calendar> calendars = new ArrayList<>();
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
