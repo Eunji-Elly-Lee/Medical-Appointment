@@ -37,6 +37,44 @@ public class CalendarDB {
         return calendars;
     }
     
+    public List<Calendar> getAllAvailable(String start_date_time, String end_date_time, int doctor_id) throws Exception {
+        List<Calendar> calendars = new ArrayList<>();
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;        
+        String sql = "SELECT date_time FROM "
+                + "(select date_time from calendar where date_time >= ? and date_time < ?) A "
+                + "left join "
+                + "(select start_date_time from appointment where start_date_time >= ? and start_date_time < ? "
+                + "and doctor_id = ?) B "
+                + "on A.date_time = B.start_date_time where B.start_date_time is null";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, start_date_time);
+            ps.setString(2, end_date_time);
+            ps.setString(3, start_date_time);
+            ps.setString(4, end_date_time);
+            ps.setInt(5, doctor_id);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                String date_time = rs.getString(1);
+                String clinic_open = rs.getString(2);             
+                
+                Calendar calendar = new Calendar(date_time , clinic_open);
+                calendars.add(calendar);
+            }
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+        
+        return calendars;
+    }
+    
     public Calendar get(String date_time) throws Exception {
         Calendar calendar = null;
         ConnectionPool cp = ConnectionPool.getInstance();
