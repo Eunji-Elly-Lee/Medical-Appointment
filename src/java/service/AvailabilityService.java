@@ -15,6 +15,12 @@ public class AvailabilityService {
         return availabilities;
     }
     
+    public List<Availability> getAllByDoctorDate(int doctor_id, String start_date_time) throws Exception {
+        AvailabilityDB availabilityDB = new AvailabilityDB();
+        List<Availability> availabilities = availabilityDB.getAllByDoctorDate(doctor_id, start_date_time);
+        return availabilities;
+    }
+    
     public Availability get(int doctor_id) throws Exception {
         AvailabilityDB availabilityDB = new AvailabilityDB();
         Availability availability = availabilityDB.get(doctor_id);
