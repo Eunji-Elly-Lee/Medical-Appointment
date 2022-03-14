@@ -225,12 +225,12 @@
 
                                 <form class="book_form" action="book_appointment" method="post">
                                     <div>
-                                        <label for="date_selection">Date</label>
-                                        <select class="form-select" name="date_selection">
+                                        <label for="appointment_date">Date</label>
+                                        <select class="form-select" name="appointment_date">
                                             <option value="0">-------- Choose Date --------</option>
-                                            <c:forEach items="${availabilities}" var="availability">
-                                                <option value="${availability.start_date_time}">
-                                                    ${availability.start_date_time}
+                                            <c:forEach items="${available_dates}" var="available_date">
+                                                <option value="${available_date}">
+                                                    ${available_date}
                                                 </option>
                                             </c:forEach>
                                         </select>

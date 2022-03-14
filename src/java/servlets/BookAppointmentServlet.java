@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -44,9 +45,7 @@ public class BookAppointmentServlet extends HttpServlet {
             
             displayInformation(request, user_name);
         }
-
-//        System.out.println("get date: " + appointment_date);
-//        System.out.println("get step: " + request.getParameter("step"));
+        
         getServletContext().getRequestDispatcher("/WEB-INF/bookAppointment.jsp").forward(request, response);
         return;
     }
@@ -57,13 +56,33 @@ public class BookAppointmentServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user_name");       
         
-        displayInformation(request, user_name);
+        List<Availability> availabilities = displayInformation(request, user_name);
         String appointment_date = request.getParameter("appointment_date");
         String action = request.getParameter("action");
         
         switch (action) {
                 case "select_date":
-                    request.setAttribute("appointment_date", appointment_date);                    
+                    String end_date_time = null;
+                    String duration = null;
+                    
+                    for (Availability availability: availabilities) {
+                        if (availability.getStart_date_time().startsWith(appointment_date)) {                            
+                            end_date_time = availability.getStart_date_time().substring(0, 19);
+                            duration = availability.getDuration() + "";                            
+                        }
+                    }
+                    
+                    LocalTime time = LocalTime.of(Integer.parseInt(end_date_time.substring(11, 13)),
+                            Integer.parseInt(end_date_time.substring(14, 16)), Integer.parseInt(end_date_time.substring(17)));
+                    
+                    time = time.plusMinutes(Integer.parseInt(duration));
+                    
+                    end_date_time = end_date_time.substring(0, 11) + time;
+                    
+//                    System.out.println("appointment_date: " + appointment_date);
+//                    System.out.println("end_date_time: " + end_date_time);
+                    
+                    request.setAttribute("appointment_date", appointment_date);
                     break;
                 
                 case "book_appointment":
@@ -75,7 +94,7 @@ public class BookAppointmentServlet extends HttpServlet {
         return;
     }
     
-    private void displayInformation(HttpServletRequest request, String user_name) {
+    private List<Availability> displayInformation(HttpServletRequest request, String user_name) {
         AccountService accountService = new AccountService();
         AdministratorService administratorService = new AdministratorService();
         DoctorService doctorService = new DoctorService();
@@ -83,6 +102,7 @@ public class BookAppointmentServlet extends HttpServlet {
         AppointmentTypeService appointmentTypeService = new AppointmentTypeService();
         AvailabilityService availabilityService = new AvailabilityService();
         
+        List<Availability> availabilities = new ArrayList<>();
         LocalDate tomorrow = LocalDate.now().plusDays(1);
         // for test version!
         tomorrow = tomorrow.withMonth(1);
@@ -111,17 +131,21 @@ public class BookAppointmentServlet extends HttpServlet {
                     types.add(appointmentTypeService.get(1));
                     types.add(appointmentTypeService.get(2));   
                     
-                    List<Availability> availabilities =
+                    availabilities =
                             availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
-                    request.setAttribute("availabilities", availabilities);
                     
                     if (!availabilities.isEmpty()) {
-                        for (Availability a: availabilities) {
-                            System.out.println("date: " + a); 
+                        List<String> available_dates = new ArrayList<>();
+
+                        for (Availability availability: availabilities) {
+                            available_dates.add(availability.getStart_date_time().substring(0, 11));
                         }
-                    } else {
-                        System.out.println("date: empty"); 
-                    } 
+                        
+                        request.setAttribute("available_dates", available_dates);
+//                        for (String date: available_dates) {
+//                            System.out.println("date: " + date); 
+//                        }
+                    }
                 }
                 
                 request.setAttribute("user", patient);
@@ -132,5 +156,7 @@ public class BookAppointmentServlet extends HttpServlet {
         } catch (Exception ex) {
                 Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return availabilities;
     }
 }
