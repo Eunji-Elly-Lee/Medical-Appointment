@@ -11,11 +11,13 @@ import javax.servlet.http.*;
 import models.Account;
 import models.Administrator;
 import models.AppointmentType;
+import models.Availability;
 import models.Doctor;
 import models.Patient;
 import service.AccountService;
 import service.AdministratorService;
 import service.AppointmentTypeService;
+import service.AvailabilityService;
 import service.DoctorService;
 import service.PatientService;
 
@@ -79,7 +81,13 @@ public class BookAppointmentServlet extends HttpServlet {
         DoctorService doctorService = new DoctorService();
         PatientService patientService = new PatientService();
         AppointmentTypeService appointmentTypeService = new AppointmentTypeService();
+        AvailabilityService availabilityService = new AvailabilityService();
         
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+        // for test version!
+        tomorrow = tomorrow.withMonth(1);
+        
+
         try {
             Account account = accountService.get(user_name);
             List<AppointmentType> types = new ArrayList<>();
@@ -101,7 +109,19 @@ public class BookAppointmentServlet extends HttpServlet {
                     Doctor doctor = doctorService.getByDoctorID(patient.getDoctor_id());                   
                     request.setAttribute("doctor", doctor);
                     types.add(appointmentTypeService.get(1));
-                    types.add(appointmentTypeService.get(2));                    
+                    types.add(appointmentTypeService.get(2));   
+                    
+                    List<Availability> availabilities =
+                            availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
+                    request.setAttribute("availabilities", availabilities);
+                    
+                    if (!availabilities.isEmpty()) {
+                        for (Availability a: availabilities) {
+                            System.out.println("date: " + a); 
+                        }
+                    } else {
+                        System.out.println("date: empty"); 
+                    } 
                 }
                 
                 request.setAttribute("user", patient);
@@ -112,8 +132,5 @@ public class BookAppointmentServlet extends HttpServlet {
         } catch (Exception ex) {
                 Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        LocalDate tomorrow = LocalDate.now().plusDays(1);
-//        System.out.println("date: " + tomorrow); 
     }
 }

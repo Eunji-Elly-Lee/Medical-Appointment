@@ -225,8 +225,15 @@
 
                                 <form class="book_form" action="book_appointment" method="post">
                                     <div>
-                                        <label for="appointment_date">Date</label>
-                                        <input type="date" name="appointment_date">
+                                        <label for="date_selection">Date</label>
+                                        <select class="form-select" name="date_selection">
+                                            <option value="0">-------- Choose Date --------</option>
+                                            <c:forEach items="${availabilities}" var="availability">
+                                                <option value="${availability.start_date_time}">
+                                                    ${availability.start_date_time}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                     <div>
                                         <input type="submit" value="Submit">
@@ -245,7 +252,7 @@
                                 <form class="book_form" action="book_appointment" method="post">
                                     <div class="book_form_flex">
                                         <div>
-                                            <label for="type">Type</label>
+                                            <label for="type_selection">Type</label>
                                             <select class="form-select" name="type_selection">
                                                 <option value="0">-------- Choose type --------</option>
                                                 <c:forEach items="${types}" var="type">
