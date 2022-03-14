@@ -196,43 +196,92 @@
                     </div>
                 </div>
                 
-                <div class="book_wrapper">
-                    <div class="book">
-                        <div class="form_heading">
-                            <h1>Book Appointment</h1>
-                            <p>Please fill in the form below</p>
-                        </div>
+                <div>
+                    <c:choose>
+                        <c:when test="${step == '1'}">
+                            <span>Select Date</span> >> 
+                            <span class="non_active step1">Book Appointment</span>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="book_appointment" class="non_active">Select Date</a> >> 
+                            <span>Book Appointment</span>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                
+                <div class="message">
+                    <br>
+                    <h3>${message}</h3>
+                </div>
+                
+                <div class="book_wrapper"> 
+                    <c:choose>
+                        <c:when test="${step == '1'}">
+                            <div class="book">
+                                <div class="form_heading">
+                                    <h1>Select Date</h1>
+                                    <p>Please select the appointment date</p>
+                                </div>
 
-                        <form class="book_form">
-                            <div class="book_form_flex">
-                                <div>
-                                    <label>Type</label>
-                                    <input type="text" name="signup_username" placeholder="Type">
-                                </div>
-                                <div>
-                                    <label>Assigned Doctor</label>
-                                    <input type="text" name="signup_password" placeholder="Doctor">
-                                </div>
-                                <div>
-                                    <label>Appointment Date</label>
-                                    <input type="date" name="book_app_date">
-                                </div>
-                                <div>
-                                    <label>Time</label>
-                                    <input type="time" id="appt" name="appt">
-                                </div>
-                                <div>
-                                    <label>Appointment Reason</label>
-                                    <textarea rows="4" cols="50" name="book_app_reason" placeholder="Appointment reason">
-                                    </textarea>
-                                    <br>
-                                    <form action="schedule">
-                                        <input type="submit" value="Continue" class="confirm_button">
-                                    </form>
-                                </div>
+                                <form class="book_form" action="book_appointment" method="post">
+                                    <div>
+                                        <label for="appointment_date">Date</label>
+                                        <input type="date" name="appointment_date">
+                                    </div>
+                                    <div>
+                                        <input type="submit" value="Submit">
+                                        <input type="hidden" name ="action" value="select_date">
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="book">
+                                <div class="form_heading">
+                                    <h1>Book Appointment</h1>
+                                    <p>Please fill in the form below</p>
+                                </div>
+
+                                <form class="book_form" action="book_appointment" method="post">
+                                    <div class="book_form_flex">
+                                        <div>
+                                            <label for="type">Type</label>
+                                            <select class="form-select" name="type_selection">
+                                                <option value="0">-------- Choose type --------</option>
+                                                <c:forEach items="${types}" var="type">
+                                                    <option value="${type.type}"
+                                                            <c:if test="${type_selection == type.type}">selected</c:if>>
+                                                        ${type.description}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="assigned_doctor">Assigned Doctor</label>
+                                            <input type="text" name="assigned_doctor" value="Dr. ${doctor.last_name}" readonly>
+                                        </div>
+                                        <div>
+                                            <label>Appointment Date</label>
+                                            <input type="text" name="appointment_date" value="${appointment_date}" readonly>
+                                        </div>
+                                        <div>
+                                            <label>Appointment Time</label>
+
+                                        </div>
+                                        <div>
+                                            <label>Appointment Reason</label>
+                                            <textarea rows="4" cols="50" name="book_app_reason" placeholder="Appointment reason">
+                                            </textarea>
+                                            <br>
+                                            
+                                            <input type="submit" value="Done">
+                                            <input type="hidden" name ="action" value="book_appointment">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
