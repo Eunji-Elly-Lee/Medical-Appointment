@@ -24,10 +24,6 @@ public class Availability {
 
      public String getStart_date_time() {
         return start_date_time;
-    }   
-
-    public void setStart_date_time(String start_date_time) {
-        this.start_date_time = start_date_time;
     }
     
     public int getDuration(){
