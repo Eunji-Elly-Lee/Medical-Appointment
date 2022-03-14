@@ -3,6 +3,7 @@ package dataaccess;
 import java.sql.*;
 import java.util.*;
 import models.AppointmentType;
+
 /**
  *
  * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
