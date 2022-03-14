@@ -44,7 +44,7 @@ public class AvailabilityDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;        
-        String sql = "SELECT * FROM availability where doctor_id = ? and start_date_time > ?;";
+        String sql = "SELECT * FROM availability where doctor_id = ? and start_date_time > ?";
         
         try {
             ps = con.prepareStatement(sql);
