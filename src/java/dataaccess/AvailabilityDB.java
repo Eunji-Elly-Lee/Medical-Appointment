@@ -26,7 +26,36 @@ public class AvailabilityDB {
                 String start_date_time = rs.getString(2);
                 int duration = rs.getInt(3);               
                 
-                Availability availability = new Availability(doctor_id , start_date_time, duration);
+                Availability availability = new Availability(doctor_id, start_date_time, duration);
+                availabilities.add(availability);
+            }
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+        
+        return availabilities;
+    }
+    
+    public List<Availability> getAllByDoctorDate(int doctor_id, String start_date_time) throws Exception {
+        List<Availability> availabilities = new ArrayList<>();
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;        
+        String sql = "SELECT * FROM availability where doctor_id = ? and start_date_time > ?;";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, doctor_id);
+            ps.setString(2, start_date_time);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                int duration = rs.getInt(3);               
+                
+                Availability availability = new Availability(doctor_id, start_date_time, duration);
                 availabilities.add(availability);
             }
         } finally {
