@@ -15,6 +15,12 @@ public class PatientService {
         return patients;
     }
     
+    public List<Patient> getAllByDoctor(int doctor_id) throws Exception {
+        PatientDB patientDB = new PatientDB();
+        List<Patient> patients = patientDB.getAllByDoctor(doctor_id);
+        return patients;
+    }
+    
     public Patient get(int account_id) throws Exception {
         PatientDB patientDB = new PatientDB();
         Patient patient = patientDB.get(account_id);
