@@ -11,6 +11,10 @@ public class Calendar {
     public Calendar() {
     }
     
+    public Calendar(String date_time) {
+        this.date_time = date_time;
+    }
+    
     public Calendar(String date_time, String clinic_open) {
         this.date_time = date_time;
         this.clinic_open = clinic_open;
