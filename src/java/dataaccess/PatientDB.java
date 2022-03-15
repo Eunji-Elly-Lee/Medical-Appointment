@@ -103,12 +103,12 @@ public class PatientDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;        
-        String sql = "SELECT * FROM patient WHERE first_name LIKE '%?%' OR last_name LIKE '%?%'";
+        String sql = "SELECT * FROM patient WHERE first_name LIKE ? OR last_name LIKE ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, name);
-            ps.setString(2, name);
+            ps.setString(1, "%" + name + "%");
+            ps.setString(2, "%" + name + "%");
             rs = ps.executeQuery();
             
             while (rs.next()) {
