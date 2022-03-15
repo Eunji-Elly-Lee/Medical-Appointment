@@ -198,13 +198,32 @@
                 
                 <div>
                     <c:choose>
-                        <c:when test="${step == '1'}">
-                            <span>Select Date</span> >> 
-                            <span class="non_active step1">Book Appointment</span>
+                        <c:when test="${account.profile == 'DOCTOR' || account.profile == 'PATIENT'}">
+                            <c:if test="${step == '1'}">
+                                <span>Select Date</span> >> 
+                                <span class="non_active other_step">Book Appointment</span>
+                            </c:if>
+                            <c:if test="${step == '2'}">
+                                <a href="book_appointment" class="non_active">Select Date</a> >> 
+                                <span>Book Appointment</span>
+                            </c:if>
                         </c:when>
                         <c:otherwise>
-                            <a href="book_appointment" class="non_active">Select Date</a> >> 
-                            <span>Book Appointment</span>
+                            <c:if test="${step == '0'}">
+                                <span>Search Patient / Doctor</span> >> 
+                                <span class="non_active other_step">Select Date</span> >> 
+                                <span class="non_active other_step">Book Appointment</span>
+                            </c:if>
+                            <c:if test="${step == '1'}">
+                                <a href="book_appointment?step=0" class="non_active">Search Patient / Doctor</a> >> 
+                                <span>Select Date</span> >> 
+                                <span class="non_active other_step">Book Appointment</span>
+                            </c:if>
+                            <c:if test="${step == '2'}">
+                                <a href="book_appointment?step=0" class="non_active">Search Patient / Doctor</a> >> 
+                                <a href="book_appointment?step=1" class="non_active">Select Date</a> >> 
+                                <span>Book Appointment</span>
+                            </c:if>   
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -216,6 +235,62 @@
                 
                 <div class="book_wrapper"> 
                     <c:choose>
+                        <c:when test="${step == '0'}">
+                            <div class="book">
+                                <div class="form_heading">
+                                    <h1>Search Patient / Doctor</h1>
+                                    <p>Please search by the name</p>
+                                </div>
+
+                                <form class="book_form" action="book_appointment" method="post">
+                                    <div>
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name">
+                                    </div>
+                                    <div>
+                                        <input type="submit" value="Submit name">
+                                        <input type="hidden" name ="action" value="search_name">
+                                    </div>
+                                </form>
+                                
+                                <c:if test="${searched}">
+                                    <form>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col"></th>                                                        
+                                                        <th scope="col">PROFILE</th>
+                                                        <th scope="col" >FIRST NAME</th>
+                                                        <th scope="col">LAST NAME</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${searched_patients}" var="searched_patient">
+                                                        <tr>
+                                                            <th><input type="radio" name="searched"
+                                                                       value="searched_patient.patient_id"></th>
+                                                            <td>PATIENT</td>
+                                                            <td>${searched_patient.first_name}</td>
+                                                            <td>${searched_patient.last_name}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    <c:forEach items="${searched_doctors}" var="searched_doctor">
+                                                        <tr>
+                                                            <th><input type="radio" name="searched"
+                                                                       value="searched_doctor.doctor_id"></th>
+                                                            <td>DOCTOR</td>
+                                                            <td>${searched_doctor.first_name}</td>
+                                                            <td>${searched_doctor.last_name}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>    
+                                    </form>
+                                </c:if>
+                            </div>
+                        </c:when>
                         <c:when test="${step == '1'}">
                             <div class="book">
                                 <div class="form_heading">
@@ -284,7 +359,7 @@
                                             </c:choose>                                            
                                         </div>
                                         <div>
-                                            <label>Appointment Date</label>
+                                            <label for="appointment_date">Appointment Date</label>
                                             <input type="text" name="appointment_date" value="${appointment_date}" readonly>
                                         </div>
                                         <div>
@@ -300,8 +375,9 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <label>Appointment Reason</label>
-                                            <textarea rows="4" cols="50" name="book_app_reason" placeholder="Please write down the reason for your appointment.">
+                                            <label for="book_app_reason">Appointment Reason</label>
+                                            <textarea rows="4" cols="50" name="book_app_reason"
+                                                      placeholder="Please write down the reason for your appointment.">
                                             </textarea>
                                             <br>
                                             

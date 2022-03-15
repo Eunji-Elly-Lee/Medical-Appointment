@@ -26,11 +26,7 @@ public class BookAppointmentServlet extends HttpServlet {
         if (user_name == null || user_name.equals("")) {
             response.sendRedirect("welcome");
             return;
-        } else {
-            if (appointment_date == null || appointment_date.equals("")) {
-                request.setAttribute("step", "1");
-            }
-            
+        } else {            
             AccountService accountService = new AccountService();
             DoctorService doctorService = new DoctorService();
             PatientService patientService = new PatientService();
@@ -45,7 +41,21 @@ public class BookAppointmentServlet extends HttpServlet {
             try {
                 Account account = accountService.get(user_name);
                 request.setAttribute("account", account);
-
+                
+                if (appointment_date == null || appointment_date.equals("")) {
+                    if (account.getProfile().equals("ADMIN")) {
+                        if (request.getParameter("step") != null && request.getParameter("step").equals("1")) {
+                            request.setAttribute("step", "1");
+                        } else if (request.getParameter("step") != null && request.getParameter("step").equals("2")) {
+                            request.setAttribute("step", "2");
+                        } else {
+                            request.setAttribute("step", "0");
+                        }
+                    } else {
+                        request.setAttribute("step", "1");
+                    }
+                }
+                
                 if (account.getProfile().equals("DOCTOR")) {                    
                     Doctor doctor = doctorService.get(account.getAccount_id());
                     
@@ -61,7 +71,7 @@ public class BookAppointmentServlet extends HttpServlet {
                     }                  
                     
                     request.setAttribute("user", doctor);
-                } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
+                } else if (account.getProfile().equals("ADMIN")) {
                     AdministratorService administratorService = new AdministratorService();
                     Administrator administrator = administratorService.get(account.getAccount_id());
                     request.setAttribute("user", administrator);
@@ -119,6 +129,9 @@ public class BookAppointmentServlet extends HttpServlet {
         
         List<AppointmentType> types = new ArrayList<>();
         List<Availability> availabilities = new ArrayList<>();
+        List<Doctor> searched_doctors = new ArrayList<>();
+        List<Patient> searched_patients = new ArrayList<>();
+        
         LocalDate tomorrow = LocalDate.now().plusDays(1);
         // for test version!
         tomorrow = tomorrow.withMonth(1);
@@ -139,16 +152,17 @@ public class BookAppointmentServlet extends HttpServlet {
                         availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
                 
                 request.setAttribute("user", doctor);
-            } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
+            } else if (account.getProfile().equals("ADMIN")) {
                 AdministratorService administratorService = new AdministratorService();
                 Administrator administrator = administratorService.get(account.getAccount_id());
                 request.setAttribute("user", administrator);
-            } else if (account.getProfile().equals("PATIENT")) {                
+            } else if (account.getProfile().equals("PATIENT")) {
                 patient = patientService.get(account.getAccount_id());    
                 
                 if (patient.getDoctor_id() == 1234567) {
                     types.add(appointmentTypeService.get(4));
-                    request.setAttribute("message", "You are new! You should proceed with \"New Patient Meeting\" first.");
+                    request.setAttribute("message",
+                            "You are new! You should proceed with \"New Patient Meeting\" first.");
                 } else {
                     doctor = doctorService.getByDoctorID(patient.getDoctor_id());                    
                     types.add(appointmentTypeService.get(1));
@@ -163,11 +177,24 @@ public class BookAppointmentServlet extends HttpServlet {
             }
             
             switch (action) {
+                case "search_name":
+                    String name = request.getParameter("appointment_date");
+                    
+                    if (name == null || name.equals("")) {
+                        request.setAttribute("message", "Please enter the name.");
+                        request.setAttribute("step", "0");
+                    } else {
+                        
+                    }
+                    
+                    break;
                 case "select_date":
                     if (appointment_date.equals("0")) {
-                        request.setAttribute("message", "Please select the date for your appointment.");
+                        request.setAttribute("message", "Please select the date for the appointment.");
                         request.setAttribute("step", "1");
-                    } 
+                    } else {
+                        request.setAttribute("step", "2");
+                    }
                     
                     break;
                 
@@ -181,27 +208,33 @@ public class BookAppointmentServlet extends HttpServlet {
                     
                     if (type_selection == 0 || time_selection.equals("0") || 
                             book_app_reason == null || book_app_reason.equals("")) {
-                        request.setAttribute("message", "Please fill out all information for your appointment.");
+                        request.setAttribute("message", "Please fill out all information for the appointment.");
+                        request.setAttribute("step", "2");
                     } else {
                         if (account.getProfile().equals("DOCTOR")) {
                             int patient_id = Integer.parseInt(request.getParameter("patient_selection"));
                             request.setAttribute("patient_selection", patient_id);
 
                             if (patient_id == 0) {
-                                request.setAttribute("message", "Please fill out all information for your appointment.");
+                                request.setAttribute("message", "Please fill out all information for the appointment.");
                             } else {
                                 appointmentService.insert(doctor.getDoctor_id(), appointment_date + " " + time_selection,
                                         patient_id, appointmentTypeService.get(type_selection).getStd_duration(),
                                         type_selection, book_app_reason, false);
                                 
-                                request.setAttribute("message", "Your appointment has been booked successfully.");
+                                request.setAttribute("message", "Tha ppointment has been booked successfully.");
                                 request.setAttribute("step", "1");
                             }
-                        }
-
+                        } else if (account.getProfile().equals("ADMIN")) {
                         
-                    
-                    
+                        } else if (account.getProfile().equals("PATIENT")) {
+                            appointmentService.insert(doctor.getDoctor_id(), appointment_date + " " + time_selection,
+                                    patient.getPatient_id(), appointmentTypeService.get(type_selection).getStd_duration(),
+                                    type_selection, book_app_reason, false);
+                                
+                            request.setAttribute("message", "Tha ppointment has been booked successfully.");
+                            request.setAttribute("step", "1");
+                        }
                     }
                     
                     break;
@@ -217,7 +250,7 @@ public class BookAppointmentServlet extends HttpServlet {
                 request.setAttribute("available_dates", available_dates);
             }
             
-            if (!appointment_date.equals("0")) {
+            if (appointment_date != null && !appointment_date.equals("0")) {
                 String start_date_time = null;
                 String end_date_time = null;
                 String duration = null;
