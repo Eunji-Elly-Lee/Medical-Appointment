@@ -115,7 +115,8 @@ public class BookAppointmentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String user_name = (String) session.getAttribute("user_name");       
+        String user_name = (String) session.getAttribute("user_name");
+        String name = request.getParameter("name");
         String appointment_date = request.getParameter("appointment_date");
         String action = request.getParameter("action");
         
@@ -178,8 +179,6 @@ public class BookAppointmentServlet extends HttpServlet {
             
             switch (action) {
                 case "search_name":
-                    String name = request.getParameter("name");
-                    
                     if (name == null || name.equals("")) {
                         request.setAttribute("message", "Please enter the name.");
                         request.setAttribute("step", "0");
@@ -194,6 +193,20 @@ public class BookAppointmentServlet extends HttpServlet {
                         }
                         
                         request.setAttribute("step", "0");                        
+                    }
+                    
+                    break;
+                    
+                case "select_name":                    
+                    if (request.getParameter("searched") == null) {
+                        searched_doctors = doctorService.getAllByName(name);
+                        searched_patients = patientService.getAllByName(name);
+                        
+                        request.setAttribute("searched", true);
+                        request.setAttribute("message", "Please select the name.");
+                        request.setAttribute("step", "0");
+                    } else {
+                        int account_id = Integer.parseInt(request.getParameter("searched"));
                     }
                     
                     break;
@@ -304,6 +317,7 @@ public class BookAppointmentServlet extends HttpServlet {
             request.setAttribute("searched_doctors", searched_doctors);
             request.setAttribute("searched_patients", searched_patients);
             request.setAttribute("types", types);
+            request.setAttribute("name", name); 
             request.setAttribute("appointment_date", appointment_date);
         } catch (Exception ex) {
                 Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);

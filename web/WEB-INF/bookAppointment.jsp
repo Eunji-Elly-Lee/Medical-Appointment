@@ -245,7 +245,7 @@
                                 <form class="book_form" action="book_appointment" method="post">
                                     <div>
                                         <label for="name">Name</label>
-                                        <input type="text" name="name">
+                                        <input type="text" name="name" value="${name}">
                                     </div>
                                     <div>
                                         <input type="submit" value="Submit name">
@@ -254,7 +254,7 @@
                                 </form>
                                 
                                 <c:if test="${searched}">
-                                    <form>
+                                    <form action="book_appointment" method="post">
                                         <div class="table-responsive">
                                             <table class="table table-hover">
                                                 <thead>
@@ -269,7 +269,7 @@
                                                     <c:forEach items="${searched_patients}" var="searched_patient">
                                                         <tr>
                                                             <th><input type="radio" name="searched"
-                                                                       value="searched_patient.patient_id"></th>
+                                                                       value="searched_patient.account_id"></th>
                                                             <td>PATIENT</td>
                                                             <td>${searched_patient.first_name}</td>
                                                             <td>${searched_patient.last_name}</td>
@@ -278,7 +278,7 @@
                                                     <c:forEach items="${searched_doctors}" var="searched_doctor">
                                                         <tr>
                                                             <th><input type="radio" name="searched"
-                                                                       value="searched_doctor.doctor_id"></th>
+                                                                       value="searched_doctor.account_id"></th>
                                                             <td>DOCTOR</td>
                                                             <td>${searched_doctor.first_name}</td>
                                                             <td>${searched_doctor.last_name}</td>
@@ -286,7 +286,12 @@
                                                     </c:forEach>
                                                 </tbody>
                                             </table>
-                                        </div>    
+                                        </div>
+                                        <div>
+                                            <input type="submit" value="Submit seleceted name">
+                                            <input type="hidden" name="name" value=${name}>
+                                            <input type="hidden" name ="action" value="select_name">
+                                        </div>
                                     </form>
                                 </c:if>
                             </div>
