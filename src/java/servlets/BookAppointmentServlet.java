@@ -178,13 +178,22 @@ public class BookAppointmentServlet extends HttpServlet {
             
             switch (action) {
                 case "search_name":
-                    String name = request.getParameter("appointment_date");
+                    String name = request.getParameter("name");
                     
                     if (name == null || name.equals("")) {
                         request.setAttribute("message", "Please enter the name.");
                         request.setAttribute("step", "0");
                     } else {
+                        searched_doctors = doctorService.getAllByName(name);
+                        searched_patients = patientService.getAllByName(name);
                         
+                        if (searched_doctors != null || searched_patients != null) {
+                            request.setAttribute("searched", true);
+                        } else {
+                            request.setAttribute("message", "The name not found.");
+                        }
+                        
+                        request.setAttribute("step", "0");                        
                     }
                     
                     break;
@@ -292,6 +301,8 @@ public class BookAppointmentServlet extends HttpServlet {
                 }
             }
             
+            request.setAttribute("searched_doctors", searched_doctors);
+            request.setAttribute("searched_patients", searched_patients);
             request.setAttribute("types", types);
             request.setAttribute("appointment_date", appointment_date);
         } catch (Exception ex) {
