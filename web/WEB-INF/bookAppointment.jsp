@@ -220,8 +220,8 @@
                                 <span class="non_active other_step">Book Appointment</span>
                             </c:if>
                             <c:if test="${step == '2'}">
-                                <a href="book_appointment?step=0" class="non_active">Search Patient / Doctor</a> >> 
-                                <a href="book_appointment?step=1" class="non_active">Select Date</a> >> 
+                                <a href="book_appointment?step=0" class="non_active other_step">Search Patient / Doctor</a> >> 
+                                <span class="non_active other_step">Select Date</span> >> 
                                 <span>Book Appointment</span>
                             </c:if>   
                         </c:otherwise>
@@ -269,7 +269,7 @@
                                                     <c:forEach items="${searched_patients}" var="searched_patient">
                                                         <tr>
                                                             <th><input type="radio" name="searched"
-                                                                       value="searched_patient.account_id"></th>
+                                                                       value="${searched_patient.account_id}"></th>
                                                             <td>PATIENT</td>
                                                             <td>${searched_patient.first_name}</td>
                                                             <td>${searched_patient.last_name}</td>
@@ -278,7 +278,7 @@
                                                     <c:forEach items="${searched_doctors}" var="searched_doctor">
                                                         <tr>
                                                             <th><input type="radio" name="searched"
-                                                                       value="searched_doctor.account_id"></th>
+                                                                       value="${searched_doctor.account_id}"></th>
                                                             <td>DOCTOR</td>
                                                             <td>${searched_doctor.first_name}</td>
                                                             <td>${searched_doctor.last_name}</td>
@@ -317,6 +317,7 @@
                                     </div>
                                     <div>
                                         <input type="submit" value="Submit">
+                                        <input type="hidden" name="account_id" value=${account_id}>
                                         <input type="hidden" name ="action" value="select_date">
                                     </div>
                                 </form>
@@ -345,7 +346,7 @@
                                         </div>
                                         <div>
                                             <c:choose>
-                                                <c:when test="${account.profile == 'DOCTOR'}">
+                                                <c:when test="${account.profile == 'DOCTOR' || selected_doctor}">
                                                     <label for="patient_selection">Assigned Patient</label>
                                                     <select class="form-select" name="patient_selection">
                                                         <option value="0">-------- Choose patient --------</option>
@@ -387,6 +388,7 @@
                                             <br>
                                             
                                             <input type="submit" value="Done">
+                                            <input type="hidden" name="account_id" value=${account_id}>
                                             <input type="hidden" name ="action" value="book_appointment">
                                         </div>
                                     </div>
