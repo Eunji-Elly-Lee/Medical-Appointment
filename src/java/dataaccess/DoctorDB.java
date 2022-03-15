@@ -50,6 +50,49 @@ public class DoctorDB {
         return doctors;
     }
     
+    public List<Doctor> getAllByName(String name) throws Exception {
+        List<Doctor> doctors = new ArrayList<>();
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;        
+        String sql = "SELECT * FROM doctor WHERE first_name LIKE '%?%' OR last_name LIKE '%?%'";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, name);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                int doctor_id = rs.getInt(1);
+                String first_name = rs.getString(2);
+                String last_name = rs.getString(3);
+                String email = rs.getString(4); 
+                String mobile_phone = rs.getString(5);
+                String alt_phone = rs.getString(6);    
+                String pref_contact_type = rs.getString(7); 
+                int account_id = rs.getInt(8);
+                String gender = rs.getString(9);  
+                String birth_date = rs.getString(10);
+                String street_address = rs.getString(11);
+                String city = rs.getString(12); 
+                String province = rs.getString(13);
+                String postal_code = rs.getString(14);            
+                
+                Doctor doctor = new Doctor(doctor_id, first_name, last_name, email, mobile_phone, alt_phone,
+                        pref_contact_type, account_id, gender, birth_date, street_address, city, province, postal_code);
+                doctors.add(doctor);
+            }
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+        
+        return doctors;
+    }
+    
     public Doctor get(int account_id) throws Exception {
         Doctor doctor = null;
         ConnectionPool cp = ConnectionPool.getInstance();
