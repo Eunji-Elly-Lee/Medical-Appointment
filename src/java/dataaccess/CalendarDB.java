@@ -62,9 +62,8 @@ public class CalendarDB {
             
             while (rs.next()) {
                 String date_time = rs.getString(1);
-                String clinic_open = rs.getString(2);             
                 
-                Calendar calendar = new Calendar(date_time , clinic_open);
+                Calendar calendar = new Calendar(date_time);
                 calendars.add(calendar);
             }
         } finally {
