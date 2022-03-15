@@ -136,6 +136,7 @@ public class BookAppointmentServlet extends HttpServlet {
                 
                 if (patient.getDoctor_id() == 0) {
                     types.add(appointmentTypeService.get(4));
+                    request.setAttribute("message", "You are new! You should proceed with \"New Patient Meeting\" first.");
                 } else {
                     doctor = doctorService.getByDoctorID(patient.getDoctor_id());                   
                     request.setAttribute("doctor", doctor);
@@ -157,7 +158,7 @@ public class BookAppointmentServlet extends HttpServlet {
                 }
                 
                 request.setAttribute("user", patient);
-//                request.setAttribute("message", "You new");
+                
             }
             
             switch (action) {
@@ -179,9 +180,18 @@ public class BookAppointmentServlet extends HttpServlet {
                     end_time = end_time.plusMinutes(Integer.parseInt(duration));                    
                     end_date_time = end_date_time.substring(0, 11) + end_time;
                     
-                    List<Calendar> calendars = calendarService.getAllAvailable(start_date_time, end_date_time, doctor.getDoctor_id());
-                    List<String> available_times = new ArrayList<>();
+                    List<Calendar> calendars = 
+                            calendarService.getAllAvailable(start_date_time, end_date_time);
                     
+                    if (!calendars.isEmpty()) {
+                        List<String> available_times = new ArrayList<>();
+
+                        for (Calendar calendar: calendars) {
+                            available_times.add(calendar.getDate_time().substring(11, 16));
+                        }
+                        
+                        request.setAttribute("available_times", available_times);
+                    }
                     
 //                    System.out.println("start_date_time: " + start_date_time);
 //                    System.out.println("end_date_time: " + end_date_time);

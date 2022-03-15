@@ -272,12 +272,20 @@
                                             <input type="text" name="appointment_date" value="${appointment_date}" readonly>
                                         </div>
                                         <div>
-                                            <label>Appointment Time</label>
-
+                                            <label for="time_selection">Appointment Time</label>
+                                            <select class="form-select" name="time_selection">
+                                                <option value="0">-------- Choose time --------</option>
+                                                <c:forEach items="${available_times}" var="available_time">
+                                                    <option value="${available_time}"
+                                                            <c:if test="${time_selection == available_time}">selected</c:if>>
+                                                        ${available_time}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div>
                                             <label>Appointment Reason</label>
-                                            <textarea rows="4" cols="50" name="book_app_reason" placeholder="Appointment reason">
+                                            <textarea rows="4" cols="50" name="book_app_reason" placeholder="Please write down the reason for your appointment.">
                                             </textarea>
                                             <br>
                                             
