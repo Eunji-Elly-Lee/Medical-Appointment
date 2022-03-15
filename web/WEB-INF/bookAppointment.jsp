@@ -264,8 +264,24 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="assigned_doctor">Assigned Doctor</label>
-                                            <input type="text" name="assigned_doctor" value="Dr. ${doctor.last_name}" readonly>
+                                            <c:choose>
+                                                <c:when test="${account.profile == 'DOCTOR'}">
+                                                    <label for="patient_selection">Assigned Patient</label>
+                                                    <select class="form-select" name="patient_selection">
+                                                        <option value="0">-------- Choose patient --------</option>
+                                                        <c:forEach items="${patients}" var="patient">
+                                                            <option value="${patient.patient_id}"
+                                                                    <c:if test="${patient_selection == patient.patient_id}">selected</c:if>>
+                                                                ${patient.first_name}, ${patient.last_name}
+                                                            </option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <label for="assigned_doctor">Assigned Doctor</label>
+                                                    <input type="text" name="assigned_doctor" value="Dr. ${doctor.last_name}" readonly>
+                                                </c:otherwise>
+                                            </c:choose>                                            
                                         </div>
                                         <div>
                                             <label>Appointment Date</label>

@@ -1,29 +1,14 @@
 package servlets;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import models.Account;
-import models.Administrator;
-import models.AppointmentType;
-import models.Availability;
-import models.Calendar;
-import models.Doctor;
-import models.Patient;
-import service.AccountService;
-import service.AdministratorService;
-import service.AppointmentService;
-import service.AppointmentTypeService;
-import service.AvailabilityService;
-import service.CalendarService;
-import service.DoctorService;
-import service.PatientService;
+import models.*;
+import service.*;
 
 /**
  *
@@ -52,6 +37,7 @@ public class BookAppointmentServlet extends HttpServlet {
             AvailabilityService availabilityService = new AvailabilityService();
             
             List<Availability> availabilities = new ArrayList<>();
+            List<String> available_dates = new ArrayList<>();
             LocalDate tomorrow = LocalDate.now().plusDays(1);
             // for test version!
             tomorrow = tomorrow.withMonth(1);
@@ -62,6 +48,18 @@ public class BookAppointmentServlet extends HttpServlet {
 
                 if (account.getProfile().equals("DOCTOR")) {                    
                     Doctor doctor = doctorService.get(account.getAccount_id());
+                    
+                    availabilities =
+                            availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
+
+                    if (!availabilities.isEmpty()) {
+                        for (Availability availability: availabilities) {
+                            available_dates.add(availability.getStart_date_time().substring(0, 11));
+                        }
+
+                        request.setAttribute("available_dates", available_dates);
+                    }                  
+                    
                     request.setAttribute("user", doctor);
                 } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
                     AdministratorService administratorService = new AdministratorService();
@@ -69,19 +67,26 @@ public class BookAppointmentServlet extends HttpServlet {
                     request.setAttribute("user", administrator);
                 } else if (account.getProfile().equals("PATIENT")) {                    
                     Patient patient = patientService.get(account.getAccount_id());
-                    Doctor doctor = doctorService.getByDoctorID(patient.getDoctor_id());
                     
-                    availabilities =
-                            availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
-                    
-                    if (!availabilities.isEmpty()) {
-                        List<String> available_dates = new ArrayList<>();
-
-                        for (Availability availability: availabilities) {
-                            available_dates.add(availability.getStart_date_time().substring(0, 11));
+                    if (patient.getDoctor_id() == 0) {
+                        for (int i = 0; i < 7; i++) {
+                            available_dates.add(tomorrow.plusDays(i) + "");
                         }
+                        
+                        request.setAttribute("message",
+                                "You are new! You should proceed with \"New Patient Meeting\" first.");
+                    } else {
+                        Doctor doctor = doctorService.getByDoctorID(patient.getDoctor_id());                    
+                        availabilities =
+                                availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
 
-                        request.setAttribute("available_dates", available_dates);
+                        if (!availabilities.isEmpty()) {
+                            for (Availability availability: availabilities) {
+                                available_dates.add(availability.getStart_date_time().substring(0, 11));
+                            }
+
+                            request.setAttribute("available_dates", available_dates);
+                        }
                     }
                     
                     request.setAttribute("user", patient);
@@ -126,6 +131,23 @@ public class BookAppointmentServlet extends HttpServlet {
                 
             if (account.getProfile().equals("DOCTOR")) {
                 doctor = doctorService.get(account.getAccount_id());
+                types.add(appointmentTypeService.get(1));
+                types.add(appointmentTypeService.get(2));   
+                types.add(appointmentTypeService.get(3)); 
+                    
+                availabilities =
+                        availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
+                 
+                if (!availabilities.isEmpty()) {
+                    List<String> available_dates = new ArrayList<>();
+
+                    for (Availability availability: availabilities) {
+                        available_dates.add(availability.getStart_date_time().substring(0, 11));
+                    }
+                        
+                    request.setAttribute("available_dates", available_dates);
+                }
+                
                 request.setAttribute("user", doctor);
             } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
                 AdministratorService administratorService = new AdministratorService();
@@ -138,8 +160,7 @@ public class BookAppointmentServlet extends HttpServlet {
                     types.add(appointmentTypeService.get(4));
                     request.setAttribute("message", "You are new! You should proceed with \"New Patient Meeting\" first.");
                 } else {
-                    doctor = doctorService.getByDoctorID(patient.getDoctor_id());                   
-                    request.setAttribute("doctor", doctor);
+                    doctor = doctorService.getByDoctorID(patient.getDoctor_id());                    
                     types.add(appointmentTypeService.get(1));
                     types.add(appointmentTypeService.get(2));   
                     
@@ -158,45 +179,53 @@ public class BookAppointmentServlet extends HttpServlet {
                 }
                 
                 request.setAttribute("user", patient);
-                
+                request.setAttribute("doctor", doctor);                
             }
             
             switch (action) {
                 case "select_date":
-                    String start_date_time = null;
-                    String end_date_time = null;
-                    String duration = null;
-                    
-                    for (Availability availability: availabilities) {
-                        if (availability.getStart_date_time().startsWith(appointment_date)) {
-                            start_date_time = availability.getStart_date_time().substring(0, 19);
-                            end_date_time = start_date_time;
-                            duration = availability.getDuration() + "";                            
-                        }
-                    }
-                    
-                    LocalTime end_time = LocalTime.of(Integer.parseInt(end_date_time.substring(11, 13)),
-                            Integer.parseInt(end_date_time.substring(14, 16)), Integer.parseInt(end_date_time.substring(17)));                    
-                    end_time = end_time.plusMinutes(Integer.parseInt(duration));                    
-                    end_date_time = end_date_time.substring(0, 11) + end_time;
-                    
-                    List<Calendar> calendars = 
-                            calendarService.getAllAvailable(start_date_time, end_date_time);
-                    
-                    if (!calendars.isEmpty()) {
-                        List<String> available_times = new ArrayList<>();
+                    if (appointment_date.equals("0")) {
+                        request.setAttribute("message", "Please select the date for your appointment.");
+                        request.setAttribute("step", "1");
+                    } else {
+                        String start_date_time = null;
+                        String end_date_time = null;
+                        String duration = null;
 
-                        for (Calendar calendar: calendars) {
-                            available_times.add(calendar.getDate_time().substring(11, 16));
+                        if (patient != null && patient.getDoctor_id() == 0) {
+                            start_date_time = appointment_date + " 08:00:00";
+                            end_date_time = appointment_date + " 17:00:00";
+                        } else {
+                            for (Availability availability: availabilities) {
+                                if (availability.getStart_date_time().startsWith(appointment_date)) {
+                                    start_date_time = availability.getStart_date_time().substring(0, 19);
+                                    end_date_time = start_date_time;
+                                    duration = availability.getDuration() + "";                            
+                                }
+                            }
+
+                            LocalTime end_time = LocalTime.of(Integer.parseInt(end_date_time.substring(11, 13)),
+                                    Integer.parseInt(end_date_time.substring(14, 16)), Integer.parseInt(end_date_time.substring(17)));                    
+                            end_time = end_time.plusMinutes(Integer.parseInt(duration));                    
+                            end_date_time = end_date_time.substring(0, 11) + end_time;
                         }
-                        
-                        request.setAttribute("available_times", available_times);
+
+                        List<Calendar> calendars = 
+                                calendarService.getAllAvailable(start_date_time, end_date_time);
+
+                        if (!calendars.isEmpty()) {
+                            List<String> available_times = new ArrayList<>();
+
+                            for (Calendar calendar: calendars) {
+                                available_times.add(calendar.getDate_time().substring(11, 16));
+                            }
+
+                            request.setAttribute("available_times", available_times);
+                        }
+
+                        request.setAttribute("appointment_date", appointment_date);
                     }
                     
-//                    System.out.println("start_date_time: " + start_date_time);
-//                    System.out.println("end_date_time: " + end_date_time);
-                    
-                    request.setAttribute("appointment_date", appointment_date);
                     break;
                 
                 case "book_appointment":
