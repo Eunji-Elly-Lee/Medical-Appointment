@@ -37,6 +37,12 @@ public class AccountService {
         return account;
     }
     
+    public Account get(int account_id) throws Exception {
+        AccountDB accountDB = new AccountDB();
+        Account account = accountDB.get(account_id);
+        return account;
+    }
+    
     public void insert(int account_id, String user_name, String password, String profile) throws Exception {
         String salt = PasswordUtil.getSalt();
         Account account =
