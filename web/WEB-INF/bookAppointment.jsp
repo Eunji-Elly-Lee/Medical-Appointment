@@ -17,8 +17,8 @@
                 crossorigin="anonymous">
         </script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-                crossorigin="anonymous">
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+              crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous">
@@ -41,7 +41,7 @@
                                 <nav>
                                     <ul>
                                         <li><a href="welcome">Home</a></li>
-                                        
+
                                         <c:choose>
                                             <c:when test="${account.profile == 'DOCTOR'}">
                                                 <li>
@@ -56,8 +56,8 @@
                                                 <li><a href="doctor_schedule">Doctor schedule</a></li>
                                                 <li><a href="view_patient">Patient</a></li>
                                                 <li><a href="view_staff">Staff</a></li>
-                                            </c:when>
-                                            <c:when test="${account.profile == 'ADMIN'}">
+                                                </c:when>
+                                                <c:when test="${account.profile == 'ADMIN'}">
                                                 <li>
                                                     <a class="drop-down-tab" href="">
                                                         Appointment <i class="bi bi-caret-down-fill"></i>
@@ -70,8 +70,8 @@
                                                 </li>
                                                 <li><a href="view_patient">Patient</a></li>
                                                 <li><a href="view_staff">Staff</a></li>
-                                            </c:when>
-                                            <c:otherwise>
+                                                </c:when>
+                                                <c:otherwise>
                                                 <li>
                                                     <a class="drop-down-tab" href="">
                                                         Appointment <i class="bi bi-caret-down-fill"></i>
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="p-0 mobile_nav">
                     <div class="pe-2 mobile_header">
                         <a href="welcome"><img src="img/logo.png" width="105px"></a>
@@ -116,12 +116,12 @@
                                 689r460OJIdjPYDO/LMC8BPMjsdNmLlftg2BaZQJn5TnVdLg1vhRn7TuyubKf8DPbd2zmO//zkAAAAASUVORK5CYII=">
                         </div>
                     </div>
-                    
+
                     <nav class="navbar navbar-expand-md navbar-light m-3">
                         <div class="container-fluid justify-content-start">
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <a class="navbar-brand ms-3 fs-6">Menu</a>
@@ -130,47 +130,47 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="welcome">Home</a>
                                     </li>
-                                    
+
                                     <c:choose>
                                         <c:when test="${account.profile == 'DOCTOR'}">
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Appointment
+                                                    Appointment
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item"><a class="nav-link" href="doctor_schedule">Doctor schedule</a></li>
                                             <li class="nav-item"><a class="nav-link" href="view_patient">Patient</a></li>
                                             <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
-                                        </c:when>
-                                        <c:when test="${account.profile == 'ADMIN'}">
+                                            </c:when>
+                                            <c:when test="${account.profile == 'ADMIN'}">
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Appointment
+                                                    Appointment
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="confirm_appointment">Confirm Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="confirm_appointment">Confirm Appointment</a></li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item"><a class="nav-link" href="view_patient">Patient</a></li>
                                             <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
-                                        </c:when>
-                                        <c:otherwise>
+                                            </c:when>
+                                            <c:otherwise>
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Appointment
+                                                    Appointment
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
                                                 </ul>
                                             </li>
                                         </c:otherwise>
@@ -180,7 +180,7 @@
                         </div>
                     </nav>
                 </div>
-                
+
                 <div class="functional_links">
                     <a href="profile">Manage Account</a>
                     <a href="welcome?logout">Logout</a>
@@ -195,7 +195,7 @@
                         <p>Book Appointment</p>
                     </div>
                 </div>
-                
+
                 <div>
                     <c:choose>
                         <c:when test="${account.profile == 'DOCTOR' || account.profile == 'PATIENT'}">
@@ -227,12 +227,12 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-                
+
                 <div class="message">
                     <br>
                     <h3>${message}</h3>
                 </div>
-                
+
                 <div class="book_wrapper"> 
                     <c:choose>
                         <c:when test="${step == '0'}">
@@ -243,16 +243,12 @@
                                 </div>
 
                                 <form class="book_form" action="book_appointment" method="post">
-                                    <div>
-                                        <label for="name">Name</label>
-                                        <input type="text" name="name" value="${name}">
-                                    </div>
-                                    <div>
-                                        <input type="submit" value="Submit name">
-                                        <input type="hidden" name ="action" value="search_name">
-                                    </div>
+                                    <label for="name">Name: </label>
+                                    <input type="text" class="search_patient" name="name" value="${name}">                  
+                                    <input type="submit" class="submit_in_form" value="Submit">
+                                    <input type="hidden" name ="action" value="search_name">
                                 </form>
-                                
+
                                 <c:if test="${searched}">
                                     <form action="book_appointment" method="post">
                                         <div class="table-responsive">
@@ -288,7 +284,7 @@
                                             </table>
                                         </div>
                                         <div>
-                                            <input type="submit" value="Submit seleceted name">
+                                            <input type="submit" class="selected_submit" value="Submit Selected Name">
                                             <input type="hidden" name="name" value=${name}>
                                             <input type="hidden" name ="action" value="select_name">
                                         </div>
@@ -316,7 +312,7 @@
                                         </select>
                                     </div>
                                     <div>
-                                        <input type="submit" value="Submit">
+                                        <input type="submit" class="submit_in_form" value="Submit">
                                         <input type="hidden" name="account_id" value=${account_id}>
                                         <input type="hidden" name ="action" value="select_date">
                                     </div>
@@ -382,12 +378,11 @@
                                         </div>
                                         <div>
                                             <label for="book_app_reason">Appointment Reason</label>
-                                            <textarea rows="4" cols="50" name="book_app_reason"
-                                                      placeholder="Please write down the reason for your appointment.">
-                                            </textarea>
+                                            <textarea name="book_app_reason" 
+                                                      placeholder="Please write down the reason for your appointment."></textarea>
                                             <br>
-                                            
-                                            <input type="submit" value="Done">
+
+                                            <input type="submit" class="submit_in_form" value="Done">
                                             <input type="hidden" name="account_id" value=${account_id}>
                                             <input type="hidden" name ="action" value="book_appointment">
                                         </div>
