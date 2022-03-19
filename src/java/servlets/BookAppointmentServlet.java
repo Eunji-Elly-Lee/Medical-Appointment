@@ -21,7 +21,6 @@ public class BookAppointmentServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String user_name = (String)session.getAttribute("user_name");
-        String appointment_date = request.getParameter("appointment_date");
         
         if (user_name == null || user_name.equals("")) {
             response.sendRedirect("welcome");
@@ -77,16 +76,20 @@ public class BookAppointmentServlet extends HttpServlet {
                     request.setAttribute("user", administrator);
                 } else if (account.getProfile().equals("PATIENT")) {                    
                     Patient patient = patientService.get(account.getAccount_id());
+                    Doctor doctor = doctorService.getByDoctorID(patient.getDoctor_id());
                     
                     if (patient.getDoctor_id() == 1234567) {
-                        for (int i = 0; i < 7; i++) {
-                            available_dates.add(tomorrow.plusDays(i) + "");
+                        for (int i = 0; i < 10; i++) {
+                            if (tomorrow.plusDays(i).getDayOfWeek().getValue() != 6 &&
+                                    tomorrow.plusDays(i).getDayOfWeek().getValue() != 7) {
+                                available_dates.add(tomorrow.plusDays(i) + "");
+                            }
                         }
                         
+                        request.setAttribute("available_dates", available_dates);
                         request.setAttribute("message",
                                 "You are new! You should proceed with \"New Patient Meeting\" first.");
                     } else {
-                        Doctor doctor = doctorService.getByDoctorID(patient.getDoctor_id());
                         availabilities =
                                 availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
 
@@ -130,6 +133,7 @@ public class BookAppointmentServlet extends HttpServlet {
         
         List<AppointmentType> types = new ArrayList<>();
         List<Availability> availabilities = new ArrayList<>();
+        List<String> available_dates = new ArrayList<>();
         List<Doctor> searched_doctors = new ArrayList<>();
         List<Patient> searched_patients = new ArrayList<>();
         
@@ -138,17 +142,18 @@ public class BookAppointmentServlet extends HttpServlet {
         tomorrow = tomorrow.withMonth(1);
         Doctor doctor = null;
         Patient patient = null;
+        Account temp_account = null;
         
         try {
             Account account = accountService.get(user_name);
             request.setAttribute("account", account);
                 
-            if (account.getProfile().equals("DOCTOR")) {                
+            if (account.getProfile().equals("DOCTOR")) {
                 types.add(appointmentTypeService.get(1));
-                types.add(appointmentTypeService.get(2));   
+                types.add(appointmentTypeService.get(2));
                 types.add(appointmentTypeService.get(3));
                 
-                doctor = doctorService.get(account.getAccount_id());               
+                doctor = doctorService.get(account.getAccount_id());
                 availabilities =
                         availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
                 
@@ -157,20 +162,66 @@ public class BookAppointmentServlet extends HttpServlet {
                 AdministratorService administratorService = new AdministratorService();
                 Administrator administrator = administratorService.get(account.getAccount_id());
                 
+                if (account_id != null && !account_id.equals("")) {
+                    temp_account = accountService.get(Integer.parseInt(account_id));
+                       
+                    if (temp_account.getProfile().equals("DOCTOR")) {               
+                        types.add(appointmentTypeService.get(1));
+                        types.add(appointmentTypeService.get(2));   
+                        types.add(appointmentTypeService.get(3));
+
+                        doctor = doctorService.get(temp_account.getAccount_id()); 
+                        availabilities =
+                                availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
+                    } else if (temp_account.getProfile().equals("PATIENT")) {
+                        patient = patientService.get(temp_account.getAccount_id());
+                        doctor = doctorService.getByDoctorID(patient.getDoctor_id()); 
+
+                        if (patient.getDoctor_id() == 1234567) {
+                            types.add(appointmentTypeService.get(4));
+                                    
+                            for (int i = 0; i < 10; i++) {
+                                if (tomorrow.plusDays(i).getDayOfWeek().getValue() != 6 &&
+                                        tomorrow.plusDays(i).getDayOfWeek().getValue() != 7) {
+                                    available_dates.add(tomorrow.plusDays(i) + "");
+                                }
+                            }
+                                    
+                            request.setAttribute("message",
+                                    patient.getFirst_name() + " are new! Should proceed with \"New Patient Meeting\" first.");
+                        } else {               
+                            types.add(appointmentTypeService.get(1));
+                            types.add(appointmentTypeService.get(2));   
+  
+                            availabilities =
+                                    availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
+                        }
+
+                        request.setAttribute("doctor", doctor);           
+                    }
+                }
+                
                 request.setAttribute("user", administrator);
             } else if (account.getProfile().equals("PATIENT")) {
                 patient = patientService.get(account.getAccount_id());
+                doctor = doctorService.getByDoctorID(patient.getDoctor_id());
                     
                 if (patient.getDoctor_id() == 1234567) {
                     types.add(appointmentTypeService.get(4));
+                    
+                    for (int i = 0; i < 10; i++) {
+                        if (tomorrow.plusDays(i).getDayOfWeek().getValue() != 6 &&
+                                tomorrow.plusDays(i).getDayOfWeek().getValue() != 7) {
+                            available_dates.add(tomorrow.plusDays(i) + "");
+                        }
+                    }
                     
                     request.setAttribute("message",
                             "You are new! You should proceed with \"New Patient Meeting\" first.");
                 } else {
                     types.add(appointmentTypeService.get(1));
                     types.add(appointmentTypeService.get(2));
-                    
-                    doctor = doctorService.getByDoctorID(patient.getDoctor_id());                    
+                                      
                     availabilities =
                             availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
                 }
@@ -210,11 +261,10 @@ public class BookAppointmentServlet extends HttpServlet {
                     } else {
                         if (account_id == null || account_id.equals("")) {
                             account_id = request.getParameter("searched");
+                            temp_account = accountService.get(Integer.parseInt(account_id));
                         }
                         
-                        Account temp_account = accountService.get(Integer.parseInt(account_id));
-                        
-                        if (temp_account.getProfile().equals("DOCTOR")) {           
+                        if (temp_account !=null && temp_account.getProfile().equals("DOCTOR")) {
                             types.add(appointmentTypeService.get(1));
                             types.add(appointmentTypeService.get(2));   
                             types.add(appointmentTypeService.get(3));
@@ -222,11 +272,19 @@ public class BookAppointmentServlet extends HttpServlet {
                             doctor = doctorService.get(temp_account.getAccount_id());     
                             availabilities =
                                     availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
-                        } else if (temp_account.getProfile().equals("PATIENT")) {
+                        } else if (temp_account !=null && temp_account.getProfile().equals("PATIENT")) {
                             patient = patientService.get(temp_account.getAccount_id());
+                            doctor = doctorService.getByDoctorID(patient.getDoctor_id());
 
                             if (patient.getDoctor_id() == 1234567) {
                                 types.add(appointmentTypeService.get(4));
+                                
+                                for (int i = 0; i < 10; i++) {
+                                    if (tomorrow.plusDays(i).getDayOfWeek().getValue() != 6 &&
+                                            tomorrow.plusDays(i).getDayOfWeek().getValue() != 7) {
+                                        available_dates.add(tomorrow.plusDays(i) + "");
+                                    }
+                                }
                                 
                                 request.setAttribute("message",
                                         patient.getFirst_name() + " are new! Should proceed with \"New Patient Meeting\" first.");
@@ -234,7 +292,6 @@ public class BookAppointmentServlet extends HttpServlet {
                                 types.add(appointmentTypeService.get(1));
                                 types.add(appointmentTypeService.get(2));   
 
-                                doctor = doctorService.getByDoctorID(patient.getDoctor_id());  
                                 availabilities =
                                         availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
                             }
@@ -248,72 +305,11 @@ public class BookAppointmentServlet extends HttpServlet {
                     break;
                 case "select_date":
                     if (appointment_date.equals("0")) {
-                        if (account_id != null && !account_id.equals("") && account.getProfile().equals("ADMIN")) {
-                            Account temp_account = accountService.get(Integer.parseInt(account_id));
-                        
-                            if (temp_account.getProfile().equals("DOCTOR")) {               
-                                types.add(appointmentTypeService.get(1));
-                                types.add(appointmentTypeService.get(2));   
-                                types.add(appointmentTypeService.get(3));
-
-                                doctor = doctorService.get(temp_account.getAccount_id()); 
-                                availabilities =
-                                        availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
-                            } else if (temp_account.getProfile().equals("PATIENT")) {
-                                patient = patientService.get(temp_account.getAccount_id());
-
-                                if (patient.getDoctor_id() == 1234567) {
-                                    types.add(appointmentTypeService.get(4));
-                                    
-                                    request.setAttribute("message",
-                                            patient.getFirst_name() + " are new! Should proceed with \"New Patient Meeting\" first.");
-                                } else {               
-                                    types.add(appointmentTypeService.get(1));
-                                    types.add(appointmentTypeService.get(2));   
-
-                                    doctor = doctorService.getByDoctorID(patient.getDoctor_id());     
-                                    availabilities =
-                                            availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
-                                }
-
-                                request.setAttribute("doctor", doctor);           
-                            }
-                        }
-                        
                         request.setAttribute("message", "Please select the date for the appointment.");
                         request.setAttribute("step", "1");
-                    } else {
-                        if (account_id != null && !account_id.equals("") && account.getProfile().equals("ADMIN")) {
-                            Account temp_account = accountService.get(Integer.parseInt(account_id));
-                        
-                            if (temp_account.getProfile().equals("DOCTOR")) {              
-                                types.add(appointmentTypeService.get(1));
-                                types.add(appointmentTypeService.get(2));   
-                                types.add(appointmentTypeService.get(3));
-
-                                doctor = doctorService.get(temp_account.getAccount_id());  
-                                availabilities =
-                                        availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
-                                request.setAttribute("selected_doctor", true);  
-                            } else if (temp_account.getProfile().equals("PATIENT")) {
-                                patient = patientService.get(temp_account.getAccount_id());
-
-                                if (patient.getDoctor_id() == 1234567) {
-                                    types.add(appointmentTypeService.get(4));
-                                    
-                                    request.setAttribute("message",
-                                            patient.getFirst_name() + " are new! Should proceed with \"New Patient Meeting\" first.");
-                                } else {                
-                                    types.add(appointmentTypeService.get(1));
-                                    types.add(appointmentTypeService.get(2));   
-
-                                    doctor = doctorService.getByDoctorID(patient.getDoctor_id());    
-                                    availabilities =
-                                            availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
-                                }
-
-                                request.setAttribute("doctor", doctor);           
-                            }
+                    } else {                        
+                        if (temp_account !=null && temp_account.getProfile().equals("DOCTOR")) {
+                            request.setAttribute("selected_doctor", true);
                         }
                         
                         request.setAttribute("step", "2");
@@ -329,60 +325,65 @@ public class BookAppointmentServlet extends HttpServlet {
                     request.setAttribute("time_selection", time_selection);
                     request.setAttribute("book_app_reason", book_app_reason);
                     
-                    if (type_selection == 0 || time_selection.equals("0") || 
-                            book_app_reason == null || book_app_reason.equals("")) {
-                        if (account_id != null && !account_id.equals("") && account.getProfile().equals("ADMIN")) {
-                            Account temp_account = accountService.get(Integer.parseInt(account_id));
-                            
-                            if (temp_account.getProfile().equals("DOCTOR")) {              
-                                types.add(appointmentTypeService.get(1));
-                                types.add(appointmentTypeService.get(2));   
-                                types.add(appointmentTypeService.get(3));
-
-                                doctor = doctorService.get(temp_account.getAccount_id());  
-                                availabilities =
-                                        availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
-                                
-                                request.setAttribute("selected_doctor", true);  
-                            } else if (temp_account.getProfile().equals("PATIENT")) {
-                                patient = patientService.get(temp_account.getAccount_id());
-
-                                if (patient.getDoctor_id() == 1234567) {
-                                    types.add(appointmentTypeService.get(4));
-                                    
-                                    request.setAttribute("message",
-                                            patient.getFirst_name() + " are new! Should proceed with \"New Patient Meeting\" first.");
-                                } else {                   
-                                    types.add(appointmentTypeService.get(1));
-                                    types.add(appointmentTypeService.get(2));   
-
-                                    doctor = doctorService.getByDoctorID(patient.getDoctor_id()); 
-                                    availabilities =
-                                            availabilityService.getAllByDoctorDate(doctor.getDoctor_id(), tomorrow.toString());
-                                }
-
-                                request.setAttribute("doctor", doctor);           
-                            }
-                        }
+                    if (account.getProfile().equals("DOCTOR")) {
+                        int patient_id = Integer.parseInt(request.getParameter("patient_selection"));
+                        request.setAttribute("patient_selection", patient_id);
                         
-                        request.setAttribute("message", "Please fill out all information for the appointment.");
-                        request.setAttribute("step", "2");
-                    } else {
-                        if (account.getProfile().equals("DOCTOR")) {
+                        if (type_selection == 0 || time_selection.equals("0") || patient_id == 0 ||
+                            book_app_reason == null || book_app_reason.equals("")) {
+                            request.setAttribute("message", "Please fill out all information for the appointment.");
+                            request.setAttribute("step", "2");
+                        } else {
+                            appointmentService.insert(doctor.getDoctor_id(), appointment_date + " " + time_selection, 
+                                    patient_id, appointmentTypeService.get(type_selection).getStd_duration(),
+                                    type_selection, book_app_reason, false);
+                                
+                            request.setAttribute("message", "The appointment has been booked successfully.");                                
+                            request.setAttribute("step", "1");
+                        }
+                    } else if (account.getProfile().equals("ADMIN")) {
+                        if (temp_account !=null && temp_account.getProfile().equals("DOCTOR")) {
                             int patient_id = Integer.parseInt(request.getParameter("patient_selection"));
                             request.setAttribute("patient_selection", patient_id);
-
-                            if (patient_id == 0) {
+                            
+                            if (type_selection == 0 || time_selection.equals("0") || patient_id == 0 ||
+                                book_app_reason == null || book_app_reason.equals("")) {
+                                request.setAttribute("selected_doctor", true);
                                 request.setAttribute("message", "Please fill out all information for the appointment.");
-                            } else {                                
+                                request.setAttribute("step", "2");
+                            } else {
+                                doctor = doctorService.get(temp_account.getAccount_id());
+
                                 appointmentService.insert(doctor.getDoctor_id(), appointment_date + " " + time_selection,
                                         patient_id, appointmentTypeService.get(type_selection).getStd_duration(),
                                         type_selection, book_app_reason, false);
+
+                                request.setAttribute("message", "The appointment has been booked successfully.");
+                                request.setAttribute("step", "0");
+                            }                        
+                        } else if (temp_account !=null && temp_account.getProfile().equals("PATIENT")) {
+                            if (type_selection == 0 || time_selection.equals("0") || 
+                                book_app_reason == null || book_app_reason.equals("")) {
+                                request.setAttribute("message", "Please fill out all information for the appointment.");
+                                request.setAttribute("step", "2");
+                            } else {
+                                patient = patientService.get(temp_account.getAccount_id());
+                                doctor = doctorService.getByDoctorID(patient.getDoctor_id());
                                 
-                                request.setAttribute("message", "The appointment has been booked successfully.");                                
-                                request.setAttribute("step", "1");
+                                appointmentService.insert(doctor.getDoctor_id(), appointment_date + " " + time_selection,
+                                        patient.getPatient_id(), appointmentTypeService.get(type_selection).getStd_duration(),
+                                        type_selection, book_app_reason, false);
+
+                                request.setAttribute("message", "The appointment has been booked successfully.");
+                                request.setAttribute("step", "0");
                             }
-                        } else if (account.getProfile().equals("PATIENT")) {
+                        }
+                    } else if (account.getProfile().equals("PATIENT")) {
+                        if (type_selection == 0 || time_selection.equals("0") ||
+                            book_app_reason == null || book_app_reason.equals("")) {
+                            request.setAttribute("message", "Please fill out all information for the appointment.");
+                            request.setAttribute("step", "2");
+                        } else {
                             appointmentService.insert(doctor.getDoctor_id(), appointment_date + " " + time_selection,
                                     patient.getPatient_id(), appointmentTypeService.get(type_selection).getStd_duration(),
                                     type_selection, book_app_reason, false);
@@ -390,53 +391,15 @@ public class BookAppointmentServlet extends HttpServlet {
                             request.setAttribute("message", "The appointment has been booked successfully.");                            
                             request.setAttribute("step", "1");
                         }
-                        
-                        if (account_id != null && !account_id.equals("") && account.getProfile().equals("ADMIN")) {
-                            Account temp_account = accountService.get(Integer.parseInt(account_id));
-                            
-                            if (temp_account.getProfile().equals("DOCTOR")) {
-                                int patient_id = Integer.parseInt(request.getParameter("patient_selection"));
-                                request.setAttribute("patient_selection", patient_id);
-
-                                if (patient_id == 0) {
-                                    request.setAttribute("message", "Please fill out all information for the appointment.");
-                                } else {
-                                    doctor = doctorService.get(temp_account.getAccount_id());
-
-                                    appointmentService.insert(doctor.getDoctor_id(), appointment_date + " " + time_selection,
-                                            patient_id, appointmentTypeService.get(type_selection).getStd_duration(),
-                                            type_selection, book_app_reason, false);
-
-                                    request.setAttribute("message", "The appointment has been booked successfully.");
-                                    request.setAttribute("step", "0");
-                                }
-                            } else if (temp_account.getProfile().equals("PATIENT")) {
-                                if (account.getProfile().equals("ADMIN")) {
-                                    patient = patientService.get(temp_account.getAccount_id());
-                                    doctor = doctorService.getByDoctorID(patient.getDoctor_id());   
-                                }
-
-                                appointmentService.insert(doctor.getDoctor_id(), appointment_date + " " + time_selection,
-                                        patient.getPatient_id(), appointmentTypeService.get(type_selection).getStd_duration(),
-                                        type_selection, book_app_reason, false);
-
-                                request.setAttribute("message", "The appointment has been booked successfully.");
-                                request.setAttribute("step", "0");
-                            }                            
-                        }
                     }
                     
                     break;
             }
             
             if (!availabilities.isEmpty()) {
-                List<String> available_dates = new ArrayList<>();
-
                 for (Availability availability: availabilities) {
                     available_dates.add(availability.getStart_date_time().substring(0, 11));
                 }
-                        
-                request.setAttribute("available_dates", available_dates);
             }
             
             if (appointment_date != null && !appointment_date.equals("0")) {                
@@ -453,13 +416,10 @@ public class BookAppointmentServlet extends HttpServlet {
                             request.setAttribute("patients", patients);
                     }
                     
-                    if (account_id != null && !account_id.equals("") && account.getProfile().equals("ADMIN")) {
-                        Account temp_account = accountService.get(Integer.parseInt(account_id));
-                        
-                        if (temp_account.getProfile().equals("DOCTOR")) {
-                            List<Patient> patients = patientService.getAllByDoctor(doctor.getDoctor_id());
-                            request.setAttribute("patients", patients);
-                        }
+                    if (account.getProfile().equals("ADMIN") &&
+                            temp_account != null && temp_account.getProfile().equals("DOCTOR")) {                        
+                        List<Patient> patients = patientService.getAllByDoctor(doctor.getDoctor_id());
+                        request.setAttribute("patients", patients);
                     }
 
                     for (Availability availability: availabilities) {
@@ -497,6 +457,7 @@ public class BookAppointmentServlet extends HttpServlet {
             request.setAttribute("types", types);
             request.setAttribute("name", name);
             request.setAttribute("account_id", account_id);
+            request.setAttribute("available_dates", available_dates);
             request.setAttribute("appointment_date", appointment_date);
         } catch (Exception ex) {
                 Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
