@@ -39,6 +39,7 @@ public class LoginServlet extends HttpServlet {
         Account account = accountService.login(user_name, password);
         
         if (account == null) {
+            request.setAttribute("invalidMessage", "Invalid username or password. Please login again!");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
             return;
         } else {
