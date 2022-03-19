@@ -70,7 +70,7 @@ public class ForgotServlet extends HttpServlet {
             } else {
                 request.setAttribute("resetMessage", "You should fill in the blank.");
                 
-                getServletContext().getRequestDispatcher("/WEB-INF/forgotPassword.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
                 return;
             }
         } else if (action.equals("newPassword")) {
