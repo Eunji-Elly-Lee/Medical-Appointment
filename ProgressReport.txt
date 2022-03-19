@@ -19,6 +19,7 @@ Doctor profile page - Jihoon
 Account model, account db, doctor db, account service, doctor service, login back-end, profile back-end - Eunji
 
 Mar 10, 2022
+Sign-up back-end - Fied
 Appointment model, appointment type model, calendar model, book appointment back-end - Jihoon
 Administrator model, administrator db, forgot back-end - Jonghan
 Availability model, patient db, appointment db, appointment type db, calendar db, availability db
