@@ -17,8 +17,8 @@
                 crossorigin="anonymous">
         </script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-                crossorigin="anonymous">
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+              crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous">
@@ -27,7 +27,7 @@
         <style><%@ include file="/css/styleSignupPage.css" %></style>      
         <title>Sign Up Page</title>
     </head>
-    
+
     <body>
         <div>
             <div class="headers">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="p-0 mobile_nav">
                     <div class="pe-2 mobile_header">
                         <a href="welcome"><img src="img/logo.png" width="105px"></a>
@@ -84,12 +84,12 @@
                                 689r460OJIdjPYDO/LMC8BPMjsdNmLlftg2BaZQJn5TnVdLg1vhRn7TuyubKf8DPbd2zmO//zkAAAAASUVORK5CYII=">
                         </div>
                     </div>
-                    
+
                     <nav class="navbar navbar-expand-md navbar-light m-3">
                         <div class="container-fluid justify-content-start">
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <a class="navbar-brand ms-3 fs-6">Menu</a>
@@ -100,7 +100,7 @@
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Appointment
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -113,7 +113,7 @@
                         </div>
                     </nav>
                 </div>
-                
+
                 <div class="functional_links">
                     <a href="login">Login</a>
                     <a href="signup">Register</a>
@@ -121,112 +121,144 @@
                     <div class="clear"></div>
                 </div>
             </div>     
-        
+
             <div>
                 <div class="banner_field">
                     <div class="banner">
                         <p>New Patient</p>
                     </div>
                 </div>
-                
+
                 <div class="signup">
                     <div class="form_heading">
                         <h1>Register</h1>
                         <p>Please fill in the form below</p>
                     </div>
 
-                    <form class="signup_form">
+                    <form class="signup_form" action="signup" method="post">
                         <div class="signup_form_flex">                            
                             <div>
                                 <label>Username</label>
-                                <input type="text" name="signup_username" placeholder="Username">
+                                <input type="text" name="signup_username" placeholder="Username" value="${account.user_name}">
+                                <p class="errormessage">${userNameErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Password</label>
-                                <input type="text" name="signup_password" placeholder="Password">
-                            </div>
-                            <div>
-                                <label>First name</label>
-                                <input type="text" name="signup_firstname" placeholder="First name">
+                                <input type="password" name="signup_password" placeholder="Password" value="${account.password}">
                             </div>
                             <div>
                                 <label>Re-enter Password</label>
-                                <input type="text" name="signup_re_enter_password" placeholder="Re-enter password">
+                                <input type="password" name="signup_re_enter_password" placeholder="Re-enter password" value="${account.password}">
+                                <p class="errormessage">${passErrorMessage}</p>
                             </div>
                             <div>
-                                <label>Last name</label>
-                                <input type="text" name="signup_lastname" placeholder="Lastname">
+                                <label>First name</label>
+                                <input type="text" name="signup_firstname" placeholder="First Name"  value="${patient.first_name}">
+                                <p class="errormessage">${firstErrorMessage}</p>
+                            </div>
+
+                            <div>
+                                <label>Last Name</label>
+                                <input type="text" name="signup_lastname" placeholder="Last Name" value="${patient.last_name}">
+                                <p class="errormessage">${lastErrorMessage}</p>
                             </div>
                             <div>
-                                <label>Health care number</label>
-                                <input type="text" name="signup_healthcare_num" placeholder="Health care number">
+                                <label>Health Care Number</label>
+                                <input type="text" name="signup_healthcare_num" placeholder="Health care number" value="${patient.healthcare_id}">
+                                <p class="errormessage">${healthErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Phone number</label>
-                                <input type="tel" name="signup_phonenum" placeholder="Phone number">
+                                <input type="tel" name="signup_phonenum" placeholder="Phone number" value="${patient.mobile_phone}">
+                                <p class="errormessage">${phoneErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Email</label>
-                                <input type="text" name="signup_email" placeholder="Email">
+                                <input type="text" name="signup_email" placeholder="Email" value="${patient.email}">
+                                <p class="errormessage">${emailErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Alternate Phone number</label>
-                                <input type="tel" name="signup_phonenum_alt" placeholder="Alternate phone number">
+                                <input type="tel" name="signup_phonenum_alt" placeholder="Alternate phone number" value="${patient.alt_phone}">
+                                <p class="errormessage">${phoneAltErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Birth date</label>
-                                <input type="date" name="signup_birth_date" placeholder="Birth date">
+                                <input type="date" name="signup_birth_date" placeholder="Birth date" value="${patient.birth_date}">
+                                <p class="errormessage">${birthErrorMessage}</p>
                             </div>
                         </div>
-                        
+
                         <div class="signup_radio_btns">
                             <div class="gender">
                                 <label>Gender</label>
                                 <div class="gender_option">
                                     <div> 
-                                        <input type="radio" name="gender_radio">
+                                        <input type="radio" name="gender_radio" value="male">
                                         <label>Male</label>
                                     </div>
                                     <div>
-                                        <input type="radio" name="gender_radio">
+                                        <input type="radio" name="gender_radio" value="female">
                                         <label>Female</label>
                                     </div>
+                                    <p class="errormessage">${genderErrorMessage}</p>
                                 </div>
                             </div>                            
                             <div class="prefered_notification">
                                 <label>Preferred Notification</label>
                                 <div class="prefered_notification_option">
                                     <div> 
-                                        <input type="radio" name="prefered_notification_radio">
+                                        <input type="radio" name="prefered_notification_radio" value="MOBILE_PHONE">
                                         <label>Phone</label>
                                     </div>
                                     <div>
-                                        <input type="radio" name="prefered_notification_radio">
+                                        <input type="radio" name="prefered_notification_radio" value="EMAIL">
                                         <label>Email</label>
                                     </div>
+                                    <p class="errormessage">${notiErrorMessage}</p>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="signup_location">
                             <div class="signup_address_field">
                                 <label>Address</label>
                                 <br/>
-                                <input type="text" name="signup_address" placeholder="Street address">
+                                <input type="text" name="signup_address" placeholder="Street address" value="${patient.street_address}">
+                                <p class="errormessage">${addressErrorMessage}</p>
                                 <input type="text" name="signup_address2" placeholder="Street address line 2">
                             </div>
                             <div class="signup_city_state_province">
-                                <input type="text" name="signup_city" placeholder="City">
-                                <input type="text" name="signup_state_province" placeholder="Province">
+                                <input type="text" name="signup_city" placeholder="City" value="${patient.city}">
+                                <p class="errormessage">${cityErrorMessage}</p>
+                                <!--                                <input type="text" name="signup_state_province" placeholder="Province" value="">-->
+                                <select name="signup_state_province" placeholder="Province" >
+                                    <option value="" disabled selected>Province</option>
+                                    <option value="Alberta">Alberta</option>
+                                    <option value="British Columbia">British Columbia</option>
+                                    <option value="Manitoba">Manitoba</option>
+                                    <option value="New Brunswick">New Brunswick</option>
+                                    <option value="Newfoundland and Labrador">Newfoundland</option>
+                                    <option value="Nova Scotia">Nova Scotia</option>
+                                    <option value="Ontario">Ontario</option>
+                                    <option value="Prince Edward Island">Prince Edward Island</option>
+                                    <option value="Quebec">Quebec</option>
+                                    <option value="Saskatchewan">Saskatchewan</option>
+                                    <option value="Northwest Territories">Northwest Territories</option>
+                                    <option value="Nunavut">Nunavut</option>
+                                    <option value="Yukon">Yukon</option>
+                                </select>
+                                <p class="errormessage">${provErrorMessage}</p>
                             </div>
                             <div class="signup_postal_code">
-                                <input type="text" name="signup_postal" placeholder="Postal code">
+                                <input type="text" name="signup_postal" placeholder="Postal code" value="${patient.postal_code}">
+                                <p class="errormessage">${postalErrorMessage}</p>
                             </div>
                         </div>
-                        
+
                         <div class="register_btn">
                             <input type="submit" value="Register">
-                            <input type="button" value="Cancle">
+                            <input type="button" value="Cancel">
                         </div>
                     </form>
                 </div>
