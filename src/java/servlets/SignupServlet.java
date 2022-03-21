@@ -17,8 +17,16 @@ public class SignupServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
-        return;
+        HttpSession session = request.getSession();
+        String user_name = (String) session.getAttribute("user_name");
+        
+        if (user_name != null && !user_name.equals("")) {
+            response.sendRedirect("welcome");
+            return;
+        } else {
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            return;
+        }
     }
 
     @Override
