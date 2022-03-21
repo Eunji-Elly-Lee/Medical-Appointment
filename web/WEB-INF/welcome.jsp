@@ -69,12 +69,27 @@
                                                         <li><a href="confirm_appointment">Confirm Appointment</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="view_patient">Patient</a></li>
+                                                <li>
+                                                    <a class="drop-down-tab" href="">
+                                                        Patient <i class="bi bi-caret-down-fill"></i>
+                                                    </a>
+                                                    <ul class="subnav">
+                                                        <li><a href="view_patient">View Patient</a></li>
+                                                        <li><a href="signup_patient">Register Patient</a></li>
+                                                    </ul>
+                                                </li>
                                                 <li><a href="view_staff">Staff</a></li>
                                             </c:when>
                                             <c:when test="${account.profile == 'SYSADMIN'}">
-                                                <li><a href="view_staff">Staff</a></li>
-                                                <li><a href="signup_staff">Register Staff</a></li>
+                                                <li>
+                                                    <a class="drop-down-tab" href="">
+                                                        &nbsp;Staff&nbsp;&nbsp; <i class="bi bi-caret-down-fill"></i>
+                                                    </a>
+                                                    <ul class="subnav">
+                                                        <li><a href="view_staff">View Staff</a></li>
+                                                        <li><a href="signup_staff">Register Staff</a></li>
+                                                    </ul>
+                                                </li>
                                                 <li><a href="backup">Backup&Restore</a></li>
                                             </c:when>
                                             <c:otherwise>
@@ -146,7 +161,7 @@
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                   <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="view_appointment">View Appointment</a></li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item"><a class="nav-link" href="doctor_schedule">Doctor schedule</a></li>
@@ -161,16 +176,33 @@
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                   <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="view_appointment">View Appointment</a></li>
                                                   <li class="ms-3 p-1"><a href="confirm_appointment">Confirm Appointment</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="nav-item"><a class="nav-link" href="view_patient">Patient</a></li>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                   Patient
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                  <li class="ms-3 p-1"><a href="view_patient">View Patient</a></li>
+                                                  <li class="ms-3 p-1"><a href="signup_patient">Register Patient</a></li>
+                                                </ul>
+                                            </li>
                                             <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
                                         </c:when>
                                         <c:when test="${account.profile == 'SYSADMIN'}">
-                                            <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
-                                            <li class="nav-item"><a class="nav-link" href="signup_staff">Register Staff</a></li>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                   Staff
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                  <li class="ms-3 p-1"><a href="view_staff">View Staff</a></li>
+                                                  <li class="ms-3 p-1"><a href="signup_staff">Register Staff</a></li>
+                                                </ul>
+                                            </li>
                                             <li class="nav-item"><a class="nav-link" href="backup">Backup&Restore</a></li>
                                         </c:when>
                                         <c:otherwise>
@@ -181,7 +213,7 @@
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                   <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="view_appointment">View Appointment</a></li>
                                                 </ul>
                                             </li>
                                         </c:otherwise>
