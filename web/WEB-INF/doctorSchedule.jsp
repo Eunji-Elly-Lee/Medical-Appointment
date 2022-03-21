@@ -108,7 +108,7 @@
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                            <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                            <li class="ms-3 p-1"><a href="view_appointment">View Appointment</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item"><a class="nav-link" href="doctor_schedule">Doctor schedule</a></li>
