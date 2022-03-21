@@ -42,7 +42,7 @@
                                 <nav>
                                     <ul>
                                         <li><a href="welcome">Home</a></li>
-                                        
+
                                         <c:choose>
                                             <c:when test="${account.profile == 'DOCTOR'}">
                                                 <li>
@@ -69,7 +69,15 @@
                                                         <li><a href="confirm_appointment">Confirm Appointment</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="view_patient">Patient</a></li>
+                                                <li>
+                                                    <a class="drop-down-tab" href="">
+                                                        Patient <i class="bi bi-caret-down-fill"></i>
+                                                    </a>
+                                                    <ul class="subnav">
+                                                        <li><a href="view_patient">View Patient</a></li>
+                                                        <li><a href="signup_patient">Register Patient</a></li>
+                                                    </ul>
+                                                </li>
                                                 <li><a href="view_staff">Staff</a></li>
                                             </c:when>
                                             <c:otherwise>
@@ -90,7 +98,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="p-0 mobile_nav">
                     <div class="pe-2 mobile_header">
                         <a href="welcome"><img src="img/logo.png" width="105px"></a>
@@ -117,12 +125,12 @@
                                 689r460OJIdjPYDO/LMC8BPMjsdNmLlftg2BaZQJn5TnVdLg1vhRn7TuyubKf8DPbd2zmO//zkAAAAASUVORK5CYII=">
                         </div>
                     </div>
-                    
+
                     <nav class="navbar navbar-expand-md navbar-light m-3">
                         <div class="container-fluid justify-content-start">
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <a class="navbar-brand ms-3 fs-6">Menu</a>
@@ -131,17 +139,17 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="welcome">Home</a>
                                     </li>
-                                    
+
                                     <c:choose>
                                         <c:when test="${account.profile == 'DOCTOR'}">
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Appointment
+                                                    Appointment
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item"><a class="nav-link" href="doctor_schedule">Doctor schedule</a></li>
@@ -156,22 +164,31 @@
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                   <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="view_appointment">View Appointment</a></li>
                                                   <li class="ms-3 p-1"><a href="confirm_appointment">Confirm Appointment</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="nav-item"><a class="nav-link" href="view_patient">Patient</a></li>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                   Patient
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                  <li class="ms-3 p-1"><a href="view_patient">View Patient</a></li>
+                                                  <li class="ms-3 p-1"><a href="signup_patient">Register Patient</a></li>
+                                                </ul>
+                                            </li>
                                             <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
                                         </c:when>
                                         <c:otherwise>
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Appointment
+                                                    Appointment
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
                                                 </ul>
                                             </li>
                                         </c:otherwise>
@@ -181,7 +198,7 @@
                         </div>
                     </nav>
                 </div>
-                
+
                 <div class="functional_links">
                     <a href="profile">Manage Account</a>
                     <a href="welcome?logout">Logout</a>
