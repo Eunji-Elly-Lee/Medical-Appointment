@@ -56,8 +56,8 @@
                                                 <li><a href="doctor_schedule">Doctor schedule</a></li>
                                                 <li><a href="view_patient">Patient</a></li>
                                                 <li><a href="view_staff">Staff</a></li>
-                                                </c:when>
-                                                <c:when test="${account.profile == 'ADMIN'}">
+                                            </c:when>
+                                            <c:when test="${account.profile == 'ADMIN'}">
                                                 <li>
                                                     <a class="drop-down-tab" href="">
                                                         Appointment <i class="bi bi-caret-down-fill"></i>
@@ -68,10 +68,18 @@
                                                         <li><a href="confirm_appointment">Confirm Appointment</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="view_patient">Patient</a></li>
+                                                <li>
+                                                    <a class="drop-down-tab" href="">
+                                                        Patient <i class="bi bi-caret-down-fill"></i>
+                                                    </a>
+                                                    <ul class="subnav">
+                                                        <li><a href="view_patient">View Patient</a></li>
+                                                        <li><a href="signup_patient">Register Patient</a></li>
+                                                    </ul>
+                                                </li>
                                                 <li><a href="view_staff">Staff</a></li>
-                                                </c:when>
-                                                <c:otherwise>
+                                            </c:when>
+                                            <c:otherwise>
                                                 <li>
                                                     <a class="drop-down-tab" href="">
                                                         Appointment <i class="bi bi-caret-down-fill"></i>
@@ -146,23 +154,32 @@
                                             <li class="nav-item"><a class="nav-link" href="doctor_schedule">Doctor schedule</a></li>
                                             <li class="nav-item"><a class="nav-link" href="view_patient">Patient</a></li>
                                             <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
-                                            </c:when>
-                                            <c:when test="${account.profile == 'ADMIN'}">
+                                        </c:when>
+                                        <c:when test="${account.profile == 'ADMIN'}">
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Appointment
+                                                   Appointment
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                    <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                    <li class="ms-3 p-1"><a href="ViewAppointment">View Appointment</a></li>
-                                                    <li class="ms-3 p-1"><a href="confirm_appointment">Confirm Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="view_appointment">View Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="confirm_appointment">Confirm Appointment</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="nav-item"><a class="nav-link" href="view_patient">Patient</a></li>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                   Patient
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                  <li class="ms-3 p-1"><a href="view_patient">View Patient</a></li>
+                                                  <li class="ms-3 p-1"><a href="signup_patient">Register Patient</a></li>
+                                                </ul>
+                                            </li>
                                             <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
-                                            </c:when>
-                                            <c:otherwise>
+                                        </c:when>
+                                        <c:otherwise>
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
