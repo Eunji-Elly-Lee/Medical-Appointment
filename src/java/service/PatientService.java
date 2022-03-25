@@ -33,6 +33,13 @@ public class PatientService {
         return patient;
     }
     
+    public Patient getByPatientId(int patient_id) throws Exception{
+         PatientDB patientDB = new PatientDB();
+         Patient patient = patientDB.getByPatientId(patient_id);
+         return patient;
+         
+    }
+    
     public void insert(int patient_id, String healthcare_id, String first_name, String last_name, String email,
             String mobile_phone, String alt_phone, String pref_contact_type, int doctor_id, int account_id, String gender,
             String birth_date, String street_address, String city, String province, String postal_code) throws Exception {
