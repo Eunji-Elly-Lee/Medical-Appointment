@@ -207,42 +207,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="table-secondary">
-                                <th>1</th>
-                                <td>Eolanda</td>
-                                <td>Kalinowsky</td>
-                                <td>ekalinow...</td>
-                                <td>4294626495</td>
-                                <td>8417722206</td>
-                                <%--<td> Details <img src="img/information.png" width="15px" height="15px"></td>--%>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <td>Eolanda</td>
-                                <td>Kalinowsky</td>
-                                <td>ekalinow...</td>
-                                <td>4294626495</td>
-                                <td>8417722206</td>
-                                <%--<td> Details <img src="img/information.png" width="15px" height="15px"></td>--%>
-                            </tr>
-                            <tr class="table-secondary">
-                                <th>1</th>
-                                <td>Eolanda</td>
-                                <td>Kalinowsky</td>
-                                <td>ekalinow...</td>
-                                <td>4294626495</td>
-                                <td>8417722206</td>
-                                <%--<td> Details <img src="img/information.png" width="15px" height="15px"></td>--%>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <td>Eolanda</td>
-                                <td>Kalinowsky</td>
-                                <td>ekalinow...</td>
-                                <td>4294626495</td>
-                                <td>8417722206</td>
-                                <%--<td> Details <img src="img/information.png" width="15px" height="15px"></td>--%>
-                            </tr>
+                             <c:choose>
+                                <c:when test="${account.profile == 'ADMIN'}">
+                                    <c:forEach items="${arrlPatients}" var="patient" varStatus="loop">
+                                        <tr class="table-secondary">
+                                            <td>${arrlPatients.get(loop.index).getPatient_id()}</td>
+                                            <td>${arrlPatients.get(loop.index).getFirst_name()}</td>
+                                            <td>${arrlPatients.get(loop.index).getLast_name()}</td>
+                                            <td>${arrlPatients.get(loop.index).getEmail()}</td>
+                                            <td>${arrlPatients.get(loop.index).getMobile_phone()}</td>
+                                            <td>${arrlPatients.get(loop.index).getAlt_phone()}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:when>
+                            </c:choose>
                         </tbody>
                     </table>
                 </div>
