@@ -15,16 +15,16 @@ public class AppointmentService {
         return appointments;
     }
     
-    public Appointment getByDoctorID(int doctor_id) throws Exception {
+    public List <Appointment> getByDoctorID(int doctor_id) throws Exception {
         AppointmentDB appointmentDB = new AppointmentDB();
-        Appointment appointment = appointmentDB.getByDoctorID(doctor_id);
-        return appointment;
+        List<Appointment> appointments = appointmentDB.getByDoctorID(doctor_id);
+        return appointments;
     }
     
-    public Appointment getByPatientID(int patient_id) throws Exception {
+    public List<Appointment> getByPatientID(int patient_id) throws Exception {
         AppointmentDB appointmentDB = new AppointmentDB();
-        Appointment appointment = appointmentDB.getByPatientID(patient_id);
-        return appointment;
+        List<Appointment> appointments = appointmentDB.getByPatientID(patient_id);
+        return appointments;
     }
     
     public Appointment getByDate(String start_date_time) throws Exception {
@@ -49,15 +49,15 @@ public class AppointmentService {
         appointmentDB.update(appointment);
     }
     
-    public void deleteByDoctorID(int doctor_id) throws Exception {
-        Appointment appointment = getByDoctorID(doctor_id);
-        AppointmentDB appointmentDB = new AppointmentDB();
-        appointmentDB.delete(appointment);
-    }
-    
-    public void deleteByPatientID(int patient_id) throws Exception {
-        Appointment appointment = getByPatientID(patient_id);
-        AppointmentDB appointmentDB = new AppointmentDB();
-        appointmentDB.delete(appointment);
-    }
+//    public void deleteByDoctorID(int doctor_id) throws Exception {
+//        Appointment appointment = getByDoctorID(doctor_id);
+//        AppointmentDB appointmentDB = new AppointmentDB();
+//        appointmentDB.delete(appointment);
+//    }
+//    
+//    public void deleteByPatientID(int patient_id) throws Exception {
+//        Appointment appointment = getByPatientID(patient_id);
+//        AppointmentDB appointmentDB = new AppointmentDB();
+//        appointmentDB.delete(appointment);
+//    }
 }
