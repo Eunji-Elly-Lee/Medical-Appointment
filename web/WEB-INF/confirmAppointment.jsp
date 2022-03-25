@@ -156,56 +156,10 @@
                 </div>
 
                 <div class="schedule_wrapper">
-                    <div class="schedule">
-                        <div class="form_heading">
-                            <header>
-                                <span id="hdr-Id"></span>
-                                <span class="hdr-radiobutton"></span>
-                                <span id="hdr-FirstName">FIRST NAME</span>
-                                <span id="hdr-LastName">LAST NAME</span>
-                                <span id="hdr-Date">DATE</span>
-                                <span id="hdr-Time">TIME</span>
-                            </header>
-                        </div>
-
-                        <form class="schedule_form">
-                            <div class="schedule_form_flex">
-                                <!-- mockup -->
-                                <!--<div class="Row" id="row-0">
-                                    <span class="Row-radiobutton"><input type="radio" id="select" 
-                                            name="select" value="0" style="margin-right:50px ;" onchange="ToggleClassState('confirmation-popup','hidden',true)"></span>
-                                    <span class="Row-FirstName">Doug </span>
-                                    <span class="Row-LastName">Shier</span>
-                                    <span class="Row-Date">Thu, 02 Dec</span>
-                                    <span class="Row-Time">11:00 am</span>
-                                </div>-->
-                                <br>
-                                <input type="submit" value="Appointment" class="confirm_button">
-                            </div>
-                        </form>
-                    </div>
+                    
+                    
                 </div>
 
-                <!-- Appointemnt Confimation Popup Box -->
-                <div class="overlay">
-                    <div class="popup">
-                        <header>Appointment Confirmation</header><br>
-                        <span class="name">Name</span><br>
-                        <span id="type">Type</span><br>
-                        <span id="date">Date</span><br>
-                        <span id="time">Time</span><br>
-                        <span id="email">Email</span><br>
-                        <span id="phone">Phone</span><br>
-                        <span id="doctor">Doctor</span><br>
-
-                        <div class="btn_area_confirm">
-                            <!--<button class="btn btn-print">Print</button>
-                            <button class="btn btn-close">Close</button>-->
-                            <button><a class="print_btn" href="">Print</a></button>
-                            <button><a class="close_btn" href="doctorschedule">Close</a></button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         
