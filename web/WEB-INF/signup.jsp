@@ -205,16 +205,16 @@
                         <div class="signup_form_flex">                            
                             <div>
                                 <label>Username</label>
-                                <input type="text" name="signup_username" placeholder="Username" value="${account.user_name}">
+                                <input type="text" name="signup_username" placeholder="Username" value="${new_account.user_name}">
                                 <p class="errormessage">${userNameErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Password</label>
-                                <input type="password" name="signup_password" placeholder="Password" value="${account.password}">
+                                <input type="password" name="signup_password" placeholder="Password" value="${new_account.password}">
                             </div>
                             <div>
                                 <label>Re-enter Password</label>
-                                <input type="password" name="signup_re_enter_password" placeholder="Re-enter password" value="${account.password}">
+                                <input type="password" name="signup_re_enter_password" placeholder="Re-enter password" value="${new_account.password}">
                                 <p class="errormessage">${passErrorMessage}</p>
                             </div>
                             <div>
