@@ -44,6 +44,10 @@
         <servlet-name>ViewStaffServlet</servlet-name>
         <servlet-class>servlets.ViewStaffServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SignupStaffServlet</servlet-name>
+        <servlet-class>servlets.SignupStaffServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WelcomeServlet</servlet-name>
         <url-pattern>/welcome</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>ViewStaffServlet</servlet-name>
         <url-pattern>/view_staff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignupStaffServlet</servlet-name>
+        <url-pattern>/signup_staff</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
