@@ -40,7 +40,7 @@ public class ForgotServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/WEB-INF/resetNewPassword.jsp").forward(request, response);
                     return;
                 } else {
-                    getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/WEB-INF/welcome.jsp").forward(request, response);
                     return;
                 }
             }
@@ -76,10 +76,11 @@ public class ForgotServlet extends HttpServlet {
         } else if (action.equals("newPassword")) {
             String newPassword = request.getParameter("resetPassword");
             String resetConfirmPassword = request.getParameter("resetConfirmPassword");
-            
+
             if (newPassword != null && !newPassword.equals("") && resetConfirmPassword != null && !resetConfirmPassword.equals("")
                     && newPassword.equals(resetConfirmPassword)) {
                 accountService.changePassword(forgotAccount.getReset_password_uuid(), newPassword);
+                
 //                session.removeAttribute("account");
                 request.setAttribute("message", "You have successfully changed your password.");
                 
