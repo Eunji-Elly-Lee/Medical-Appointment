@@ -77,7 +77,7 @@
                                                     </a>
                                                     <ul class="subnav">
                                                         <li><a href="view_patient">View Patient</a></li>
-                                                        <li><a href="signup_patient">Register Patient</a></li>
+                                                        <li><a href="signup">Register Patient</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="view_staff">Staff</a></li>
@@ -189,7 +189,7 @@
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                     <li class="ms-3 p-1"><a href="view_patient">View Patient</a></li>
-                                                    <li class="ms-3 p-1"><a href="signup_patient">Register Patient</a></li>
+                                                    <li class="ms-3 p-1"><a href="signup">Register Patient</a></li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
@@ -227,19 +227,9 @@
                 </div>
 
                 <div class="functional_links">
-                    <c:choose>
-                        <c:when test="${loginAccount == null}">
-                            <a href="login">Login</a>
-                            <a href="signup">Register</a>
-                            <a href="forgot">Find Account/Password</a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="profile">Manage Account</a>
-                            <a href="welcome?logout">Logout</a>
-                            <span>Hello, ${loginUser.first_name} ${loginUser.last_name}</span>
-                        </c:otherwise>
-                    </c:choose>
-
+                    <a href="profile">Manage Account</a>
+                    <a href="welcome?logout">Logout</a>
+                    <span>Hello, ${loginUser.first_name} ${loginUser.last_name}</span>
                     <div class="clear"></div>
                 </div>
             </div>
