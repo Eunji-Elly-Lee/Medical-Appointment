@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.*;
 import java.util.logging.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -15,7 +16,7 @@ public class ViewPatientServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {     
+            throws ServletException, IOException {       
         HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user_name");
         
@@ -38,6 +39,15 @@ public class ViewPatientServlet extends HttpServlet {
                         AdministratorService administratorService = new AdministratorService();
                         Administrator administrator = administratorService.get(account.getAccount_id());
                         request.setAttribute("user", administrator);
+                        PatientService patientService = new PatientService();
+                        List<Patient> patients = patientService.getAll();
+                        ArrayList<Patient>arrlPatients = new ArrayList();
+                        
+                        for (int i = 0; i < patients.size();i++) {
+                            arrlPatients.add(patients.get(i));
+                        }
+                        
+                        request.setAttribute("arrlPatients",  arrlPatients);                        
                     } else if (account.getProfile().equals("PATIENT")) {
                         PatientService patientService = new PatientService();
                         Patient patient = patientService.get(account.getAccount_id());
@@ -48,6 +58,7 @@ public class ViewPatientServlet extends HttpServlet {
                 }   
             }        
         }
+        
         getServletContext().getRequestDispatcher("/WEB-INF/viewPatient.jsp").forward(request, response);
           return;
     }
