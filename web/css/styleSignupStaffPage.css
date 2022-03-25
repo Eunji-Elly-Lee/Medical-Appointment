@@ -13,6 +13,9 @@
     font-size: 35px;
     line-height: 265%;
 }
+.errormessage{
+    color: red;
+}
 .error_message {
     text-align: center;
 }
