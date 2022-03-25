@@ -139,7 +139,7 @@
                         <p>Please fill in the form below</p>
                     </div>
 
-                    <form class="signup_form" action="signup" method="post">
+                    <form class="signup_form" action="signup_staff" method="post">
                         <div class="signup_form_flex">                            
                             <div>
                                 <label>Username</label>
@@ -157,39 +157,32 @@
                             </div>
                             <div>
                                 <label>First name</label>
-                                <input type="text" name="signup_firstname" placeholder="First Name"  value="${patient.first_name}">
+                                <input type="text" name="signup_firstname" placeholder="First Name" value="${doctor.first_name}">
                                 <p class="errormessage">${firstErrorMessage}</p>
                             </div>
-
                             <div>
                                 <label>Last Name</label>
-                                <input type="text" name="signup_lastname" placeholder="Last Name" value="${patient.last_name}">
+                                <input type="text" name="signup_lastname" placeholder="Last Name" value="${doctor.last_name}">
                                 <p class="errormessage">${lastErrorMessage}</p>
                             </div>
-                            
-                       <%-- <div>
-                                <label>Health Care Number</label>
-                                <input type="text" name="signup_healthcare_num" placeholder="Health care number" value="${patient.healthcare_id}">
-                                <p class="errormessage">${healthErrorMessage}</p>
-                             </div>--%>
                             <div>
                                 <label>Phone number</label>
-                                <input type="tel" name="signup_phonenum" placeholder="Phone number" value="${patient.mobile_phone}">
+                                <input type="tel" name="signup_phonenum" placeholder="Phone number" value="${doctor.mobile_phone}">
                                 <p class="errormessage">${phoneErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Email</label>
-                                <input type="text" name="signup_email" placeholder="Email" value="${patient.email}">
+                                <input type="text" name="signup_email" placeholder="Email" value="${doctor.email}">
                                 <p class="errormessage">${emailErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Alternate Phone number</label>
-                                <input type="tel" name="signup_phonenum_alt" placeholder="Alternate phone number" value="${patient.alt_phone}">
+                                <input type="tel" name="signup_phonenum_alt" placeholder="Alternate phone number" value="${doctor.alt_phone}">
                                 <p class="errormessage">${phoneAltErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Birth date</label>
-                                <input type="date" name="signup_birth_date" placeholder="Birth date" value="${patient.birth_date}">
+                                <input type="date" name="signup_birth_date" placeholder="Birth date" value="${doctor.birth_date}">
                                 <p class="errormessage">${birthErrorMessage}</p>
                             </div>
                         </div>
@@ -242,13 +235,13 @@
                         <div class="signup_location">
                             <div class="signup_address_field">
                                 <label>Address</label>
-                                <input type="text" name="signup_address" placeholder="Street address" value="${patient.street_address}">
+                                <input type="text" name="signup_address" placeholder="Street address" value="${doctor.street_address}">
                                 <p class="errormessage">${addressErrorMessage}</p>
                                 <%--<input type="text" name="signup_address2" placeholder="Street address line 2">--%>
                             </div>
                             <div class="signup_city_state_province">
                                 <label>City</label>
-                                <input type="text" name="signup_city" placeholder="City" value="${patient.city}">
+                                <input type="text" name="signup_city" placeholder="City" value="${doctor.city}">
                                 <p class="errormessage">${cityErrorMessage}</p>
                                 <!--<input type="text" name="signup_state_province" placeholder="Province" value="">-->
                                 <label>Province</label>
@@ -272,7 +265,7 @@
                             </div>
                             <div class="signup_postal_code">
                                 <label>Postal Code</label>
-                                <input type="text" name="signup_postal" placeholder="T2X 2X2" value="${patient.postal_code}">
+                                <input type="text" name="signup_postal" placeholder="T2X 2X2" value="${doctor.postal_code}">
                                 <p class="errormessage">${postalErrorMessage}</p>
                             </div>
                         </div>
