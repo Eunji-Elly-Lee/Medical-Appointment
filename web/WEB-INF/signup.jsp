@@ -43,16 +43,41 @@
                             <div class="topnav_right">
                                 <nav>
                                     <ul>
-                                        <li><a href="welcome">Home</a></li>
-                                        <li>
-                                            <a class="drop-down-tab" href="">
-                                                Appointment <i class="bi bi-caret-down-fill"></i>
-                                            </a>
-                                            <ul class="subnav">
-                                                <li><a href="book_appointment">Book Appointment</a></li>
-                                                <li><a href="view_appointment">View Appointment</a></li>
-                                            </ul>
-                                        </li>
+                                        <c:choose>
+                                            <c:when test="${account.profile == 'ADMIN'}">
+                                                <li>
+                                                    <a class="drop-down-tab" href="">
+                                                        Appointment <i class="bi bi-caret-down-fill"></i>
+                                                    </a>
+                                                    <ul class="subnav">
+                                                        <li><a href="book_appointment">Book Appointment</a></li>
+                                                        <li><a href="view_appointment">View Appointment</a></li>
+                                                        <li><a href="confirm_appointment">Confirm Appointment</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a class="drop-down-tab" href="">
+                                                        Patient <i class="bi bi-caret-down-fill"></i>
+                                                    </a>
+                                                    <ul class="subnav">
+                                                        <li><a href="view_patient">View Patient</a></li>
+                                                        <li><a href="signup">Register Patient</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="view_staff">Staff</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li>
+                                                    <a class="drop-down-tab" href="">
+                                                        Appointment <i class="bi bi-caret-down-fill"></i>
+                                                    </a>
+                                                    <ul class="subnav">
+                                                        <li><a href="book_appointment">Book Appointment</a></li>
+                                                        <li><a href="view_appointment">View Appointment</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </ul>
                                 </nav>
                             </div>
@@ -100,16 +125,45 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="welcome">Home</a>
                                     </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Appointment
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                            <li class="ms-3 p-1"><a href="view_appointment">View Appointment</a></li>
-                                        </ul>
-                                    </li>
+                                    
+                                    <c:choose>
+                                        <c:when test="${account.profile == 'ADMIN'}">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                   Appointment
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="view_appointment">View Appointment</a></li>
+                                                  <li class="ms-3 p-1"><a href="confirm_appointment">Confirm Appointment</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                   Patient
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                  <li class="ms-3 p-1"><a href="view_patient">View Patient</a></li>
+                                                  <li class="ms-3 p-1"><a href="signup">Register Patient</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Appointment
+                                                </a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                    <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="view_appointment">View Appointment</a></li>
+                                                </ul>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </ul>
                             </div>
                         </div>
@@ -117,9 +171,19 @@
                 </div>
 
                 <div class="functional_links">
-                    <a href="login">Login</a>
-                    <a href="signup">Register</a>
-                    <a href="forgot">Find Account/Password</a>
+                    <c:choose>
+                        <c:when test="${account == null}">
+                            <a href="login">Login</a>
+                            <a href="signup">Register</a>
+                            <a href="forgot">Find Account/Password</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="profile">Manage Account</a>
+                            <a href="welcome?logout">Logout</a>
+                            <span>Hello, ${user.first_name} ${user.last_name}</span>
+                        </c:otherwise>
+                    </c:choose>
+                            
                     <div class="clear"></div>
                 </div>
             </div>     
