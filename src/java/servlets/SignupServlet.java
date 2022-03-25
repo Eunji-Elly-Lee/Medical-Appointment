@@ -21,6 +21,27 @@ public class SignupServlet extends HttpServlet {
         String user_name = (String) session.getAttribute("user_name");
         
         if (user_name != null && !user_name.equals("")) {
+            AccountService accountService = new AccountService();
+            
+            try {
+                Account account = accountService.get(user_name);
+                request.setAttribute("account", account);
+                    
+                if (account.getProfile().equals("ADMIN")) {
+                    AdministratorService administratorService = new AdministratorService();
+                    Administrator administrator = administratorService.get(account.getAccount_id());
+                    request.setAttribute("user", administrator);
+                    
+                    getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
+                    return;
+                } else {
+                    response.sendRedirect("welcome");
+                    return;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }  
+            
             response.sendRedirect("welcome");
             return;
         } else {
