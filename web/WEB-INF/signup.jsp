@@ -43,6 +43,8 @@
                             <div class="topnav_right">
                                 <nav>
                                     <ul>
+                                        <li><a href="welcome">Home</a></li>
+                                        
                                         <c:choose>
                                             <c:when test="${account.profile == 'ADMIN'}">
                                                 <li>
