@@ -16,6 +16,7 @@
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
                 crossorigin="anonymous">
         </script>
+        <script src="https://kit.fontawesome.com/ed40b1b6b3.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
               crossorigin="anonymous">
@@ -25,6 +26,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <style><%@ include file="/css/styleCommon.css" %></style>  
         <style><%@ include file="/css/styleSignupPage.css" %></style>      
+        <style><%@ include file="/css/styleFooter.css" %></style>  
         <title>Sign Up Page</title>
     </head>
 
@@ -223,16 +225,17 @@
                         <div class="signup_location">
                             <div class="signup_address_field">
                                 <label>Address</label>
-                                <br/>
                                 <input type="text" name="signup_address" placeholder="Street address" value="${patient.street_address}">
                                 <p class="errormessage">${addressErrorMessage}</p>
-                                <input type="text" name="signup_address2" placeholder="Street address line 2">
+                                <%--<input type="text" name="signup_address2" placeholder="Street address line 2">--%>
                             </div>
                             <div class="signup_city_state_province">
+                                <label>City</label>
                                 <input type="text" name="signup_city" placeholder="City" value="${patient.city}">
                                 <p class="errormessage">${cityErrorMessage}</p>
-                                <!--                                <input type="text" name="signup_state_province" placeholder="Province" value="">-->
-                                <select name="signup_state_province" placeholder="Province" >
+                                <!--<input type="text" name="signup_state_province" placeholder="Province" value="">-->
+                                <label>Province</label>
+                                <select class="province" name="signup_state_province" placeholder="Province" >
                                     <option value="" disabled selected>Province</option>
                                     <option value="Alberta">Alberta</option>
                                     <option value="British Columbia">British Columbia</option>
@@ -251,7 +254,8 @@
                                 <p class="errormessage">${provErrorMessage}</p>
                             </div>
                             <div class="signup_postal_code">
-                                <input type="text" name="signup_postal" placeholder="Postal code" value="${patient.postal_code}">
+                                <label>Postal Code</label>
+                                <input type="text" name="signup_postal" placeholder="T2X 2X2" value="${patient.postal_code}">
                                 <p class="errormessage">${postalErrorMessage}</p>
                             </div>
                         </div>
@@ -264,5 +268,32 @@
                 </div>
             </div>
         </div>
+                            
+        <!----------------Footer------------------------>
+        <div class="container"></div>
+        <footer>
+            <div class="top">
+                <div class="top-left">
+                    <img src="img/logo.png">
+                    <div class="details">
+                        <h3>About Us</h3>
+                        <p>Surpass health clinic prides itself on integrity, accountability, respect, excellence. 
+                            Surpass health clinic believes in helping people feel better through quality family 
+                            healthcare available to everyone. </p>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <h3>Contact Us</h3>
+                   <div class="links">
+                        <a href="#"><i class="fa-solid fa-square-phone"></i> +1 420 1245 6456</a>
+                        <a href="#"><i class="fa-solid fa-envelope"></i> SurpassClinic@gmail.com</a>
+                        <a href="#"><i class="fa-solid fa-location-dot"></i> 436 40th Street Calgary Alberta T2M 0G6</a>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <p> © 2022 The Surpass Clinic </p>
+            </div>
+        </footer>
     </body>
 </html>
