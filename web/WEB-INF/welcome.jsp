@@ -77,7 +77,7 @@
                                                     </a>
                                                     <ul class="subnav">
                                                         <li><a href="view_patient">View Patient</a></li>
-                                                        <li><a href="signup_patient">Register Patient</a></li>
+                                                        <li><a href="signup">Register Patient</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="view_staff">Staff</a></li>
@@ -189,7 +189,7 @@
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                   <li class="ms-3 p-1"><a href="view_patient">View Patient</a></li>
-                                                  <li class="ms-3 p-1"><a href="signup_patient">Register Patient</a></li>
+                                                  <li class="ms-3 p-1"><a href="signup">Register Patient</a></li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
