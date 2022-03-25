@@ -43,7 +43,8 @@ public class AppointmentDB {
         return appointments;
     }
     
-    public Appointment getByDoctorID(int doctor_id) throws Exception {
+    public List<Appointment> getByDoctorID(int doctor_id) throws Exception {
+        List<Appointment> appointments = new ArrayList<>();
         Appointment appointment = null;
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
@@ -56,7 +57,7 @@ public class AppointmentDB {
             ps.setInt(1, doctor_id);
             rs = ps.executeQuery();
             
-            if (rs.next()) {
+            while (rs.next()) {
                 String start_date_time = rs.getString(2);
                 int patient_id = rs.getInt(3);
                 int duration = rs.getInt(4); 
@@ -66,6 +67,7 @@ public class AppointmentDB {
                 
                 appointment =
                         new Appointment(doctor_id, start_date_time, patient_id, duration, type, reason, patient_attended);
+                appointments.add(appointment);
             }
         } finally {
             DBUtil.closeResultSet(rs);
@@ -73,10 +75,11 @@ public class AppointmentDB {
             cp.freeConnection(con);
         }
         
-        return appointment;
+        return appointments;
     }
     
-    public Appointment getByPatientID(int patient_id) throws Exception {
+    public List<Appointment> getByPatientID(int patient_id) throws Exception {
+        List<Appointment> appointments = new ArrayList<>();
         Appointment appointment = null;
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
@@ -89,7 +92,7 @@ public class AppointmentDB {
             ps.setInt(1, patient_id);
             rs = ps.executeQuery();
             
-            if (rs.next()) {
+            while (rs.next()) {
                 int doctor_id = rs.getInt(1);
                 String start_date_time = rs.getString(2);
                 int duration = rs.getInt(4); 
@@ -99,6 +102,7 @@ public class AppointmentDB {
                 
                 appointment =
                         new Appointment(doctor_id, start_date_time, patient_id, duration, type, reason, patient_attended);
+                appointments.add(appointment);
             }
         } finally {
             DBUtil.closeResultSet(rs);
@@ -106,7 +110,7 @@ public class AppointmentDB {
             cp.freeConnection(con);
         }
         
-        return appointment;
+        return appointments;
     }
     
     public Appointment getByDate(String start_date_time) throws Exception {
