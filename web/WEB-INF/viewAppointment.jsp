@@ -220,55 +220,43 @@
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
-                            <tr>                                
+                            <tr>
                                 <th scope="col" >FIRST NAME</th>
                                 <th scope="col">LAST NAME </th>
                                 <th scope="col">APPOINTMENT TYPE </th>
-                                <th scope="col">DATE </th>
-                                <th scope="col">TIME</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                                <%--<th scope="col">EDIT</th>
-                                <th scope="col">DELETE</th>--%>
+                                <th scope="col">DATE AND TIME</th>
+                                <th scope="col">EDIT</th>
+                                <th scope="col">DELETE</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            <tr class="table-secondary">                               
-                                <td>Marine</td>
-                                <td>Garegin</td>
-                                <td>Physical</td>
-                                <td>Mon, 29 Nov</td>
-                                <td>09:00 am</td>
-                                <td><input type="button" class="edit_appointemnt" value="edit"></td>
-                                <td><input type="button" class="delete_appointemnt" value="delete"></td></td>
-                            </tr>
-                           <tr>                               
-                                <td>Marine</td>
-                                <td>Garegin</td>
-                                <td>Physical</td>
-                                <td>Mon, 29 Nov</td>
-                                <td>09:00 am</td>
-                                <td><input type="button" class="edit_appointemnt" value="edit"></td>
-                                <td><input type="button" class="delete_appointemnt" value="delete"></td>
-                            </tr>
-                            <tr class="table-secondary">                               
-                                <td>Marine</td>
-                                <td>Garegin</td>
-                                <td>Physical</td>
-                                <td>Mon, 29 Nov</td>
-                                <td>09:00 am</td>
-                                <td><input type="button" class="edit_appointemnt" value="edit"></td>
-                                <td><input type="button" class="delete_appointemnt" value="delete"></td>
-                            </tr>
-                            <tr>                               
-                                <td>Marine</td>
-                                <td>Garegin</td>
-                                <td>Physical</td>
-                                <td>Mon, 29 Nov</td>
-                                <td>09:00 am</td>
-                                <td><input type="button" class="edit_appointemnt" value="edit"></td>
-                                <td><input type="button" class="delete_appointemnt" value="delete"></td>
-                            </tr>
+                            <c:choose>
+                                <c:when test="${account.profile == 'PATIENT'}">
+                                    <c:forEach items="${arrType}" var="type" varStatus="loop">
+                                        <tr class="table-secondary">
+                                            <td>${doctorFirstName}</td>
+                                            <td>${doctorLastName}</td>
+                                            <td>${type}</td>
+                                            <td>${arrTime.get(loop.index)}</td>
+                                            <td><input type="button" class="edit_appointemnt" value="edit"></td>
+                                            <td><input type="button" class="delete_appointemnt" value="delete"></td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:when>
+                                <c:when test="${account.profile == 'DOCTOR'}">
+                                    <c:forEach items="${arrlAppointments}" var="appointment" varStatus="loop">
+                                        <tr class="table-secondary">
+                                            <td>${arrlPatients.get(loop.index).getFirst_name()}</td>
+                                            <td>${arrlPatients.get(loop.index).getLast_name()}</td>
+                                            <td>${arrType.get(loop.index)}</td>
+                                            <td>${arrlAppointments.get(loop.index).getStart_date_time()}</td>
+                                            <td><input type="button" class="edit_appointemnt" value="edit"></td>
+                                            <td><input type="button" class="delete_appointemnt" value="delete"></td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:when>
+                            </c:choose>
                         </tbody>
                     </table>
                 </div>
