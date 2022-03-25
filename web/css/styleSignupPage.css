@@ -13,171 +13,58 @@
     font-size: 35px;
     line-height: 265%;
 }
-.signup{
-    width: 93.8%; 
-    margin: 0 auto;    
-    margin-top: 19px; 
+.errormessage{
+    color: red;
 }
-.form_heading{
-    border: 1px solid black;
+.error_message {
+    text-align: center;
+}    
+.signup{  
+    border-radius: 5px;
+    background-color: #F8F5F8;
+    padding: 20px;
+    box-shadow: 5px 5px 10px #000000;
+    box-sizing: content-box;
+    width: 50%;
+    margin: 60px auto;
 }
-.form_heading h1,
-.form_heading p{
-    display: block;
-    margin-left: 30px;
+input[type=submit]:hover,
+input[type=button]:hover{
+    background-color: #01886f;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
-.signup_form{
-    margin-bottom: 5px;
-    padding-left: 11%;
+input[type=submit]{
+    width: 20%;
+    font-size: 16px;
     background-color: #017C83;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border: 1px solid #DDD4DD;
-}
-.signup_form label{
     color: white;
+    padding: 10px 15px;
+    margin: 10px 16% 0px 16%;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
-.signup_form_flex{
+input[type=button]{
+    width: 20%;
+    font-size: 16px;
+    background-color: #017C83;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+input[type=text],
+input[type=password],
+input[type=tel],
+input[type=date],
+.province{
     width: 100%;
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-.signup_form_flex label{
-    display:block;
-    width: 85%;
-}
-.signup_form_flex input{
-    display:block;
-    width: 85%;
-    height:32px;
-    border-radius: 5px;
-    padding:2px 5px;
-}
-.signup_form_flex div{
-    flex:100%;
-    margin:5px 0px;
-}
-.signup_radio_btns{
-    display: flex;
-    justify-content: space-around;
-}
-.gender,
-.prefered_notification{
-    margin-top: 3px;
-    flex:50%;
-}
-.gender_option,
-.prefered_notification_option{
-    display: flex;
-}
-.gender_option label,
-.prefered_notification_option label{
-    margin-right: 15px;
-}
-.signup_location input{
-    display: block;
-    height: 32px;
-    border-radius: 5px;
-    padding:2px 5px;
-    margin-bottom: 20px;
-}
-.signup_address_field input,
-.signup_postal_code input{
-    width:85%;
-} 
-.signup_city_state_province{
-    display:flex;
-}
-.signup_city_state_province input:first-child{
-    margin-right: 0.5%;
-}
-.signup_city_state_province input{
-    width:40.6%;
-}
-.register_btn input{
-    height:40px;
-    width:30%;
-    margin: 2px 6.5% 15px;
-    background-color: white;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-}
-
-@media screen and (min-width: 576px) {
-    .signup{
-        width: 94.5%;
-    }
-    .gender_option label,.prefered_notification_option label{
-        margin-right: 20px;
-    }
-    .signup_city_state_province input:first-child{
-        margin-right: 0.7%;
-    }
-    .signup_city_state_province input{
-        width:40.9%;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .signup{
-        width: 75%;
-    }
-    .signup_form{
-        padding-left: 5%;
-        border: 1px solid black;
-        -moz-border-radius: 0px;
-        -webkit-border-radius: 0px;
-    }
-    .signup_form_flex div{
-        flex:50%;
-    }
-    .gender_option label,.prefered_notification_option label{
-        margin-right: 35px;
-    }    
-    .signup_address_field input ,.signup_postal_code input{
-        width:92%;
-    }
-    .signup_city_state_province input:first-child{
-        margin-right: 4.5%;
-    }
-    .signup_city_state_province input{
-        width:42.6%;
-    }
-    .register_btn input{
-        margin: 2px 8% 15px;
-    }
-}
-
-@media screen and (min-width: 992px) {
-    .gender_option label,.prefered_notification_option label{
-        margin-right: 40px;
-    }
-    .signup_city_state_province input:first-child{
-        margin-right: 4.8%;
-    }
-    .register_btn input{
-        width:26%;
-        margin: 2px 10% 15px;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    .signup_city_state_province input:first-child{
-        margin-right: 5.5%;
-    }
-    .register_btn input{
-        width:22%;
-        margin: 2px 12% 15px;
-    }
-}
-
-@media screen and (min-width: 1400px) {    
-    .signup{
-        width: 70%;
-    }
-    .register_btn input{
-        width:20%;
-        margin: 2px 14% 15px;
-    }
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
