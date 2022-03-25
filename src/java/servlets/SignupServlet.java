@@ -253,7 +253,7 @@ public class SignupServlet extends HttpServlet {
                 request.setAttribute("patient", patient);
         
                 Account account = new Account(0, usernameEntered, passEntered);
-                request.setAttribute("account", account);
+                request.setAttribute("new_account", account);
             } 
         } catch (Exception ex) {
             Logger.getLogger(SignupServlet.class.getName()).log(Level.SEVERE, null, ex);
