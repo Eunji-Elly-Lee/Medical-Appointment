@@ -1,5 +1,5 @@
 <%-- 
-    Document   : signupStaff
+    Document   : Signup staff page
     Created on : Mar 24, 2022
     Author     : Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
 --%>
