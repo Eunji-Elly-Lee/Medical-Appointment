@@ -16,6 +16,7 @@
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
                 crossorigin="anonymous">
         </script>
+        <script src="https://kit.fontawesome.com/ed40b1b6b3.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
                 crossorigin="anonymous">
@@ -25,6 +26,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <style><%@ include file="/css/styleCommon.css" %></style>  
         <style><%@ include file="/css/styleViewPatientPage.css" %></style>  
+        <style><%@ include file="/css/styleFooter.css" %></style>  
         <title>View Patient Page</title>
     </head>
 
@@ -195,13 +197,13 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">PATIENT ID <img src="img/triangle.png" width="15px" height="15px"></th>
-                                <th scope="col">FIRST NAME <img src="img/triangle.png" width="15px" height="15px"></th>
-                                <th scope="col">LAST NAME <img src="img/triangle.png" width="15px" height="15px"></th>
-                                <th scope="col">EMAIL <img src="img/triangle.png" width="15px" height="15px"></th>
-                                <th scope="col">MOBILE PHONE <img src="img/triangle.png" width="15px" height="15px"></th>
-                                <th scope="col">ALT PHONE <img src="img/triangle.png" width="15px" height="15px"></th>
-                                <th scope="col">MORE <img src="img/triangle.png" width="15px" height="15px"></th>
+                                <th scope="col">PATIENT ID </th>
+                                <th scope="col">FIRST NAME </th>
+                                <th scope="col">LAST NAME </th>
+                                <th scope="col">EMAIL </th>
+                                <th scope="col">MOBILE PHONE</th>
+                                <th scope="col">ALT PHONE </th>
+                                <%--<th scope="col">MORE </th>--%>
                             </tr>
                         </thead>
                         <tbody>
@@ -212,7 +214,7 @@
                                 <td>ekalinow...</td>
                                 <td>4294626495</td>
                                 <td>8417722206</td>
-                                <td> Details <img src="img/information.png" width="15px" height="15px"></td>
+                                <%--<td> Details <img src="img/information.png" width="15px" height="15px"></td>--%>
                             </tr>
                             <tr>
                                 <th>1</th>
@@ -221,7 +223,7 @@
                                 <td>ekalinow...</td>
                                 <td>4294626495</td>
                                 <td>8417722206</td>
-                                <td> Details <img src="img/information.png" width="15px" height="15px"></td>
+                                <%--<td> Details <img src="img/information.png" width="15px" height="15px"></td>--%>
                             </tr>
                             <tr class="table-secondary">
                                 <th>1</th>
@@ -230,7 +232,7 @@
                                 <td>ekalinow...</td>
                                 <td>4294626495</td>
                                 <td>8417722206</td>
-                                <td> Details <img src="img/information.png" width="15px" height="15px"></td>
+                                <%--<td> Details <img src="img/information.png" width="15px" height="15px"></td>--%>
                             </tr>
                             <tr>
                                 <th>1</th>
@@ -239,12 +241,39 @@
                                 <td>ekalinow...</td>
                                 <td>4294626495</td>
                                 <td>8417722206</td>
-                                <td> Details <img src="img/information.png" width="15px" height="15px"></td>
+                                <%--<td> Details <img src="img/information.png" width="15px" height="15px"></td>--%>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+                            
+        <!----------------Footer------------------------>
+        <div class="container"></div>
+        <footer>
+            <div class="top">
+                <div class="top-left">
+                    <img src="img/logo.png">
+                    <div class="details">
+                        <h3>About Us</h3>
+                        <p>Surpass health clinic prides itself on integrity, accountability, respect, excellence. 
+                            Surpass health clinic believes in helping people feel better through quality family 
+                            healthcare available to everyone. </p>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <h3>Contact Us</h3>
+                   <div class="links">
+                        <a href="#"><i class="fa-solid fa-square-phone"></i> +1 420 1245 6456</a>
+                        <a href="#"><i class="fa-solid fa-envelope"></i> SurpassClinic@gmail.com</a>
+                        <a href="#"><i class="fa-solid fa-location-dot"></i> 436 40th Street Calgary Alberta T2M 0G6</a>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <p> © 2022 The Surpass Clinic </p>
+            </div>
+        </footer>
     </body>
 </html>
