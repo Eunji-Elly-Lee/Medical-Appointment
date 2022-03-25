@@ -2,16 +2,9 @@
 
 h1{
     font-family: 'Open Sans', sans-serif; 
-}
-
-.login_field a,
-.login_field a:visited,
-.login_field a:active {
-    text-decoration: none;
-    color: #aaaaaa;
-}
+}  
 a:hover{
-    text-decoration: underline;
+    text-decoration: underline;   
     text-decoration: #01886f;
     text-decoration: blue;
 }
@@ -27,8 +20,7 @@ a:hover{
                 0 100px 80px rgba(0, 0, 0, 0.12);
     box-sizing: content-box;
     width: 20%;
-    margin: 20px auto;
-   
+    margin: 20px auto;   
 }
 input[type=submit]:hover{
     background-color: #01886f;
@@ -62,6 +54,7 @@ input[type=password]{
 .loginBox{
     margin-top: 9%;
 }
-.invalidMessage{
-    color:red;
+.forget_pwd,
+.sign_up{
+    color: blue;
 }
