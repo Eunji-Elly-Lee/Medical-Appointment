@@ -27,7 +27,7 @@
         <style><%@ include file="/css/styleCommon.css" %></style>  
         <style><%@ include file="/css/styleSignupStaffPage.css" %></style>  
         <style><%@ include file="/css/styleFooter.css" %></style>  
-        <title>Signup Staff</title>      
+        <title>Sign Up Staff Page</title>      
     </head>
     
     <body> 
