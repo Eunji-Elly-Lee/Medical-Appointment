@@ -16,6 +16,7 @@
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
                 crossorigin="anonymous">
         </script>
+        <script src="https://kit.fontawesome.com/ed40b1b6b3.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
                 crossorigin="anonymous">
@@ -25,6 +26,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <style><%@ include file="/css/styleCommon.css" %></style>  
         <style><%@ include file="/css/styleViewAppointmentPage.css" %></style>        
+        <style><%@ include file="/css/styleFooter.css" %></style>  
         <title>View Appointment Page</title>
     </head>
 
@@ -218,69 +220,86 @@
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
-                            <tr>
+                            <tr>                                
+                                <th scope="col" >FIRST NAME</th>
+                                <th scope="col">LAST NAME </th>
+                                <th scope="col">APPOINTMENT TYPE </th>
+                                <th scope="col">DATE </th>
+                                <th scope="col">TIME</th>
                                 <th scope="col"></th>
-                                <th scope="col" >FIRST NAME <img src="img/triangle.png" width="15px" height="15px"></th>
-                                <th scope="col">LAST NAME <img src="img/triangle.png" width="15px" height="15px"></th>
-                                <th scope="col">APPOINTMENT TYPE <img src="img/triangle.png" width="15px" height="15px"></th>
-                                <th scope="col">DATE <img src="img/triangle.png" width="15px" height="15px"></th>
-                                <th scope="col">TIME <img src="img/triangle.png" width="15px" height="15px"</th>
                                 <th scope="col"></th>
+                                <%--<th scope="col">EDIT</th>
+                                <th scope="col">DELETE</th>--%>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="table-secondary">
-                                <th><input type="radio"></th>
+                            <tr class="table-secondary">                               
                                 <td>Marine</td>
                                 <td>Garegin</td>
                                 <td>Physical</td>
                                 <td>Mon, 29 Nov</td>
                                 <td>09:00 am</td>
-                                <td>
-                                    <img src="img/fax.png" width="15px" height="15px">
-                                    <img src="img/information.png" width="15px" height="15px">
-                                </td>
+                                <td><input type="button" class="edit_appointemnt" value="edit"></td>
+                                <td><input type="button" class="delete_appointemnt" value="delete"></td></td>
                             </tr>
-                           <tr>
-                                <th><input type="radio"></th>
+                           <tr>                               
                                 <td>Marine</td>
                                 <td>Garegin</td>
                                 <td>Physical</td>
                                 <td>Mon, 29 Nov</td>
                                 <td>09:00 am</td>
-                                <td>
-                                    <img src="img/fax.png" width="15px" height="15px">
-                                    <img src="img/information.png" width="15px" height="15px">
-                                </td>
+                                <td><input type="button" class="edit_appointemnt" value="edit"></td>
+                                <td><input type="button" class="delete_appointemnt" value="delete"></td>
                             </tr>
-                            <tr class="table-secondary">
-                                <th><input type="radio"></th>
+                            <tr class="table-secondary">                               
                                 <td>Marine</td>
                                 <td>Garegin</td>
                                 <td>Physical</td>
                                 <td>Mon, 29 Nov</td>
                                 <td>09:00 am</td>
-                                <td>
-                                    <img src="img/fax.png" width="15px" height="15px">
-                                    <img src="img/information.png" width="15px" height="15px">
-                                </td>
+                                <td><input type="button" class="edit_appointemnt" value="edit"></td>
+                                <td><input type="button" class="delete_appointemnt" value="delete"></td>
                             </tr>
-                            <tr>
-                                <th><input type="radio"></th>
+                            <tr>                               
                                 <td>Marine</td>
                                 <td>Garegin</td>
                                 <td>Physical</td>
                                 <td>Mon, 29 Nov</td>
                                 <td>09:00 am</td>
-                                <td>
-                                    <img src="img/fax.png" width="15px" height="15px">
-                                    <img src="img/information.png" width="15px" height="15px">
-                                </td>
+                                <td><input type="button" class="edit_appointemnt" value="edit"></td>
+                                <td><input type="button" class="delete_appointemnt" value="delete"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+                            
+       <!----------------Footer------------------------>
+        <div class="container"></div>
+        <footer>
+            <div class="top">
+                <div class="top-left">
+                    <img src="img/logo.png">
+                    <div class="details">
+                        <h3>About Us</h3>
+                        <p>Surpass health clinic prides itself on integrity, accountability, respect, excellence. 
+                            Surpass health clinic believes in helping people feel better through quality family 
+                            healthcare available to everyone. </p>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <h3>Contact Us</h3>
+                   <div class="links">
+                        <a href="#"><i class="fa-solid fa-square-phone"></i> +1 420 1245 6456</a>
+                        <a href="#"><i class="fa-solid fa-envelope"></i> SurpassClinic@gmail.com</a>
+                        <a href="#"><i class="fa-solid fa-location-dot"></i> 436 40th Street Calgary Alberta T2M 0G6</a>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <p> © 2022 The Surpass Clinic </p>
+            </div>
+        </footer>
     </body>
 </html>
