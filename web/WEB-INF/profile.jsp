@@ -285,7 +285,7 @@
                             <div class="row align-items-fourth">
                                 <div class="col-md-5">
                                     <label for="email">Email</label> <br>
-                                    <input type="text" id="email" name="email" value="${user.email}">
+                                    <input type="email" id="email" name="email" value="${user.email}">
                                 </div>
                                 <div class="col-md-5">
                                     <label for="pref_contact_type">Preferred Notification</label><br>
