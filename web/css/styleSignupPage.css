@@ -59,6 +59,7 @@ input[type=button]{
 input[type=text],
 input[type=password],
 input[type=tel],
+input[type=email],
 input[type=date],
 .province{
     width: 100%;
