@@ -183,7 +183,7 @@
                                                         Annual Physical
                                                     </c:when>
                                                     <c:when test="${appointment.type == '3'}">
-                                                        Regular
+                                                        Urgent Care
                                                     </c:when>
                                                     <c:otherwise>
                                                         New Patient Meeting
@@ -192,12 +192,12 @@
                                             </td>
                                             <td>
                                                 <input type="checkbox" class="me-2" value="${appointment.patient_attended}" name="patient_attended"
-                                                        id="patient_attended" <c:if test="${patient_attended}">checked</c:if>>
+                                                        id="patient_attended" <c:if test="${appointment.patient_attended}">checked</c:if>>
                                             </td>
                                         </tr>
                                     </c:if>
                                     <c:if test="${(loop.count % 2) == 1}">
-                                        <tr class="table-secondary">
+                                        <tr>
                                             <th scope="row">${appointment.start_date_time.substring(0, 16)}</th>
                                             <td>${patients.get(loop.index)}</td>
                                             <td>${doctors.get(loop.index)}</td>
@@ -210,7 +210,7 @@
                                                         Annual Physical
                                                     </c:when>
                                                     <c:when test="${appointment.type == '3'}">
-                                                        Regular
+                                                        Urgent Care
                                                     </c:when>
                                                     <c:otherwise>
                                                         New Patient Meeting
@@ -219,7 +219,7 @@
                                             </td>
                                             <td>
                                                 <input type="checkbox" class="me-2" value="${appointment.patient_attended}" name="patient_attended"
-                                                        id="patient_attended" <c:if test="${patient_attended}">checked</c:if>>
+                                                        id="patient_attended" <c:if test="${appointment.patient_attended}">checked</c:if>>
                                             </td>
                                         </tr>
                                     </c:if>                                
