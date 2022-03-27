@@ -62,8 +62,7 @@ public class ProfileServlet extends HttpServlet {
         String regex_first_name = "[a-zA-Z\\-]{1,25}";
         String regex_last_name = "[a-zA-Z\\-]{1,25}";
         String regex_phone_number = "^(\\+\\d{1}\\s)?\\(?\\d{3}\\)?\\d{3}\\d{4}$";
-        String regex_email = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+↵\n"
-                + ")*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
+        String regex_email ="^[^\\s@]+@([^\\s@.,]+\\.)+[^\\s@.,]{2,}$";
         String regex_birth_date = "^\\d{4}\\)?[\\s.-]\\d{2}[\\s.-]\\d{2}$";
         String regex_city = "[a-zA-Z\\-]{1,25}";
         String regex_postal_code = "[A-Za-z]\\d[A-Za-z] ?\\d[A-Za-z]\\d";
