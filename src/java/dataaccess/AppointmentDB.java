@@ -49,7 +49,7 @@ public class AppointmentDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;        
-        String sql = "SELECT * FROM appointment WHERE start_date_time LIKE ?";
+        String sql = "SELECT * FROM appointment WHERE start_date_time LIKE ? ORDER BY 2";
         
         try {
             ps = con.prepareStatement(sql);
