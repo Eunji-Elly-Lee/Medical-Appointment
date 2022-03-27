@@ -155,11 +155,83 @@
                     </div>
                 </div>
 
-                <div class="schedule_wrapper">
-                    
-                    
+                <div class="table-responsive">
+                    <form action="confirm_appointment" method="POST">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">DATE AND TIME </th>
+                                    <th scope="col">PATIENT NAME </th>
+                                    <th scope="col">DOCTOR NAME </th>
+                                    <th scope="col">TYPE </th>
+                                    <th scope="col">PATIENT ATTENDED </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${appointments}" var="appointment" varStatus="loop">
+                                    <c:if test="${(loop.count % 2) == 0}">
+                                        <tr class="table-secondary">
+                                            <th scope="row">${appointment.start_date_time.substring(0, 16)}</th>
+                                            <td>${patients.get(loop.index)}</td>
+                                            <td>${doctors.get(loop.index)}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${appointment.type == '1'}">
+                                                        Regular
+                                                    </c:when>
+                                                    <c:when test="${appointment.type == '2'}">
+                                                        Annual Physical
+                                                    </c:when>
+                                                    <c:when test="${appointment.type == '3'}">
+                                                        Regular
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        New Patient Meeting
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" class="me-2" value="${appointment.patient_attended}" name="patient_attended"
+                                                        id="patient_attended" <c:if test="${patient_attended}">checked</c:if>>
+                                            </td>
+                                        </tr>
+                                    </c:if>
+                                    <c:if test="${(loop.count % 2) == 1}">
+                                        <tr class="table-secondary">
+                                            <th scope="row">${appointment.start_date_time.substring(0, 16)}</th>
+                                            <td>${patients.get(loop.index)}</td>
+                                            <td>${doctors.get(loop.index)}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${appointment.type == '1'}">
+                                                        Regular
+                                                    </c:when>
+                                                    <c:when test="${appointment.type == '2'}">
+                                                        Annual Physical
+                                                    </c:when>
+                                                    <c:when test="${appointment.type == '3'}">
+                                                        Regular
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        New Patient Meeting
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" class="me-2" value="${appointment.patient_attended}" name="patient_attended"
+                                                        id="patient_attended" <c:if test="${patient_attended}">checked</c:if>>
+                                            </td>
+                                        </tr>
+                                    </c:if>                                
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        
+                        <div>
+                            <input type="submit" class="submit_in_form" value="Submit">
+                        </div>
+                    </form>
                 </div>
-
             </div>
         </div>
         
