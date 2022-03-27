@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.*;
 import javax.servlet.ServletException;
@@ -61,7 +62,26 @@ public class ConfirmAppointmentServlet extends HttpServlet {
         
         try {
             AppointmentService appointmentService = new AppointmentService();
-            List<Appointment> appointments = appointmentService.getAllByDate(tomorrow);
+            List<Appointment> appointments = appointmentService.getAllByDate(tomorrow + "");
+            
+            if (appointments != null && !appointments.isEmpty()) {
+                DoctorService doctorService = new DoctorService();
+                PatientService patientService = new PatientService();
+                Doctor doctor = null;
+                Patient patient = null;
+                List<String> doctors = new ArrayList<>();
+                List<String> patients = new ArrayList<>();
+                
+                for (int i = 0; i < appointments.size(); i++) {
+                    doctor = doctorService.getByDoctorID(appointments.get(i).getDoctor_id());
+                    patient = patientService.getByPatientId(appointments.get(i).getPatient_id());
+                    doctors.add(doctor.getFirst_name() + " " + doctor.getLast_name());
+                    patients.add(patient.getFirst_name() + " " + patient.getLast_name());
+                }
+                
+                request.setAttribute("doctors", doctors);
+                request.setAttribute("patients", patients);
+            }
             
             request.setAttribute("appointments", appointments);
         } catch (Exception ex) {
