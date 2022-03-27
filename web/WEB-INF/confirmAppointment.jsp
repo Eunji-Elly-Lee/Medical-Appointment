@@ -227,7 +227,7 @@
                             </tbody>
                         </table>
                         
-                        <div>
+                        <div class="submit_wrapper">
                             <input type="submit" class="submit_in_form" value="Submit">
                         </div>
                     </form>
