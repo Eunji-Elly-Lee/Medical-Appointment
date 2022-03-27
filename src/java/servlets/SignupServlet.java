@@ -79,6 +79,7 @@ public class SignupServlet extends HttpServlet {
         boolean checkNumAlt = true;
         boolean checkHealthCare = true;
         boolean checkPass = true;
+        boolean insertInfo = true;
 
         for (char c : phoneEntered.toCharArray()) {
             if (phoneEntered.length() != 10) {
@@ -116,23 +117,21 @@ public class SignupServlet extends HttpServlet {
         String regexPostal = "^(?![DFIOQUWZ])[A-Z]{1}[0-9]{1}(?![DFIOQU])[A-Z]{1}[ ]{1}[0-9]{1}(?![DFIOQU])[A-Z]{1}[0-9]{1}$";
         boolean checkEmail = true;
         boolean checkPostal = true;
+        
         if (emailEntered == null || emailEntered.equals("")) {
             request.setAttribute("emailErrorMessage", "*Email is required");
-        } else {
-            Pattern p = Pattern.compile(regexEmail);
-            Matcher m = p.matcher(emailEntered);
-            checkEmail = m.matches();
-        }
+            insertInfo = false;
+        } 
 
         if (postalEntered == null || postalEntered.equals("")) {
             request.setAttribute("postalErrorMessage", "*Postal Code is required");
+             insertInfo = false;
         } else {
             Pattern p2 = Pattern.compile(regexPostal);
             Matcher m2 = p2.matcher(postalEntered);
             checkPostal = m2.matches();
         }
-
-        boolean insertInfo = true;
+        
         if (usernameEntered == null || usernameEntered.equals("")) {
             request.setAttribute("userNameErrorMessage", "*Username is required");
             insertInfo = false;
@@ -170,11 +169,6 @@ public class SignupServlet extends HttpServlet {
             insertInfo = false;
         } else if (checkPass == false) {
             request.setAttribute("passErrorMessage", "*Password does not match ");
-            insertInfo = false;
-        }
-
-        if (checkEmail == false) {
-            request.setAttribute("emailErrorMessage", "*Invalid Email ex. example@domain.com");
             insertInfo = false;
         }
 
