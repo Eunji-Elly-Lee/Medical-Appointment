@@ -242,7 +242,7 @@
                             </div>
                             <div>
                                 <label>Email</label>
-                                <input type="text" name="signup_email" placeholder="Email" value="${patient.email}">
+                                <input type="email" name="signup_email" placeholder="Email" value="${patient.email}">
                                 <p class="errormessage">${emailErrorMessage}</p>
                             </div>
                             <div>
@@ -259,7 +259,7 @@
 
                         <div class="signup_radio_btns">
                             <div class="gender">
-                                <label>Gender</label>
+                                <label>Sex</label>
                                 <div class="gender_option">
                                     <div> 
                                         <input type="radio" name="gender_radio" value="male">
