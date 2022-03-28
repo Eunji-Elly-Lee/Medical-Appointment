@@ -64,7 +64,7 @@
                 <div class="p-0 mobile_nav">
                     <div class="pe-2 mobile_header">
                         <a href="welcome"><img src="img/logo.png" width="105px"></a>
-                        <div><span class="hello">Hello ${loginUser.first_name}</span>
+                        <div><span class="hello">Hello ${user.first_name}</span>
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABmJLR0QA/wD/
                                 AP+gvaeTAAAD40lEQVRYhe2XS2xUZRTHf+eb6YOqpYD0laghdkAw7HwUEeLCqKnR0qJ1Y2JcWE3YqtWdS+
@@ -121,7 +121,7 @@
                 <div class="functional_links">
                     <a href="profile">Manage Account</a>
                     <a href="welcome?logout">Logout</a>
-                    <span>Hello, ${loginUser.first_name} ${loginUser.last_name}</span>
+                    <span>Hello, ${user.first_name} ${user.last_name}</span>
                     <div class="clear"></div>
                 </div>
             </div>
@@ -133,6 +133,11 @@
                     </div>
                 </div>
 
+                <div class="message">
+                    <br>
+                    <h3>${message}</h3>
+                </div>
+                    
                 <div class="signup">
                     <div class="form_heading">
                         <h1>Register</h1>
@@ -143,46 +148,46 @@
                         <div class="signup_form_flex">                            
                             <div>
                                 <label>Username</label>
-                                <input type="text" name="signup_username" placeholder="Username" value="${account.user_name}">
+                                <input type="text" name="signup_username" placeholder="Username" value="${signup_username}">
                                 <p class="errormessage">${userNameErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Password</label>
-                                <input type="password" name="signup_password" placeholder="Password" value="${account.password}">
+                                <input type="password" name="signup_password" placeholder="Password">
                             </div>
                             <div>
                                 <label>Re-enter Password</label>
-                                <input type="password" name="signup_re_enter_password" placeholder="Re-enter password" value="${account.password}">
+                                <input type="password" name="signup_re_enter_password" placeholder="Re-enter password">
                                 <p class="errormessage">${passErrorMessage}</p>
                             </div>
                             <div>
                                 <label>First name</label>
-                                <input type="text" name="signup_firstname" placeholder="First Name" value="${doctor.first_name}">
+                                <input type="text" name="signup_firstname" placeholder="First Name" value="${signup_firstname}">
                                 <p class="errormessage">${firstErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Last Name</label>
-                                <input type="text" name="signup_lastname" placeholder="Last Name" value="${doctor.last_name}">
+                                <input type="text" name="signup_lastname" placeholder="Last Name" value="${signup_lastname}">
                                 <p class="errormessage">${lastErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Phone number</label>
-                                <input type="tel" name="signup_phonenum" placeholder="Phone number" value="${doctor.mobile_phone}">
+                                <input type="tel" name="signup_phonenum" placeholder="Phone number" value="${signup_phonenum}">
                                 <p class="errormessage">${phoneErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Email</label>
-                                <input type="text" name="signup_email" placeholder="Email" value="${doctor.email}">
+                                <input type="text" name="signup_email" placeholder="Email" value="${signup_email}">
                                 <p class="errormessage">${emailErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Alternate Phone number</label>
-                                <input type="tel" name="signup_phonenum_alt" placeholder="Alternate phone number" value="${doctor.alt_phone}">
+                                <input type="tel" name="signup_phonenum_alt" placeholder="Alternate phone number" value="${signup_phonenum_alt}">
                                 <p class="errormessage">${phoneAltErrorMessage}</p>
                             </div>
                             <div>
                                 <label>Birth date</label>
-                                <input type="date" name="signup_birth_date" placeholder="Birth date" value="${doctor.birth_date}">
+                                <input type="date" name="signup_birth_date" placeholder="Birth date" value="${signup_birth_date}">
                                 <p class="errormessage">${birthErrorMessage}</p>
                             </div>
                         </div>
@@ -192,11 +197,13 @@
                                 <label>Staff Type</label>
                                 <div class="staff_type_option">
                                     <div> 
-                                        <input type="radio" name="staff_type_radio" value="DOCTOR">
+                                        <input type="radio" name="staff_type_radio" value="DOCTOR" 
+                                               <c:if test="${staff_type_radio == 'DOCTOR'}">checked</c:if>>
                                         <label>Doctor</label>
                                     </div>
                                     <div>
-                                        <input type="radio" name="staff_type_radio" value="ADMIN">
+                                        <input type="radio" name="staff_type_radio" value="ADMIN"
+                                               <c:if test="${staff_type_radio == 'ADMIN'}">checked</c:if>>
                                         <label>Admin</label>
                                     </div>
                                     <p class="errormessage">${typeErrorMessage}</p>
@@ -206,11 +213,13 @@
                                 <label>Gender</label>
                                 <div class="gender_option">
                                     <div> 
-                                        <input type="radio" name="gender_radio" value="male">
+                                        <input type="radio" name="gender_radio" value="male"
+                                               <c:if test="${gender_radio == 'male'}">checked</c:if>>
                                         <label>Male</label>
                                     </div>
                                     <div>
-                                        <input type="radio" name="gender_radio" value="female">
+                                        <input type="radio" name="gender_radio" value="female"
+                                               <c:if test="${gender_radio == 'female'}">checked</c:if>>
                                         <label>Female</label>
                                     </div>
                                     <p class="errormessage">${genderErrorMessage}</p>
@@ -220,11 +229,13 @@
                                 <label>Preferred Notification</label>
                                 <div class="prefered_notification_option">
                                     <div> 
-                                        <input type="radio" name="prefered_notification_radio" value="MOBILE_PHONE">
+                                        <input type="radio" name="prefered_notification_radio" value="MOBILE_PHONE"
+                                               <c:if test="${prefered_notification_radio == 'MOBILE_PHONE'}">checked</c:if>>
                                         <label>Phone</label>
                                     </div>
                                     <div>
-                                        <input type="radio" name="prefered_notification_radio" value="EMAIL">
+                                        <input type="radio" name="prefered_notification_radio" value="EMAIL"
+                                               <c:if test="${prefered_notification_radio == 'EMAIL'}">checked</c:if>>
                                         <label>Email</label>
                                     </div>
                                     <p class="errormessage">${notiErrorMessage}</p>
@@ -235,37 +246,68 @@
                         <div class="signup_location">
                             <div class="signup_address_field">
                                 <label>Address</label>
-                                <input type="text" name="signup_address" placeholder="Street address" value="${doctor.street_address}">
+                                <input type="text" name="signup_address" placeholder="Street address" value="${signup_address}">
                                 <p class="errormessage">${addressErrorMessage}</p>
                                 <%--<input type="text" name="signup_address2" placeholder="Street address line 2">--%>
                             </div>
                             <div class="signup_city_state_province">
                                 <label>City</label>
-                                <input type="text" name="signup_city" placeholder="City" value="${doctor.city}">
+                                <input type="text" name="signup_city" placeholder="City" value="${signup_city}">
                                 <p class="errormessage">${cityErrorMessage}</p>
+                                
                                 <!--<input type="text" name="signup_state_province" placeholder="Province" value="">-->
                                 <label>Province</label>
                                 <select class="province" name="signup_state_province" placeholder="Province" >
                                     <option value="" disabled selected>Province</option>
-                                    <option value="Alberta">Alberta</option>
-                                    <option value="British Columbia">British Columbia</option>
-                                    <option value="Manitoba">Manitoba</option>
-                                    <option value="New Brunswick">New Brunswick</option>
-                                    <option value="Newfoundland and Labrador">Newfoundland</option>
-                                    <option value="Nova Scotia">Nova Scotia</option>
-                                    <option value="Ontario">Ontario</option>
-                                    <option value="Prince Edward Island">Prince Edward Island</option>
-                                    <option value="Quebec">Quebec</option>
-                                    <option value="Saskatchewan">Saskatchewan</option>
-                                    <option value="Northwest Territories">Northwest Territories</option>
-                                    <option value="Nunavut">Nunavut</option>
-                                    <option value="Yukon">Yukon</option>
+                                    <option value="Alberta" <c:if test="${signup_state_province == 'Alberta'}">selected</c:if>>
+                                        Alberta
+                                    </option>
+                                    <option value="British Columbia"
+                                            <c:if test="${signup_state_province == 'British Columbia'}">selected</c:if>>
+                                        British Columbia
+                                    </option>
+                                    <option value="Manitoba" <c:if test="${signup_state_province == 'Manitoba'}">selected</c:if>>
+                                        Manitoba
+                                    </option>
+                                    <option value="New Brunswick" <c:if test="${signup_state_province == 'New Brunswick'}">selected</c:if>>
+                                        New Brunswick
+                                    </option>
+                                    <option value="Newfoundland and Labrador"
+                                            <c:if test="${signup_state_province == 'Newfoundland and Labrador'}">selected</c:if>>
+                                        Newfoundland
+                                    </option>
+                                    <option value="Nova Scotia" <c:if test="${signup_state_province == 'Nova Scotia'}">selected</c:if>>
+                                        Nova Scotia
+                                    </option>
+                                    <option value="Ontario" <c:if test="${signup_state_province == 'Ontario'}">selected</c:if>>
+                                        Ontario
+                                    </option>
+                                    <option value="Prince Edward Island"
+                                            <c:if test="${signup_state_province == 'Prince Edward Island'}">selected</c:if>>
+                                        Prince Edward Island
+                                    </option>
+                                    <option value="Quebec" <c:if test="${signup_state_province == 'Quebec'}">selected</c:if>>
+                                        Quebec
+                                    </option>
+                                    <option value="Saskatchewan" <c:if test="${signup_state_province == 'Saskatchewan'}">selected</c:if>>
+                                        Saskatchewan
+                                    </option>
+                                    <option value="Northwest Territories"
+                                            <c:if test="${signup_state_province == 'Northwest Territories'}">selected</c:if>>
+                                        Northwest Territories
+                                    </option>
+                                    <option value="Nunavut" <c:if test="${signup_state_province == 'Nunavut'}">selected</c:if>>
+                                        Nunavut
+                                    </option>
+                                    <option value="Yukon" <c:if test="${signup_state_province == 'Yukon'}">selected</c:if>>
+                                        Yukon
+                                    </option>
                                 </select>
                                 <p class="errormessage">${provErrorMessage}</p>
                             </div>
                             <div class="signup_postal_code">
                                 <label>Postal Code</label>
-                                <input type="text" name="signup_postal" placeholder="T2X 2X2" value="${doctor.postal_code}">
+                                <input type="text" name="signup_postal" placeholder="T2X 2X2" value="${signup_postal}">
                                 <p class="errormessage">${postalErrorMessage}</p>
                             </div>
                         </div>
