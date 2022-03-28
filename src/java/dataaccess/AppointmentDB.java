@@ -219,8 +219,9 @@ public class AppointmentDB {
             ps.setInt(3, appointment.getPatient_id());
             ps.setInt(4, appointment.getDuration());  
             ps.setInt(5, appointment.getType());
-            ps.setBoolean(6, appointment.getPatient_attended());
-            ps.setInt(7, appointment.getDoctor_id());
+            ps.setString(6, appointment.getReason());
+            ps.setBoolean(7, appointment.getPatient_attended());
+            ps.setInt(8, appointment.getDoctor_id());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
