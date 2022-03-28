@@ -394,6 +394,7 @@
                                 <th scope="col">MOBILE PHONE </th>
                                 <th scope="col">PREFERRED NOTIFICATION </th>
                                 <th scope="col">EDIT</th>
+                                <th scope="col">DELETE</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -414,6 +415,13 @@
                                                 </button>
                                             </form>
                                         </td>
+                                        <td>
+                                            <form action="view_staff" method="POST">
+                                                <input type="hidden" name="account_id" value=${admins.account_id}>
+                                                <button type="submit" value="delete" class="btn btn-danger">Delete                                                    <input type="hidden" name ="action" value="delete">
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 </c:if>
                                 <c:if test="${(status.count % 2) == 1}">
@@ -429,6 +437,14 @@
                                                 <input type="hidden" name="account_id" value=${admins.account_id}>
                                                 <button type="submit" value="edit" class="btn btn-secondary">Edit
                                                     <input type="hidden" name ="action" value="edit">
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="view_staff" method="POST">
+                                                <input type="hidden" name="account_id" value=${admins.account_id}>
+                                                <button type="submit" value="delete" class="btn btn-danger">Delete
+                                                    <input type="hidden" name ="action" value="delete">
                                                 </button>
                                             </form>
                                         </td>
@@ -450,6 +466,7 @@
                                 <th scope="col">MOBILE PHONE </th>
                                 <th scope="col">PREFERRED NOTIFICATION </th>
                                 <th scope="col">EDIT</th>
+                                <th scope="col">DELETE</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -470,6 +487,14 @@
                                                 </button>
                                             </form>
                                         </td>
+                                        <td>
+                                            <form action="view_staff" method="POST">
+                                                <input type="hidden" name="account_id" value=${doctors.account_id}>
+                                                <button type="submit" value="delete" class="btn btn-danger">Delete
+                                                    <input type="hidden" name ="action" value="delete">
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 </c:if>
                                 <c:if test="${(status.count % 2) == 1}">
@@ -485,6 +510,14 @@
                                                 <input type="hidden" name="account_id" value=${doctors.account_id}>
                                                 <button type="submit" value="edit" class="btn btn-secondary">Edit
                                                     <input type="hidden" name ="action" value="edit">
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="view_staff" method="POST">
+                                                <input type="hidden" name="account_id" value=${doctors.account_id}>
+                                                <button type="submit" value="delete" class="btn btn-danger">Delete
+                                                    <input type="hidden" name ="action" value="delete">
                                                 </button>
                                             </form>
                                         </td>
