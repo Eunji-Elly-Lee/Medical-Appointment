@@ -30,6 +30,7 @@ public class ProfileServlet extends HttpServlet {
             session.setAttribute("selectedUser", null);
         } else {
             displayInformation(request, user_name);
+            session.setAttribute("editCheck", null);
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
