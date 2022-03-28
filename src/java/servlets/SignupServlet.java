@@ -70,7 +70,6 @@ public class SignupServlet extends HttpServlet {
         String genderEntered = request.getParameter("gender_radio");
 
         String streetEntered = request.getParameter("signup_address");
-        String street2Entered = request.getParameter("signup_address2");
         String provinceEntered = request.getParameter("signup_state_province");
         String cityEntered = request.getParameter("signup_city");
         String postalEntered = request.getParameter("signup_postal");
@@ -121,11 +120,15 @@ public class SignupServlet extends HttpServlet {
         if (emailEntered == null || emailEntered.equals("")) {
             request.setAttribute("emailErrorMessage", "*Email is required");
             insertInfo = false;
-        } 
+        } else {
+            Pattern p = Pattern.compile(regexEmail);
+            Matcher m = p.matcher(emailEntered);
+            checkEmail = m.matches();
+        }
 
         if (postalEntered == null || postalEntered.equals("")) {
             request.setAttribute("postalErrorMessage", "*Postal Code is required");
-             insertInfo = false;
+            insertInfo = false;
         } else {
             Pattern p2 = Pattern.compile(regexPostal);
             Matcher m2 = p2.matcher(postalEntered);
@@ -172,24 +175,16 @@ public class SignupServlet extends HttpServlet {
             insertInfo = false;
         }
 
+        if (checkEmail == false) {
+            request.setAttribute("emailErrorMessage", "*Invalid Email ex. example@domain.com");
+            insertInfo = false;
+        }
+        
         if (checkPostal == false) {
             request.setAttribute("postalErrorMessage", "*Invalid Postal Code ex. T2L 4T7");
             insertInfo = false;
         }
 
-//             String firstEntered = request.getParameter("signup_firstname");
-//        String lastEntered = request.getParameter("signup_lastname");
-//
-//        String emailEntered = request.getParameter("signup_email");
-//        String birthEntered = request.getParameter("signup_birth_date");
-//        String prefferedEntered = request.getParameter("prefered_notification_radio");
-//        String genderEntered = request.getParameter("gender_radio");
-//
-//        String streetEntered = request.getParameter("signup_address");
-//        String street2Entered = request.getParameter("signup_address2");
-//        String provinceEntered = request.getParameter("signup_state_province");
-//        String cityEntered = request.getParameter("signup_city");
-//        String postalEntered = request.getParameter("signup_postal");
         if (firstEntered == null || firstEntered.equals("")) {
             request.setAttribute("firstErrorMessage", "*First Name is required");
             insertInfo = false;
@@ -230,9 +225,18 @@ public class SignupServlet extends HttpServlet {
             insertInfo = false;
         }
 
+        HttpSession session = request.getSession();
+        String user_name = (String) session.getAttribute("user_name");
         PatientService ps = new PatientService();
+        AdministratorService ads = new AdministratorService();
         AccountService as = new AccountService();
-        try {
+        
+        try {            
+            Account account = as.get(user_name);
+            Administrator administrator = ads.get(account.getAccount_id());
+            request.setAttribute("account", account);
+            request.setAttribute("user", administrator);
+            
             if (insertInfo == true) {
                 as.insert(0, usernameEntered, passEntered, "PATIENT");
                 Account newAccount = as.getAll().get(as.getAll().size()-1);
@@ -241,13 +245,13 @@ public class SignupServlet extends HttpServlet {
                         phoneAltEntered, prefferedEntered, 1234567, newAccount.getAccount_id(), genderEntered,
                         birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
             } else {
-             Patient patient = new Patient(0,  healthCareNumber,  firstEntered, lastEntered ,  emailEntered,
+                Patient patient = new Patient(0,  healthCareNumber,  firstEntered, lastEntered ,  emailEntered,
                      phoneEntered , phoneAltEntered, prefferedEntered, 1234567, 4618, genderEntered,
                      birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
                 request.setAttribute("patient", patient);
         
-                Account account = new Account(0, usernameEntered, passEntered);
-                request.setAttribute("new_account", account);
+                Account new_account = new Account(0, usernameEntered, passEntered);
+                request.setAttribute("new_account", new_account);
             } 
         } catch (Exception ex) {
             Logger.getLogger(SignupServlet.class.getName()).log(Level.SEVERE, null, ex);
