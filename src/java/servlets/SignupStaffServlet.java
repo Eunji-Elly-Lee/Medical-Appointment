@@ -244,6 +244,22 @@ public class SignupStaffServlet extends HttpServlet {
                             phoneAltEntered, prefferedEntered, newAccount.getAccount_id(), genderEntered,
                             birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
                 } 
+                
+                request.setAttribute("signup_username", "");
+                request.setAttribute("signup_firstname", "");
+                request.setAttribute("signup_lastname", "");
+                request.setAttribute("signup_phonenum", "");
+                request.setAttribute("signup_email", "");
+                request.setAttribute("signup_phonenum_alt", "");
+                request.setAttribute("signup_birth_date", ""); 
+                request.setAttribute("staff_type_radio", "");
+                request.setAttribute("gender_radio", "");
+                request.setAttribute("prefered_notification_radio", "");
+                request.setAttribute("signup_address", "");   
+                request.setAttribute("signup_city", ""); 
+                request.setAttribute("signup_state_province", ""); 
+                request.setAttribute("signup_postal", "");
+                request.setAttribute("message", "New staff has beed updated successfully.");   
             }
         } catch (Exception ex) {
             Logger.getLogger(SignupServlet.class.getName()).log(Level.SEVERE, null, ex);
