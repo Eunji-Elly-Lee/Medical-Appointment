@@ -48,6 +48,10 @@
         <servlet-name>SignupStaffServlet</servlet-name>
         <servlet-class>servlets.SignupStaffServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BackupServlet</servlet-name>
+        <servlet-class>servlets.BackupServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WelcomeServlet</servlet-name>
         <url-pattern>/welcome</url-pattern>
@@ -96,6 +100,10 @@
         <servlet-name>SignupStaffServlet</servlet-name>
         <url-pattern>/signup_staff</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BackupServlet</servlet-name>
+        <url-pattern>/backup</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -107,11 +115,11 @@
     <env-entry>
         <env-entry-name>webmail-username</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value></env-entry-value>
+        <env-entry-value/>
     </env-entry>
     <env-entry>
         <env-entry-name>webmail-password</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value></env-entry-value>
+        <env-entry-value/>
     </env-entry>
 </web-app>
