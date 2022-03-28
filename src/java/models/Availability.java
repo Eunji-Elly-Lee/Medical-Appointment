@@ -8,8 +8,13 @@ public class Availability {
     private int doctor_id;
     private String start_date_time;
     private int duration;
-    
+  
     public Availability() {
+    }
+    
+    public Availability(int doctor_id, String start_date_time) {
+        this.doctor_id = doctor_id; 
+        this.start_date_time = start_date_time;
     }
     
     public Availability(int doctor_id, String start_date_time, int duration) {
@@ -17,7 +22,7 @@ public class Availability {
         this.start_date_time = start_date_time; 
         this.duration = duration; 
     }
-    
+   
     public int getDoctor_id(){
         return doctor_id;
     }  
