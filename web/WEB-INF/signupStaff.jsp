@@ -64,7 +64,7 @@
                 <div class="p-0 mobile_nav">
                     <div class="pe-2 mobile_header">
                         <a href="welcome"><img src="img/logo.png" width="105px"></a>
-                        <div><span class="hello">Hello ${user.first_name}</span>
+                        <div><span class="hello">Hello ${loginUser.first_name}</span>
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABmJLR0QA/wD/
                                 AP+gvaeTAAAD40lEQVRYhe2XS2xUZRTHf+eb6YOqpYD0laghdkAw7HwUEeLCqKnR0qJ1Y2JcWE3YqtWdS+
@@ -121,7 +121,7 @@
                 <div class="functional_links">
                     <a href="profile">Manage Account</a>
                     <a href="welcome?logout">Logout</a>
-                    <span>Hello, ${user.first_name} ${user.last_name}</span>
+                    <span>Hello, ${loginUser.first_name} ${loginUser.last_name}</span>
                     <div class="clear"></div>
                 </div>
             </div>
