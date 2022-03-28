@@ -209,19 +209,17 @@ public class AppointmentDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE appointment SET doctor_id = ?, start_date_time = ?, " +
+        String sql = "UPDATE appointment SET " +
                 "patient_id = ?, duration = ?, type = ?, reason = ?, patient_attended = ? WHERE doctor_id = ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, appointment.getDoctor_id());
-            ps.setString(2, appointment.getStart_date_time());
-            ps.setInt(3, appointment.getPatient_id());
-            ps.setInt(4, appointment.getDuration());  
-            ps.setInt(5, appointment.getType());
-            ps.setString(6, appointment.getReason());
-            ps.setBoolean(7, appointment.getPatient_attended());
-            ps.setInt(8, appointment.getDoctor_id());
+            ps.setInt(1, appointment.getPatient_id());
+            ps.setInt(2, appointment.getDuration());  
+            ps.setInt(3, appointment.getType());
+            ps.setString(4, appointment.getReason());
+            ps.setBoolean(5, appointment.getPatient_attended());
+            ps.setInt(6, appointment.getDoctor_id());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
