@@ -231,11 +231,13 @@ public class SignupServlet extends HttpServlet {
         AdministratorService ads = new AdministratorService();
         AccountService as = new AccountService();
         
-        try {            
-            Account account = as.get(user_name);
-            Administrator administrator = ads.get(account.getAccount_id());
-            request.setAttribute("account", account);
-            request.setAttribute("user", administrator);
+        try {
+            if (user_name != null && !user_name.equals("")) {
+                Account account = as.get(user_name);
+                Administrator administrator = ads.get(account.getAccount_id());
+                request.setAttribute("account", account);
+                request.setAttribute("user", administrator);
+            }            
             
             if (insertInfo == true) {
                 as.insert(0, usernameEntered, passEntered, "PATIENT");
@@ -254,10 +256,11 @@ public class SignupServlet extends HttpServlet {
         
                 Account new_account = new Account(0, usernameEntered, passEntered);
                 request.setAttribute("new_account", new_account);
+                
+                request.setAttribute("message", "Please fill out all the required information.");
             } 
         } catch (Exception ex) {
-            Logger.getLogger(SignupServlet.class.getName()).log(Level.SEVERE, null, ex);
-            request.setAttribute("message", "error");
+            Logger.getLogger(SignupServlet.class.getName()).log(Level.SEVERE, null, ex);            
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
