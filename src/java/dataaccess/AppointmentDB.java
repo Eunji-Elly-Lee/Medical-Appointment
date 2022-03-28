@@ -209,8 +209,8 @@ public class AppointmentDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE appointment SET " +
-                "patient_id = ?, duration = ?, type = ?, reason = ?, patient_attended = ? WHERE doctor_id = ?";
+        String sql = "UPDATE appointment SET patient_id = ?, duration = ?, type = ?, reason = ?, patient_attended = ?"
+                + " WHERE doctor_id = ? AND start_date_time = ?";
         
         try {
             ps = con.prepareStatement(sql);
@@ -220,6 +220,7 @@ public class AppointmentDB {
             ps.setString(4, appointment.getReason());
             ps.setBoolean(5, appointment.getPatient_attended());
             ps.setInt(6, appointment.getDoctor_id());
+            ps.setString(7, appointment.getStart_date_time());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
