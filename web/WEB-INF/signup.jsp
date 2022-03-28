@@ -197,6 +197,11 @@
                     </div>
                 </div>
 
+                <div class="message">
+                    <br>
+                    <h3>${message}</h3>
+                </div>
+                
                 <div class="signup">
                     <div class="form_heading">
                         <h1>Register</h1>
@@ -262,11 +267,13 @@
                                 <label>Sex</label>
                                 <div class="gender_option">
                                     <div> 
-                                        <input type="radio" name="gender_radio" value="male">
+                                        <input type="radio" name="gender_radio" value="male"
+                                               <c:if test="${patient.gender == 'male'}">checked</c:if>>
                                         <label>Male</label>
                                     </div>
                                     <div>
-                                        <input type="radio" name="gender_radio" value="female">
+                                        <input type="radio" name="gender_radio" value="female"
+                                                <c:if test="${patient.gender == 'female'}">checked</c:if>>
                                         <label>Female</label>
                                     </div>
                                     <p class="errormessage">${genderErrorMessage}</p>
@@ -276,11 +283,13 @@
                                 <label>Preferred Notification</label>
                                 <div class="prefered_notification_option">
                                     <div> 
-                                        <input type="radio" name="prefered_notification_radio" value="MOBILE_PHONE">
+                                        <input type="radio" name="prefered_notification_radio" value="MOBILE_PHONE"
+                                               <c:if test="${patient.pref_contact_type == 'MOBILE_PHONE'}">checked</c:if>>
                                         <label>Phone</label>
                                     </div>
                                     <div>
-                                        <input type="radio" name="prefered_notification_radio" value="EMAIL">
+                                        <input type="radio" name="prefered_notification_radio" value="EMAIL"
+                                               <c:if test="${patient.pref_contact_type == 'EMAIL'}">checked</c:if>>
                                         <label>Email</label>
                                     </div>
                                     <p class="errormessage">${notiErrorMessage}</p>
@@ -303,19 +312,49 @@
                                 <label>Province</label>
                                 <select class="province" name="signup_state_province" placeholder="Province" >
                                     <option value="" disabled selected>Province</option>
-                                    <option value="Alberta">Alberta</option>
-                                    <option value="British Columbia">British Columbia</option>
-                                    <option value="Manitoba">Manitoba</option>
-                                    <option value="New Brunswick">New Brunswick</option>
-                                    <option value="Newfoundland and Labrador">Newfoundland</option>
-                                    <option value="Nova Scotia">Nova Scotia</option>
-                                    <option value="Ontario">Ontario</option>
-                                    <option value="Prince Edward Island">Prince Edward Island</option>
-                                    <option value="Quebec">Quebec</option>
-                                    <option value="Saskatchewan">Saskatchewan</option>
-                                    <option value="Northwest Territories">Northwest Territories</option>
-                                    <option value="Nunavut">Nunavut</option>
-                                    <option value="Yukon">Yukon</option>
+                                    <option value="Alberta" <c:if test="${patient.province == 'Alberta'}">selected</c:if>>
+                                        Alberta
+                                    </option>
+                                    <option value="British Columbia"
+                                            <c:if test="${patient.province == 'British Columbia'}">selected</c:if>>
+                                        British Columbia
+                                    </option>
+                                    <option value="Manitoba" <c:if test="${patient.province == 'Manitoba'}">selected</c:if>>
+                                        Manitoba
+                                    </option>
+                                    <option value="New Brunswick" <c:if test="${patient.province == 'New Brunswick'}">selected</c:if>>
+                                        New Brunswick
+                                    </option>
+                                    <option value="Newfoundland and Labrador"
+                                            <c:if test="${patient.province == 'Newfoundland and Labrador'}">selected</c:if>>
+                                        Newfoundland
+                                    </option>
+                                    <option value="Nova Scotia" <c:if test="${patient.province == 'Nova Scotia'}">selected</c:if>>
+                                        Nova Scotia
+                                    </option>
+                                    <option value="Ontario" <c:if test="${patient.province == 'Ontario'}">selected</c:if>>
+                                        Ontario
+                                    </option>
+                                    <option value="Prince Edward Island"
+                                            <c:if test="${patient.province == 'Prince Edward Island'}">selected</c:if>>
+                                        Prince Edward Island
+                                    </option>
+                                    <option value="Quebec" <c:if test="${patient.province == 'Quebec'}">selected</c:if>>
+                                        Quebec
+                                    </option>
+                                    <option value="Saskatchewan" <c:if test="${patient.province == 'Saskatchewan'}">selected</c:if>>
+                                        Saskatchewan
+                                    </option>
+                                    <option value="Northwest Territories"
+                                            <c:if test="${patient.province == 'Northwest Territories'}">selected</c:if>>
+                                        Northwest Territories
+                                    </option>
+                                    <option value="Nunavut" <c:if test="${patient.province == 'Nunavut'}">selected</c:if>>
+                                        Nunavut
+                                    </option>
+                                    <option value="Yukon" <c:if test="${patient.province == 'Yukon'}">selected</c:if>>
+                                        Yukon
+                                    </option>
                                 </select>
                                 <p class="errormessage">${provErrorMessage}</p>
                             </div>
