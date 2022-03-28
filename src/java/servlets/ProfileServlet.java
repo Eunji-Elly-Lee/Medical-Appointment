@@ -107,7 +107,9 @@ public class ProfileServlet extends HttpServlet {
                 || province == null || province.equals("")) {
             displayInformation(request, user_name);
             request.setAttribute("message", "Please fill out all the required information.");
-            //end
+            
+            getServletContext().getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
+            return;
         } else {
             AccountService accountService = new AccountService();
 
