@@ -191,7 +191,7 @@
                                                 </c:choose>
                                             </td>
                                             <td>
-                                                <input type="checkbox" class="me-2" value="${appointment.patient_attended}" name="patient_attended"
+                                                <input type="checkbox" class="me-2" value="${loop.index}" name="patient_attended"
                                                         id="patient_attended" <c:if test="${appointment.patient_attended}">checked</c:if>>
                                             </td>
                                         </tr>
@@ -218,7 +218,7 @@
                                                 </c:choose>
                                             </td>
                                             <td>
-                                                <input type="checkbox" class="me-2" value="${appointment.patient_attended}" name="patient_attended"
+                                                <input type="checkbox" class="me-2" value="${loop.index}" name="patient_attended"
                                                         id="patient_attended" <c:if test="${appointment.patient_attended}">checked</c:if>>
                                             </td>
                                         </tr>
