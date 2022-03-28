@@ -19,8 +19,14 @@ public class AvailabilityService {
         AvailabilityDB availabilityDB = new AvailabilityDB();
         List<Availability> availabilities = availabilityDB.getAllByDoctorDate(doctor_id, start_date_time);
         return availabilities;
-    }
+    }    
     
+    public List<Availability> getAllByDoctorId(int doctor_id) throws Exception {
+        AvailabilityDB availabilityDB = new AvailabilityDB();
+        List<Availability> availabilities = availabilityDB.getAllByDoctorId(doctor_id);
+        return availabilities;
+    }
+        
     public Availability get(int doctor_id) throws Exception {
         AvailabilityDB availabilityDB = new AvailabilityDB();
         Availability availability = availabilityDB.get(doctor_id);
@@ -43,5 +49,11 @@ public class AvailabilityService {
         Availability availability = get(doctor_id);
         AvailabilityDB availabilityDB = new AvailabilityDB();
         availabilityDB.delete(availability);
+    }
+    
+    public void deleteBySchedule(int doctor_id ,String start_time_date) throws Exception {
+        Availability availability = new Availability(doctor_id , start_time_date);
+        AvailabilityDB availabilityDB = new AvailabilityDB();
+        availabilityDB.deleteBySchedule(availability);        
     }
 }
