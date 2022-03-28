@@ -17,55 +17,73 @@ public class SignupStaffServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();        
         String user_name = (String) session.getAttribute("user_name");
-        
+
         if (user_name == null || user_name.equals("")) {
             response.sendRedirect("welcome");
             return;
         } else {
             AccountService accountService = new AccountService();
-            
+
             try {
                 Account account = accountService.get(user_name);
                 
-                if (!account.getProfile().equals("SYSADMIN")) {
+                if (account.getProfile().equals("SYSADMIN")) {
+                    AdministratorService administratorService = new AdministratorService();
+                    Administrator administrator = administratorService.get(account.getAccount_id());
+                    request.setAttribute("user", administrator);
+                } else {
                     response.sendRedirect("welcome");
                     return;
-                } else {
-                    getServletContext().getRequestDispatcher("/WEB-INF/signupStaff.jsp").forward(request, response);
-                    return;
-                }           
+                }
             } catch (Exception ex) {
                 Logger.getLogger(SignupStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }            
         }
+        
+        getServletContext().getRequestDispatcher("/WEB-INF/signupStaff.jsp").forward(request, response);
+        return;
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();        
+        String user_name = (String) session.getAttribute("user_name");
+        
         String usernameEntered = request.getParameter("signup_username");
-        String phoneEntered = request.getParameter("signup_phonenum");
-        String phoneAltEntered = request.getParameter("signup_phonenum_alt");
-
         String passEntered = request.getParameter("signup_password");
         String reenterPassEntered = request.getParameter("signup_re_enter_password");
-
         String firstEntered = request.getParameter("signup_firstname");
         String lastEntered = request.getParameter("signup_lastname");
-
+        String phoneEntered = request.getParameter("signup_phonenum");
         String emailEntered = request.getParameter("signup_email");
+        String phoneAltEntered = request.getParameter("signup_phonenum_alt");        
         String birthEntered = request.getParameter("signup_birth_date");
-        String prefferedEntered = request.getParameter("prefered_notification_radio");
-        String genderEntered = request.getParameter("gender_radio");
         String staffTypeEntered = request.getParameter("staff_type_radio");
+        String genderEntered = request.getParameter("gender_radio");
+        String prefferedEntered = request.getParameter("prefered_notification_radio");
         String streetEntered = request.getParameter("signup_address");
-        String street2Entered = request.getParameter("signup_address2");
-        String provinceEntered = request.getParameter("signup_state_province");
         String cityEntered = request.getParameter("signup_city");
+        String provinceEntered = request.getParameter("signup_state_province");
         String postalEntered = request.getParameter("signup_postal");
 
+        request.setAttribute("signup_username", usernameEntered);
+        request.setAttribute("signup_firstname", firstEntered);
+        request.setAttribute("signup_lastname", lastEntered);
+        request.setAttribute("signup_phonenum", phoneEntered);
+        request.setAttribute("signup_email", emailEntered);
+        request.setAttribute("signup_phonenum_alt", phoneAltEntered);
+        request.setAttribute("signup_birth_date", birthEntered); 
+        request.setAttribute("staff_type_radio", staffTypeEntered);
+        request.setAttribute("gender_radio", genderEntered);
+        request.setAttribute("prefered_notification_radio", prefferedEntered);
+        request.setAttribute("signup_address", streetEntered);   
+        request.setAttribute("signup_city", cityEntered); 
+        request.setAttribute("signup_state_province", provinceEntered); 
+        request.setAttribute("signup_postal", postalEntered);        
+                    
         boolean checkNum = true;
         boolean checkNumAlt = true;
         boolean checkPass = true;
@@ -94,10 +112,10 @@ public class SignupStaffServlet extends HttpServlet {
                 + ")*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
 
         String regexPostal = "^(?![DFIOQUWZ])[A-Z]{1}[0-9]{1}(?![DFIOQU])[A-Z]{1}[ ]{1}[0-9]{1}(?![DFIOQU])[A-Z]{1}[0-9]{1}$";
-        
+
         boolean checkEmail = true;
         boolean checkPostal = true;
-        
+
         if (emailEntered == null || emailEntered.equals("")) {
             request.setAttribute("emailErrorMessage", "*Email is required");
         } else {
@@ -115,7 +133,7 @@ public class SignupStaffServlet extends HttpServlet {
         }
 
         boolean insertInfo = true;
-        
+
         if (usernameEntered == null || usernameEntered.equals("")) {
             request.setAttribute("userNameErrorMessage", "*Username is required");
             insertInfo = false;
@@ -202,12 +220,16 @@ public class SignupStaffServlet extends HttpServlet {
             request.setAttribute("provErrorMessage", "*Province is required");
             insertInfo = false;
         }
-        
+
         DoctorService ds = new DoctorService();
         AdministratorService ads = new AdministratorService();
         AccountService as = new AccountService();
 
         try {
+            Account account = as.get(user_name);
+            Administrator administrator = ads.get(account.getAccount_id());
+            request.setAttribute("user", administrator);
+            
             if (insertInfo == true) {
                 if (staffTypeEntered.equals("DOCTOR")) {
                     as.insert(0, usernameEntered, passEntered, "DOCTOR");
@@ -215,21 +237,13 @@ public class SignupStaffServlet extends HttpServlet {
                     ds.insert(0, firstEntered, lastEntered, emailEntered, phoneEntered,
                             phoneAltEntered, prefferedEntered, newAccount.getAccount_id(), genderEntered,
                             birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
-                }else if(staffTypeEntered.equals("ADMIN")){
+                } else if (staffTypeEntered.equals("ADMIN")) {
                     as.insert(0, usernameEntered, passEntered, "ADMIN");
                     Account newAccount = as.getAll().get(as.getAll().size() - 1);
                     ads.insert(0, firstEntered, lastEntered, emailEntered, phoneEntered,
                             phoneAltEntered, prefferedEntered, newAccount.getAccount_id(), genderEntered,
                             birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
-                } else {
-                    Doctor doctor = new Doctor(0, firstEntered, lastEntered, emailEntered,
-                            phoneEntered, phoneAltEntered, prefferedEntered, 1234567, genderEntered,
-                            birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
-                    request.setAttribute("doctor", doctor);
-
-                    Account account = new Account(0, usernameEntered, passEntered);
-                    request.setAttribute("account", account);
-                }
+                } 
             }
         } catch (Exception ex) {
             Logger.getLogger(SignupServlet.class.getName()).log(Level.SEVERE, null, ex);
