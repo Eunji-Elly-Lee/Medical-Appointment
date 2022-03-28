@@ -70,25 +70,30 @@ public class ConfirmAppointmentServlet extends HttpServlet {
             request.setAttribute("user", administrator);
             
 //            List<Appointment> appointments = appointmentService.getAllByDate(today + "");
-            List<Appointment> appointments = appointmentService.getAllByDate("2022-01-26");
+            List<Appointment> appointments = appointmentService.getAllByDate("2022-01-1");
             
-            
-            if (patient_attended != null && patient_attended.length != 0) {
+            if (patient_attended != null && patient_attended.length != 0) {                
                 int idx = 0;
 
                 for (int i = 0; i < appointments.size(); i++) {
-                    Appointment appointment = appointments.get(i);
+                    Appointment appointment = appointments.get(i);                
                     
-                    if (Integer.parseInt(patient_attended[idx]) == i) {
-                        appointmentService.update(appointment.getDoctor_id(), appointment.getStart_date_time(),
-                                appointment.getPatient_id(), appointment.getDuration(), appointment.getType(),
-                                appointment.getReason(), true);
-                        idx++;
+                    if (idx < patient_attended.length) {                        
+                        if (Integer.parseInt(patient_attended[idx]) == i) {
+                            appointmentService.update(appointment.getDoctor_id(), appointment.getStart_date_time(),
+                                    appointment.getPatient_id(), appointment.getDuration(), appointment.getType(),
+                                    appointment.getReason(), true);
+                            idx++;                            
+                        } else {                            
+                            appointmentService.update(appointment.getDoctor_id(), appointment.getStart_date_time(),
+                                    appointment.getPatient_id(), appointment.getDuration(), appointment.getType(),
+                                    appointment.getReason(), false);
+                        }                    
                     } else {
                         appointmentService.update(appointment.getDoctor_id(), appointment.getStart_date_time(),
-                                appointment.getPatient_id(), appointment.getDuration(), appointment.getType(),
-                                appointment.getReason(), false);
-                    }
+                                    appointment.getPatient_id(), appointment.getDuration(), appointment.getType(),
+                                    appointment.getReason(), false);
+                    }                    
                 }
             } else {
                 for (int i = 0; i < appointments.size(); i++) {
@@ -116,7 +121,7 @@ public class ConfirmAppointmentServlet extends HttpServlet {
         try {
             AppointmentService appointmentService = new AppointmentService();
 //            List<Appointment> appointments = appointmentService.getAllByDate(today + "");
-            List<Appointment> appointments = appointmentService.getAllByDate("2022-01-26");
+            List<Appointment> appointments = appointmentService.getAllByDate("2022-01-1");
             
             if (appointments != null && !appointments.isEmpty()) {
                 DoctorService doctorService = new DoctorService();
