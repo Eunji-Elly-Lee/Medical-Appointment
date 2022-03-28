@@ -20,9 +20,10 @@ public class ViewStaffServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user_name");
         String complete = (String) session.getAttribute("complete");
+
         getAllStaff(request, response);
-        
-        if(complete != null){
+
+        if (complete != null) {
             request.setAttribute("message", "User information has been updated successfully.");
             session.setAttribute("complete", null);
         }
@@ -56,7 +57,7 @@ public class ViewStaffServlet extends HttpServlet {
                 }
             }
         }
-        
+
         getServletContext().getRequestDispatcher("/WEB-INF/viewStaff.jsp").forward(request, response);
         return;
     }
@@ -66,25 +67,56 @@ public class ViewStaffServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         AccountService as = new AccountService();
-        
+        DoctorService ds = new DoctorService();
+        AdministratorService ads = new AdministratorService();
+
+        String action = request.getParameter("action");
         String account_id = request.getParameter("account_id");
         int accountID = Integer.parseInt(account_id);
- 
+
         if (account_id != null) {
             Account account = null;
+            
             try {
                 account = as.get(accountID);
             } catch (Exception ex) {
                 Logger.getLogger(ViewStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            session.setAttribute("selectedUser", account.getUser_name());
-            session.setAttribute("editCheck", "editCheck");
-            response.sendRedirect("profile");
-            return;
-        } else {
-            getServletContext().getRequestDispatcher("/WEB-INF/viewStaff.jsp").forward(request, response);
-            return;
+
+            if (action.equals("edit")) {
+                session.setAttribute("selectedUser", account.getUser_name());
+                session.setAttribute("editCheck", "editCheck");
+                response.sendRedirect("profile");
+                return;
+            } else if (action.equals("delete")) {
+                if (account.getProfile().equals("DOCTOR")) {
+                    try {
+                        ds.delete(account.getAccount_id());
+                        as.delete(account.getUser_name());
+                    } catch (Exception ex) {
+                        Logger.getLogger(ViewStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    response.sendRedirect("view_staff");
+                    request.setAttribute("message", "User is deleted successfully.");
+                    return;
+                } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
+                    try {
+                        ads.delete(account.getAccount_id());
+                        as.delete(account.getUser_name());
+                    } catch (Exception ex) {
+                        Logger.getLogger(ViewStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    response.sendRedirect("view_staff");
+                    request.setAttribute("message", "User is deleted successfully.");
+                    return;
+                }
+            }
         }
+        
+        getServletContext().getRequestDispatcher("/WEB-INF/viewStaff.jsp").forward(request, response);
+        return;
     }
 
     public void getAllStaff(HttpServletRequest request, HttpServletResponse response)
@@ -101,6 +133,7 @@ public class ViewStaffServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(ViewStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         request.setAttribute("admins", admins);
         request.setAttribute("doctors", doctors);
     }
