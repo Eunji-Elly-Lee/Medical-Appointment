@@ -18,8 +18,8 @@
         </script>
         <script src="https://kit.fontawesome.com/ed40b1b6b3.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-                crossorigin="anonymous">
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+              crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous">
@@ -29,7 +29,7 @@
         <style><%@ include file="/css/styleFooter.css" %></style>  
         <title>Doctor Schedule Page</title>
     </head>
-    
+
     <body>
         <div>
             <div class="headers">
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="p-0 mobile_nav">
                     <div class="pe-2 mobile_header">
                         <a href="welcome"><img src="img/logo.png" width="105px"></a>
@@ -89,12 +89,12 @@
                                 689r460OJIdjPYDO/LMC8BPMjsdNmLlftg2BaZQJn5TnVdLg1vhRn7TuyubKf8DPbd2zmO//zkAAAAASUVORK5CYII=">
                         </div>
                     </div>
-                    
+
                     <nav class="navbar navbar-expand-md navbar-light m-3">
                         <div class="container-fluid justify-content-start">
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <a class="navbar-brand ms-3 fs-6">Menu</a>
@@ -106,7 +106,7 @@
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                           Appointment
+                                            Appointment
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
@@ -121,7 +121,7 @@
                         </div>
                     </nav>
                 </div>
-                
+
                 <div class="functional_links">
                     <a href="profile">Manage Account</a>
                     <a href="welcome?logout">Logout</a>
@@ -130,17 +130,98 @@
                 </div>
             </div>
                     
+            <!--  new line -->
             <div>
                 <div class="banner_field">
                     <div class="banner">
                         <p>Doctor Schedule</p>
                     </div>
-                </div>
+                </div>  
 
-                <div class="schedule_wrapper">
-                    <div class="schedule">
-                        
-                    </div>
+                <div>
+                    <c:if test="${step == '1'}">
+                        <span>Select Date</span>>>  
+                        <span class="non_active other_step">Doctor Schedule</span>
+                    </c:if>
+                    <c:if test="${step == '2'}">
+                        <a href="doctor_schedule" class="non_active">Select Date</a> >> 
+                        <span>Doctor Schedule</span>
+                    </c:if>
+                </div>  
+
+                <div class="schedule_wrapper"> 
+                    <c:choose>
+                        <c:when test="${step == '1'}">       
+                            <div class="book">
+                                <div class="form_heading">
+                                    <h1>Select Date</h1>
+                                    <p>Please select your schedule date</p>
+                                </div>
+
+                                <form class="book_form" action="doctor_schedule" method="post">
+                                    <div>
+                                        <label for="appointment_date">Date</label>
+                                        <select class="form-select" name="schedule_date">
+                                            <option value="0">-------- Choose Date --------</option>
+                                            <c:forEach items="${dateList}" var="date_List">
+                                                <option value="${date_List}">
+                                                    ${date_List}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <input type="submit" class="submit_in_form" value="Submit">
+                                        <input type="hidden" name="doctor_id" value=${doctor_id}>
+                                        <input type="hidden" name ="action" value="select_date">
+                                    </div>
+                                </form>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="book">
+                                <div class="form_heading">
+                                    <h1>schedule</h1>
+                                    <p>Please fill in the form below</p>
+                                </div> 
+
+                                <form class="book_form" action="" method="post">
+                                    <div class="book_form_flex">
+                                        <div class="check_box_date">
+                                            <label>Date</label>
+                                            <c:forEach items="${dateList}" var="date_List"  >
+                                                <input type="checkbox" value="${date_List}" name ="seleted_schedule_date">
+                                                <c:out value="${date_List}" ></c:out>
+ 
+                                                <label>start time</label>
+                                                <select class="form-select" name="start_time" >
+                                                    <option value="0">-------- Choose Time --------</option>
+                                                    <c:forEach items="${timetable}" var="start_time_table" >
+                                                        <option value="${start_time_table}">
+                                                           ${start_time_table}
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
+                                                <label>end time</label>
+                                                <select class="form-select" name="end_time" >
+                                                    <option value="0">-------- Choose Time --------</option>
+                                                    <c:forEach items="${timetable}" var="end_time_table" >
+                                                        <option value="${end_time_table}">
+                                                          ${end_time_table}
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
+                                            </c:forEach>
+                                        </div>
+
+                                        <input type="submit" class="submit_in_form" value="Apply">
+                                        <input type="hidden" name="account_id" >
+                                        <input type="hidden" name ="action" value="doctor_schedule">
+                                    </div>
+                                </form>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
