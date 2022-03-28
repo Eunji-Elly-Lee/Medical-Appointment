@@ -179,4 +179,21 @@ public class AvailabilityDB {
             cp.freeConnection(con);
         }
     }
+    
+    public void deleteBySchedule(Availability availability) throws Exception {
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        String sql = "DELETE FROM availability WHERE doctor_id = ? and start_date_time = ?";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, availability.getDoctor_id());
+            ps.setString(2, availability.getStart_date_time());           
+            ps.executeUpdate();
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+    }
 }
