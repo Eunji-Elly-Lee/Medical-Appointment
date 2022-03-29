@@ -174,7 +174,7 @@
                                             </c:forEach>
                                         </select>
                                     </div>
-                                    <div>
+                                    <div class="submit_wrapper">
                                         <input type="submit" class="submit_in_form" value="Submit">
                                         <input type="hidden" name="doctor_id" value=${doctor_id}>
                                         <input type="hidden" name ="action" value="select_date">
@@ -185,15 +185,14 @@
                         <c:otherwise>
                             <div class="book">
                                 <div class="form_heading">
-                                    <h1>schedule</h1>
-                                    <p>Please fill in the form below</p>
+                                    <h1>Schedule</h1>
+                                    <p>Please set your schedule</p>
                                      <p class="errormessage">${dateMissingErrorMessage}</p>
                                 </div> 
 
                                 <form class="book_form" action="" method="post">
                                     <div class="book_form_flex">
-                                        <div class="check_box_date">
-                                            <label>Date</label>
+                                        <div class="check_box_date">                                            
                                             <c:forEach items="${dateList}" var="date_List">
                                                 <%
                                                     ArrayList<Availability> al = new ArrayList<>();
@@ -208,12 +207,13 @@
                                                     }
                                                 %>
 
+                                                <label>Date</label>
                                                 <input type="checkbox" value="${date_List}"
                                                        ${date_List eq rarara ? 'checked' : ''} name ="seleted_schedule_date">
 
                                                 <c:out value="${date_List}"></c:out> 
 
-                                                <label>start time</label>
+                                                <label class="time_label">Start time</label>
                                                 <select class="form-select" name="start_time">
                                                     <option value="0">-------- Choose Time --------</option>
                                                     <c:forEach items="${timetable}" var="start_time_table">
@@ -232,14 +232,13 @@
                                                             }
                                                         %>
 
-                                                        <option value="${start_time_table}" 
-                                                                ${start_time_table eq rarara ? 'selected' : ''}>
+                                                        <option value="${start_time_table}" ${start_time_table eq rarara ? 'selected' : ''}>
                                                             ${start_time_table}
                                                         </option>
                                                     </c:forEach>
                                                 </select>
                                                 
-                                                <label>end time</label>
+                                                <label class="time_label">End time</label>
                                                 <select class="form-select" name="end_time">
                                                     <option value="0">-------- Choose Time --------</option>
                                                     <c:forEach items="${timetable}" var="end_time_table">
@@ -266,8 +265,10 @@
                                                     </c:forEach>
                                                 </select>
                                             </c:forEach>
-                                        </div>
-
+                                        </div>                                        
+                                    </div>
+                                    
+                                    <div class="submit_wrapper">
                                         <input type="submit" class="submit_in_form" value="Apply">
                                         <input type="hidden" name="account_id" >
                                         <input type="hidden" name ="action" value="doctor_schedule">
