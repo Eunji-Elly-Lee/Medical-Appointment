@@ -59,9 +59,7 @@ public class ConfirmAppointmentServlet extends HttpServlet {
         AccountService accountService = new AccountService();
         AdministratorService administratorService = new AdministratorService();
         AppointmentService appointmentService = new AppointmentService();
-        LocalDate today = LocalDate.now();
-        // for test version!
-        today = today.withMonth(1);        
+        LocalDate today = LocalDate.now();      
         
         try {
             Account account = accountService.get(user_name);
@@ -113,9 +111,7 @@ public class ConfirmAppointmentServlet extends HttpServlet {
     }
 
     private void getTodayAppointments(HttpServletRequest request, HttpServletResponse response) {
-        LocalDate today = LocalDate.now();
-        // for test version!
-        today = today.withMonth(1);        
+        LocalDate today = LocalDate.now();     
         
         try {
             AppointmentService appointmentService = new AppointmentService();
