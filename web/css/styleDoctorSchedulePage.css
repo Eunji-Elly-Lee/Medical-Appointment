@@ -39,46 +39,91 @@ header {
 span#hdr-Id,
 span.Row-Id {
     width: 50px;
-    margin: 20px 0px ; 
-
+    margin: 20px 0px;
 }
 span#hdr-FirstName,
 span#hdr-LastName,
 span#hdr-Date {
     width: 200px;
-    margin: 10px 0px ; 
+    margin: 10px 0px; 
 }
 span#hdr-Time{
     width: 100px;
-    margin: 10px 0px ;
+    margin: 10px 0px;
 }
-.schedule_form{
-    padding-left: 30px;
-    background-color: white;
+.book_form{
+    padding-left: 10px;
+    box-sizing: content-box;
 }
-.schedule_form_flex{
+.book_form_flex{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    
+    flex-direction: row;
+    justify-content: space-around;    
 }
-.schedule_form_flex div{
-    flex: 50%;
+.book_form_flex .check_box_date{
+    flex: 30%;
     margin: 5px 0px;
+    box-sizing: content-box;    
+    width: 30%;
 }
-.schedule_form_flex label{
-    display: block;
+.book_form_flex label{
     width: 180px;
 }
-.schedule_form_flex input{
+.book_form_flex input{
     display: block;
-    width: 230px;
-    height: 32px;
+    width: 100px;
+    height: 20px;
     border-radius: 5px;
     padding: 2px 5px;
     align-content: space-around;
-    margin-right: 25%;
+}
+.book{
+    border-radius: 5px;
+    background-color: #F8F5F8;
+    padding: 20px;
+    box-shadow: 5px 5px 10px #000000;
+    box-sizing: content-box;
+    width: 50%;
+    margin: 60px auto;
+}
+input[type=checkbox]{
+    width: 10%;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    display: inline;
+    margin-left: 20px;
+}
+input[type=submit]:hover,
+input[type=button]:hover{
+    background-color: #01886f;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+input[type=submit]{
+    width: 20%;
+    font-size: 16px;
+    background-color: #017C83;
+    color: white;
+    padding: 10px 15px;
+    margin: 26px 22% 0px 35%;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+input[type=text],
+input[type=password],
+input[type=tel],
+input[type=date],
+.form-select,
+textarea{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 .Row{
     display : block;
