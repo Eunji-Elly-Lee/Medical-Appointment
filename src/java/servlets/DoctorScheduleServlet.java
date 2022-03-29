@@ -78,6 +78,7 @@ public class DoctorScheduleServlet extends HttpServlet {
             doctor = doctorService.get(account.getAccount_id());
             availabilities = availabilityService.getAllByDoctorId(doctor.getDoctor_id());
             request.setAttribute("availabilities", availabilities);
+            request.setAttribute("user", doctor);
         } catch (Exception ex) {
             Logger.getLogger(DoctorScheduleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -178,7 +179,9 @@ public class DoctorScheduleServlet extends HttpServlet {
                         
                         if (delectdateList) {
                             try {
-                                availabilityService.deleteBySchedule(doctor.getDoctor_id(), availabilities.get(i).getStart_date_time());                             
+                                availabilityService.deleteBySchedule(doctor.getDoctor_id(), availabilities.get(i).getStart_date_time());   
+                                request.setAttribute("completeMessage", "Schedule updated");
+                                request.setAttribute("step", "1");
                             } catch (Exception ex) {                                
                             }
                         }
