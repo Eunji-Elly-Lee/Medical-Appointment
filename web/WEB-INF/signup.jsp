@@ -369,6 +369,7 @@
                             <div class="agreement_wapper">
                                 <input type="checkbox" name="agreement" value="agreed">&nbsp; I've read and agreed
                                 <a href="agreement" target="_blank">this HIA</a>
+                                <p class="errormessage">${agreementErrorMessage}</p>
                             </div>     
                         </c:if>                        
                         
