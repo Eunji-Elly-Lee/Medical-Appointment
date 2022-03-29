@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+.agreement{
+    width: 90%;
+    margin: 0 auto;
+}
+ul, li{
+   list-style: disc; 
+}
