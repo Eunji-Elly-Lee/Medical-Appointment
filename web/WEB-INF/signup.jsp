@@ -365,6 +365,11 @@
                             </div>
                         </div>
 
+                        <div class="agreement_wapper" <c:if test="${diplay_agreement}">>
+                            <input type="checkbox" name="agreement" value="agreed">&nbsp; I've read and agreed
+                            <a href="agreement" target="_blank">this HIA</a>
+                        </div>
+                        
                         <div class="register_btn">
                             <input type="submit" value="Register">
                             <input type="button" value="Cancel">
