@@ -25,7 +25,7 @@
               crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <style><%@ include file="/css/styleCommon.css" %></style>  
-        <style><%@ include file="/css/styleAgreement.css" %></style>  
+        <style><%@ include file="/css/styleAgreementPage.css" %></style>  
         <style><%@ include file="/css/styleFooter.css" %></style>  
         <title>Agreement Page</title>
     </head>
