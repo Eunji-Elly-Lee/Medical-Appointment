@@ -3,7 +3,11 @@
 .agreement{
     width: 90%;
     margin: 0 auto;
+    margin-top: 35px;
 }
-ul, li{
+.agreement ul, .agreement li{
    list-style: disc; 
+}
+h2{
+    margin-bottom: 15px;
 }
