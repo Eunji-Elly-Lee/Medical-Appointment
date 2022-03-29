@@ -4,6 +4,9 @@
     Author     : Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
 --%>
 
+<%@ page import="java.util.List" %>
+<%@ page import="models.Availability" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -136,8 +139,8 @@
                     <div class="banner">
                         <p>Doctor Schedule</p>
                     </div>
-                </div>  
-
+                </div>
+                
                 <div>
                     <c:if test="${step == '1'}">
                         <span>Select Date</span>>>  
@@ -156,6 +159,7 @@
                                 <div class="form_heading">
                                     <h1>Select Date</h1>
                                     <p>Please select your schedule date</p>
+                                    <p class="errormessage">${completeMessage}</p>
                                 </div>
 
                                 <form class="book_form" action="doctor_schedule" method="post">
@@ -165,7 +169,7 @@
                                             <option value="0">-------- Choose Date --------</option>
                                             <c:forEach items="${dateList}" var="date_List">
                                                 <option value="${date_List}">
-                                                    ${date_List}
+                                                    ${date_List} 
                                                 </option>
                                             </c:forEach>
                                         </select>
@@ -183,31 +187,81 @@
                                 <div class="form_heading">
                                     <h1>schedule</h1>
                                     <p>Please fill in the form below</p>
+                                     <p class="errormessage">${dateMissingErrorMessage}</p>
                                 </div> 
 
                                 <form class="book_form" action="" method="post">
                                     <div class="book_form_flex">
                                         <div class="check_box_date">
                                             <label>Date</label>
-                                            <c:forEach items="${dateList}" var="date_List"  >
-                                                <input type="checkbox" value="${date_List}" name ="seleted_schedule_date">
-                                                <c:out value="${date_List}" ></c:out>
- 
+                                            <c:forEach items="${dateList}" var="date_List">
+                                                <%
+                                                    ArrayList<Availability> al = new ArrayList<>();
+                                                    al = (ArrayList) pageContext.findAttribute("availabilities");
+                                                    String date_ListList = (String) pageContext.findAttribute("date_List");
+                                                    pageContext.setAttribute("rarara", null);
+                                                    
+                                                    for (int i = 0; i < al.size(); i++) {
+                                                        if (al.get(i).getStart_date_time().substring(0, 10).equals(date_ListList)) {                                                            
+                                                            pageContext.setAttribute("rarara", al.get(i).getStart_date_time().substring(0, 10));
+                                                        }
+                                                    }
+                                                %>
+
+                                                <input type="checkbox" value="${date_List}"
+                                                       ${date_List eq rarara ? 'checked' : ''} name ="seleted_schedule_date">
+
+                                                <c:out value="${date_List}"></c:out> 
+
                                                 <label>start time</label>
-                                                <select class="form-select" name="start_time" >
+                                                <select class="form-select" name="start_time">
                                                     <option value="0">-------- Choose Time --------</option>
-                                                    <c:forEach items="${timetable}" var="start_time_table" >
-                                                        <option value="${start_time_table}">
-                                                           ${start_time_table}
+                                                    <c:forEach items="${timetable}" var="start_time_table">
+                                                        <%
+                                                            al = (ArrayList) pageContext.findAttribute("availabilities");
+                                                            String timetableList = (String) pageContext.findAttribute("start_time_table");
+                                                            date_ListList = (String) pageContext.findAttribute("date_List");
+                                                            pageContext.setAttribute("rarara", null);
+                                                            
+                                                            for (int i = 0; i < al.size(); i++) {
+                                                                if (al.get(i).getStart_date_time().substring(11, 16).equals(timetableList)
+                                                                        && al.get(i).getStart_date_time().substring(0, 10).equals(date_ListList)) {
+
+                                                                    pageContext.setAttribute("rarara", al.get(i).getStart_date_time().substring(11, 16));
+                                                                }
+                                                            }
+                                                        %>
+
+                                                        <option value="${start_time_table}" 
+                                                                ${start_time_table eq rarara ? 'selected' : ''}>
+                                                            ${start_time_table}
                                                         </option>
                                                     </c:forEach>
                                                 </select>
+                                                
                                                 <label>end time</label>
-                                                <select class="form-select" name="end_time" >
+                                                <select class="form-select" name="end_time">
                                                     <option value="0">-------- Choose Time --------</option>
-                                                    <c:forEach items="${timetable}" var="end_time_table" >
-                                                        <option value="${end_time_table}">
-                                                          ${end_time_table}
+                                                    <c:forEach items="${timetable}" var="end_time_table">
+                                                        <%
+                                                            ArrayList<String> endtimeList = new ArrayList<>();
+                                                            endtimeList = (ArrayList) pageContext.findAttribute("conveted_endtime_from_availabilty");
+                                                            ArrayList<Integer> duration_list = new ArrayList<>();
+                                                            duration_list = (ArrayList) pageContext.findAttribute("duration_list");
+                                                            al = (ArrayList) pageContext.findAttribute("availabilities");
+                                                            String end_timetableList = (String) pageContext.findAttribute("end_time_table");
+                                                            date_ListList = (String) pageContext.findAttribute("date_List");
+                                                            pageContext.setAttribute("endtimechecked", null);
+                                                            
+                                                            for (int i = 0; i < al.size(); i++) {
+                                                                if (al.get(i).getStart_date_time().substring(0, 10).equals(date_ListList)) {
+                                                                    pageContext.setAttribute("endtimechecked", endtimeList.get(i));
+                                                                }
+                                                            }
+                                                        %>
+                                                        
+                                                        <option value="${end_time_table}" ${end_time_table eq endtimechecked ? 'selected' : ''}>
+                                                            ${end_time_table}
                                                         </option>
                                                     </c:forEach>
                                                 </select>
