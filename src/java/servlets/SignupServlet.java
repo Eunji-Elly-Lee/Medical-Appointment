@@ -45,6 +45,7 @@ public class SignupServlet extends HttpServlet {
             response.sendRedirect("welcome");
             return;
         } else {
+            request.setAttribute("diplay_agreement", true);
             getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
             return;
         }
@@ -237,7 +238,16 @@ public class SignupServlet extends HttpServlet {
                 Administrator administrator = ads.get(account.getAccount_id());
                 request.setAttribute("account", account);
                 request.setAttribute("user", administrator);
-            }            
+            } else {
+                String agreement = request.getParameter("agreement");
+                
+                if (agreement == null || agreement.equals("")) {
+                    request.setAttribute("agreementErrorMessage", "*Agreement is required");
+                    insertInfo = false;
+                }
+                
+                request.setAttribute("diplay_agreement", true);
+            }
             
             if (insertInfo == true) {
                 as.insert(0, usernameEntered, passEntered, "PATIENT");
