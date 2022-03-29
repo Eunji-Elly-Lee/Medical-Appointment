@@ -196,4 +196,25 @@ public class AvailabilityDB {
             cp.freeConnection(con);
         }
     }
+    
+    public void updateSchedule(Availability availability, String new_start_time, int new_duration) throws Exception {
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        String sql = "UPDATE availability SET doctor_id = ?, start_date_time = ?, "
+                + "duration = ? WHERE doctor_id = ? and start_date_time= ?" ;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, availability.getDoctor_id());
+            ps.setString(2, new_start_time);
+            ps.setInt(3, new_duration);
+            ps.setInt(4, availability.getDoctor_id());
+            ps.setString(5, availability.getStart_date_time());
+            ps.executeUpdate();
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+    }
 }
