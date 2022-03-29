@@ -69,8 +69,7 @@ public class ConfirmAppointmentServlet extends HttpServlet {
             request.setAttribute("account", account);
             request.setAttribute("user", administrator);
             
-//            List<Appointment> appointments = appointmentService.getAllByDate(today + "");
-            List<Appointment> appointments = appointmentService.getAllByDate("2022-01-1");
+            List<Appointment> appointments = appointmentService.getAllByDate(today + "");
             
             if (patient_attended != null && patient_attended.length != 0) {                
                 int idx = 0;
@@ -120,8 +119,7 @@ public class ConfirmAppointmentServlet extends HttpServlet {
         
         try {
             AppointmentService appointmentService = new AppointmentService();
-//            List<Appointment> appointments = appointmentService.getAllByDate(today + "");
-            List<Appointment> appointments = appointmentService.getAllByDate("2022-01-1");
+            List<Appointment> appointments = appointmentService.getAllByDate(today + "");
             
             if (appointments != null && !appointments.isEmpty()) {
                 DoctorService doctorService = new DoctorService();
