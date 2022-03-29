@@ -365,10 +365,12 @@
                             </div>
                         </div>
 
-                        <div class="agreement_wapper" <c:if test="${diplay_agreement}">>
-                            <input type="checkbox" name="agreement" value="agreed">&nbsp; I've read and agreed
-                            <a href="agreement" target="_blank">this HIA</a>
-                        </div>
+                       <c:if test="${diplay_agreement}">
+                            <div class="agreement_wapper">
+                                <input type="checkbox" name="agreement" value="agreed">&nbsp; I've read and agreed
+                                <a href="agreement.jsp" target="_blank">this HIA</a>
+                            </div>     
+                        </c:if>                        
                         
                         <div class="register_btn">
                             <input type="submit" value="Register">
