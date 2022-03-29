@@ -56,4 +56,11 @@ public class AvailabilityService {
         AvailabilityDB availabilityDB = new AvailabilityDB();
         availabilityDB.deleteBySchedule(availability);        
     }
+    
+    public void updateSchedule(int doctor_id, String start_date_time, int duration,
+            String new_start_date_time, int new_duration) throws Exception {
+        Availability availability = new Availability(doctor_id, start_date_time, duration);
+        AvailabilityDB availabilityDB = new AvailabilityDB();
+        availabilityDB.updateSchedule(availability, new_start_date_time, new_duration);                                       
+    }
 }
