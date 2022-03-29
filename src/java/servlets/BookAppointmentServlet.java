@@ -34,8 +34,6 @@ public class BookAppointmentServlet extends HttpServlet {
             List<Availability> availabilities = new ArrayList<>();
             List<String> available_dates = new ArrayList<>();
             LocalDate tomorrow = LocalDate.now().plusDays(1);
-            // for test version!
-            tomorrow = tomorrow.withMonth(1);
             
             try {
                 Account account = accountService.get(user_name);
@@ -138,8 +136,6 @@ public class BookAppointmentServlet extends HttpServlet {
         List<Patient> searched_patients = new ArrayList<>();
         
         LocalDate tomorrow = LocalDate.now().plusDays(1);
-        // for test version!
-        tomorrow = tomorrow.withMonth(1);
         Doctor doctor = null;
         Patient patient = null;
         Account temp_account = null;
