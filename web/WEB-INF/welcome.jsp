@@ -92,7 +92,6 @@
                                                         <li><a href="signup_staff">Register Staff</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="backup">Backup&Restore</a></li>
                                             </c:when>
                                             <c:otherwise>
                                                 <li>
@@ -205,7 +204,6 @@
                                                   <li class="ms-3 p-1"><a href="signup_staff">Register Staff</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="nav-item"><a class="nav-link" href="backup">Backup&Restore</a></li>
                                         </c:when>
                                         <c:otherwise>
                                             <li class="nav-item dropdown">
