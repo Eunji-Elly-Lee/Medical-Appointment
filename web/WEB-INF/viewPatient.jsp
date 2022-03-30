@@ -192,7 +192,7 @@
                         <p>View Patient</p>
                     </div>
                 </div>
-                
+
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -203,21 +203,61 @@
                                 <th scope="col">EMAIL </th>
                                 <th scope="col">MOBILE PHONE</th>
                                 <th scope="col">ALT PHONE </th>
+                                <th scope="col">EDIT</th>
+                                <th scope="col">DELETE</th>
                                 <%--<th scope="col">MORE </th>--%>
                             </tr>
                         </thead>
                         <tbody>
-                             <c:choose>
+                            <c:choose>
                                 <c:when test="${account.profile == 'ADMIN'}">
-                                    <c:forEach items="${arrlPatients}" var="patient" varStatus="loop">
-                                        <tr class="table-secondary">
-                                            <td>${arrlPatients.get(loop.index).getPatient_id()}</td>
-                                            <td>${arrlPatients.get(loop.index).getFirst_name()}</td>
-                                            <td>${arrlPatients.get(loop.index).getLast_name()}</td>
-                                            <td>${arrlPatients.get(loop.index).getEmail()}</td>
-                                            <td>${arrlPatients.get(loop.index).getMobile_phone()}</td>
-                                            <td>${arrlPatients.get(loop.index).getAlt_phone()}</td>
-                                        </tr>
+                                    <c:forEach items="${arrlPatients}" var="patients" varStatus="loop">
+                                        <c:if test="${(loop.count % 2) == 0}">
+                                            <tr class="table-secondary">
+                                                <td>${arrlPatients.get(loop.index).getPatient_id()}</td>
+                                                <td>${arrlPatients.get(loop.index).getFirst_name()}</td>
+                                                <td>${arrlPatients.get(loop.index).getLast_name()}</td>
+                                                <td>${arrlPatients.get(loop.index).getEmail()}</td>
+                                                <td>${arrlPatients.get(loop.index).getMobile_phone()}</td>
+                                                <td>${arrlPatients.get(loop.index).getAlt_phone()}</td>
+                                                <td>
+                                                    <form action="view_staff" method="POST">
+                                                        <input type="hidden" name="account_id" value=${patients.account_id}>
+                                                        <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                            <input type="hidden" name ="action" value="edit">
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" value="delete" class="btn btn-secondary">Delete
+                                                        <input type="hidden" name ="action" value="id">
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </c:if>
+                                        <c:if test="${(loop.count % 2) == 1}">
+                                            <tr>
+                                                <td>${arrlPatients.get(loop.index).getPatient_id()}</td>
+                                                <td>${arrlPatients.get(loop.index).getFirst_name()}</td>
+                                                <td>${arrlPatients.get(loop.index).getLast_name()}</td>
+                                                <td>${arrlPatients.get(loop.index).getEmail()}</td>
+                                                <td>${arrlPatients.get(loop.index).getMobile_phone()}</td>
+                                                <td>${arrlPatients.get(loop.index).getAlt_phone()}</td>
+                                                <td>
+                                                    <form action="view_staff" method="POST">
+                                                        <input type="hidden" name="account_id" value=${patients.account_id}>
+                                                        <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                            <input type="hidden" name ="action" value="edit">
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <button type="submit" value="edit" class="btn btn-secondary">Delete
+                                                        <input type="hidden" name ="action" value="id">
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </c:if>
                                     </c:forEach>
                                 </c:when>
                             </c:choose>
