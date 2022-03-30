@@ -239,8 +239,24 @@
                                             <td>${doctorLastName}</td>
                                             <td>${type}</td>
                                             <td>${arrTime.get(loop.index)}</td>
-                                            <td><input type="button" class="edit_appointemnt" value="edit"></td>
-                                            <td><input type="button" class="delete_appointemnt" value="delete"></td>
+                                            <td>
+                                                <form action="view_appointment" method="POST">
+                                                    <input type="hidden" name="profile" value="PATIENT"> 
+                                                    <input type="hidden"  name="timeonly" value=${arrTimeOnly.get(loop.index)}>
+                                                    <input type="hidden"  name="dateonly" value=${arrTime.get(loop.index)}>
+                                                    <input type="hidden" name="doctor_id" value=${doctor_id}>
+                                                    <input type="hidden" name="patient_id_P" value=${patient_id}>
+                                                    <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                        <input type="hidden" name ="action" value="edit">
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <a href="view_appointment?delete=${arrTime.get(loop.index)}&doctor_id=${doctor_id}&patient_id=${patient_id}" 
+                                                        class="delete_appointment">
+                                                    <button> Delete </button>
+                                                </a>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
@@ -251,8 +267,54 @@
                                             <td>${arrlPatients.get(loop.index).getLast_name()}</td>
                                             <td>${arrType.get(loop.index)}</td>
                                             <td>${arrlAppointments.get(loop.index).getStart_date_time()}</td>
-                                            <td><input type="button" class="edit_appointemnt" value="edit"></td>
-                                            <td><input type="button" class="delete_appointemnt" value="delete"></td>
+                                            <td>
+                                                <form action="view_appointment" method="POST">
+                                                    <input type="hidden" name="profile" value="DOCTOR">
+                                                    <input type="hidden" name="time" value=${arrlAppointments.get(loop.index).getStart_date_time()}>
+                                                    <input type="hidden"  name="timeonly" value=${arrTimeOnly.get(loop.index)}>
+                                                    <input type="hidden"  name="dateonly" value=${arrTime.get(loop.index)}>
+                                                    <input type="hidden" name="doctor_id" value=${doctor_id}>
+                                                    <input type="hidden" name="patient_id" value=${arrPatientID.get(loop.index)}>
+                                                    <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                        <input type="hidden" name ="action" value="edit">
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <a href="view_appointment?delete=${arrlAppointments.get(loop.index).getStart_date_time()}&doctor_id=${doctor_id}&patient_id=${arrPatientID.get(loop.index)}"
+                                                        class="delete_appointment">
+                                                    <button> Delete </button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:when>
+                                <c:when test="${account.profile == 'ADMIN'}">
+                                    <c:forEach items="${arrlAppointments}" var="appointment" varStatus="loop">
+                                        <tr class="table-secondary">
+                                            <td>${arrlPatients.get(loop.index).getFirst_name()}</td>
+                                            <td>${arrlPatients.get(loop.index).getLast_name()}</td>
+                                            <td>${arrType.get(loop.index)}</td>
+                                            <td>${arrlAppointments.get(loop.index).getStart_date_time()}</td>
+                                            <td>
+                                                <form action="view_appointment" method="POST">
+                                                    <input type="hidden" name="profile" value="ADMIN">
+                                                    <input type="hidden" name="start_date_admin" value=${arrlAppointments.get(loop.index).getStart_date_time()}>
+                                                    <input type="hidden"  name="timeonly" value=${arrTimeOnly.get(loop.index)}>
+                                                    <input type="hidden"  name="dateonly" value=${arrTime.get(loop.index)}>
+                                                    <input type="hidden" name="doctor_id" value=${arrDoctorID.get(loop.index)}>
+                                                    <input type="hidden" name="patient_id" value=${arrPatientID.get(loop.index)}>
+                                                    <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                        <input type="hidden" name ="action" value="edit">
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <a href="view_appointment?delete=${arrlAppointments.get(loop.index).getStart_date_time()}&doctor_id=${arrDoctorID.get(loop.index)}&patient_id=${arrPatientID.get(loop.index)}"
+                                                       class="delete_appointment">
+                                                    <button> Delete </button>
+                                                </a>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
