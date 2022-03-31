@@ -228,15 +228,17 @@ public class AppointmentDB {
         }
     }
     
-    public void delete(Appointment appointment) throws Exception {
+    public void delete(String time ,int doctor_id,int patient_id) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "DELETE FROM appointment WHERE doctor_id = ?";
+        String sql = "DELETE FROM appointment WHERE start_date_time=? and doctor_id =? and patient_id=?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, appointment.getDoctor_id());
+            ps.setString(1, time);
+            ps.setInt(2,doctor_id);
+            ps.setInt(3,patient_id);
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
