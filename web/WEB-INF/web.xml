@@ -52,6 +52,10 @@
         <servlet-name>AgreementServlet</servlet-name>
         <servlet-class>servlets.AgreementServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditAppointmentServlet</servlet-name>
+        <servlet-class>servlets.EditAppointmentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WelcomeServlet</servlet-name>
         <url-pattern>/welcome</url-pattern>
@@ -104,6 +108,10 @@
         <servlet-name>AgreementServlet</servlet-name>
         <url-pattern>/agreement</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAppointmentServlet</servlet-name>
+        <url-pattern>/edit_appointment</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -115,11 +123,11 @@
     <env-entry>
         <env-entry-name>webmail-username</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value></env-entry-value>
+        <env-entry-value/>
     </env-entry>
     <env-entry>
         <env-entry-name>webmail-password</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value></env-entry-value>
+        <env-entry-value/>
     </env-entry>
 </web-app>
