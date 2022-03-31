@@ -60,11 +60,33 @@ public class ViewPatientServlet extends HttpServlet {
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/viewPatient.jsp").forward(request, response);
-          return;
+        return;
     }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        AccountService as = new AccountService();
+        
+        String account_id = request.getParameter("account_id");
+        int accountID = Integer.parseInt(account_id);
+ 
+        if (account_id != null) {
+            Account account = null;
+            
+            try {
+                account = as.get(accountID);
+            } catch (Exception ex) {
+                Logger.getLogger(ViewPatientServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            session.setAttribute("selectedUser", account.getUser_name());
+            session.setAttribute("editCheck", "editCheck");
+            response.sendRedirect("profile");
+        } else {
+            getServletContext().getRequestDispatcher("/WEB-INF/viewPatient.jsp").forward(request, response);
+            return;
+        }
     }
 }
