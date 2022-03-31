@@ -55,15 +55,8 @@ public class AppointmentService {
         appointmentDB.update(appointment);
     }
     
-//    public void deleteByDoctorID(int doctor_id) throws Exception {
-//        Appointment appointment = getByDoctorID(doctor_id);
-//        AppointmentDB appointmentDB = new AppointmentDB();
-//        appointmentDB.delete(appointment);
-//    }
-//    
-//    public void deleteByPatientID(int patient_id) throws Exception {
-//        Appointment appointment = getByPatientID(patient_id);
-//        AppointmentDB appointmentDB = new AppointmentDB();
-//        appointmentDB.delete(appointment);
-//    }
+    public void delete (String time, int doctor_id, int patient_id) throws Exception {
+        AppointmentDB appointmentDB = new AppointmentDB();
+        appointmentDB.delete(time, doctor_id, patient_id);
+    }    
 }
