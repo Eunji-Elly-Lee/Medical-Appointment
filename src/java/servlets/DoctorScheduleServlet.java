@@ -16,7 +16,7 @@ import service.*;
  * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
  */
 public class DoctorScheduleServlet extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -27,20 +27,31 @@ public class DoctorScheduleServlet extends HttpServlet {
         ArrayList<String> datelist = new ArrayList<>();
         AccountService accountService = new AccountService();
         DoctorService doctorService = new DoctorService();
-
+        
+        if (user_name == null || user_name.equals("")) {
+            response.sendRedirect("welcome");
+            return;
+        }
+        
         for (int i = 1; i < 20; i++) {
             if (!(LocalDate.now().plusDays(i).getDayOfWeek().toString().equals("SATURDAY")
                     || LocalDate.now().plusDays(i).getDayOfWeek().toString().equals("SUNDAY"))) {
                 datelist.add(LocalDate.now().plusDays(i).toString());
             }
         }
-        
+
         request.setAttribute("dateList", datelist);
 
         try {
             Account account = accountService.get(user_name);
-            Doctor doctor = doctorService.get(account.getAccount_id());
-            request.setAttribute("user", doctor);
+            
+            if (account.getProfile().equals("DOCTOR")) {
+                Doctor doctor = doctorService.get(account.getAccount_id());
+                request.setAttribute("user", doctor);
+            } else {
+                response.sendRedirect("welcome");
+                return;
+            }
         } catch (Exception ex) {
             Logger.getLogger(DoctorScheduleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -51,7 +62,7 @@ public class DoctorScheduleServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {           
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user_name");
         String action = request.getParameter("action");
@@ -87,11 +98,11 @@ public class DoctorScheduleServlet extends HttpServlet {
             case "select_date":
                 request.setAttribute("step", "0");
                 break;
-                
+
             case "doctor_schedule":
                 request.setAttribute("completeMessage", "Schedule updated");
                 request.setAttribute("step", "1");
-                
+
                 List<String> cleand_start_time = new ArrayList<>();
                 List<String> cleand_end_time = new ArrayList<>();
 
@@ -102,26 +113,26 @@ public class DoctorScheduleServlet extends HttpServlet {
                             cleand_end_time.add(seleted_end_time[i]);
                         }
                     }
-                    
+
                     int b = 0;
                     int c = 0;
                     int d = 0;
-                    
+
                     for (int i = 0; i < cleand_start_time.size(); i++) {
-                        b++;                        
+                        b++;
                     }
-                    
+
                     for (int i = 0; i < cleand_end_time.size(); i++) {
                         c++;
                     }
-                    
+
                     for (int i = 0; i < seleted_schedule_date.length; i++) {
                         d++;
                     }
-                    
+
                     if (!(b == c && c == d && d == b)) {
                         request.setAttribute("dateMissingErrorMessage", "*Update false");
-                        request.setAttribute("step", "0");   
+                        request.setAttribute("step", "0");
                     }
 
                     for (int i = 0; i < seleted_schedule_date.length; i++) {
@@ -131,24 +142,24 @@ public class DoctorScheduleServlet extends HttpServlet {
                             du_time = (endDate.getTime() - beginDate.getTime()) / (60 * 1000);
                             Long longtime = du_time;
                             int du_time_time = longtime.intValue();
-                            
+
                             for (Availability availability : availabilities) {
                                 if (availability.getStart_date_time().substring(0, 10).equals(seleted_schedule_date[i])) {
                                     availabilityService.updateSchedule(doctor.getDoctor_id(),
                                             availability.getStart_date_time(), availability.getDuration(),
-                                            seleted_schedule_date[i] + " " + cleand_start_time.get(i) + ":00.0", du_time_time);                                   
+                                            seleted_schedule_date[i] + " " + cleand_start_time.get(i) + ":00.0", du_time_time);
                                 }
                             }
 
                             availabilityService.insert(doctor.getDoctor_id(),
                                     seleted_schedule_date[i] + " " + cleand_start_time.get(i) + ":00.0", du_time_time);
-                         
-                        } catch (Exception ex) {                           
+
+                        } catch (Exception ex) {
                         }
                     }
                 } catch (Exception ex) {
                     request.setAttribute("dateMissingErrorMessage", "*time check is required");
-                    request.setAttribute("step", "0");  
+                    request.setAttribute("step", "0");
                 }
 
                 boolean delectdateList = true;
@@ -176,16 +187,16 @@ public class DoctorScheduleServlet extends HttpServlet {
                             }
                         } catch (Exception ex) {
                         }
-                        
+
                         if (delectdateList) {
                             try {
-                                availabilityService.deleteBySchedule(doctor.getDoctor_id(), availabilities.get(i).getStart_date_time());   
+                                availabilityService.deleteBySchedule(doctor.getDoctor_id(), availabilities.get(i).getStart_date_time());
                                 request.setAttribute("completeMessage", "Schedule updated");
                                 request.setAttribute("step", "1");
-                            } catch (Exception ex) {                                
+                            } catch (Exception ex) {
                             }
                         }
-                        
+
                         delectdateList = true;
                     }
                 }
@@ -193,21 +204,21 @@ public class DoctorScheduleServlet extends HttpServlet {
                 break;
 
         }
-        
+
         // after select date  
         ArrayList<String> datelist = new ArrayList<>();
         ArrayList<String> timetable = new ArrayList<>();
 
         int k = 0;
-        
+
         for (int i = 1; i < 20; i++) {
             if ((LocalDate.now().plusDays(i).toString().equals(schedule_date))) {
                 k = i - 1;
             }
         }
-        
+
         int a = 0;
-        
+
         for (int i = 1; i < 20; i++) {
             if (!(LocalDate.now().plusDays(k + i).getDayOfWeek().toString().equals("SATURDAY")
                     || LocalDate.now().plusDays(k + i).getDayOfWeek().toString().equals("SUNDAY"))) {
@@ -215,16 +226,16 @@ public class DoctorScheduleServlet extends HttpServlet {
                 a++;
             }
         }
-        
+
         session.removeAttribute("schedule_start_date");
         session.removeAttribute("schedule_end_date");
         session.setAttribute("schedule_start_date", datelist.get(0));
         session.setAttribute("schedule_end_date", datelist.get(a - 1));
         request.setAttribute("dateList", datelist);
-        
+
         String dateConvert = null;
         int time = 7;
-        
+
         for (int i = 0; i < 19; i++) {
             if (i % 2 == 0) {
                 time = time + 1;
@@ -248,7 +259,7 @@ public class DoctorScheduleServlet extends HttpServlet {
                 timetable.add(dateConvert);
             }
         }
-        
+
         request.setAttribute("timetable", timetable);
 
         ArrayList<String> endTimelist = new ArrayList<>();
@@ -259,12 +270,12 @@ public class DoctorScheduleServlet extends HttpServlet {
         Date duration_time_list;
         String conveted_endtime;
         Calendar calndr = Calendar.getInstance();
-        
+
         for (Availability availability : availabilities) {
             end_time_start = availability.getStart_date_time().substring(11, 16);
             duration_time = availability.getDuration();
             duration_list.add(availability.getDuration());
-            
+
             try {
                 duration_time_list = df.parse(end_time_start);
                 calndr.setTime(duration_time_list);
@@ -274,7 +285,7 @@ public class DoctorScheduleServlet extends HttpServlet {
             } catch (ParseException ex) {
                 Logger.getLogger(DoctorScheduleServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             request.setAttribute("conveted_endtime_from_availabilty", endTimelist);
             request.setAttribute("duration_list", duration_list);
         }
