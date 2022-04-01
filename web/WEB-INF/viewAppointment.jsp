@@ -4,6 +4,8 @@
     Author     : Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
 --%>
 
+<%@ page import="models.Appointment" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -18,8 +20,8 @@
         </script>
         <script src="https://kit.fontawesome.com/ed40b1b6b3.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-                crossorigin="anonymous">
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+              crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous">
@@ -59,8 +61,8 @@
                                                 <li><a href="doctor_schedule">Doctor schedule</a></li>
                                                 <li><a href="view_patient">Patient</a></li>
                                                 <li><a href="view_staff">Staff</a></li>
-                                            </c:when>
-                                            <c:when test="${account.profile == 'ADMIN'}">
+                                                </c:when>
+                                                <c:when test="${account.profile == 'ADMIN'}">
                                                 <li>
                                                     <a class="drop-down-tab" href="">
                                                         Appointment <i class="bi bi-caret-down-fill"></i>
@@ -81,8 +83,8 @@
                                                     </ul>
                                                 </li>
                                                 <li><a href="view_staff">Staff</a></li>
-                                            </c:when>
-                                            <c:otherwise>
+                                                </c:when>
+                                                <c:otherwise>
                                                 <li>
                                                     <a class="drop-down-tab" href="">
                                                         Appointment <i class="bi bi-caret-down-fill"></i>
@@ -157,32 +159,32 @@
                                             <li class="nav-item"><a class="nav-link" href="doctor_schedule">Doctor schedule</a></li>
                                             <li class="nav-item"><a class="nav-link" href="view_patient">Patient</a></li>
                                             <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
-                                        </c:when>
-                                        <c:when test="${account.profile == 'ADMIN'}">
+                                            </c:when>
+                                            <c:when test="${account.profile == 'ADMIN'}">
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Appointment
+                                                    Appointment
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                  <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="view_appointment">View Appointment</a></li>
-                                                  <li class="ms-3 p-1"><a href="confirm_appointment">Confirm Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="book_appointment">Book Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="view_appointment">View Appointment</a></li>
+                                                    <li class="ms-3 p-1"><a href="confirm_appointment">Confirm Appointment</a></li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                   Patient
+                                                    Patient
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                  <li class="ms-3 p-1"><a href="view_patient">View Patient</a></li>
-                                                  <li class="ms-3 p-1"><a href="signup">Register Patient</a></li>
+                                                    <li class="ms-3 p-1"><a href="view_patient">View Patient</a></li>
+                                                    <li class="ms-3 p-1"><a href="signup">Register Patient</a></li>
                                                 </ul>
                                             </li>
                                             <li class="nav-item"><a class="nav-link" href="view_staff">Staff</a></li>
-                                        </c:when>
-                                        <c:otherwise>
+                                            </c:when>
+                                            <c:otherwise>
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -215,50 +217,82 @@
                         <p>View Appointment</p>
                     </div>
                 </div>
-
+                
+                <c:if test="${account.profile == 'PATIENT'}">
+                    <div>
+                        <!--Jihoon  -->
+                        <form  method="post" action="view_appointment">
+                            <button>History</button>
+                            <input type="hidden" name="account_id">
+                            <input type="hidden" name ="action" value="history_appointment">  
+                        </form>
+                    </div>            
+                </c:if>
+                
                 <!-- histroy of the appointment -->
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col" >FIRST NAME</th>
-                                <th scope="col">LAST NAME </th>
+                                <c:if test="${account.profile == 'PATIENT'}">
+                                    <th scope="col">Assigned Doctor  </th>
+                                </c:if>
+                                <c:if test="${account.profile != 'PATIENT'}">
+                                    <th scope="col" >First Name</th>
+                                    <th scope="col" >Last Name</th>
+                                </c:if>
                                 <th scope="col">APPOINTMENT TYPE </th>
-                                <th scope="col">DATE AND TIME</th>
-                                <th scope="col">EDIT</th>
-                                <th scope="col">DELETE</th>
+                                <th scope="col">DATE </th>
+                                <th scope="col">TIME</th>                           
+                                <c:if  test ="${step != 0}">
+                                    <th scope="col">EDIT</th>
+                                    <th scope="col">DELETE</th>
+                                </c:if>
                             </tr>
                         </thead>
 
                         <tbody>
                             <c:choose>
                                 <c:when test="${account.profile == 'PATIENT'}">
-                                    <c:forEach items="${arrType}" var="type" varStatus="loop">
-                                        <tr class="table-secondary">
-                                            <td>${doctorFirstName}</td>
-                                            <td>${doctorLastName}</td>
-                                            <td>${type}</td>
-                                            <td>${arrTime.get(loop.index)}</td>
-                                            <td>
-                                                <form action="view_appointment" method="POST">
-                                                    <input type="hidden" name="profile" value="PATIENT"> 
-                                                    <input type="hidden"  name="timeonly" value=${arrTimeOnly.get(loop.index)}>
-                                                    <input type="hidden"  name="dateonly" value=${arrTime.get(loop.index)}>
-                                                    <input type="hidden" name="doctor_id" value=${doctor_id}>
-                                                    <input type="hidden" name="patient_id_P" value=${patient_id}>
-                                                    <button type="submit" value="edit" class="btn btn-secondary">Edit
-                                                        <input type="hidden" name ="action" value="edit">
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <a href="view_appointment?delete=${arrTime.get(loop.index)}&doctor_id=${doctor_id}&patient_id=${patient_id}" 
-                                                        class="delete_appointment">
-                                                    <button> Delete </button>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                    <c:if  test ="${step == 1}">
+                                        <c:forEach items="${arrType}" var="type" varStatus="loop">                                 
+                                            <tr class="table-secondary">
+                                                <td>${doctorFirstName}&nbsp; ${ doctorLastName}</td>
+                                                <td>${type}</td>
+                                                <td>${arrTime.get(loop.index).substring(0,10)}</td>
+                                                <td>${arrTime.get(loop.index).substring(11,16)}</td>
+                                                <td>
+                                                    <form action="view_appointment" method="POST">
+                                                        <input type="hidden" name="profile" value="PATIENT"> 
+                                                        <input type="hidden"  name="timeonly" value=${arrTimeOnly.get(loop.index)}>
+                                                        <input type="hidden"  name="dateonly" value=${arrTime.get(loop.index)}>
+                                                        <input type="hidden" name="doctor_id" value=${doctor_id}>
+                                                        <input type="hidden" name="patient_id_P" value=${patient_id}>
+                                                        <button type="submit" value="edit" class="btn btn-secondary">
+                                                            Edit
+                                                            <input type="hidden" name ="action" value="edit">
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <a href="view_appointment?delete=${arrTime.get(loop.index)}&doctor_id=${doctor_id}&patient_id=${patient_id}"
+                                                            class="delete_appointment">
+                                                        <button> Delete </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if  test ="${step == 0}">
+                                        <c:forEach items="${pastAppointments}" var="pastAppointments_history" varStatus="loop">                              
+                                            <tr class="table-secondary">
+                                                <td>${doctor.first_name} &nbsp; ${doctor.last_name}</td>
+                                                <td>${pastAppointments_history.getType_toString(pastAppointments_history.getType())}</td>
+                                                <td>${pastAppointments_history.getStart_date_time().substring(0,10)}</td>
+                                                <td>${pastAppointments_history.getStart_date_time().substring(11,16)}</td>
+                                            </tr>
+                                        </c:forEach>  
+                                    </c:if>
                                 </c:when>
                                 <c:when test="${account.profile == 'DOCTOR'}">
                                     <c:forEach items="${arrlAppointments}" var="appointment" varStatus="loop">
@@ -266,7 +300,8 @@
                                             <td>${arrlPatients.get(loop.index).getFirst_name()}</td>
                                             <td>${arrlPatients.get(loop.index).getLast_name()}</td>
                                             <td>${arrType.get(loop.index)}</td>
-                                            <td>${arrlAppointments.get(loop.index).getStart_date_time()}</td>
+                                            <td>${arrlAppointments.get(loop.index).getStart_date_time().substring(0,10)}</td>
+                                            <td>${arrlAppointments.get(loop.index).getStart_date_time().substring(11,16)}</td>
                                             <td>
                                                 <form action="view_appointment" method="POST">
                                                     <input type="hidden" name="profile" value="DOCTOR">
@@ -275,7 +310,8 @@
                                                     <input type="hidden"  name="dateonly" value=${arrTime.get(loop.index)}>
                                                     <input type="hidden" name="doctor_id" value=${doctor_id}>
                                                     <input type="hidden" name="patient_id" value=${arrPatientID.get(loop.index)}>
-                                                    <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                    <button type="submit" value="edit" class="btn btn-secondary">
+                                                        Edit
                                                         <input type="hidden" name ="action" value="edit">
                                                     </button>
                                                 </form>
@@ -283,7 +319,7 @@
                                             <td>
                                                 <a href="view_appointment?delete=${arrlAppointments.get(loop.index).getStart_date_time()}&doctor_id=${doctor_id}&patient_id=${arrPatientID.get(loop.index)}"
                                                         class="delete_appointment">
-                                                    <button> Delete </button>
+                                                    <button class="btn btn-danger"> Delete </button>
                                                 </a>
                                             </td>
                                         </tr>
@@ -295,7 +331,8 @@
                                             <td>${arrlPatients.get(loop.index).getFirst_name()}</td>
                                             <td>${arrlPatients.get(loop.index).getLast_name()}</td>
                                             <td>${arrType.get(loop.index)}</td>
-                                            <td>${arrlAppointments.get(loop.index).getStart_date_time()}</td>
+                                            <td>${arrlAppointments.get(loop.index).getStart_date_time().substring(0,10)}</td>
+                                            <td>${arrlAppointments.get(loop.index).getStart_date_time().substring(11,16)}</td>
                                             <td>
                                                 <form action="view_appointment" method="POST">
                                                     <input type="hidden" name="profile" value="ADMIN">
@@ -304,15 +341,16 @@
                                                     <input type="hidden"  name="dateonly" value=${arrTime.get(loop.index)}>
                                                     <input type="hidden" name="doctor_id" value=${arrDoctorID.get(loop.index)}>
                                                     <input type="hidden" name="patient_id" value=${arrPatientID.get(loop.index)}>
-                                                    <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                    <button type="submit" value="edit" class="btn btn-secondary">
+                                                        Edit
                                                         <input type="hidden" name ="action" value="edit">
                                                     </button>
                                                 </form>
                                             </td>
                                             <td>
                                                 <a href="view_appointment?delete=${arrlAppointments.get(loop.index).getStart_date_time()}&doctor_id=${arrDoctorID.get(loop.index)}&patient_id=${arrPatientID.get(loop.index)}"
-                                                       class="delete_appointment">
-                                                    <button> Delete </button>
+                                                        class="delete_appointment">
+                                                    <button class="btn btn-danger"> Delete </button>
                                                 </a>
                                             </td>
                                         </tr>
@@ -324,8 +362,8 @@
                 </div>
             </div>
         </div>
-                            
-       <!----------------Footer------------------------>
+
+        <!----------------Footer------------------------>
         <div class="container"></div>
         <footer>
             <div class="top">
@@ -340,7 +378,7 @@
                 </div>
                 <div class="top-right">
                     <h3>Contact Us</h3>
-                   <div class="links">
+                    <div class="links">
                         <a href="#"><i class="fa-solid fa-square-phone"></i> +1 420 1245 6456</a>
                         <a href="#"><i class="fa-solid fa-envelope"></i> SurpassClinic@gmail.com</a>
                         <a href="#"><i class="fa-solid fa-location-dot"></i> 436 40th Street Calgary Alberta T2M 0G6</a>
