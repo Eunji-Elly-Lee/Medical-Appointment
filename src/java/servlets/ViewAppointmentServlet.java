@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.*;
 import javax.servlet.ServletException;
@@ -19,6 +21,9 @@ public class ViewAppointmentServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user_name");
+        // add 
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate beginDate;
 
         if (request.getParameter("logout") != null) {
             session.invalidate();
@@ -54,7 +59,13 @@ public class ViewAppointmentServlet extends HttpServlet {
                         ArrayList<Appointment> arrlAppointments = new ArrayList();
 
                         for (int i = 0; i < appointments.size(); i++) {
-                            arrlAppointments.add(appointments.get(i));
+                            //add Jihoon
+                            beginDate = LocalDate.parse(appointments.get(i).getStart_date_time().substring(0, 10), df);
+                            
+                            if (beginDate.isAfter(LocalDate.now())) {
+                                arrlAppointments.add(appointments.get(i));
+                            }
+                            //end jihoon
                         }
 
                         request.setAttribute("arrlAppointments", arrlAppointments);
@@ -74,17 +85,17 @@ public class ViewAppointmentServlet extends HttpServlet {
 
                         for (int i = 0; i < appointments.size(); i++) {
                             arrType.add(appointments.get(i).getType_toString(i));
-                            arrTime.add(appointments.get(i).getStart_date_time()); //added
+                            arrTime.add(appointments.get(i).getStart_date_time());
                             arrPatientID.add(appointments.get(i).getPatient_id());
                         }
 
-                        for (int i = 0; i < arrTime.size(); i++) { //added
+                        for (int i = 0; i < arrTime.size(); i++) {
                             String[] parts = arrTime.get(i).split(" ");
                             arrTimeOnly.add(parts[1]);
                         }
 
-                        request.setAttribute("arrTime", arrTime); //added
-                        request.setAttribute("arrTimeOnly", arrTimeOnly);//added
+                        request.setAttribute("arrTime", arrTime);
+                        request.setAttribute("arrTimeOnly", arrTimeOnly);
                         request.setAttribute("arrType", arrType);
                         request.setAttribute("arrPatientID", arrPatientID);
                         request.setAttribute("doctor_id", doctor.getDoctor_id());
@@ -99,7 +110,13 @@ public class ViewAppointmentServlet extends HttpServlet {
                         PatientService patientService = new PatientService();
                         
                         for (int i = 0; i < appointments.size(); i++) {
-                            arrlAppointments.add(appointments.get(i));
+                            //add jihoon
+                            beginDate = LocalDate.parse(appointments.get(i).getStart_date_time().substring(0, 10), df);
+                            
+                            if (beginDate.isAfter(LocalDate.now())) {
+                                arrlAppointments.add(appointments.get(i));
+                            }
+                            //end jihoon
                         }
 
                         request.setAttribute("arrlAppointments", arrlAppointments);
@@ -134,24 +151,45 @@ public class ViewAppointmentServlet extends HttpServlet {
                         request.setAttribute("arrPatientID", arrPatientID);
                         request.setAttribute("arrDoctorID", arrDoctorID);
                     } else if (account.getProfile().equals("PATIENT")) {
+                        //add jihoon
+                        request.setAttribute("step", 1);
+                        //end jihoon
                         PatientService patientService = new PatientService();
                         Patient patient = patientService.get(account.getAccount_id());
                         request.setAttribute("user", patient);
                         AppointmentService as = new AppointmentService();
                         List<Appointment> appointments = as.getByPatientID(patient.getPatient_id());
+                        //change type    jihoon
+                        ArrayList<Appointment> futuerAppointment = new ArrayList();
                         ArrayList<String> arrType = new ArrayList();
+                        // add  jihoon
+                        ArrayList<Appointment> pastAppointments = new ArrayList();
 
                         for (int i = 0; i < appointments.size(); i++) {
-                            arrType.add(appointments.get(i).getType_toString(i));
+                            beginDate = LocalDate.parse(appointments.get(i).getStart_date_time().substring(0, 10), df);
+                            
+                            if (beginDate.isBefore(LocalDate.now())) {
+                                //jihoon  for history
+                                pastAppointments.add(appointments.get(i));
+                            } else {
+                                futuerAppointment.add(appointments.get(i));
+                            }
+                        }
+                        //end  jihoon
+                        
+                        for (int i = 0; i < futuerAppointment.size(); i++) {
+                            arrType.add(futuerAppointment.get(i).getType_toString(i));
                         }
 
                         request.setAttribute("arrType", arrType);
+                        request.setAttribute("futuerAppointment", futuerAppointment);
 
                         ArrayList<String> arrTime = new ArrayList();
                         ArrayList<String> arrTimeOnly = new ArrayList();
 
-                        for (int i = 0; i < appointments.size(); i++) {
-                            arrTime.add(appointments.get(i).getStart_date_time());
+                        for (int i = 0; i < futuerAppointment.size(); i++) {
+                            System.out.println(futuerAppointment.get(i) +"GGGGEEEEEEETTTTTTT");
+                            arrTime.add(futuerAppointment.get(i).getStart_date_time());
                         }
 
                         for (int i = 0; i < arrTime.size(); i++) {
@@ -216,7 +254,7 @@ public class ViewAppointmentServlet extends HttpServlet {
 
         try {
             String user_name = (String) session.getAttribute("user_name");
-
+            
             AccountService as = new AccountService();
             Account account = as.get(user_name);
             PatientService ps = new PatientService();
@@ -233,7 +271,45 @@ public class ViewAppointmentServlet extends HttpServlet {
             //           session.setAttribute("appointmentSessionObjAdmin", appointmentAdmin);
             session.setAttribute("doctorSessionObj", doctor);
             session.setAttribute("patientSessionObj", patient);
-
+            //add jihoon
+            String action = request.getParameter("action");          
+            boolean active = false;
+            
+            switch (action) {
+                case "history_appointment":                  
+                    request.setAttribute("account",account );                   
+                    patient =ps.get(account.getAccount_id());
+                    DoctorService ds = new DoctorService();
+                    doctor =  ds.getByDoctorID(patient.getDoctor_id());
+                    request.setAttribute("user",patient );
+                    request.setAttribute("doctor",doctor );      
+                    
+                    AppointmentService appoinmentService = new AppointmentService();
+                    List<Appointment> appointments = appoinmentService.getByPatientID(patient.getPatient_id());     
+                    ArrayList<Appointment> pastAppointments = new ArrayList();
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate beginDate;
+                    
+                    for (int i = 0; i < appointments.size(); i++) {
+                        beginDate = LocalDate.parse(appointments.get(i).getStart_date_time().substring(0, 10), df);
+                        
+                        if (beginDate.isBefore(LocalDate.now())) {                          
+                            pastAppointments.add(appointments.get(i));                     
+                        } 
+                    }        
+                    
+                    request.setAttribute("pastAppointments", pastAppointments);
+                    request.setAttribute("step", "0");
+                    active =true;           
+                    break;                
+            }
+            
+            if (active){
+                getServletContext().getRequestDispatcher("/WEB-INF/viewAppointment.jsp").forward(request, response);     
+                return; 
+            }      
+            //end jihoon
+           
             if (account.getProfile().equals("PATIENT")) {
                 getServletContext().getRequestDispatcher("/WEB-INF/editAppointmentPatient.jsp").forward(request, response);
                 return;
