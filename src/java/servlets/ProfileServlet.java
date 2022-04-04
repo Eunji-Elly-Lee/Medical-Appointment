@@ -57,21 +57,21 @@ public class ProfileServlet extends HttpServlet {
         String city = request.getParameter("city");
         String postal_code = request.getParameter("postal_code");
         String province = request.getParameter("province");
-        
+
         boolean regex_all_check = false;
         // 2022/03/22   add  start point
         String regex_first_name = "[a-zA-Z\\-]{1,25}";
         String regex_last_name = "[a-zA-Z\\-]{1,25}";
         String regex_phone_number = "^(\\+\\d{1}\\s)?\\(?\\d{3}\\)?\\d{3}\\d{4}$";
-        String regex_email ="^[^\\s@]+@([^\\s@.,]+\\.)+[^\\s@.,]{2,}$";
+        String regex_email = "^[^\\s@]+@([^\\s@.,]+\\.)+[^\\s@.,]{2,}$";
         String regex_birth_date = "^\\d{4}\\)?[\\s.-]\\d{2}[\\s.-]\\d{2}$";
         String regex_city = "[a-zA-Z\\-]{1,25}";
         String regex_postal_code = "[A-Za-z]\\d[A-Za-z] ?\\d[A-Za-z]\\d";
-        
+
         Pattern p = Pattern.compile(regex_first_name);
         Matcher m = p.matcher(first_name);
         boolean check_first_name = m.matches();
-        
+
         p = Pattern.compile(regex_last_name);
         m = p.matcher(last_name);
         boolean check_last_name = m.matches();
@@ -96,8 +96,8 @@ public class ProfileServlet extends HttpServlet {
         m = p.matcher(birth_date);
         boolean check_birth_date = m.matches();
 
-        if (check_first_name == true && check_last_name == true && check_phone_name == true && check_regex_email == true &&
-                check_regex_city == true && check_postal_code == true && check_birth_date == true) {
+        if (check_first_name == true && check_last_name == true && check_phone_name == true && check_regex_email == true
+                && check_regex_city == true && check_postal_code == true && check_birth_date == true) {
             regex_all_check = true;
         }
 
@@ -108,7 +108,7 @@ public class ProfileServlet extends HttpServlet {
                 || province == null || province.equals("")) {
             displayInformation(request, user_name);
             request.setAttribute("message", "Please fill out all the required information.");
-            
+
             getServletContext().getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
             return;
         } else {
@@ -162,11 +162,17 @@ public class ProfileServlet extends HttpServlet {
         }
 
         String editCheck = (String) session.getAttribute("editCheck");
+        String editCheckPatient = (String) session.getAttribute("editCheckPatient");
 
         if (editCheck != null) {
             session.setAttribute("editCheck", null);
             session.setAttribute("complete", "complete");
             response.sendRedirect("view_staff");
+            return;
+        } else if (editCheckPatient != null) {
+            session.setAttribute("editCheckPatient", null);
+            session.setAttribute("complete", "complete");
+            response.sendRedirect("view_patient");
             return;
         } else {
             getServletContext().getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
@@ -183,31 +189,38 @@ public class ProfileServlet extends HttpServlet {
             Account account = accountService.get(user_name);
             request.setAttribute("account", account);
 
-            Account loginAccount = accountService.get(loginUser);
-            request.setAttribute("loginAccount", loginAccount);
-
             if (account.getProfile().equals("DOCTOR")) {
                 DoctorService doctorService = new DoctorService();
                 Doctor doctor = doctorService.get(account.getAccount_id());
                 request.setAttribute("user", doctor);
                 session.setAttribute("user", account.getUser_name());
 
-                Doctor loginDoctor = doctorService.get(loginAccount.getAccount_id());
-                request.setAttribute("loginUser", loginDoctor);
             } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
                 AdministratorService administratorService = new AdministratorService();
                 Administrator administrator = administratorService.get(account.getAccount_id());
                 request.setAttribute("user", administrator);
                 session.setAttribute("user", account.getUser_name());
-
-                Administrator loginAdministrator = administratorService.get(loginAccount.getAccount_id());
-                request.setAttribute("loginUser", loginAdministrator);
+                
             } else if (account.getProfile().equals("PATIENT")) {
                 PatientService patientService = new PatientService();
                 Patient patient = patientService.get(account.getAccount_id());
                 request.setAttribute("user", patient);
                 session.setAttribute("user", account.getUser_name());
+            }
 
+            Account loginAccount = accountService.get(loginUser);
+            request.setAttribute("loginAccount", loginAccount);
+
+            if (loginAccount.getProfile().equals("DOCTOR")) {
+                DoctorService doctorService = new DoctorService();
+                Doctor loginDoctor = doctorService.get(loginAccount.getAccount_id());
+                request.setAttribute("loginUser", loginDoctor);
+            } else if (loginAccount.getProfile().equals("ADMIN") || loginAccount.getProfile().equals("SYSADMIN")) {
+                AdministratorService administratorService = new AdministratorService();
+                Administrator loginAdministrator = administratorService.get(loginAccount.getAccount_id());
+                request.setAttribute("loginUser", loginAdministrator);
+            } else if (account.getProfile().equals("PATIENT")) {
+                PatientService patientService = new PatientService();
                 Patient loginPatient = patientService.get(loginAccount.getAccount_id());
                 request.setAttribute("loginUser", loginPatient);
             }
