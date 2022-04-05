@@ -215,7 +215,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="steps">
                     <c:choose>
                         <c:when test="${account.profile == 'DOCTOR' || account.profile == 'PATIENT'}">
                             <c:if test="${step == '1'}">
@@ -257,15 +257,18 @@
                         <c:when test="${step == '0'}">
                             <div class="book">
                                 <div class="form_heading">
-                                    <h1>Search Patient / Doctor</h1>
+                                    <h2>Search Patient / Doctor</h2>
                                     <p>Please search by the name</p>
                                 </div>
 
                                 <form class="book_form" action="book_appointment" method="post">
-                                    <label for="name">Name: </label>
-                                    <input type="text" class="search_patient" name="name" value="${name}">                  
-                                    <input type="submit" class="submit_in_form" value="Submit">
-                                    <input type="hidden" name ="action" value="search_name">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="search_patient" name="name" value="${name}">
+                                    
+                                    <div class="btn_wrapper">
+                                        <input type="submit" class="submit_in_form" value="Submit">
+                                        <input type="hidden" name ="action" value="search_name">
+                                    </div>                                    
                                 </form>
 
                                 <c:if test="${searched}">
@@ -302,7 +305,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div>
+                                        <div class="btn_wrapper">
                                             <input type="submit" class="selected_submit" value="Submit Selected Name">
                                             <input type="hidden" name="name" value=${name}>
                                             <input type="hidden" name ="action" value="select_name">
@@ -314,7 +317,7 @@
                         <c:when test="${step == '1'}">
                             <div class="book">
                                 <div class="form_heading">
-                                    <h1>Select Date</h1>
+                                    <h2>Select Date</h2>
                                     <p>Please select the appointment date</p>
                                 </div>
 
@@ -330,7 +333,7 @@
                                             </c:forEach>
                                         </select>
                                     </div>
-                                    <div>
+                                    <div class="btn_wrapper">
                                         <input type="submit" class="submit_in_form" value="Submit">
                                         <input type="hidden" name="account_id" value=${account_id}>
                                         <input type="hidden" name ="action" value="select_date">
@@ -341,7 +344,7 @@
                         <c:otherwise>
                             <div class="book">
                                 <div class="form_heading">
-                                    <h1>Book Appointment</h1>
+                                    <h2>Book Appointment</h2>
                                     <p>Please fill in the form below</p>
                                 </div>
 
@@ -400,7 +403,8 @@
                                             <textarea name="book_app_reason" 
                                                       placeholder="Please write down the reason for your appointment."></textarea>
                                             <br>
-
+                                        </div>
+                                        <div class="btn_wrapper">
                                             <input type="submit" class="submit_in_form" value="Done">
                                             <input type="hidden" name="account_id" value=${account_id}>
                                             <input type="hidden" name ="action" value="book_appointment">
@@ -429,7 +433,7 @@
                 </div>
                 <div class="top-right">
                     <h3>Contact Us</h3>
-                   <div class="links">
+                    <div class="links">
                         <a href="#"><i class="fa-solid fa-square-phone"></i> +1 420 1245 6456</a>
                         <a href="#"><i class="fa-solid fa-envelope"></i> SurpassClinic@gmail.com</a>
                         <a href="#"><i class="fa-solid fa-location-dot"></i> 436 40th Street Calgary Alberta T2M 0G6</a>
