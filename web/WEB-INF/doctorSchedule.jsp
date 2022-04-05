@@ -159,7 +159,7 @@
                                 <div class="form_heading">
                                     <h2>Select Date</h2>
                                     <p>Please select your schedule date</p>
-                                    <p>${completeMessage}</p>
+                                    <p>${message}</p>
                                 </div>
 
                                 <form class="schedule_form" action="doctor_schedule" method="post">
@@ -187,7 +187,7 @@
                                 <div class="form_heading">
                                     <h2>Schedule</h2>
                                     <p>Please set your schedule</p>
-                                     <p>${dateMissingErrorMessage}</p>
+                                     <p>${message}</p>
                                 </div> 
 
                                 <form class="schedule_form" action="" method="post">
