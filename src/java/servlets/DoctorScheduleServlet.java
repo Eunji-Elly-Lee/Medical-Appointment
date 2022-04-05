@@ -193,7 +193,7 @@ public class DoctorScheduleServlet extends HttpServlet {
                         }
                         
                         schedule_date = LocalDate.now().plusDays(1).toString();
-                        request.setAttribute("message", "Schedule updated");
+                        request.setAttribute("message", "Schedule has been updated successfully.");
                         request.setAttribute("step", "1");
                     } else {
                         request.setAttribute("message", "*Update false");
