@@ -11,7 +11,7 @@
 .banner{
     text-align: center;
     font-size: 35px;
-    line-height: 250%;
+    line-height: 265%;
 }
 .message {
     text-align: center;
@@ -70,13 +70,6 @@ input[type=submit]:hover{
 }
 
 @media screen and (min-width: 768px) {
-    .banner_field{
-        margin-top: 15px;
-    }
-    .banner{
-        font-size: 40px;
-        line-height: 230%;
-    }
     .profileForm{
         width: 50%;
     }
