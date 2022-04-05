@@ -77,7 +77,6 @@ public class DoctorScheduleServlet extends HttpServlet {
         String seleted_schedule_date[] = request.getParameterValues("seleted_schedule_date");
         String seleted_start_time[] = request.getParameterValues("start_time");
         String seleted_end_time[] = request.getParameterValues("end_time");
-        String date_list[] = request.getParameterValues("date_List");
         Date beginDate;
         Date endDate;
         long du_time;
@@ -133,79 +132,79 @@ public class DoctorScheduleServlet extends HttpServlet {
                         d++;
                     }
 
-                    if (!(b == c && c == d && d == b)) {
-                        request.setAttribute("message", "*Update false");
-                        request.setAttribute("step", "2");
-                    }
-
-                    for (int i = 0; i < seleted_schedule_date.length; i++) {
-                        try {
-                            beginDate = df.parse(cleand_start_time.get(i));
-                            endDate = df.parse(cleand_end_time.get(i));
-                            du_time = (endDate.getTime() - beginDate.getTime()) / (60 * 1000);
-                            Long longtime = du_time;
-                            int du_time_time = longtime.intValue();
-
-                            for (Availability availability : availabilities) {
-                                if (availability.getStart_date_time().substring(0, 10).equals(seleted_schedule_date[i])) {
-                                    availabilityService.updateSchedule(doctor.getDoctor_id(),
-                                            availability.getStart_date_time(), availability.getDuration(),
-                                            seleted_schedule_date[i] + " " + cleand_start_time.get(i) + ":00.0", du_time_time);
-                                }
-                            }
-
-                            availabilityService.insert(doctor.getDoctor_id(),
-                                    seleted_schedule_date[i] + " " + cleand_start_time.get(i) + ":00.0", du_time_time);
-
-                        } catch (Exception ex) {
-                        }
-                    }
-                } catch (Exception ex) {
-                    request.setAttribute("message", "*time check is required");
-                    request.setAttribute("step", "2");
-                }
-
-                boolean delectdateList = true;
-                int beforedate;
-                int afterdate;
-
-                String beforedate_cal = (String) session.getAttribute("schedule_start_date");
-                String afterdate_cal = (String) session.getAttribute("schedule_end_date");
-                beforedate = Integer.parseInt(beforedate_cal.substring(0, 4) + beforedate_cal.substring(5, 7) + beforedate_cal.substring(8, 10));
-                afterdate = Integer.parseInt(afterdate_cal.substring(0, 4) + afterdate_cal.substring(5, 7) + afterdate_cal.substring(8, 10));
-
-                int availDateInt;
-
-                for (int i = 0; i < availabilities.size(); i++) {
-                    availDateInt = Integer.parseInt(availabilities.get(i).getStart_date_time().substring(0, 4)
-                            + availabilities.get(i).getStart_date_time().substring(5, 7)
-                            + availabilities.get(i).getStart_date_time().substring(8, 10));
-
-                    if (!(beforedate > availDateInt || afterdate < availDateInt)) {
-                        try {
-                            for (int j = 0; j < seleted_schedule_date.length; j++) {
-                                if (seleted_schedule_date[j].equals(availabilities.get(i).getStart_date_time().substring(0, 10))) {
-                                    delectdateList = false;
-                                }
-                            }
-                        } catch (Exception ex) {
-                        }
-
-                        if (delectdateList) {
+                    if (b == c && c == d && d == b) {
+                        for (int i = 0; i < seleted_schedule_date.length; i++) {
                             try {
-                                availabilityService.deleteBySchedule(doctor.getDoctor_id(), availabilities.get(i).getStart_date_time());
-                                request.setAttribute("message", "Schedule updated");
-                                request.setAttribute("step", "1");
+                                beginDate = df.parse(cleand_start_time.get(i));
+                                endDate = df.parse(cleand_end_time.get(i));
+                                du_time = (endDate.getTime() - beginDate.getTime()) / (60 * 1000);
+                                Long longtime = du_time;
+                                int du_time_time = longtime.intValue();
+
+                                for (Availability availability : availabilities) {
+                                    if (availability.getStart_date_time().substring(0, 10).equals(seleted_schedule_date[i])) {
+                                        availabilityService.updateSchedule(doctor.getDoctor_id(),
+                                                availability.getStart_date_time(), availability.getDuration(),
+                                                seleted_schedule_date[i] + " " + cleand_start_time.get(i) + ":00.0", du_time_time);
+                                    }
+                                }
+
+                                availabilityService.insert(doctor.getDoctor_id(),
+                                        seleted_schedule_date[i] + " " + cleand_start_time.get(i) + ":00.0", du_time_time);
                             } catch (Exception ex) {
                             }
                         }
+                        
+                        boolean deleteDateList = true;
+                        int beforedate;
+                        int afterdate;
 
-                        delectdateList = true;
+                        String beforedate_cal = (String) session.getAttribute("schedule_start_date");
+                        String afterdate_cal = (String) session.getAttribute("schedule_end_date");
+                        beforedate = Integer.parseInt(beforedate_cal.substring(0, 4) + beforedate_cal.substring(5, 7) + beforedate_cal.substring(8, 10));
+                        afterdate = Integer.parseInt(afterdate_cal.substring(0, 4) + afterdate_cal.substring(5, 7) + afterdate_cal.substring(8, 10));
+
+                        int availDateInt;
+
+                        for (int i = 0; i < availabilities.size(); i++) {
+                            availDateInt = Integer.parseInt(availabilities.get(i).getStart_date_time().substring(0, 4)
+                                    + availabilities.get(i).getStart_date_time().substring(5, 7)
+                                    + availabilities.get(i).getStart_date_time().substring(8, 10));
+
+                            if (!(beforedate > availDateInt || afterdate < availDateInt)) {
+                                try {
+                                    for (int j = 0; j < seleted_schedule_date.length; j++) {
+                                        if (seleted_schedule_date[j].equals(availabilities.get(i).getStart_date_time().substring(0, 10))) {
+                                            deleteDateList = false;
+                                        }
+                                    }
+                                } catch (Exception ex) {
+                                }
+
+                                if (deleteDateList) {
+                                    try {
+                                        availabilityService.deleteBySchedule(doctor.getDoctor_id(), availabilities.get(i).getStart_date_time());
+                                    } catch (Exception ex) {
+                                    }
+                                }
+
+                                deleteDateList = true;
+                            }
+                        }
+                        
+                        schedule_date = LocalDate.now().plusDays(1).toString();
+                        request.setAttribute("message", "Schedule updated");
+                        request.setAttribute("step", "1");
+                    } else {
+                        request.setAttribute("message", "*Update false");
+                        request.setAttribute("step", "2");
                     }
+                } catch (Exception ex) {
+                    request.setAttribute("message", "*Update false");
+                    request.setAttribute("step", "2");
                 }
 
                 break;
-
         }
 
         // after select date  
