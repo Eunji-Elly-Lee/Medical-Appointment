@@ -126,28 +126,26 @@
             
             <div>
                 <div class="loginBox">
-                    <div class="loginForm">
+                    <form action="login" method="post">
+                        <h2>Login</h2>
+                        <br>
+                        <label>Username</label>
+                        <input type="text" name="username_input" size="30" placeholder="Username">
+                        <br>
 
-                        <form class="login_field" action="login" method="post">
-                            <h3>Login</h3>
-                            <br>
-                            <label>Username</label>
-                            <input type="text" name="username_input" size="30" placeholder="Username">
-                            <br>
-
-                            <label>Password</label>
-                            <input type="password" name="password_input" size="30" placeholder="Password">
-                            <a class="forget_pwd" href="forgot"> Forgot your password?</a>
-                            <input id="login_btn" type="submit" value="Log in" size="30">
-                            <br>
-                            <br>
-                            <span class="invalidMessage">${invalidMessage}</span>
-                        </form>
+                        <label>Password</label>
+                        <input type="password" name="password_input" size="30" placeholder="Password">
+                        <a class="forget_pwd" href="forgot"> Forgot your password?</a>
+                        <input type="submit" value="Log in">
+                        <br>
+                        <br>
                         
-                        <div class="account">
-                            <span>Need an account?</span>
-                            <a class="sign_up" href="signup">Sign up</a>
-                        </div> 
+                        <span>${invalidMessage}</span>
+                    </form>
+                        
+                    <div class="account">
+                        <span>Need an account?</span>
+                        <a class="sign_up" href="signup">&nbsp; Sign up</a>
                     </div>
                 </div>
             </div>
@@ -168,7 +166,7 @@
                 </div>
                 <div class="top-right">
                     <h3>Contact Us</h3>
-                   <div class="links">
+                    <div class="links">
                         <a href="#"><i class="fa-solid fa-square-phone"></i> +1 420 1245 6456</a>
                         <a href="#"><i class="fa-solid fa-envelope"></i> SurpassClinic@gmail.com</a>
                         <a href="#"><i class="fa-solid fa-location-dot"></i> 436 40th Street Calgary Alberta T2M 0G6</a>
