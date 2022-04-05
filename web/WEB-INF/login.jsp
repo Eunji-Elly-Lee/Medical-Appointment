@@ -136,7 +136,10 @@
                         <label>Password</label>
                         <input type="password" name="password_input" size="30" placeholder="Password">
                         <a class="forget_pwd" href="forgot"> Forgot your password?</a>
-                        <input type="submit" value="Log in">
+                        
+                        <div class="btn_wrapper">
+                            <input type="submit" value="Log in">
+                        </div>                        
                         <br>
                         <br>
                         
