@@ -245,10 +245,12 @@
                 </div>
 
                 <div class="profileForm">
-                    <form action="profile" method="post">
+                    <div class="form_heading">
                         <h2>Edit your account</h2>
                         <p>Please enter your information for your account.</p>
-
+                    </div>
+                    
+                    <form action="profile" method="post">
                         <div class="container">
                             <div class="row align-items-start">
                                 <div class="col-md-5">
@@ -368,7 +370,7 @@
                 </div>
                 <div class="top-right">
                     <h3>Contact Us</h3>
-                   <div class="links">
+                    <div class="links">
                         <a href="#"><i class="fa-solid fa-square-phone"></i> +1 420 1245 6456</a>
                         <a href="#"><i class="fa-solid fa-envelope"></i> SurpassClinic@gmail.com</a>
                         <a href="#"><i class="fa-solid fa-location-dot"></i> 436 40th Street Calgary Alberta T2M 0G6</a>
