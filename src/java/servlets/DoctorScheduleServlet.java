@@ -67,7 +67,8 @@ public class DoctorScheduleServlet extends HttpServlet {
         String user_name = (String) session.getAttribute("user_name");
         String action = request.getParameter("action");
         String schedule_date = request.getParameter("schedule_date");
-
+        request.setAttribute("schedule_date", schedule_date);
+        
         AccountService accountService = new AccountService();
         DoctorService doctorService = new DoctorService();
         AvailabilityService availabilityService = new AvailabilityService();
@@ -96,13 +97,15 @@ public class DoctorScheduleServlet extends HttpServlet {
 
         switch (action) {
             case "select_date":
-                request.setAttribute("step", "0");
+                if (schedule_date.equals("0")) {
+                 request.setAttribute("step", "1");
+                } else {
+                    request.setAttribute("step", "2");
+                }
+                
                 break;
 
             case "doctor_schedule":
-                request.setAttribute("completeMessage", "Schedule updated");
-                request.setAttribute("step", "1");
-
                 List<String> cleand_start_time = new ArrayList<>();
                 List<String> cleand_end_time = new ArrayList<>();
 
@@ -131,8 +134,8 @@ public class DoctorScheduleServlet extends HttpServlet {
                     }
 
                     if (!(b == c && c == d && d == b)) {
-                        request.setAttribute("dateMissingErrorMessage", "*Update false");
-                        request.setAttribute("step", "0");
+                        request.setAttribute("message", "*Update false");
+                        request.setAttribute("step", "2");
                     }
 
                     for (int i = 0; i < seleted_schedule_date.length; i++) {
@@ -158,8 +161,8 @@ public class DoctorScheduleServlet extends HttpServlet {
                         }
                     }
                 } catch (Exception ex) {
-                    request.setAttribute("dateMissingErrorMessage", "*time check is required");
-                    request.setAttribute("step", "0");
+                    request.setAttribute("message", "*time check is required");
+                    request.setAttribute("step", "2");
                 }
 
                 boolean delectdateList = true;
@@ -191,7 +194,7 @@ public class DoctorScheduleServlet extends HttpServlet {
                         if (delectdateList) {
                             try {
                                 availabilityService.deleteBySchedule(doctor.getDoctor_id(), availabilities.get(i).getStart_date_time());
-                                request.setAttribute("completeMessage", "Schedule updated");
+                                request.setAttribute("message", "Schedule updated");
                                 request.setAttribute("step", "1");
                             } catch (Exception ex) {
                             }
