@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 
-                <div>
+                <div class="steps">
                     <c:if test="${step == '1'}">
                         <span>Select Date</span>>>  
                         <span class="non_active other_step">Doctor Schedule</span>
@@ -155,16 +155,16 @@
                 <div class="schedule_wrapper"> 
                     <c:choose>
                         <c:when test="${step == '1'}">       
-                            <div class="book">
+                            <div class="schedule">
                                 <div class="form_heading">
-                                    <h1>Select Date</h1>
+                                    <h2>Select Date</h2>
                                     <p>Please select your schedule date</p>
-                                    <p class="errormessage">${completeMessage}</p>
+                                    <p>${completeMessage}</p>
                                 </div>
 
-                                <form class="book_form" action="doctor_schedule" method="post">
+                                <form class="schedule_form" action="doctor_schedule" method="post">
                                     <div>
-                                        <label for="appointment_date">Date</label>
+                                        <label for="schedule_date">Date</label>
                                         <select class="form-select" name="schedule_date">
                                             <option value="0">-------- Choose Date --------</option>
                                             <c:forEach items="${dateList}" var="date_List">
@@ -183,15 +183,15 @@
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <div class="book">
+                            <div class="schedule">
                                 <div class="form_heading">
-                                    <h1>Schedule</h1>
+                                    <h2>Schedule</h2>
                                     <p>Please set your schedule</p>
-                                     <p class="errormessage">${dateMissingErrorMessage}</p>
+                                     <p>${dateMissingErrorMessage}</p>
                                 </div> 
 
-                                <form class="book_form" action="" method="post">
-                                    <div class="book_form_flex">
+                                <form class="schedule_form" action="" method="post">
+                                    <div class="schedule_form_flex">
                                         <div class="check_box_date">                                            
                                             <c:forEach items="${dateList}" var="date_List">
                                                 <%
@@ -296,7 +296,7 @@
                 </div>
                 <div class="top-right">
                     <h3>Contact Us</h3>
-                   <div class="links">
+                    <div class="links">
                         <a href="#"><i class="fa-solid fa-square-phone"></i> +1 420 1245 6456</a>
                         <a href="#"><i class="fa-solid fa-envelope"></i> SurpassClinic@gmail.com</a>
                         <a href="#"><i class="fa-solid fa-location-dot"></i> 436 40th Street Calgary Alberta T2M 0G6</a>
