@@ -151,15 +151,19 @@
                         <span>Doctor Schedule</span>
                     </c:if>
                 </div>  
-
+                
                 <div class="schedule_wrapper"> 
                     <c:choose>
-                        <c:when test="${step == '1'}">       
+                        <c:when test="${step == '1'}">     
+                            <div class="message">
+                                <br>
+                                <h3>${message}</h3>
+                            </div>  
+                            
                             <div class="schedule">
                                 <div class="form_heading">
                                     <h2>Select Date</h2>
                                     <p>Please select your schedule date</p>
-                                    <p>${message}</p>
                                 </div>
 
                                 <form class="schedule_form" action="doctor_schedule" method="post">
