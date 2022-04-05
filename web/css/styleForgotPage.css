@@ -51,8 +51,8 @@ input[type=password]{
     text-align: center;
 }
 input[type=submit]{
-    width: 50%;
-    font-size: 18px;
+    width: 45%;
+    font-size: 16px;
     background-color: #017C83;
     color: white;
     padding: 14px 20px;
