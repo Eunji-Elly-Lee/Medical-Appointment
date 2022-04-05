@@ -67,6 +67,7 @@ public class ViewStaffServlet extends HttpServlet {
         DoctorService ds = new DoctorService();
         AdministratorService ads = new AdministratorService();
 
+        String user_name = (String) session.getAttribute("user_name");
         String action = request.getParameter("action");
         String account_id = request.getParameter("account_id");
         int accountID = Integer.parseInt(account_id);
@@ -93,10 +94,6 @@ public class ViewStaffServlet extends HttpServlet {
                     } catch (Exception ex) {
                         Logger.getLogger(ViewStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
-                    response.sendRedirect("view_staff");
-                    request.setAttribute("message", "User is deleted successfully.");
-                    return;
                 } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
                     try {
                         ads.delete(account.getAccount_id());
@@ -104,14 +101,30 @@ public class ViewStaffServlet extends HttpServlet {
                     } catch (Exception ex) {
                         Logger.getLogger(ViewStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
-                    response.sendRedirect("view_staff");
-                    request.setAttribute("message", "User is deleted successfully.");
-                    return;
                 }
+                
+                request.setAttribute("message", "User is deleted successfully.");
             }
         }
         
+        try {
+            Account account = as.get(user_name);
+            request.setAttribute("account", account);
+
+            if (account.getProfile().equals("DOCTOR")) {
+                DoctorService doctorService = new DoctorService();
+                Doctor doctor = doctorService.get(account.getAccount_id());
+                request.setAttribute("user", doctor);
+            } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
+                AdministratorService administratorService = new AdministratorService();
+                Administrator administrator = administratorService.get(account.getAccount_id());
+                request.setAttribute("user", administrator);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        getAllStaff(request, response);
         getServletContext().getRequestDispatcher("/WEB-INF/viewStaff.jsp").forward(request, response);
         return;
     }
