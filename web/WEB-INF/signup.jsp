@@ -209,165 +209,152 @@
                     </div>
 
                     <form class="signup_form" action="signup" method="post">
-                        <div class="signup_form_flex">                            
-                            <div>
-                                <label>Username</label>
-                                <input type="text" name="signup_username" placeholder="Username" value="${new_account.user_name}">
-                                <p class="errormessage">${userNameErrorMessage}</p>
-                            </div>
-                            <div>
-                                <label>Password</label>
-                                <input type="password" name="signup_password" placeholder="Password" value="${new_account.password}">
-                            </div>
-                            <div>
-                                <label>Re-enter Password</label>
-                                <input type="password" name="signup_re_enter_password" placeholder="Re-enter password" value="${new_account.password}">
-                                <p class="errormessage">${passErrorMessage}</p>
-                            </div>
-                            <div>
-                                <label>First name</label>
-                                <input type="text" name="signup_firstname" placeholder="First Name"  value="${patient.first_name}">
-                                <p class="errormessage">${firstErrorMessage}</p>
-                            </div>
-
-                            <div>
-                                <label>Last Name</label>
-                                <input type="text" name="signup_lastname" placeholder="Last Name" value="${patient.last_name}">
-                                <p class="errormessage">${lastErrorMessage}</p>
-                            </div>
-                            <div>
-                                <label>Health Care Number</label>
-                                <input type="text" name="signup_healthcare_num" placeholder="Health care number" value="${patient.healthcare_id}">
-                                <p class="errormessage">${healthErrorMessage}</p>
-                            </div>
-                            <div>
-                                <label>Phone number</label>
-                                <input type="tel" name="signup_phonenum" placeholder="Phone number" value="${patient.mobile_phone}">
-                                <p class="errormessage">${phoneErrorMessage}</p>
-                            </div>
-                            <div>
-                                <label>Email</label>
-                                <input type="email" name="signup_email" placeholder="Email" value="${patient.email}">
-                                <p class="errormessage">${emailErrorMessage}</p>
-                            </div>
-                            <div>
-                                <label>Alternate Phone number</label>
-                                <input type="tel" name="signup_phonenum_alt" placeholder="Alternate phone number" value="${patient.alt_phone}">
-                                <p class="errormessage">${phoneAltErrorMessage}</p>
-                            </div>
-                            <div>
-                                <label>Birth date</label>
-                                <input type="date" name="signup_birth_date" placeholder="Birth date" value="${patient.birth_date}">
-                                <p class="errormessage">${birthErrorMessage}</p>
-                            </div>
+                        <div>
+                            <label>Username</label>
+                            <input type="text" name="signup_username" placeholder="Username" value="${new_account.user_name}">
+                            <p class="errormessage">${userNameErrorMessage}</p>
                         </div>
-
-                        <div class="signup_radio_btns">
-                            <div class="gender">
-                                <label>Sex</label>
-                                <div class="gender_option">
-                                    <div> 
-                                        <input type="radio" name="gender_radio" value="male"
-                                               <c:if test="${patient.gender == 'male'}">checked</c:if>>
-                                        <label>Male</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="gender_radio" value="female"
-                                                <c:if test="${patient.gender == 'female'}">checked</c:if>>
-                                        <label>Female</label>
-                                    </div>
-                                    <p class="errormessage">${genderErrorMessage}</p>
-                                </div>
-                            </div>                            
-                            <div class="prefered_notification">
-                                <label>Preferred Notification</label>
-                                <div class="prefered_notification_option">
-                                    <div> 
-                                        <input type="radio" name="prefered_notification_radio" value="MOBILE_PHONE"
-                                               <c:if test="${patient.pref_contact_type == 'MOBILE_PHONE'}">checked</c:if>>
-                                        <label>Phone</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="prefered_notification_radio" value="EMAIL"
-                                               <c:if test="${patient.pref_contact_type == 'EMAIL'}">checked</c:if>>
-                                        <label>Email</label>
-                                    </div>
-                                    <p class="errormessage">${notiErrorMessage}</p>
-                                </div>
-                            </div>
+                        <div>
+                            <label>Password</label>
+                            <input type="password" name="signup_password" placeholder="Password" value="${new_account.password}">
                         </div>
-
-                        <div class="signup_location">
-                            <div class="signup_address_field">
-                                <label>Address</label>
-                                <input type="text" name="signup_address" placeholder="Street address" value="${patient.street_address}">
-                                <p class="errormessage">${addressErrorMessage}</p>
-                                <%--<input type="text" name="signup_address2" placeholder="Street address line 2">--%>
+                        <div>
+                            <label>Re-enter Password</label>
+                            <input type="password" name="signup_re_enter_password" placeholder="Re-enter password" value="${new_account.password}">
+                            <p class="errormessage">${passErrorMessage}</p>
+                        </div>
+                        <div>
+                            <label>First name</label>
+                            <input type="text" name="signup_firstname" placeholder="First Name"  value="${patient.first_name}">
+                            <p class="errormessage">${firstErrorMessage}</p>
+                        </div>
+                        <div>
+                            <label>Last Name</label>
+                            <input type="text" name="signup_lastname" placeholder="Last Name" value="${patient.last_name}">
+                            <p class="errormessage">${lastErrorMessage}</p>
+                        </div>
+                        <div>
+                            <label>Health Care Number</label>
+                            <input type="text" name="signup_healthcare_num" placeholder="Health care number" value="${patient.healthcare_id}">
+                            <p class="errormessage">${healthErrorMessage}</p>
+                        </div>
+                        <div>
+                            <label>Phone number</label>
+                            <input type="tel" name="signup_phonenum" placeholder="Phone number" value="${patient.mobile_phone}">
+                            <p class="errormessage">${phoneErrorMessage}</p>
+                        </div>
+                        <div>
+                            <label>Email</label>
+                            <input type="email" name="signup_email" placeholder="Email" value="${patient.email}">
+                            <p class="errormessage">${emailErrorMessage}</p>
+                        </div>
+                        <div>
+                            <label>Alternate Phone number</label>
+                            <input type="tel" name="signup_phonenum_alt" placeholder="Alternate phone number" value="${patient.alt_phone}">
+                            <p class="errormessage">${phoneAltErrorMessage}</p>
+                        </div>
+                        <div>
+                            <label>Birth date</label>
+                            <input type="date" name="signup_birth_date" placeholder="Birth date" value="${patient.birth_date}">
+                            <p class="errormessage">${birthErrorMessage}</p>
+                        </div>
+                        <div>
+                            <label>Sex</label>
+                            <div> 
+                                <input type="radio" name="gender_radio" value="male"
+                                        <c:if test="${patient.gender == 'male'}">checked</c:if>>
+                                <label>&nbsp; Male</label>
                             </div>
-                            <div class="signup_city_state_province">
-                                <label>City</label>
-                                <input type="text" name="signup_city" placeholder="City" value="${patient.city}">
-                                <p class="errormessage">${cityErrorMessage}</p>
-                                <!--<input type="text" name="signup_state_province" placeholder="Province" value="">-->
-                                <label>Province</label>
-                                <select class="province" name="signup_state_province" placeholder="Province" >
-                                    <option value="" disabled selected>Province</option>
-                                    <option value="Alberta" <c:if test="${patient.province == 'Alberta'}">selected</c:if>>
-                                        Alberta
-                                    </option>
-                                    <option value="British Columbia"
-                                            <c:if test="${patient.province == 'British Columbia'}">selected</c:if>>
-                                        British Columbia
-                                    </option>
-                                    <option value="Manitoba" <c:if test="${patient.province == 'Manitoba'}">selected</c:if>>
-                                        Manitoba
-                                    </option>
-                                    <option value="New Brunswick" <c:if test="${patient.province == 'New Brunswick'}">selected</c:if>>
-                                        New Brunswick
-                                    </option>
-                                    <option value="Newfoundland and Labrador"
-                                            <c:if test="${patient.province == 'Newfoundland and Labrador'}">selected</c:if>>
-                                        Newfoundland
-                                    </option>
-                                    <option value="Nova Scotia" <c:if test="${patient.province == 'Nova Scotia'}">selected</c:if>>
-                                        Nova Scotia
-                                    </option>
-                                    <option value="Ontario" <c:if test="${patient.province == 'Ontario'}">selected</c:if>>
-                                        Ontario
-                                    </option>
-                                    <option value="Prince Edward Island"
-                                            <c:if test="${patient.province == 'Prince Edward Island'}">selected</c:if>>
-                                        Prince Edward Island
-                                    </option>
-                                    <option value="Quebec" <c:if test="${patient.province == 'Quebec'}">selected</c:if>>
-                                        Quebec
-                                    </option>
-                                    <option value="Saskatchewan" <c:if test="${patient.province == 'Saskatchewan'}">selected</c:if>>
-                                        Saskatchewan
-                                    </option>
-                                    <option value="Northwest Territories"
-                                            <c:if test="${patient.province == 'Northwest Territories'}">selected</c:if>>
-                                        Northwest Territories
-                                    </option>
-                                    <option value="Nunavut" <c:if test="${patient.province == 'Nunavut'}">selected</c:if>>
-                                        Nunavut
-                                    </option>
-                                    <option value="Yukon" <c:if test="${patient.province == 'Yukon'}">selected</c:if>>
-                                        Yukon
-                                    </option>
-                                </select>
-                                <p class="errormessage">${provErrorMessage}</p>
+                            <div>
+                                <input type="radio" name="gender_radio" value="female"
+                                        <c:if test="${patient.gender == 'female'}">checked</c:if>>
+                                <label>&nbsp; Female</label>
                             </div>
-                            <div class="signup_postal_code">
-                                <label>Postal Code</label>
-                                <input type="text" name="signup_postal" placeholder="T2X 2X2" value="${patient.postal_code}">
-                                <p class="errormessage">${postalErrorMessage}</p>
+                            <p class="errormessage">${genderErrorMessage}</p>
+                        </div>                            
+                        <div>
+                            <label>Preferred Notification</label>
+                            <div> 
+                                <input type="radio" name="prefered_notification_radio" value="MOBILE_PHONE"
+                                        <c:if test="${patient.pref_contact_type == 'MOBILE_PHONE'}">checked</c:if>>
+                                <label>&nbsp; Phone</label>
                             </div>
+                            <div>
+                                <input type="radio" name="prefered_notification_radio" value="EMAIL"
+                                        <c:if test="${patient.pref_contact_type == 'EMAIL'}">checked</c:if>>
+                                <label>&nbsp; Email</label>
+                            </div>
+                            <p class="errormessage">${notiErrorMessage}</p>
+                        </div>                        
+                        <div>
+                            <label>Address</label>
+                            <input type="text" name="signup_address" placeholder="Street address" value="${patient.street_address}">
+                            <p class="errormessage">${addressErrorMessage}</p>
+                        </div>
+                        <div>
+                            <label>City</label>
+                            <input type="text" name="signup_city" placeholder="City" value="${patient.city}">
+                            <p class="errormessage">${cityErrorMessage}</p>
+                        </div>
+                        <div>
+                            <label>Province</label>
+                            <select class="province" name="signup_state_province" placeholder="Province">
+                                <option value="" disabled selected>Province</option>
+                                <option value="Alberta" <c:if test="${patient.province == 'Alberta'}">selected</c:if>>
+                                    Alberta
+                                </option>
+                                <option value="British Columbia"
+                                        <c:if test="${patient.province == 'British Columbia'}">selected</c:if>>
+                                    British Columbia
+                                </option>
+                                <option value="Manitoba" <c:if test="${patient.province == 'Manitoba'}">selected</c:if>>
+                                    Manitoba
+                                </option>
+                                <option value="New Brunswick" <c:if test="${patient.province == 'New Brunswick'}">selected</c:if>>
+                                    New Brunswick
+                                </option>
+                                <option value="Newfoundland and Labrador"
+                                        <c:if test="${patient.province == 'Newfoundland and Labrador'}">selected</c:if>>
+                                    Newfoundland
+                                </option>
+                                <option value="Nova Scotia" <c:if test="${patient.province == 'Nova Scotia'}">selected</c:if>>
+                                    Nova Scotia
+                                </option>
+                                <option value="Ontario" <c:if test="${patient.province == 'Ontario'}">selected</c:if>>
+                                    Ontario
+                                </option>
+                                <option value="Prince Edward Island"
+                                        <c:if test="${patient.province == 'Prince Edward Island'}">selected</c:if>>
+                                    Prince Edward Island
+                                </option>
+                                <option value="Quebec" <c:if test="${patient.province == 'Quebec'}">selected</c:if>>
+                                    Quebec
+                                </option>
+                                <option value="Saskatchewan" <c:if test="${patient.province == 'Saskatchewan'}">selected</c:if>>
+                                    Saskatchewan
+                                </option>
+                                <option value="Northwest Territories"
+                                        <c:if test="${patient.province == 'Northwest Territories'}">selected</c:if>>
+                                    Northwest Territories
+                                </option>
+                                <option value="Nunavut" <c:if test="${patient.province == 'Nunavut'}">selected</c:if>>
+                                    Nunavut
+                                </option>
+                                <option value="Yukon" <c:if test="${patient.province == 'Yukon'}">selected</c:if>>
+                                    Yukon
+                                </option>
+                            </select>
+                            <p class="errormessage">${provErrorMessage}</p>
+                        </div>
+                        <div>
+                            <label>Postal Code</label>
+                            <input type="text" name="signup_postal" placeholder="T2X 2X2" value="${patient.postal_code}">
+                            <p class="errormessage">${postalErrorMessage}</p>
                         </div>
 
                        <c:if test="${diplay_agreement}">
                             <div class="agreement_wapper">
-                                <input type="checkbox" name="agreement" value="agreed">&nbsp; I've read and agreed
+                                <input type="checkbox" name="agreement" value="agreed">&nbsp;&nbsp; I've read and agreed
                                 <a href="agreement" target="_blank">this HIA</a>
                                 <p class="errormessage">${agreementErrorMessage}</p>
                             </div>     
@@ -397,7 +384,7 @@
                 </div>
                 <div class="top-right">
                     <h3>Contact Us</h3>
-                   <div class="links">
+                    <div class="links">
                         <a href="#"><i class="fa-solid fa-square-phone"></i> +1 420 1245 6456</a>
                         <a href="#"><i class="fa-solid fa-envelope"></i> SurpassClinic@gmail.com</a>
                         <a href="#"><i class="fa-solid fa-location-dot"></i> 436 40th Street Calgary Alberta T2M 0G6</a>
