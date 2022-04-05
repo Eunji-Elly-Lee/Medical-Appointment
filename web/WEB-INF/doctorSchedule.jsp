@@ -272,6 +272,7 @@
                                         <input type="submit" class="submit_in_form" value="Apply">
                                         <input type="hidden" name="account_id" >
                                         <input type="hidden" name ="action" value="doctor_schedule">
+                                        <input type="hidden" name ="action" value="select_date">
                                     </div>
                                 </form>
                             </div>
