@@ -63,6 +63,14 @@ input[type=submit]:hover{
     background-color: #01886f;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
+.table-responsive{
+    background-color: white;
+    margin: 30px auto;
+}
+thead{
+    border-top: 2px solid black;
+    border-bottom: 3px solid black;
+}
 .selected_submit{
     width: 85% !important;
 }
