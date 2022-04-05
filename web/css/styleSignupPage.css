@@ -23,7 +23,7 @@
     box-shadow: 5px 5px 10px #000000;
     box-sizing: content-box;
     width: 50%;
-    margin: 60px auto;
+    margin: 30px auto;
 }
 input[type=text],
 input[type=password],
@@ -33,7 +33,7 @@ input[type=date],
 .province{
     width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: 2px 0 8px;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -78,5 +78,11 @@ input[type=button]:hover{
     input[type=button]{
         width: 20%;
         margin: 10px 8%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .signup{
+        width: 45%;
     }
 }
