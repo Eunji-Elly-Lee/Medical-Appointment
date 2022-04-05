@@ -22,6 +22,9 @@
 .other_step:hover{
     color: black !important;
 }
+.message {
+    text-align: center;
+}
 .schedule{
     border-radius: 5px;
     background-color: #F8F5F8;
