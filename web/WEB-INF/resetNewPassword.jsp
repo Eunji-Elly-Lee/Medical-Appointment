@@ -145,8 +145,11 @@
                         <input type="password" name="resetPassword" value="${resetPassword}"><br>
                         <label for="resetConfirmPassword">* Confirm New Password: </label> 
                         <input type="password" name="resetConfirmPassword" value="${resetConfirmPassword}"><br>
-                        <input type="submit" value="Submit">
-                        <input type="hidden" name ="action" value="newPassword">
+                        
+                        <div class="btn_wrapper">
+                            <input type="submit" value="Submit">
+                            <input type="hidden" name ="action" value="newPassword">
+                        </div>                        
                     </form>
                 </div>
             </div>
@@ -167,7 +170,7 @@
                 </div>
                 <div class="top-right">
                     <h3>Contact Us</h3>
-                   <div class="links">
+                    <div class="links">
                         <a href="#"><i class="fa-solid fa-square-phone"></i> +1 420 1245 6456</a>
                         <a href="#"><i class="fa-solid fa-envelope"></i> SurpassClinic@gmail.com</a>
                         <a href="#"><i class="fa-solid fa-location-dot"></i> 436 40th Street Calgary Alberta T2M 0G6</a>
