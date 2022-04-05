@@ -253,41 +253,41 @@
                     <form action="profile" method="post">
                         <div class="container">
                             <div class="row align-items-start">
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <label for="first_name">First name</label> <br>
                                     <input type="text" id="first_name" name="first_name" value="${user.first_name}">
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <label for="last_name">Last name</label> <br>
                                     <input type="text" id="last_name" name="last_name" value="${user.last_name}">
                                 </div>
                             </div>
                             <div class="row align-items-second">
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <label for="password">Password</label> <br>
                                     <input type="password" id="password" name="password" placeholder="Enter New Password">
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <label for="repassword">Re-enter Password</label> <br>
                                     <input type="password" id="repassword" name="repassword" placeholder="Re-enter New Password">
                                 </div>
                             </div>                            
                             <div class="row align-items-third">
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <label for="phone_number">Phone number</label> <br>
                                     <input type="text" id="phone_number" name="phone_number" value="${user.mobile_phone}">
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <label for="alt_phone">Alter Phone number</label> <br>
                                     <input type="text" id="alt_phone" name="alt_phone" value="${user.alt_phone}">
                                 </div>
                             </div>                            
                             <div class="row align-items-fourth">
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <label for="email">Email</label> <br>
                                     <input type="email" id="email" name="email" value="${user.email}">
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <label for="pref_contact_type">Preferred Notification</label><br>
                                     <select id="pref_contact_type" name="pref_contact_type">
                                         <c:if test="${user.pref_contact_type == 'MOBILE_PHONE'}">
@@ -302,12 +302,12 @@
                                 </div>
                             </div>
                             <div class="row align-items-fifth">
-                                <div class="col-md-5">
+                                <div class="col-lg-5">
                                     <label for="birth_date">Birth date</label> <br>
-                                    <input type="text" id="birth_date" name="birth_date" value="${user.birth_date}">
+                                    <input type="date" id="birth_date" name="birth_date" value="${user.birth_date}">
                                 </div>
-                                <div class="col-md-5">
-                                    <label for="gender">Gender</label><br>
+                                <div class="col-lg-5">
+                                    <label for="gender">Sex</label><br>
                                     <select id="gender" name="gender">
                                         <c:if test="${user.gender == 'male'}">
                                             <option value="male" selected>Male</option>
@@ -321,14 +321,14 @@
                                 </div>
                             </div>
                             <div class="row align-items-sixth">
-                                <div class="col-lg-10">
+                                <div class="col-lg-11">
                                     <label>Address</label> <br>
                                     <input type="text" id="street_address" name="street_address" value="${user.street_address}"><br>
                                     <input type="text" id="city" name="city" value="${user.city}">
                                 </div>                       
                             </div>
                             <div class="row align-items-seventh">
-                                <div class="col-lg-10">
+                                <div class="col-lg-11">
                                     <input type="text" id="postal_code" name="postal_code" value="${user.postal_code}"><br>
                                     <select name="province">                                      
                                         <option value="Alberta" ${user.province == 'Alberta' ? 'selected' : ''} >Alberta</option>
