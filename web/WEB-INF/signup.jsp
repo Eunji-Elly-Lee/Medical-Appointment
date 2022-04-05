@@ -204,7 +204,7 @@
                 
                 <div class="signup">
                     <div class="form_heading">
-                        <h1>Register</h1>
+                        <h2>Register</h2>
                         <p>Please fill in the form below</p>
                     </div>
 
