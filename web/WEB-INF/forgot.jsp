@@ -148,8 +148,11 @@
                         <input type="text" id="lastName" name="lastName" value="" placeholder="Last name"><br>
                         <label for="email_accountForm">Email: </label> 
                         <input type="email" id="email_accountForm" name="email_accountForm" value="" placeholder="Email"><br>
-                        <input type="submit" value="Submit">
-                        <input type="hidden" name ="action" value="findAcc">
+                        
+                        <div class="btn_wrapper">
+                            <input type="submit" value="Submit">
+                            <input type="hidden" name ="action" value="findAcc">
+                        </div>                        
                     </form>
                 </div>
 
@@ -160,8 +163,11 @@
 
                         <label for="email">Email Address: </label> 
                         <input type="email" id="email" name="resetEmail" value="" placeholder="Email address"><br>
-                        <input type="submit" value="Submit">
-                        <input type="hidden" name ="action" value="findPwd">
+                        
+                        <div class="btn_wrapper">
+                            <input type="submit" value="Submit">
+                            <input type="hidden" name ="action" value="findPwd">
+                        </div>                        
                     </form>
                 </div>
             </div>
@@ -182,7 +188,7 @@
                 </div>
                 <div class="top-right">
                     <h3>Contact Us</h3>
-                   <div class="links">
+                    <div class="links">
                         <a href="#"><i class="fa-solid fa-square-phone"></i> +1 420 1245 6456</a>
                         <a href="#"><i class="fa-solid fa-envelope"></i> SurpassClinic@gmail.com</a>
                         <a href="#"><i class="fa-solid fa-location-dot"></i> 436 40th Street Calgary Alberta T2M 0G6</a>
