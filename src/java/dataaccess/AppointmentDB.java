@@ -78,6 +78,41 @@ public class AppointmentDB {
         return appointments;
     }
     
+    public List<Appointment> getAllFutures(String date) throws Exception {
+        List<Appointment> appointments = new ArrayList<>();
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;        
+        String sql = "SELECT * FROM appointment WHERE start_date_time > ? ORDER BY 2";
+        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, date);
+            rs = ps.executeQuery();
+                        
+            while (rs.next()) {
+                int doctor_id = rs.getInt(1);
+                String start_date_time = rs.getString(2);
+                int patient_id = rs.getInt(3);
+                int duration = rs.getInt(4); 
+                int type = rs.getInt(5); 
+                String reason = rs.getString(6);
+                boolean patient_attended = rs.getBoolean(7);
+                
+                Appointment appointment =
+                        new Appointment(doctor_id, start_date_time, patient_id, duration, type, reason, patient_attended);
+                appointments.add(appointment);
+            }
+        } finally {
+            DBUtil.closeResultSet(rs);
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+        
+        return appointments;
+    }
+    
     public List<Appointment> getByDoctorID(int doctor_id) throws Exception {
         List<Appointment> appointments = new ArrayList<>();
         Appointment appointment = null;
