@@ -189,11 +189,11 @@ public class AppointmentDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM appointment WHERE start_date_time = ?";
+        String sql = "SELECT * FROM appointment WHERE start_date_time LIKE ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, start_date_time);
+            ps.setString(1, start_date_time + "%");
             rs = ps.executeQuery();
             
             if (rs.next()) {
@@ -202,7 +202,7 @@ public class AppointmentDB {
                 int duration = rs.getInt(4); 
                 int type = rs.getInt(5); 
                 String reason = rs.getString(6);
-                boolean patient_attended = rs.getBoolean(7);   
+                boolean patient_attended = rs.getBoolean(7);
                 
                 appointment =
                         new Appointment(doctor_id, start_date_time, patient_id, duration, type, reason, patient_attended);
