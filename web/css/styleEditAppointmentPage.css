@@ -1,8 +1,5 @@
 @charset "utf-8";
 
-body{
-    font-family: 'Lato', sans-serif;
-}
 .banner_field{
     background-image: url("img/view_appointment_banner.png");
     margin-top: 19px;
@@ -14,48 +11,46 @@ body{
 .banner{
     text-align: center;
     font-size: 35px;
-    line-height: 250%;
+    line-height: 265%;
 }
 .message {
     text-align: center;
 }
-a:hover {
-    color: black;
-    text-decoration: underline;    
-}
-.signup{  
+.edit{
     border-radius: 5px;
     background-color: #F8F5F8;
     padding: 20px;
     box-shadow: 5px 5px 10px #000000;
     box-sizing: content-box;
     width: 50%;
-    margin: 60px auto;
+    margin: 30px auto;
 }
-input[type=submit]:hover{
-    background-color: #01886f;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+input[type=text],
+select,
+textarea{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 2px 0 8px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.btn_wrapper{
+    text-align: center;
 }
 input[type=submit]{
-    width: 20%;
+    width: 40%;
     font-size: 16px;
     background-color: #017C83;
     color: white;
     padding: 10px 15px;
-    margin: 26px 22% 0px 35%;
+    margin: 40px 2% 15px 2%;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
-input[type=text],
-input[type=date],
-.type_selection,
-textarea{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+input[type=submit]:hover{
+    background-color: #01886f;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
