@@ -365,7 +365,7 @@
                     <c:when test="${account.profile == 'DOCTOR'}">
                         <c:if test="${searched}">
                             <div class="table-responsive">
-                                <h3>Searched Patient List</h3>
+                                <h2>Searched Patient List</h2>
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
@@ -408,7 +408,7 @@
                         <div class="table-responsive">
                             <h3 style="text-align: center;">${message}</h3>
                             <br>
-                            <h3>Patient List</h3>
+                            <h2>Patient List</h2>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
