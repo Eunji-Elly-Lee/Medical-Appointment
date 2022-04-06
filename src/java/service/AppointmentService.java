@@ -21,6 +21,12 @@ public class AppointmentService {
         return appointments;
     }
     
+    public List<Appointment> getAllFutures(String date) throws Exception {
+        AppointmentDB appointmentDB = new AppointmentDB();
+        List<Appointment> appointments = appointmentDB.getAllByDate(date);
+        return appointments;
+    }
+    
     public List <Appointment> getByDoctorID(int doctor_id) throws Exception {
         AppointmentDB appointmentDB = new AppointmentDB();
         List<Appointment> appointments = appointmentDB.getByDoctorID(doctor_id);
