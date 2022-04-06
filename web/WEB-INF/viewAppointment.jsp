@@ -238,11 +238,11 @@
                                         <th scope="col">DATE AND TIME </th>
                                         <th scope="col">DOCTOR NAME </th>
                                         <th scope="col">TYPE </th>                         
-                                        <c:if  test ="${step = 1}">
+                                        <c:if  test ="${step == 1}">
                                             <th scope="col">EDIT </th>
                                             <th scope="col">DELETE </th>
                                         </c:if>
-                                        <c:if  test ="${step = 0}">
+                                        <c:if  test ="${step == 0}">
                                             <th scope="col">REASON </th>
                                         </c:if>
                                     </tr>
