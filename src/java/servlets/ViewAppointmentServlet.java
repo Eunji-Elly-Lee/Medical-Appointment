@@ -29,11 +29,11 @@ public class ViewAppointmentServlet extends HttpServlet {
         LocalDate today = LocalDate.now();
 
         if (request.getParameter("delete") != null) {
-            String time = request.getParameter("delete");           
+            String date = request.getParameter("delete");           
             
             try {
-                Appointment appointment = as.getByDate(time);
-                as.delete(time, appointment.getDoctor_id(), appointment.getPatient_id());
+                Appointment appointment = as.getByDate(date.substring(0, 16));
+                as.delete(date, appointment.getDoctor_id(), appointment.getPatient_id());
             } catch (Exception ex) {
                 Logger.getLogger(ViewAppointmentServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -146,8 +146,8 @@ public class ViewAppointmentServlet extends HttpServlet {
         AppointmentService aps = new AppointmentService();
         
         try {            
-            String time = request.getParameter("date_time"); 
-            Appointment appointment = aps.getByDate(time);            
+            String time = request.getParameter("date_time");  
+            Appointment appointment = aps.getByDate(time);  
             session.setAttribute("appointmentSessionObj", appointment);                      
 
             //add jihoon
@@ -194,7 +194,7 @@ public class ViewAppointmentServlet extends HttpServlet {
             }      
             //end jihoon
            
-            getServletContext().getRequestDispatcher("/WEB-INF/editAppointment.jsp").forward(request, response);
+            response.sendRedirect("edit_appointment");
             return;
         } catch (Exception ex) {
             Logger.getLogger(EditAppointmentServlet.class.getName()).log(Level.SEVERE, null, ex);
