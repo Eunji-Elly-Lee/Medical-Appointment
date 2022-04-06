@@ -229,6 +229,11 @@
                     </div>            
                 </c:if>
                 
+                <div class="message">
+                    <br>
+                    <h3>${message}</h3>
+                </div>
+                
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <c:choose>
@@ -275,7 +280,8 @@
                                                         <form action="view_appointment" method="POST">                                                            
                                                             <button type="submit" value="edit" class="btn btn-secondary">Edit
                                                                 <input type="hidden" name ="action" value="edit">
-                                                                <input type="hidden" name ="date_time" value=${futuerAppointment.start_date_time}>
+                                                                <input type="hidden" name ="date" value=${futuerAppointment.start_date_time.substring(0, 10)}>
+                                                                <input type="hidden" name ="time" value=${futuerAppointment.start_date_time.substring(11, 16)}>
                                                             </button>
                                                         </form>
                                                     </td>
@@ -310,7 +316,8 @@
                                                         <form action="view_appointment" method="POST">                                                            
                                                             <button type="submit" value="edit" class="btn btn-secondary">Edit
                                                                 <input type="hidden" name ="action" value="edit">
-                                                                <input type="hidden" name ="date_time" value=${futuerAppointment.start_date_time}>
+                                                                <input type="hidden" name ="date" value=${futuerAppointment.start_date_time.substring(0, 10)}>
+                                                                <input type="hidden" name ="time" value=${futuerAppointment.start_date_time.substring(11, 16)}>
                                                             </button>
                                                         </form>
                                                     </td>
@@ -412,7 +419,8 @@
                                                     <form action="view_appointment" method="POST">                                                            
                                                         <button type="submit" value="edit" class="btn btn-secondary">Edit
                                                             <input type="hidden" name ="action" value="edit">
-                                                            <input type="hidden" name ="date_time" value=${appointment.start_date_time}>
+                                                            <input type="hidden" name ="date" value=${appointment.start_date_time.substring(0, 10)}>
+                                                            <input type="hidden" name ="time" value=${appointment.start_date_time.substring(11, 16)}>
                                                         </button>
                                                     </form>
                                                 </td>
@@ -447,7 +455,8 @@
                                                     <form action="view_appointment" method="POST">                                                            
                                                         <button type="submit" value="edit" class="btn btn-secondary">Edit
                                                             <input type="hidden" name ="action" value="edit">
-                                                            <input type="hidden" name ="date_time" value=${appointment.start_date_time}>
+                                                            <input type="hidden" name ="date" value=${appointment.start_date_time.substring(0, 10)}>
+                                                            <input type="hidden" name ="time" value=${appointment.start_date_time.substring(11, 16)}>
                                                         </button>
                                                     </form>
                                                 </td>
@@ -500,7 +509,8 @@
                                                     <form action="view_appointment" method="POST">                                                            
                                                         <button type="submit" value="edit" class="btn btn-secondary">Edit
                                                             <input type="hidden" name ="action" value="edit">
-                                                            <input type="hidden" name ="date_time" value=${appointment.start_date_time}>
+                                                            <input type="hidden" name ="date" value=${appointment.start_date_time.substring(0, 10)}>
+                                                            <input type="hidden" name ="time" value=${appointment.start_date_time.substring(11, 16)}>
                                                         </button>
                                                     </form>
                                                 </td>
@@ -536,7 +546,8 @@
                                                     <form action="view_appointment" method="POST">                                                            
                                                         <button type="submit" value="edit" class="btn btn-secondary">Edit
                                                             <input type="hidden" name ="action" value="edit">
-                                                            <input type="hidden" name ="date_time" value=${appointment.start_date_time}>
+                                                            <input type="hidden" name ="date" value=${appointment.start_date_time.substring(0, 10)}>
+                                                            <input type="hidden" name ="time" value=${appointment.start_date_time.substring(11, 16)}>
                                                         </button>
                                                     </form>
                                                 </td>
