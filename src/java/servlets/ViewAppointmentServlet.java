@@ -169,7 +169,7 @@ public class ViewAppointmentServlet extends HttpServlet {
                     
                     List<Appointment> allAppointments = as.getByPatientID(patient.getPatient_id());
                     //change type    jihoon
-                    ArrayList<Appointment> futuerAppointment = new ArrayList();
+                    ArrayList<Appointment> futuerAppointments = new ArrayList();
 //                    ArrayList<String> arrType = new ArrayList();
 //                    // add  jihoon
                     ArrayList<Appointment> pastAppointments = new ArrayList();
@@ -182,7 +182,7 @@ public class ViewAppointmentServlet extends HttpServlet {
                             //jihoon  for history
                             pastAppointments.add(allAppointments.get(i));
                         } else {
-                            futuerAppointment.add(allAppointments.get(i));
+                            futuerAppointments.add(allAppointments.get(i));
                         }
                     }
                     //end  jihoon
@@ -193,7 +193,7 @@ public class ViewAppointmentServlet extends HttpServlet {
 
 //                    request.setAttribute("arrType", arrType);
                     request.setAttribute("pastAppointments", pastAppointments);
-                    request.setAttribute("futuerAppointment", futuerAppointment);
+                    request.setAttribute("futuerAppointments", futuerAppointments);
 
 //                    ArrayList<String> arrTime = new ArrayList();
 //                    ArrayList<String> arrTimeOnly = new ArrayList();
