@@ -241,8 +241,8 @@
                             <input type="text" name="patient" value="${patient}" readonly>
                         </div>
                         <div>
-                            <label for="type_selection">Type</label>
-                            <select name="form-select" class="type_selection">
+                            <label for="type">Type</label>
+                            <select name="type">
                                 <c:if test="${appointment.type == '1'}">
                                     <option value="1" selected>Regular</option>
                                     <option value="2" >Annual Physical</option>
@@ -270,11 +270,11 @@
                             </select>
                         </div>
                         <div>
-                            <label for="book_app_reason">Appointment Reason</label>
-                            <textarea name="book_app_reason" 
+                            <label for="reason">Appointment Reason</label>
+                            <textarea name="reason" 
                                     placeholder="Please write down the reason for your appointment.">${appointment.reason}</textarea>
                             <br>
-                        </div
+                        </div>
                         
                         <div class="btn_wrapper">
                             <input type="submit" value="Submit">
