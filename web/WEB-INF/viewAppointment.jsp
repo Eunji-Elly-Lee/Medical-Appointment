@@ -223,141 +223,334 @@
                         <!--Jihoon  -->
                         <form  method="post" action="view_appointment">
                             <button>History</button>
-                            <input type="hidden" name="account_id">
+                            <!--<input type="hidden" name="account_id">-->
                             <input type="hidden" name ="action" value="history_appointment">  
                         </form>
                     </div>            
                 </c:if>
                 
-                <!-- histroy of the appointment -->
                 <div class="table-responsive">
                     <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <c:if test="${account.profile == 'PATIENT'}">
-                                    <th scope="col">Assigned Doctor  </th>
-                                </c:if>
-                                <c:if test="${account.profile != 'PATIENT'}">
-                                    <th scope="col" >First Name</th>
-                                    <th scope="col" >Last Name</th>
-                                </c:if>
-                                <th scope="col">APPOINTMENT TYPE </th>
-                                <th scope="col">DATE </th>
-                                <th scope="col">TIME</th>                           
-                                <c:if  test ="${step != 0}">
-                                    <th scope="col">EDIT</th>
-                                    <th scope="col">DELETE</th>
-                                </c:if>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <c:choose>
-                                <c:when test="${account.profile == 'PATIENT'}">
+                        <c:choose>
+                            <c:when test="${account.profile == 'PATIENT'}">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">DATE AND TIME </th>
+                                        <th scope="col">DOCTOR NAME </th>
+                                        <th scope="col">TYPE </th>                         
+                                        <c:if  test ="${step = 1}">
+                                            <th scope="col">EDIT </th>
+                                            <th scope="col">DELETE </th>
+                                        </c:if>
+                                        <c:if  test ="${step = 0}">
+                                            <th scope="col">REASON </th>
+                                        </c:if>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
                                     <c:if  test ="${step == 1}">
-                                        <c:forEach items="${arrType}" var="type" varStatus="loop">                                 
+                                        <c:forEach items="${futuerAppointments}" var="futuerAppointment" varStatus="status">
+                                            <c:if test="${(status.count % 2) == 0}">
+                                                <tr class="table-secondary">
+                                                    <th scope="row">${futuerAppointment.start_date_time.substring(0, 16)}</th>
+                                                    <td>${doctorName}</td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${futuerAppointment.type == '1'}">
+                                                                Regular
+                                                            </c:when>
+                                                            <c:when test="${futuerAppointment.type == '2'}">
+                                                                Annual Physical
+                                                            </c:when>
+                                                            <c:when test="${futuerAppointment.type == '3'}">
+                                                                Urgent Care
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                New Patient Meeting
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td>
+                                                        <form action="view_appointment" method="POST">                                                            
+                                                            <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                                <input type="hidden" name ="action" value="edit">
+                                                                <input type="hidden" name ="date_time" value=${futuerAppointment.start_date_time}>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <a href="view_appointment?delete=${futuerAppointment.start_date_time}">
+                                                            <button type="submit" value="delete" class="btn btn-danger">Delete </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
+                                            <c:if test="${(status.count % 2) == 1}">
+                                                <tr>
+                                                    <th scope="row">${futuerAppointment.start_date_time.substring(0, 16)}</th>
+                                                    <td>${doctorName}</td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${futuerAppointment.type == '1'}">
+                                                                Regular
+                                                            </c:when>
+                                                            <c:when test="${futuerAppointment.type == '2'}">
+                                                                Annual Physical
+                                                            </c:when>
+                                                            <c:when test="${futuerAppointment.type == '3'}">
+                                                                Urgent Care
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                New Patient Meeting
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td>
+                                                        <form action="view_appointment" method="POST">                                                            
+                                                            <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                                <input type="hidden" name ="action" value="edit">
+                                                                <input type="hidden" name ="date_time" value=${futuerAppointment.start_date_time}>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <a href="view_appointment?delete=${futuerAppointment.start_date_time}">
+                                                            <button type="submit" value="delete" class="btn btn-danger">Delete </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if  test ="${step == 0}">
+                                        <c:forEach items="${pastAppointments}" var="pastAppointment" varStatus="status">
+                                            <c:if test="${(status.count % 2) == 0}">
+                                                <tr class="table-secondary">
+                                                    <th scope="row">${pastAppointment.start_date_time.substring(0, 16)}</th>
+                                                    <td>${doctorName}</td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${pastAppointment.type == '1'}">
+                                                                Regular
+                                                            </c:when>
+                                                            <c:when test="${pastAppointment.type == '2'}">
+                                                                Annual Physical
+                                                            </c:when>
+                                                            <c:when test="${pastAppointment.type == '3'}">
+                                                                Urgent Care
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                New Patient Meeting
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td>${pastAppointment.reason}</td>
+                                                </tr>
+                                            </c:if>
+                                            <c:if test="${(status.count % 2) == 1}">
+                                                <tr>
+                                                    <th scope="row">${pastAppointment.start_date_time.substring(0, 16)}</th>
+                                                    <td>${doctorName}</td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${pastAppointment.type == '1'}">
+                                                                Regular
+                                                            </c:when>
+                                                            <c:when test="${pastAppointment.type == '2'}">
+                                                                Annual Physical
+                                                            </c:when>
+                                                            <c:when test="${pastAppointment.type == '3'}">
+                                                                Urgent Care
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                New Patient Meeting
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
+                                                    <td>${pastAppointment.reason}</td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>
+                                </tbody>
+                            </c:when>
+                            <c:when test="${account.profile == 'DOCTOR'}">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">DATE AND TIME </th>
+                                        <th scope="col">PATIENT NAME </th>
+                                        <th scope="col">TYPE </th>                         
+                                        <th scope="col">EDIT </th>
+                                        <th scope="col">DELETE </th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <c:forEach items="${arrlAppointments}" var="appointment" varStatus="status">
+                                        <c:if test="${(status.count % 2) == 0}">
                                             <tr class="table-secondary">
-                                                <td>${doctorFirstName}&nbsp; ${ doctorLastName}</td>
-                                                <td>${type}</td>
-                                                <td>${arrTime.get(loop.index).substring(0,10)}</td>
-                                                <td>${arrTime.get(loop.index).substring(11,16)}</td>
+                                                <th scope="row">${appointment.start_date_time.substring(0, 16)}</th>
+                                                <td>${arrlPatients.get(status.index).first_name} ${arrlPatients.get(status.index).last_name}</td>
                                                 <td>
-                                                    <form action="view_appointment" method="POST">
-                                                        <input type="hidden" name="profile" value="PATIENT"> 
-                                                        <input type="hidden"  name="timeonly" value=${arrTimeOnly.get(loop.index)}>
-                                                        <input type="hidden"  name="dateonly" value=${arrTime.get(loop.index)}>
-                                                        <input type="hidden" name="doctor_id" value=${doctor_id}>
-                                                        <input type="hidden" name="patient_id_P" value=${patient_id}>
-                                                        <button type="submit" value="edit" class="btn btn-secondary">
-                                                            Edit
+                                                    <c:choose>
+                                                        <c:when test="${appointment.type == '1'}">
+                                                            Regular
+                                                        </c:when>
+                                                        <c:when test="${appointment.type == '2'}">
+                                                            Annual Physical
+                                                        </c:when>
+                                                        <c:when test="${appointment.type == '3'}">
+                                                            Urgent Care
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            New Patient Meeting
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td>
+                                                    <form action="view_appointment" method="POST">                                                            
+                                                        <button type="submit" value="edit" class="btn btn-secondary">Edit
                                                             <input type="hidden" name ="action" value="edit">
+                                                            <input type="hidden" name ="date_time" value=${appointment.start_date_time}>
                                                         </button>
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <a href="view_appointment?delete=${arrTime.get(loop.index)}&doctor_id=${doctor_id}&patient_id=${patient_id}"
-                                                            class="delete_appointment">
-                                                        <button> Delete </button>
+                                                    <a href="view_appointment?delete=${appointment.start_date_time}">
+                                                        <button type="submit" value="delete" class="btn btn-danger">Delete </button>
                                                     </a>
                                                 </td>
                                             </tr>
-                                        </c:forEach>
-                                    </c:if>
-                                    <c:if  test ="${step == 0}">
-                                        <c:forEach items="${pastAppointments}" var="pastAppointments_history" varStatus="loop">                              
-                                            <tr class="table-secondary">
-                                                <td>${doctor.first_name} &nbsp; ${doctor.last_name}</td>
-                                                <td>${pastAppointments_history.getType_toString(pastAppointments_history.getType())}</td>
-                                                <td>${pastAppointments_history.getStart_date_time().substring(0,10)}</td>
-                                                <td>${pastAppointments_history.getStart_date_time().substring(11,16)}</td>
+                                        </c:if>
+                                        <c:if test="${(status.count % 2) == 1}">
+                                            <tr>
+                                                <th scope="row">${appointment.start_date_time.substring(0, 16)}</th>
+                                                <td>${arrlPatients.get(status.index).first_name} ${arrlPatients.get(status.index).last_name}</td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${appointment.type == '1'}">
+                                                            Regular
+                                                        </c:when>
+                                                        <c:when test="${appointment.type == '2'}">
+                                                            Annual Physical
+                                                        </c:when>
+                                                        <c:when test="${appointment.type == '3'}">
+                                                            Urgent Care
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            New Patient Meeting
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td>
+                                                    <form action="view_appointment" method="POST">                                                            
+                                                        <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                            <input type="hidden" name ="action" value="edit">
+                                                            <input type="hidden" name ="date_time" value=${appointment.start_date_time}>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <a href="view_appointment?delete=${appointment.start_date_time}">
+                                                        <button type="submit" value="delete" class="btn btn-danger">Delete </button>
+                                                    </a>
+                                                </td>
                                             </tr>
-                                        </c:forEach>  
-                                    </c:if>
-                                </c:when>
-                                <c:when test="${account.profile == 'DOCTOR'}">
-                                    <c:forEach items="${arrlAppointments}" var="appointment" varStatus="loop">
-                                        <tr class="table-secondary">
-                                            <td>${arrlPatients.get(loop.index).getFirst_name()}</td>
-                                            <td>${arrlPatients.get(loop.index).getLast_name()}</td>
-                                            <td>${arrType.get(loop.index)}</td>
-                                            <td>${arrlAppointments.get(loop.index).getStart_date_time().substring(0,10)}</td>
-                                            <td>${arrlAppointments.get(loop.index).getStart_date_time().substring(11,16)}</td>
-                                            <td>
-                                                <form action="view_appointment" method="POST">
-                                                    <input type="hidden" name="profile" value="DOCTOR">
-                                                    <input type="hidden" name="time" value=${arrlAppointments.get(loop.index).getStart_date_time()}>
-                                                    <input type="hidden"  name="timeonly" value=${arrTimeOnly.get(loop.index)}>
-                                                    <input type="hidden"  name="dateonly" value=${arrTime.get(loop.index)}>
-                                                    <input type="hidden" name="doctor_id" value=${doctor_id}>
-                                                    <input type="hidden" name="patient_id" value=${arrPatientID.get(loop.index)}>
-                                                    <button type="submit" value="edit" class="btn btn-secondary">
-                                                        Edit
-                                                        <input type="hidden" name ="action" value="edit">
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <a href="view_appointment?delete=${arrlAppointments.get(loop.index).getStart_date_time()}&doctor_id=${doctor_id}&patient_id=${arrPatientID.get(loop.index)}"
-                                                        class="delete_appointment">
-                                                    <button class="btn btn-danger"> Delete </button>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        </c:if>
                                     </c:forEach>
-                                </c:when>
-                                <c:when test="${account.profile == 'ADMIN'}">
-                                    <c:forEach items="${arrlAppointments}" var="appointment" varStatus="loop">
-                                        <tr class="table-secondary">
-                                            <td>${arrlPatients.get(loop.index).getFirst_name()}</td>
-                                            <td>${arrlPatients.get(loop.index).getLast_name()}</td>
-                                            <td>${arrType.get(loop.index)}</td>
-                                            <td>${arrlAppointments.get(loop.index).getStart_date_time().substring(0,10)}</td>
-                                            <td>${arrlAppointments.get(loop.index).getStart_date_time().substring(11,16)}</td>
-                                            <td>
-                                                <form action="view_appointment" method="POST">
-                                                    <input type="hidden" name="profile" value="ADMIN">
-                                                    <input type="hidden" name="start_date_admin" value=${arrlAppointments.get(loop.index).getStart_date_time()}>
-                                                    <input type="hidden"  name="timeonly" value=${arrTimeOnly.get(loop.index)}>
-                                                    <input type="hidden"  name="dateonly" value=${arrTime.get(loop.index)}>
-                                                    <input type="hidden" name="doctor_id" value=${arrDoctorID.get(loop.index)}>
-                                                    <input type="hidden" name="patient_id" value=${arrPatientID.get(loop.index)}>
-                                                    <button type="submit" value="edit" class="btn btn-secondary">
-                                                        Edit
-                                                        <input type="hidden" name ="action" value="edit">
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <a href="view_appointment?delete=${arrlAppointments.get(loop.index).getStart_date_time()}&doctor_id=${arrDoctorID.get(loop.index)}&patient_id=${arrPatientID.get(loop.index)}"
-                                                        class="delete_appointment">
-                                                    <button class="btn btn-danger"> Delete </button>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                </tbody>
+                            </c:when>
+                            <c:when test="${account.profile == 'ADMIN'}">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">DATE AND TIME </th>
+                                        <th scope="col">PATIENT NAME </th>
+                                        <th scope="col">DOCTOR NAME </th>
+                                        <th scope="col">TYPE </th>                         
+                                        <th scope="col">EDIT </th>
+                                        <th scope="col">DELETE </th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    <c:forEach items="${arrlAppointments}" var="appointment" varStatus="status">
+                                        <c:if test="${(status.count % 2) == 0}">
+                                            <tr class="table-secondary">
+                                                <th scope="row">${appointment.start_date_time.substring(0, 16)}</th>
+                                                <td>${arrlPatients.get(status.index).first_name} ${arrlPatients.get(status.index).last_name}</td>
+                                                <td>${arrlDoctors.get(status.index).first_name} ${arrlDoctors.get(status.index).last_name}</td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${appointment.type == '1'}">
+                                                            Regular
+                                                        </c:when>
+                                                        <c:when test="${appointment.type == '2'}">
+                                                            Annual Physical
+                                                        </c:when>
+                                                        <c:when test="${appointment.type == '3'}">
+                                                            Urgent Care
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            New Patient Meeting
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td>
+                                                    <form action="view_appointment" method="POST">                                                            
+                                                        <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                            <input type="hidden" name ="action" value="edit">
+                                                            <input type="hidden" name ="date_time" value=${appointment.start_date_time}>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <a href="view_appointment?delete=${appointment.start_date_time}">
+                                                        <button type="submit" value="delete" class="btn btn-danger">Delete </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </c:if>
+                                        <c:if test="${(status.count % 2) == 1}">
+                                            <tr>
+                                                <th scope="row">${appointment.start_date_time.substring(0, 16)}</th>
+                                                <td>${arrlPatients.get(status.index).first_name} ${arrlPatients.get(status.index).last_name}</td>
+                                                <td>${arrlDoctors.get(status.index).first_name} ${arrlDoctors.get(status.index).last_name}</td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${appointment.type == '1'}">
+                                                            Regular
+                                                        </c:when>
+                                                        <c:when test="${appointment.type == '2'}">
+                                                            Annual Physical
+                                                        </c:when>
+                                                        <c:when test="${appointment.type == '3'}">
+                                                            Urgent Care
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            New Patient Meeting
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td>
+                                                    <form action="view_appointment" method="POST">                                                            
+                                                        <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                            <input type="hidden" name ="action" value="edit">
+                                                            <input type="hidden" name ="date_time" value=${appointment.start_date_time}>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <a href="view_appointment?delete=${appointment.start_date_time}">
+                                                        <button type="submit" value="delete" class="btn btn-danger">Delete </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </c:if>
                                     </c:forEach>
-                                </c:when>
-                            </c:choose>
-                        </tbody>
+                                </tbody>
+                            </c:when>
+                        </c:choose>
                     </table>
                 </div>
             </div>
