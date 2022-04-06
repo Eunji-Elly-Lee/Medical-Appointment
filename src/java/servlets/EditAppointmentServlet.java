@@ -18,19 +18,48 @@ public class EditAppointmentServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user_name");
-      
-        AppointmentService a = new AppointmentService();
-        int patient_id = Integer.parseInt(request.getParameter("patient_id"));
-
-        try {
-            Appointment appointment = (Appointment) a.getByPatientID(patient_id);
-            request.setAttribute("appointment", appointment);
-        } catch (Exception ex) {
-            Logger.getLogger(EditAppointmentServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Appointment appointSession = (Appointment) session.getAttribute("appointmentSessionObj");
         
-        getServletContext().getRequestDispatcher("/WEB-INF/editAppointmentPatient.jsp").forward(request, response);
-        return;
+        AccountService as = new AccountService();
+        DoctorService doctorService = new DoctorService();
+        PatientService patientService = new PatientService();
+        
+        if (appointSession == null) {
+            response.sendRedirect("welcome");
+            return;
+        } else {
+            try {
+                Account account = as.get(user_name);
+                request.setAttribute("account", account);
+                
+                if (account.getProfile().equals("DOCTOR")) {                    
+                    Doctor doctor = doctorService.get(account.getAccount_id());
+                    request.setAttribute("user", doctor);
+                } else if (account.getProfile().equals("ADMIN")) {
+                    AdministratorService administratorService = new AdministratorService();
+                    Administrator administrator = administratorService.get(account.getAccount_id());
+                    request.setAttribute("user", administrator);
+                } else {
+                    Patient patient = patientService.get(account.getAccount_id());
+                    request.setAttribute("user", patient);
+                }
+                
+                String doctor = doctorService.getByDoctorID(appointSession.getDoctor_id()).getLast_name();
+                String patient = patientService.getByPatientId(appointSession.getPatient_id()).getFirst_name() +
+                        " " + patientService.getByPatientId(appointSession.getPatient_id()).getLast_name();
+                
+                request.setAttribute("date", appointSession.getStart_date_time().substring(0, 16));
+                request.setAttribute("doctor", doctor);
+                request.setAttribute("patient", patient);
+                request.setAttribute("type", appointSession.getType());
+                request.setAttribute("reason", appointSession.getReason());
+            } catch (Exception ex) {
+                Logger.getLogger(EditAppointmentServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            getServletContext().getRequestDispatcher("/WEB-INF/editAppointment.jsp").forward(request, response);
+            return;
+        }        
     }
 
     @Override
