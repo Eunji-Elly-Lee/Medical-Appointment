@@ -109,7 +109,7 @@ public class EditAppointmentServlet extends HttpServlet {
                 
                 session.setAttribute("appointmentSessionObj", null);
                 session.setAttribute("edited", "edited");
-                getServletContext().getRequestDispatcher("/WEB-INF/viewAppointment.jsp").forward(request, response);
+                response.sendRedirect("view_appointment");
                 return;
             }            
         } catch (Exception ex) {
