@@ -145,11 +145,7 @@ public class ViewAppointmentServlet extends HttpServlet {
         DoctorService ds = new DoctorService();
         AppointmentService aps = new AppointmentService();
         
-        try {            
-            String time = request.getParameter("date_time");  
-            Appointment appointment = aps.getByDate(time);  
-            session.setAttribute("appointmentSessionObj", appointment);                      
-
+        try {      
             //add jihoon
             String action = request.getParameter("action");          
             boolean active = false;
@@ -184,14 +180,23 @@ public class ViewAppointmentServlet extends HttpServlet {
                     
                     Doctor doctor = ds.getByDoctorID(patient.getDoctor_id());
                     request.setAttribute("doctorName", doctor.getFirst_name() + " " + doctor.getLast_name());
-                    active = true;        
-                    break;                
+                    active = true;  
+                    
+                    break;
+            
+                case "edit":
+                    String date = request.getParameter("date");  
+                    String time = request.getParameter("time");  
+                    Appointment appointment = aps.getByDate(date + " " + time);  
+                    session.setAttribute("appointmentSessionObj", appointment);
+                    
+                    break;
             }
             
             if (active){   
                 getServletContext().getRequestDispatcher("/WEB-INF/viewAppointment.jsp").forward(request, response);
                 return; 
-            }      
+            } 
             //end jihoon
            
             response.sendRedirect("edit_appointment");
