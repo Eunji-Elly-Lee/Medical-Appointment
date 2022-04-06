@@ -198,10 +198,10 @@
                         <div class="search_field">
                             <h2>Search Patient</h2>                    
                             <label for="name">Name</label>
-                            <input type="text" class="search_patient" name="name" value="${name}"> 
+                            <input type="text" name="name" value="${name}"> 
                         </div>
                         <div class="search_button">
-                            <input type="submit" class="submit_in_form" value="Submit">
+                            <input type="submit" value="Submit">
                             <input type="hidden" name ="action" value="search_name">
                         </div>
                     </form>
@@ -285,9 +285,10 @@
                             </div>
                         </c:if> 
 
-                        <div class="table-responsive">
-                            <h3 style="text-align: center;">${message}</h3>
-                            <br>
+                        <h3 style="text-align: center;">${message}</h3>
+                        <br>
+                            
+                        <div class="table-responsive">                            
                             <h2>Patient List</h2>
                             <table class="table table-hover">
                                 <thead>
@@ -405,9 +406,10 @@
                             </div>
                         </c:if> 
 
-                        <div class="table-responsive">
-                            <h3 style="text-align: center;">${message}</h3>
-                            <br>
+                        <h3 style="text-align: center;">${message}</h3>
+                        <br>
+                            
+                        <div class="table-responsive">                            
                             <h2>Patient List</h2>
                             <table class="table table-hover">
                                 <thead>
