@@ -23,7 +23,7 @@ public class AppointmentService {
     
     public List<Appointment> getAllFutures(String date) throws Exception {
         AppointmentDB appointmentDB = new AppointmentDB();
-        List<Appointment> appointments = appointmentDB.getAllByDate(date);
+        List<Appointment> appointments = appointmentDB.getAllFutures(date);
         return appointments;
     }
     
