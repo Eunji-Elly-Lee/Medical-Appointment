@@ -192,25 +192,103 @@
                         <p>View Patient</p>
                     </div>
                 </div>
+                
+                <div class="search_form">
+                    <form action="view_patient" method="post">
+                        <div class="search_field">
+                            <h2>Search Patient</h2>                    
+                            <label for="name">Name</label>
+                            <input type="text" class="search_patient" name="name" value="${name}"> 
+                        </div>
+                        <div class="search_button">
+                            <input type="submit" class="submit_in_form" value="Submit">
+                            <input type="hidden" name ="action" value="search_name">
+                        </div>
+                    </form>
+                </div>
+                
+                <c:choose>
+                    <c:when test="${account.profile == 'ADMIN'}">
+                        <c:if test="${searched}">
+                            <div class="table-responsive">
+                                <h2>Searched Patient List</h2>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">PATIENT ID </th>
+                                            <th scope="col">FIRST NAME </th>
+                                            <th scope="col">LAST NAME </th>
+                                            <th scope="col">EMAIL </th>
+                                            <th scope="col">MOBILE PHONE</th>
+                                            <th scope="col">PREFERRED NOTIFICATION </th>
+                                            <th scope="col">EDIT </th>
+                                            <th scope="col">DELETE </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${searchedPatients}" var="searchedPatient" varStatus="loop">
+                                            <c:if test="${(loop.count % 2) == 0}">
+                                                <tr class="table-secondary">
+                                                    <th>${searchedPatient.getPatient_id()}</th>
+                                                    <td>${searchedPatient.getFirst_name()}</td>
+                                                    <td>${searchedPatient.getLast_name()}</td>
+                                                    <td>${searchedPatient.getEmail()}</td>
+                                                    <td>${searchedPatient.getMobile_phone()}</td>
+                                                    <td>${searchedPatient.getPref_contact_type()}</td>
+                                                    <td>
+                                                        <form action="view_patient" method="POST">
+                                                            <input type="hidden" name="account_id" value=${searchedPatient.account_id}>
+                                                            <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                                <input type="hidden" name ="action" value="edit">
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="view_patient" method="POST">
+                                                            <input type="hidden" name="account_id" value=${searchedPatient.account_id}>
+                                                            <button type="submit" value="delete" class="btn btn-danger">Delete
+                                                                <input type="hidden" name ="action" value="delete">
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
+                                            <c:if test="${(loop.count % 2) == 1}">
+                                                <tr>
+                                                    <th>${searchedPatient.getPatient_id()}</th>
+                                                    <td>${searchedPatient.getFirst_name()}</td>
+                                                    <td>${searchedPatient.getLast_name()}</td>
+                                                    <td>${searchedPatient.getEmail()}</td>
+                                                    <td>${searchedPatient.getMobile_phone()}</td>
+                                                    <td>${searchedPatient.getPref_contact_type()}</td>
+                                                    <td>
+                                                        <form action="view_patient" method="POST">
+                                                            <input type="hidden" name="account_id" value=${searchedPatient.account_id}>
+                                                            <button type="submit" value="edit" class="btn btn-secondary">Edit
+                                                                <input type="hidden" name ="action" value="edit">
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        <form action="view_patient" method="POST">
+                                                            <input type="hidden" name="account_id" value=${searchedPatient.account_id}>
+                                                            <button type="submit" value="delete" class="btn btn-danger">Delete
+                                                                <input type="hidden" name ="action" value="delete">
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </c:if> 
 
-                <form class="search_form" action="view_patient" method="post">
-                    <div class="search_field">
-                        <h5>Search Patient</h5>                    
-                        <label for="name">Name: </label>
-                        <input type="text" class="search_patient" name="name" value="${name}"> 
-                    </div>
-                    <div class="search_button">
-                        <input type="submit" class="submit_in_form" value="Submit">
-                        <input type="hidden" name ="action" value="search_name">
-                    </div>
-                </form>
-            </div>
-
-            <c:choose>
-                <c:when test="${account.profile == 'ADMIN'}">
-                    <c:if test="${searched}">
                         <div class="table-responsive">
-                            <h3>Searched Patient List</h3>
+                            <h3 style="text-align: center;">${message}</h3>
+                            <br>
+                            <h2>Patient List</h2>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -219,25 +297,24 @@
                                         <th scope="col">LAST NAME </th>
                                         <th scope="col">EMAIL </th>
                                         <th scope="col">MOBILE PHONE</th>
-                                        <th scope="col">ALT PHONE </th>
+                                        <th scope="col">PREFERRED NOTIFICATION </th>
                                         <th scope="col">EDIT </th>
                                         <th scope="col">DELETE </th>
-                                        <%--<th scope="col">MORE </th>--%>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${searchedPatients}" var="searchedPatient" varStatus="loop">
+                                    <c:forEach items="${patients}" var="patients" varStatus="loop">
                                         <c:if test="${(loop.count % 2) == 0}">
                                             <tr class="table-secondary">
-                                                <th>${searchedPatient.getPatient_id()}</th>
-                                                <td>${searchedPatient.getFirst_name()}</td>
-                                                <td>${searchedPatient.getLast_name()}</td>
-                                                <td>${searchedPatient.getEmail()}</td>
-                                                <td>${searchedPatient.getMobile_phone()}</td>
-                                                <td>${searchedPatient.getAlt_phone()}</td>
+                                                <th>${patients.getPatient_id()}</th>
+                                                <td>${patients.getFirst_name()}</td>
+                                                <td>${patients.getLast_name()}</td>
+                                                <td>${patients.getEmail()}</td>
+                                                <td>${patients.getMobile_phone()}</td>
+                                                <td>${patients.getPref_contact_type()}</td>
                                                 <td>
                                                     <form action="view_patient" method="POST">
-                                                        <input type="hidden" name="account_id" value=${searchedPatient.account_id}>
+                                                        <input type="hidden" name="account_id" value=${patients.account_id}>
                                                         <button type="submit" value="edit" class="btn btn-secondary">Edit
                                                             <input type="hidden" name ="action" value="edit">
                                                         </button>
@@ -245,7 +322,7 @@
                                                 </td>
                                                 <td>
                                                     <form action="view_patient" method="POST">
-                                                        <input type="hidden" name="account_id" value=${searchedPatient.account_id}>
+                                                        <input type="hidden" name="account_id" value=${patients.account_id}>
                                                         <button type="submit" value="delete" class="btn btn-danger">Delete
                                                             <input type="hidden" name ="action" value="delete">
                                                         </button>
@@ -255,15 +332,15 @@
                                         </c:if>
                                         <c:if test="${(loop.count % 2) == 1}">
                                             <tr>
-                                                <th>${searchedPatient.getPatient_id()}</th>
-                                                <td>${searchedPatient.getFirst_name()}</td>
-                                                <td>${searchedPatient.getLast_name()}</td>
-                                                <td>${searchedPatient.getEmail()}</td>
-                                                <td>${searchedPatient.getMobile_phone()}</td>
-                                                <td>${searchedPatient.getAlt_phone()}</td>
+                                                <th>${patients.getPatient_id()}</th>
+                                                <td>${patients.getFirst_name()}</td>
+                                                <td>${patients.getLast_name()}</td>
+                                                <td>${patients.getEmail()}</td>
+                                                <td>${patients.getMobile_phone()}</td>
+                                                <td>${patients.getPref_contact_type()}</td>
                                                 <td>
                                                     <form action="view_patient" method="POST">
-                                                        <input type="hidden" name="account_id" value=${searchedPatient.account_id}>
+                                                        <input type="hidden" name="account_id" value=${patients.account_id}>
                                                         <button type="submit" value="edit" class="btn btn-secondary">Edit
                                                             <input type="hidden" name ="action" value="edit">
                                                         </button>
@@ -271,7 +348,7 @@
                                                 </td>
                                                 <td>
                                                     <form action="view_patient" method="POST">
-                                                        <input type="hidden" name="account_id" value=${searchedPatient.account_id}>
+                                                        <input type="hidden" name="account_id" value=${patients.account_id}>
                                                         <button type="submit" value="delete" class="btn btn-danger">Delete
                                                             <input type="hidden" name ="action" value="delete">
                                                         </button>
@@ -283,90 +360,55 @@
                                 </tbody>
                             </table>
                         </div>
-                    </c:if> 
-                            
-                    <div class="table-responsive">
-                        <h3 style="text-align: center;">${message}</h3>
-                        <br>
-                        <h3>Patient List</h3>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">PATIENT ID </th>
-                                    <th scope="col">FIRST NAME </th>
-                                    <th scope="col">LAST NAME </th>
-                                    <th scope="col">EMAIL </th>
-                                    <th scope="col">MOBILE PHONE</th>
-                                    <th scope="col">ALT PHONE </th>
-                                    <th scope="col">EDIT </th>
-                                    <th scope="col">DELETE </th>
-                                    <%--<th scope="col">MORE </th>--%>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${patients}" var="patients" varStatus="loop">
-                                    <c:if test="${(loop.count % 2) == 0}">
-                                        <tr class="table-secondary">
-                                            <th>${patients.getPatient_id()}</th>
-                                            <td>${patients.getFirst_name()}</td>
-                                            <td>${patients.getLast_name()}</td>
-                                            <td>${patients.getEmail()}</td>
-                                            <td>${patients.getMobile_phone()}</td>
-                                            <td>${patients.getAlt_phone()}</td>
-                                            <td>
-                                                <form action="view_patient" method="POST">
-                                                    <input type="hidden" name="account_id" value=${patients.account_id}>
-                                                    <button type="submit" value="edit" class="btn btn-secondary">Edit
-                                                        <input type="hidden" name ="action" value="edit">
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="view_patient" method="POST">
-                                                    <input type="hidden" name="account_id" value=${patients.account_id}>
-                                                    <button type="submit" value="delete" class="btn btn-danger">Delete
-                                                        <input type="hidden" name ="action" value="delete">
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </c:if>
-                                    <c:if test="${(loop.count % 2) == 1}">
+                    </c:when>
+
+                    <c:when test="${account.profile == 'DOCTOR'}">
+                        <c:if test="${searched}">
+                            <div class="table-responsive">
+                                <h3>Searched Patient List</h3>
+                                <table class="table table-hover">
+                                    <thead>
                                         <tr>
-                                            <th>${patients.getPatient_id()}</th>
-                                            <td>${patients.getFirst_name()}</td>
-                                            <td>${patients.getLast_name()}</td>
-                                            <td>${patients.getEmail()}</td>
-                                            <td>${patients.getMobile_phone()}</td>
-                                            <td>${patients.getAlt_phone()}</td>
-                                            <td>
-                                                <form action="view_patient" method="POST">
-                                                    <input type="hidden" name="account_id" value=${patients.account_id}>
-                                                    <button type="submit" value="edit" class="btn btn-secondary">Edit
-                                                        <input type="hidden" name ="action" value="edit">
-                                                    </button>
-                                                </form>
-                                            </td>
-                                            <td>
-                                                <form action="view_patient" method="POST">
-                                                    <input type="hidden" name="account_id" value=${patients.account_id}>
-                                                    <button type="submit" value="delete" class="btn btn-danger">Delete
-                                                        <input type="hidden" name ="action" value="delete">
-                                                    </button>
-                                                </form>
-                                            </td>
+                                            <th scope="col">PATIENT ID </th>
+                                            <th scope="col">FIRST NAME </th>
+                                            <th scope="col">LAST NAME </th>
+                                            <th scope="col">EMAIL </th>
+                                            <th scope="col">MOBILE PHONE</th>
+                                            <th scope="col">PREFERRED NOTIFICATION </th>
                                         </tr>
-                                    </c:if>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </c:when>
-                
-                <c:when test="${account.profile == 'DOCTOR'}">
-                    <c:if test="${searched}">
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${searchedPatients}" var="searchedPatient" varStatus="loop">
+                                            <c:if test="${(loop.count % 2) == 0}">
+                                                <tr class="table-secondary">
+                                                    <th>${searchedPatient.getPatient_id()}</th>
+                                                    <td>${searchedPatient.getFirst_name()}</td>
+                                                    <td>${searchedPatient.getLast_name()}</td>
+                                                    <td>${searchedPatient.getEmail()}</td>
+                                                    <td>${searchedPatient.getMobile_phone()}</td>
+                                                    <td>${searchedPatient.getPref_contact_type()}</td>
+                                                </tr>
+                                            </c:if>
+                                            <c:if test="${(loop.count % 2) == 1}">
+                                                <tr>
+                                                    <th>${searchedPatient.getPatient_id()}</th>
+                                                    <td>${searchedPatient.getFirst_name()}</td>
+                                                    <td>${searchedPatient.getLast_name()}</td>
+                                                    <td>${searchedPatient.getEmail()}</td>
+                                                    <td>${searchedPatient.getMobile_phone()}</td>
+                                                    <td>${searchedPatient.getPref_contact_type()}</td>
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </c:if> 
+
                         <div class="table-responsive">
-                            <h3>Searched Patient List</h3>
+                            <h3 style="text-align: center;">${message}</h3>
+                            <br>
+                            <h3>Patient List</h3>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -375,82 +417,38 @@
                                         <th scope="col">LAST NAME </th>
                                         <th scope="col">EMAIL </th>
                                         <th scope="col">MOBILE PHONE</th>
-                                        <th scope="col">ALT PHONE </th>
-                                        <%--<th scope="col">MORE </th>--%>
+                                        <th scope="col">PREFERRED NOTIFICATION </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${searchedPatients}" var="searchedPatient" varStatus="loop">
+                                    <c:forEach items="${patients}" var="patients" varStatus="loop">
                                         <c:if test="${(loop.count % 2) == 0}">
                                             <tr class="table-secondary">
-                                                <th>${searchedPatient.getPatient_id()}</th>
-                                                <td>${searchedPatient.getFirst_name()}</td>
-                                                <td>${searchedPatient.getLast_name()}</td>
-                                                <td>${searchedPatient.getEmail()}</td>
-                                                <td>${searchedPatient.getMobile_phone()}</td>
-                                                <td>${searchedPatient.getAlt_phone()}</td>
+                                                <th>${patients.getPatient_id()}</th>
+                                                <td>${patients.getFirst_name()}</td>
+                                                <td>${patients.getLast_name()}</td>
+                                                <td>${patients.getEmail()}</td>
+                                                <td>${patients.getMobile_phone()}</td>
+                                                <td>${patients.getPref_contact_type()}</td>
                                             </tr>
                                         </c:if>
                                         <c:if test="${(loop.count % 2) == 1}">
                                             <tr>
-                                                <th>${searchedPatient.getPatient_id()}</th>
-                                                <td>${searchedPatient.getFirst_name()}</td>
-                                                <td>${searchedPatient.getLast_name()}</td>
-                                                <td>${searchedPatient.getEmail()}</td>
-                                                <td>${searchedPatient.getMobile_phone()}</td>
-                                                <td>${searchedPatient.getAlt_phone()}</td>
+                                                <th>${patients.getPatient_id()}</th>
+                                                <td>${patients.getFirst_name()}</td>
+                                                <td>${patients.getLast_name()}</td>
+                                                <td>${patients.getEmail()}</td>
+                                                <td>${patients.getMobile_phone()}</td>
+                                                <td>${patients.getPref_contact_type()}</td>
                                             </tr>
                                         </c:if>
                                     </c:forEach>
                                 </tbody>
                             </table>
                         </div>
-                    </c:if> 
-                            
-                    <div class="table-responsive">
-                        <h3 style="text-align: center;">${message}</h3>
-                        <br>
-                        <h3>Patient List</h3>
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">PATIENT ID </th>
-                                    <th scope="col">FIRST NAME </th>
-                                    <th scope="col">LAST NAME </th>
-                                    <th scope="col">EMAIL </th>
-                                    <th scope="col">MOBILE PHONE</th>
-                                    <th scope="col">ALT PHONE </th>
-                                    <%--<th scope="col">MORE </th>--%>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${patients}" var="patients" varStatus="loop">
-                                    <c:if test="${(loop.count % 2) == 0}">
-                                        <tr class="table-secondary">
-                                            <th>${patients.getPatient_id()}</th>
-                                            <td>${patients.getFirst_name()}</td>
-                                            <td>${patients.getLast_name()}</td>
-                                            <td>${patients.getEmail()}</td>
-                                            <td>${patients.getMobile_phone()}</td>
-                                            <td>${patients.getAlt_phone()}</td>
-                                        </tr>
-                                    </c:if>
-                                    <c:if test="${(loop.count % 2) == 1}">
-                                        <tr>
-                                            <th>${patients.getPatient_id()}</th>
-                                            <td>${patients.getFirst_name()}</td>
-                                            <td>${patients.getLast_name()}</td>
-                                            <td>${patients.getEmail()}</td>
-                                            <td>${patients.getMobile_phone()}</td>
-                                            <td>${patients.getAlt_phone()}</td>
-                                        </tr>
-                                    </c:if>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </c:when>
-            </c:choose>            
+                    </c:when>
+                </c:choose>  
+            </div>
         </div>
 
         <!----------------Footer------------------------>
