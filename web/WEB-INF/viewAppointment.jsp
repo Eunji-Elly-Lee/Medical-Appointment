@@ -218,30 +218,30 @@
                     </div>
                 </div>
                 
+                <div class="message">
+                    <br>
+                    <h3>${message}</h3>
+                </div>
+                
                 <c:if test="${account.profile == 'PATIENT'}">
                     <c:if test="${step == 1}">
-                        <div>
+                        <div class="btn_wrapper">
                             <!--Jihoon  -->
                             <form  method="post" action="view_appointment">
-                                <button>History</button>
+                                <button class="btn btn-secondary">History</button>
                                 <input type="hidden" name ="action" value="history_appointment">  
                             </form>
                         </div>  
                     </c:if>
                     <c:if test="${step == 0}">
-                        <div>
+                        <div class="btn_wrapper">
                             <a href="view_appointment">
-                                <button>Upcoming</button>
+                                <button class="btn btn-secondary">Upcoming</button>
                             </a>
                         </div>
                     </c:if>
                               
                 </c:if>
-                
-                <div class="message">
-                    <br>
-                    <h3>${message}</h3>
-                </div>
                 
                 <div class="table-responsive">
                     <table class="table table-hover">
