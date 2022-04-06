@@ -219,14 +219,23 @@
                 </div>
                 
                 <c:if test="${account.profile == 'PATIENT'}">
-                    <div>
-                        <!--Jihoon  -->
-                        <form  method="post" action="view_appointment">
-                            <button>History</button>
-                            <!--<input type="hidden" name="account_id">-->
-                            <input type="hidden" name ="action" value="history_appointment">  
-                        </form>
-                    </div>            
+                    <c:if test="${step == 1}">
+                        <div>
+                            <!--Jihoon  -->
+                            <form  method="post" action="view_appointment">
+                                <button>History</button>
+                                <input type="hidden" name ="action" value="history_appointment">  
+                            </form>
+                        </div>  
+                    </c:if>
+                    <c:if test="${step == 0}">
+                        <div>
+                            <a href="view_appointment">
+                                <button>Upcoming</button>
+                            </a>
+                        </div>
+                    </c:if>
+                              
                 </c:if>
                 
                 <div class="message">
@@ -247,14 +256,14 @@
                                             <th scope="col">EDIT </th>
                                             <th scope="col">DELETE </th>
                                         </c:if>
-                                        <c:if  test ="${step == 0}">
+                                        <c:if test ="${step == 0}">
                                             <th scope="col">REASON </th>
                                         </c:if>
                                     </tr>
                                 </thead>
                                 
                                 <tbody>
-                                    <c:if  test ="${step == 1}">
+                                    <c:if test="${step == 1}">
                                         <c:forEach items="${futuerAppointments}" var="futuerAppointment" varStatus="status">
                                             <c:if test="${(status.count % 2) == 0}">
                                                 <tr class="table-secondary">
@@ -330,7 +339,7 @@
                                             </c:if>
                                         </c:forEach>
                                     </c:if>
-                                    <c:if  test ="${step == 0}">
+                                    <c:if test="${step == 0}">
                                         <c:forEach items="${pastAppointments}" var="pastAppointment" varStatus="status">
                                             <c:if test="${(status.count % 2) == 0}">
                                                 <tr class="table-secondary">
