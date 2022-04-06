@@ -107,6 +107,8 @@ public class ViewPatientServlet extends HttpServlet {
                     request.setAttribute("searchedPatients", searched_patients);
                     request.setAttribute("user", doctor);
                     getAllPatient(request, response);
+                    
+                    request.setAttribute("name", name);
                     request.setAttribute("searched", true);
                 } else if (account.getProfile().equals("ADMIN")) {
                     Administrator admin = null;
@@ -122,6 +124,8 @@ public class ViewPatientServlet extends HttpServlet {
                     request.setAttribute("searchedPatients", searched_patients);
                     request.setAttribute("user", admin);
                     getAllPatient(request, response);
+                    
+                    request.setAttribute("name", name);
                     request.setAttribute("searched", true);
                 }
             } else {
