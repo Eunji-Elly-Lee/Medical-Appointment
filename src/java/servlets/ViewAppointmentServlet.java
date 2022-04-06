@@ -27,7 +27,7 @@ public class ViewAppointmentServlet extends HttpServlet {
         DoctorService doctorService = new DoctorService();
         PatientService patientService = new PatientService();
         AppointmentService as = new AppointmentService();           
-        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
 
         if (request.getParameter("delete") != null) {
             String date = request.getParameter("delete");           
@@ -42,7 +42,7 @@ public class ViewAppointmentServlet extends HttpServlet {
             request.setAttribute("message", "Appointment is deleted successfully.");
         }
         
-        if (edited != null && edited.equals("")) {
+        if (edited != null && !edited.equals("")) {
             request.setAttribute("message", "Appointment has been updated successfully.");
             session.setAttribute("edited", null);
         }
@@ -52,7 +52,7 @@ public class ViewAppointmentServlet extends HttpServlet {
                 Account account = accountService.get(user_name);
                 request.setAttribute("account", account);
                 
-                List<Appointment> appointments = as.getAllFutures(today + "");
+                List<Appointment> appointments = as.getAllFutures(tomorrow + "");
                 
                 if (account.getProfile().equals("DOCTOR")) {                    
                     Doctor doctor = doctorService.get(account.getAccount_id());
@@ -110,7 +110,7 @@ public class ViewAppointmentServlet extends HttpServlet {
                         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                         LocalDate beginDate = LocalDate.parse(allAppointments.get(i).getStart_date_time().substring(0, 10), df);
                          
-                        if (beginDate.isBefore(today)) {
+                        if (beginDate.isBefore(tomorrow)) {
                             //jihoon  for history
                             pastAppointments.add(allAppointments.get(i));
                         } else {
@@ -168,13 +168,13 @@ public class ViewAppointmentServlet extends HttpServlet {
                     List<Appointment> allAppointments = aps.getByPatientID(patient.getPatient_id());
                     ArrayList<Appointment> pastAppointments = new ArrayList();
                     ArrayList<Appointment> futuerAppointments = new ArrayList();
-                    LocalDate today = LocalDate.now();
+                    LocalDate tomorrow = LocalDate.now().plusDays(1);
                     
                     for (int i = 0; i < allAppointments.size(); i++) {
                         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                         LocalDate beginDate = LocalDate.parse(allAppointments.get(i).getStart_date_time().substring(0, 10), df);
                          
-                        if (beginDate.isBefore(today)) {
+                        if (beginDate.isBefore(tomorrow)) {
                             pastAppointments.add(allAppointments.get(i));
                         } else {
                             futuerAppointments.add(allAppointments.get(i));
