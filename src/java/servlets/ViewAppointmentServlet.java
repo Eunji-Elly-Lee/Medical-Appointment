@@ -21,6 +21,7 @@ public class ViewAppointmentServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user_name");
+        String edited = (String) session.getAttribute("edited");
         
         AccountService accountService = new AccountService();
         DoctorService doctorService = new DoctorService();
@@ -39,6 +40,11 @@ public class ViewAppointmentServlet extends HttpServlet {
             }
             
             request.setAttribute("message", "Appointment is deleted successfully.");
+        }
+        
+        if (edited != null && edited.equals("")) {
+            request.setAttribute("message", "Appointment has been updated successfully.");
+            session.setAttribute("edited", null);
         }
 
         if (user_name != null && !user_name.equals("")) {
