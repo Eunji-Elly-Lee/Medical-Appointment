@@ -286,7 +286,6 @@
                         </c:if> 
 
                         <h3 style="text-align: center;">${message}</h3>
-                        <br>
                             
                         <div class="table-responsive">                            
                             <h2>Patient List</h2>
@@ -407,7 +406,6 @@
                         </c:if> 
 
                         <h3 style="text-align: center;">${message}</h3>
-                        <br>
                             
                         <div class="table-responsive">                            
                             <h2>Patient List</h2>
