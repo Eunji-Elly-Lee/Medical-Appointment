@@ -109,15 +109,16 @@ public class AccountDB {
         DoctorDB doctorDB = new DoctorDB();
         PatientDB patientDB = new PatientDB();
         AdministratorDB administratorDB = new AdministratorDB();
-
-        if (doctorDB.get(email) != null){
-           Doctor doctor = doctorDB.get(email);
+        AES aes = new AES();
+        
+        if (doctorDB.get(aes.encrypt(email)) != null){
+           Doctor doctor = doctorDB.get(aes.encrypt(email));
             account = accountDB.get(doctor.getAccount_id());
-        } else if (patientDB.get(email) != null){
-            Patient patient = patientDB.get(email);
+        } else if (patientDB.get(aes.encrypt(email)) != null){
+            Patient patient = patientDB.get(aes.encrypt(email));
             account = accountDB.get(patient.getAccount_id());
-        } else if (administratorDB.get(email) != null){
-            Administrator admin = administratorDB.get(email);
+        } else if (administratorDB.get(aes.encrypt(email)) != null){
+            Administrator admin = administratorDB.get(aes.encrypt(email));
             account = accountDB.get(admin.getAccount_id());
         } 
         
