@@ -76,6 +76,14 @@
         <servlet-name>EditAppointmentServlet</servlet-name>
         <servlet-class>servlets.EditAppointmentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditPatientServlet</servlet-name>
+        <servlet-class>servlets.EditPatientServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditStaffServlet</servlet-name>
+        <servlet-class>servlets.EditStaffServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WelcomeServlet</servlet-name>
         <url-pattern>/welcome</url-pattern>
@@ -131,6 +139,14 @@
     <servlet-mapping>
         <servlet-name>EditAppointmentServlet</servlet-name>
         <url-pattern>/edit_appointment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditPatientServlet</servlet-name>
+        <url-pattern>/edit_patient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditStaffServlet</servlet-name>
+        <url-pattern>/edit_staff</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
