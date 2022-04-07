@@ -13,14 +13,16 @@ import service.*;
  * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
  */
 public class WelcomeServlet extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        allPasswordEncrypted(request, response);        
+        // Must use once to encrypt all sensitive data       
+        //allDataEncrypted(request, response);
+        allPasswordEncrypted(request, response);
         HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user_name");
-        
+
         if (request.getParameter("logout") != null) {
             session.invalidate();
             session = request.getSession();
@@ -31,7 +33,7 @@ public class WelcomeServlet extends HttpServlet {
                 try {
                     Account account = accountService.get(user_name);
                     request.setAttribute("account", account);
-                    
+
                     if (account.getProfile().equals("DOCTOR")) {
                         DoctorService doctorService = new DoctorService();
                         Doctor doctor = doctorService.get(account.getAccount_id());
@@ -47,30 +49,30 @@ public class WelcomeServlet extends HttpServlet {
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }   
-            }        
+                }
+            }
         }
-        
+
         getServletContext().getRequestDispatcher("/WEB-INF/welcome.jsp").forward(request, response);
-        return;        
+        return;
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {       
+            throws ServletException, IOException {
     }
-    
+
     public void allPasswordEncrypted(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         AccountService accountService = new AccountService();
-        
+
         try {
             List<Account> accounts = accountService.getAll();
-            
+
             for (int i = 0; i < accounts.size(); i++) {
                 Account account = accounts.get(i);
-                
-                if (account.getSalt() == null) {                    
+
+                if (account.getSalt() == null) {
                     accountService.update(account.getAccount_id(), account.getUser_name(),
                             account.getPassword(), account.getProfile());
                 }
@@ -78,5 +80,22 @@ public class WelcomeServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
+
+    public void allDataEncrypted(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PatientService ps = new PatientService();
+        DoctorService dc = new DoctorService();
+        AdministratorService ads = new AdministratorService();
+
+        try {
+
+            ps.setAllDataEncrypt();
+            dc.setAllDataEncrypt();
+            ads.setAllDataEncrypt();
+
+        } catch (Exception ex) {
+            Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
