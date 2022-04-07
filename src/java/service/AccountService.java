@@ -73,6 +73,7 @@ public class AccountService {
         String link = url + "?uuid=" + uuid;
         AccountDB accountDB = new AccountDB();
         Account account = null;
+        AES aes = new AES();
         
         try {
             account = accountDB.getByEmail(email);
@@ -85,8 +86,8 @@ public class AccountService {
                 accountDB.update(account);
 
                 HashMap<String, String> tags = new HashMap<>();
-                tags.put("firstname", doctor.getFirst_name());
-                tags.put("lastname", doctor.getLast_name());
+                tags.put("firstname", aes.decrypt(doctor.getFirst_name()));
+                tags.put("lastname", aes.decrypt(doctor.getLast_name()));
                 tags.put("link", link);
                 tags.put("date", (new java.util.Date()).toString());
 
@@ -99,8 +100,8 @@ public class AccountService {
                 accountDB.update(account);
 
                 HashMap<String, String> tags = new HashMap<>();
-                tags.put("firstname", administrator.getFirst_name());
-                tags.put("lastname", administrator.getLast_name());
+                tags.put("firstname", aes.decrypt(administrator.getFirst_name()));
+                tags.put("lastname", aes.decrypt(administrator.getLast_name()));
                 tags.put("link", link);
                 tags.put("date", (new java.util.Date()).toString());
 
@@ -113,8 +114,8 @@ public class AccountService {
                 accountDB.update(account);
 
                 HashMap<String, String> tags = new HashMap<>();
-                tags.put("firstname", patient.getFirst_name());
-                tags.put("lastname", patient.getLast_name());
+                tags.put("firstname", aes.decrypt(patient.getFirst_name()));
+                tags.put("lastname", aes.decrypt(patient.getLast_name()));
                 tags.put("link", link);
                 tags.put("date", (new java.util.Date()).toString());
 
@@ -124,6 +125,7 @@ public class AccountService {
             //GmailService.sendMail(email, "NotesKeeper Password", "Hello, To reset your password, please click this link : ", false);
         } catch (Exception ex) {
             Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         
         return account;
@@ -152,23 +154,24 @@ public class AccountService {
         PatientDB patientDB = new PatientDB();
         AdministratorDB administratorDB = new AdministratorDB();
         Account account = accountDB.getByEmail(email);
+        AES aes = new AES();
         
         if (account.getProfile().equals("DOCTOR")) {
-            Doctor doctor = doctorDB.get(email);
+            Doctor doctor = doctorDB.get(aes.encrypt(email));
             
-            if (doctor.getFirst_name().equals(firstName) && doctor.getLast_name().equals(lastName)) {
+            if (doctor.getFirst_name().equals(aes.encrypt(firstName)) && doctor.getLast_name().equals(aes.encrypt(lastName))) {
                 return account;
             }
         } else if (account.getProfile().equals("PATIENT")) {
-            Patient patient = patientDB.get(email);
+            Patient patient = patientDB.get(aes.encrypt(email));
             
-            if (patient.getFirst_name().equals(firstName) && patient.getLast_name().equals(lastName)) {
+            if (patient.getFirst_name().equals(aes.encrypt(firstName)) && patient.getLast_name().equals(aes.encrypt(lastName))) {
                 return account;
             }
         } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
-            Administrator administrator = administratorDB.get(email);
+            Administrator administrator = administratorDB.get(aes.encrypt(email));
             
-            if (administrator.getFirst_name().equals(firstName) && administrator.getLast_name().equals(lastName)) {
+            if (administrator.getFirst_name().equals(aes.encrypt(firstName)) && administrator.getLast_name().equals(aes.encrypt(lastName))) {
                 return account;
             }
         }
@@ -183,6 +186,7 @@ public class AccountService {
         String url2 = "http://localhost:8084/capstone/";
         AccountDB accountDB = new AccountDB();        
         Account account = null;
+        AES aes = new AES();
         
         try {
             account = accountDB.getByEmail(email);
@@ -191,11 +195,11 @@ public class AccountService {
                 DoctorDB doctorDB = new DoctorDB();
                 Doctor doctor = doctorDB.get(account.getAccount_id());
 
-                if (doctor.getFirst_name().equals(firstName) &&
-                        doctor.getLast_name().equals(LastName) && doctor.getEmail().equals(email)) {      
+                if (doctor.getFirst_name().equals(aes.encrypt(firstName)) &&
+                        doctor.getLast_name().equals(aes.encrypt(LastName)) && doctor.getEmail().equals(aes.encrypt(email))) {      
                     HashMap<String, String> tags = new HashMap<>();
-                    tags.put("firstname", doctor.getFirst_name());
-                    tags.put("lastname", doctor.getLast_name());
+                    tags.put("firstname", aes.decrypt(doctor.getFirst_name()));
+                    tags.put("lastname", aes.decrypt(doctor.getLast_name()));
                     tags.put("id", account.getUser_name());
                     tags.put("link", url2);
                     tags.put("date", (new java.util.Date()).toString());
@@ -209,11 +213,11 @@ public class AccountService {
                 AdministratorDB administratorDB = new AdministratorDB();
                 Administrator administrator = administratorDB.get(account.getAccount_id());
 
-                if (administrator.getFirst_name().equals(firstName) &&
-                        administrator.getLast_name().equals(LastName) && administrator.getEmail().equals(email)) {
+                if (administrator.getFirst_name().equals(aes.encrypt(firstName)) &&
+                        administrator.getLast_name().equals(aes.encrypt(LastName)) && administrator.getEmail().equals(aes.encrypt(email))) {
                     HashMap<String, String> tags = new HashMap<>();
-                    tags.put("firstname", administrator.getFirst_name());
-                    tags.put("lastname", administrator.getLast_name());
+                    tags.put("firstname", aes.decrypt(administrator.getFirst_name()));
+                    tags.put("lastname", aes.decrypt(administrator.getLast_name()));
                     tags.put("id", account.getUser_name());
                     tags.put("link", url2);
                     tags.put("date", (new java.util.Date()).toString());
@@ -226,24 +230,23 @@ public class AccountService {
                 PatientDB patientDB = new PatientDB();
                 Patient patient = patientDB.get(account.getAccount_id());
 
-                if (patient.getFirst_name().equals(firstName) &&
-                        patient.getLast_name().equals(LastName) && patient.getEmail().equals(email)) {
+                if (patient.getFirst_name().equals(aes.encrypt(firstName)) &&
+                        patient.getLast_name().equals(aes.encrypt(LastName)) && patient.getEmail().equals(aes.encrypt(email))) {
                     HashMap<String, String> tags = new HashMap<>();
-                    tags.put("firstname", patient.getFirst_name());
-                    tags.put("lastname", patient.getLast_name());
+                    tags.put("firstname", aes.decrypt(patient.getFirst_name()));
+                    tags.put("lastname", aes.decrypt(patient.getLast_name()));
                     tags.put("id", account.getUser_name());
                     tags.put("link", url2);
                     tags.put("date", (new java.util.Date()).toString());
 
                     GmailService.sendMail(to, subject, template, tags);
-                } else {
-                    return null;
-                }
+                } 
             }
 
             //GmailService.sendMail(email, "NotesKeeper Password", "Hello, To reset your password, please click this link : ", false);
         } catch (Exception ex) {
             Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         
         return account;
