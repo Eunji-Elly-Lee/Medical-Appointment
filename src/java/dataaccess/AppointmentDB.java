@@ -263,6 +263,24 @@ public class AppointmentDB {
         }
     }
     
+    public void assignDoctor(int doctor_id, int patient_id, String start_date_time) throws Exception{
+        ConnectionPool cp = ConnectionPool.getInstance();
+        Connection con = cp.getConnection();
+        PreparedStatement ps = null;
+        String sql = "UPDATE appointment SET doctor_id = ?"
+                + " WHERE patient_id = ? AND start_date_time = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, doctor_id);
+            ps.setInt(2, patient_id);  
+            ps.setString(3, start_date_time);
+            ps.executeUpdate();
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            cp.freeConnection(con);
+        }
+    }
+    
     public void delete(String time, int doctor_id, int patient_id) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
