@@ -1,5 +1,6 @@
 package servlets;
 
+import dataaccess.AES;
 import java.io.IOException;
 import java.util.*;
 import java.util.logging.*;
@@ -53,7 +54,7 @@ public class ViewStaffServlet extends HttpServlet {
         } else {
             response.sendRedirect("welcome");
             return;
-        }        
+        }
 
         getServletContext().getRequestDispatcher("/WEB-INF/viewStaff.jsp").forward(request, response);
         return;
@@ -65,7 +66,10 @@ public class ViewStaffServlet extends HttpServlet {
         HttpSession session = request.getSession();
         AccountService as = new AccountService();
         DoctorService ds = new DoctorService();
+        PatientService ps = new PatientService();
         AdministratorService ads = new AdministratorService();
+        AppointmentService aps = new AppointmentService();
+        AvailabilityService avs = new AvailabilityService();
 
         String user_name = (String) session.getAttribute("user_name");
         String action = request.getParameter("action");
@@ -74,7 +78,7 @@ public class ViewStaffServlet extends HttpServlet {
 
         if (account_id != null) {
             Account account = null;
-            
+
             try {
                 account = as.get(accountID);
             } catch (Exception ex) {
@@ -84,11 +88,44 @@ public class ViewStaffServlet extends HttpServlet {
             if (action.equals("edit")) {
                 session.setAttribute("selectedUser", account.getUser_name());
                 session.setAttribute("editCheck", "editCheck");
-                response.sendRedirect("profile");
+                response.sendRedirect("edit_staff");
                 return;
             } else if (action.equals("delete")) {
                 if (account.getProfile().equals("DOCTOR")) {
+                    List<Appointment> doctorsAppointment = new ArrayList<>();
+                    List<Availability> doctorsAvailability = new ArrayList<>();
+                    List<Patient> patients = new ArrayList<>();
+
                     try {
+                        //----------------------------   Delete Appointment ---------------------------------    
+                        Doctor doctor = ds.get(account.getAccount_id());
+                        doctorsAppointment = aps.getByDoctorID(doctor.getDoctor_id());
+
+                        for (int i = 0; i < doctorsAppointment.size(); i++) {
+                            aps.update(1234567, doctorsAppointment.get(i).getStart_date_time(),
+                                   doctorsAppointment.get(i).getPatient_id(), doctorsAppointment.get(i).getDuration(),
+                                   doctorsAppointment.get(i).getType(), doctorsAppointment.get(i).getReason(),
+                                   doctorsAppointment.get(i).getPatient_attended());
+                        }
+                        //----------------------------   Delete Availability ---------------------------------                        
+                        doctorsAvailability = avs.getAllByDoctorId(doctor.getDoctor_id());
+
+                        for (int i = 0; i < doctorsAvailability.size(); i++) {
+                            avs.delete(doctorsAvailability.get(i).getDoctor_id());
+                        }
+                        
+                        //-------------------   Change the doctor for all patients ---------------------------    
+                        patients = ps.getAllByDoctor(doctor.getDoctor_id());
+                        for(int i = 0; i < patients.size();i++){
+                            ps.update(patients.get(i).getPatient_id(), patients.get(i).getHealthcare_id(), 
+                                    patients.get(i).getFirst_name(), patients.get(i).getLast_name(),
+                                    patients.get(i).getEmail(), patients.get(i).getMobile_phone(), 
+                                    patients.get(i).getAlt_phone(),patients.get(i).getPref_contact_type(), 1234567, 
+                                    patients.get(i).getAccount_id(),patients.get(i).getGender(), patients.get(i).getBirth_date(), 
+                                    patients.get(i).getStreet_address(), patients.get(i).getCity(), 
+                                    patients.get(i).getProvince(), patients.get(i).getPostal_code());
+                        }
+                        
                         ds.delete(account.getAccount_id());
                         as.delete(account.getUser_name());
                     } catch (Exception ex) {
@@ -102,11 +139,11 @@ public class ViewStaffServlet extends HttpServlet {
                         Logger.getLogger(ViewStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                
+
                 request.setAttribute("message", "User is deleted successfully.");
             }
         }
-        
+
         try {
             Account account = as.get(user_name);
             request.setAttribute("account", account);
@@ -123,7 +160,7 @@ public class ViewStaffServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         getAllStaff(request, response);
         getServletContext().getRequestDispatcher("/WEB-INF/viewStaff.jsp").forward(request, response);
         return;
@@ -143,7 +180,7 @@ public class ViewStaffServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(ViewStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         request.setAttribute("admins", admins);
         request.setAttribute("doctors", doctors);
     }
