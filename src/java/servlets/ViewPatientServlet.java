@@ -35,7 +35,7 @@ public class ViewPatientServlet extends HttpServlet {
             request.setAttribute("message", "Please enter the name");
             session.setAttribute("noName", null);
         }
-        
+
         if (user_name != null && !user_name.equals("")) {
             AccountService accountService = new AccountService();
 
@@ -75,6 +75,7 @@ public class ViewPatientServlet extends HttpServlet {
         PatientService ps = new PatientService();
         DoctorService ds = new DoctorService();
         AdministratorService ads = new AdministratorService();
+        AppointmentService aps = new AppointmentService();
 
         List<Patient> searched_patients = new ArrayList<>();
 
@@ -107,7 +108,7 @@ public class ViewPatientServlet extends HttpServlet {
                     request.setAttribute("searchedPatients", searched_patients);
                     request.setAttribute("user", doctor);
                     getAllPatient(request, response);
-                    
+
                     request.setAttribute("name", name);
                     request.setAttribute("searched", true);
                 } else if (account.getProfile().equals("ADMIN")) {
@@ -124,7 +125,7 @@ public class ViewPatientServlet extends HttpServlet {
                     request.setAttribute("searchedPatients", searched_patients);
                     request.setAttribute("user", admin);
                     getAllPatient(request, response);
-                    
+
                     request.setAttribute("name", name);
                     request.setAttribute("searched", true);
                 }
@@ -147,16 +148,27 @@ public class ViewPatientServlet extends HttpServlet {
             if (action.equals("edit")) {
                 session.setAttribute("selectedUser", account.getUser_name());
                 session.setAttribute("editCheckPatient", "editCheckPatient");
-                response.sendRedirect("profile");
+                response.sendRedirect("edit_patient");
                 return;
             } else if (action.equals("delete")) {
+                List<Appointment> patientsAppointment = new ArrayList<>();
+                
+
                 try {
-                    ps.delete(account.getAccount_id());
+                    Patient patient = ps.get(account.getAccount_id());
+                    patientsAppointment = aps.getByPatientID(patient.getPatient_id());
+                    for (int i = 0; i < patientsAppointment.size(); i++) {
+                        aps.delete(patientsAppointment.get(i).getStart_date_time(), 
+                                patientsAppointment.get(i).getDoctor_id(), 
+                                patientsAppointment.get(i).getPatient_id());
+                    }
+                    ps.delete(patient.getAccount_id());
+
                     as.delete(account.getUser_name());
                 } catch (Exception ex) {
                     Logger.getLogger(ViewStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 session.setAttribute("deleteCheck", "deleteCheck");
                 response.sendRedirect("view_patient");
                 return;
@@ -177,7 +189,7 @@ public class ViewPatientServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(ViewPatientServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         request.setAttribute("patients", patients);
     }
 }
