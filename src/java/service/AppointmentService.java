@@ -61,8 +61,14 @@ public class AppointmentService {
         appointmentDB.update(appointment);
     }
     
+    public void assignDoc(int doctor_id, int patient_id, String start_date_time) throws Exception{
+        AppointmentDB appointmentDB = new AppointmentDB();
+        appointmentDB.assignDoctor(doctor_id, patient_id, start_date_time);
+    }
+    
     public void delete (String time, int doctor_id, int patient_id) throws Exception {
         AppointmentDB appointmentDB = new AppointmentDB();
         appointmentDB.delete(time, doctor_id, patient_id);
     }    
+
 }
