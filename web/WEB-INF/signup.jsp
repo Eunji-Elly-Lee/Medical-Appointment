@@ -217,6 +217,7 @@
                         <div>
                             <label>Password</label>
                             <input type="password" name="signup_password" placeholder="Password" value="${new_account.password}">
+                            <p class="errormessage">${passPatternErrorMessage}</p>
                         </div>
                         <div>
                             <label>Re-enter Password</label>
