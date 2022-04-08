@@ -266,6 +266,7 @@
                                 <div class="col-lg-5">
                                     <label for="password">Password</label> <br>
                                     <input type="password" id="password" name="password" placeholder="Enter New Password">
+                                    <p class="errormessage">${passPatternErrorMessage}</p>
                                 </div>
                                 <div class="col-lg-5">
                                     <label for="repassword">Re-enter Password</label> <br>
