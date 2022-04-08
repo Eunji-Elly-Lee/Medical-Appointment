@@ -143,6 +143,7 @@
 
                         <label for="resetPassword">* Enter New Password: </label> 
                         <input type="password" name="resetPassword" value="${resetPassword}"><br>
+                        <p class="errormessage">${passPatternErrorMessage}</p>
                         <label for="resetConfirmPassword">* Confirm New Password: </label> 
                         <input type="password" name="resetConfirmPassword" value="${resetConfirmPassword}"><br>
                         
