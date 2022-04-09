@@ -41,7 +41,7 @@ public class SignupStaffServlet extends HttpServlet {
                 Logger.getLogger(SignupStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
             }            
         }
-        
+          
         getServletContext().getRequestDispatcher("/WEB-INF/signupStaff.jsp").forward(request, response);
         return;
     }
@@ -112,9 +112,13 @@ public class SignupStaffServlet extends HttpServlet {
                 + ")*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
 
         String regexPostal = "^(?![DFIOQUWZ])[A-Z]{1}[0-9]{1}(?![DFIOQU])[A-Z]{1}[ ]{1}[0-9]{1}(?![DFIOQU])[A-Z]{1}[0-9]{1}$";
-
+        
+        String regexPassword = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,}$";
         boolean checkEmail = true;
         boolean checkPostal = true;
+        boolean checkPassword = true;
+      
+        
 
         if (emailEntered == null || emailEntered.equals("")) {
             request.setAttribute("emailErrorMessage", "*Email is required");
@@ -158,14 +162,28 @@ public class SignupStaffServlet extends HttpServlet {
             insertInfo = false;
         }
 
-        if (passEntered == null || passEntered.equals("") || reenterPassEntered == null || reenterPassEntered.equals("")) {
+           if (passEntered == null || passEntered.equals("") || reenterPassEntered == null || reenterPassEntered.equals("")) {
+            request.setAttribute("passErrorMessage", "*Password is required");
+            insertInfo = false;
+        } else {
+            Pattern p3 = Pattern.compile(regexPassword);
+            Matcher m3 = p3.matcher(passEntered);
+            checkPassword = m3.matches();
+        }
+        
+         if (passEntered == null || passEntered.equals("") || reenterPassEntered == null || reenterPassEntered.equals("")) {
             request.setAttribute("passErrorMessage", "*Password is required");
             insertInfo = false;
         } else if (checkPass == false) {
             request.setAttribute("passErrorMessage", "*Password does not match ");
             insertInfo = false;
         }
-
+        
+        if (checkPassword == false) {
+            request.setAttribute("passPatternErrorMessage", "*Must contain one number, one uppercase and lowercase letter, one special character and be 6 or more characters");
+            insertInfo = false;
+        }
+        
         if (checkEmail == false) {
             request.setAttribute("emailErrorMessage", "*Invalid Email ex. example@domain.com");
             insertInfo = false;
