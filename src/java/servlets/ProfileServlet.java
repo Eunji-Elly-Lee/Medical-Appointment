@@ -67,6 +67,7 @@ public class ProfileServlet extends HttpServlet {
         String regex_birth_date = "^\\d{4}\\)?[\\s.-]\\d{2}[\\s.-]\\d{2}$";
         String regex_city = "[a-zA-Z\\-]{1,25}";
         String regex_postal_code = "[A-Za-z]\\d[A-Za-z] ?\\d[A-Za-z]\\d";
+        String regexNewPassword = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,}$"; //added
 
         Pattern p = Pattern.compile(regex_first_name);
         Matcher m = p.matcher(first_name);
@@ -92,12 +93,25 @@ public class ProfileServlet extends HttpServlet {
         m = p.matcher(postal_code);
         boolean check_postal_code = m.matches();
 
+//        p = Pattern.compile(regex_birth_date);
+//        m = p.matcher(birth_date);
+//        boolean check_birth_date = m.matches();
+//
+//        if (check_first_name == true && check_last_name == true && check_phone_name == true && check_regex_email == true
+//                && check_regex_city == true && check_postal_code == true && check_birth_date == true) {
+//            regex_all_check = true;
+//        }
+        p = Pattern.compile(regexNewPassword);
+        m = p.matcher(password);
+        //added
+        boolean check_password = m.matches();
         p = Pattern.compile(regex_birth_date);
         m = p.matcher(birth_date);
         boolean check_birth_date = m.matches();
+        
 
         if (check_first_name == true && check_last_name == true && check_phone_name == true && check_regex_email == true
-                && check_regex_city == true && check_postal_code == true && check_birth_date == true) {
+                && check_regex_city == true && check_postal_code == true && check_birth_date == true && check_password == true) {
             regex_all_check = true;
         }
 
@@ -119,6 +133,8 @@ public class ProfileServlet extends HttpServlet {
 
                 if (password != null && !password.equals("") && password.equals(repassword)) {
                     accountService.update(account.getAccount_id(), user_name, password, account.getProfile());
+                }else if(check_password == false) {
+                 request.setAttribute("passPatternErrorMessage", "*Must contain one number, one uppercase and lowercase letter, one special character and be 6 or more characters");
                 }
 
                 if (account.getProfile().equals("DOCTOR")) {
@@ -200,7 +216,7 @@ public class ProfileServlet extends HttpServlet {
                 Administrator administrator = administratorService.get(account.getAccount_id());
                 request.setAttribute("user", administrator);
                 session.setAttribute("user", account.getUser_name());
-                
+
             } else if (account.getProfile().equals("PATIENT")) {
                 PatientService patientService = new PatientService();
                 Patient patient = patientService.get(account.getAccount_id());
