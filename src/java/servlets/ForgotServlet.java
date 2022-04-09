@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import models.Account;
 import service.AccountService;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -81,6 +83,12 @@ public class ForgotServlet extends HttpServlet {
         } else if (action.equals("newPassword")) {
             String newPassword = request.getParameter("resetPassword");
             String resetConfirmPassword = request.getParameter("resetConfirmPassword");
+            String regexPassword = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,}$";
+            boolean checkPassword = true;
+
+            Pattern p3 = Pattern.compile(regexPassword);
+            Matcher m3 = p3.matcher(newPassword);
+            checkPassword = m3.matches();
 
             if (newPassword != null && !newPassword.equals("") && resetConfirmPassword != null && !resetConfirmPassword.equals("")
                     && newPassword.equals(resetConfirmPassword)) {
@@ -97,6 +105,8 @@ public class ForgotServlet extends HttpServlet {
 
                 getServletContext().getRequestDispatcher("/WEB-INF/resetNewPassword.jsp").forward(request, response);
                 return;
+            } else if (checkPassword == false) {
+                request.setAttribute("passPatternErrorMessage", "*Must contain one number, one uppercase and lowercase letter, one special character and be 6 or more characters");
             } else {
                 request.setAttribute("newPswMessage", "You should fill in the blank.");
 
