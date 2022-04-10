@@ -378,7 +378,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${searchedPatients}" var="searchedPatient" varStatus="loop">
+                                        <c:forEach items="${searchedPatients}" var="searchedPatient" varStatus="loop">                                            
                                             <c:if test="${(loop.count % 2) == 0}">
                                                 <tr class="table-secondary">
                                                     <th>${searchedPatient.getPatient_id()}</th>
