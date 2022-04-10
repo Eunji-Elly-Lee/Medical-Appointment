@@ -54,6 +54,7 @@ public class ForgotServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account forgotAccount = (Account) session.getAttribute("forgotAccount");
+        String sessionUrl = (String) session.getAttribute("home_url");
         AccountService accountService = new AccountService();
         String url = request.getRequestURL().toString();
         String path = getServletContext().getRealPath("/WEB-INF");
@@ -66,7 +67,11 @@ public class ForgotServlet extends HttpServlet {
 
                 getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
                 return;
-            } else if (forgotAccount == null && email != null && !email.equals("")) {
+            } else if (forgotAccount != null && forgotAccount.getReset_password_uuid() != null) {
+                request.setAttribute("resetMessage", "You already have the email to find your account. Check your email again.");
+                getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
+                return;
+            } else if (forgotAccount == null) {
                 Account account2 = accountService.resetPassword(email, path, url);
                 if (account2 != null) {
                     session.setAttribute("forgotAccount", account2);
@@ -96,7 +101,7 @@ public class ForgotServlet extends HttpServlet {
 
 //                session.removeAttribute("account");
                 request.setAttribute("message", "You have successfully changed your password.");
-
+                session.setAttribute("forgotAccount", null);
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 return;
             } else if (newPassword != null && !newPassword.equals("") && resetConfirmPassword != null && !resetConfirmPassword.equals("")
@@ -127,7 +132,7 @@ public class ForgotServlet extends HttpServlet {
                 return;
             } else {
                 try {
-                    Account checkAccount = accountService.sendAccount(emailFind, firstName, lastName, path);
+                    Account checkAccount = accountService.sendAccount(emailFind, firstName, lastName, path, sessionUrl);
 
                     if (checkAccount != null) {
                         request.setAttribute("resetPwd", "We sent an email to your email address.");
