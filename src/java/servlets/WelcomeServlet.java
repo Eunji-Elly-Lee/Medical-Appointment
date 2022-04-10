@@ -22,6 +22,8 @@ public class WelcomeServlet extends HttpServlet {
         allPasswordEncrypted(request, response);
         HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user_name");
+        String url = request.getRequestURL().toString();
+        session.setAttribute("home_url", url);
 
         if (request.getParameter("logout") != null) {
             session.invalidate();
