@@ -39,9 +39,15 @@ public class EditPatientServlet extends HttpServlet {
             displayInformation(request, selectedUser);
             //session.setAttribute("loginUser", null);
             session.setAttribute("selectedUser", null);
-        } else {
+        } else if (user_name != null || user_name.equals("")) {
             displayInformation(request, user_name);
             session.setAttribute("editCheck", null);
+            String noProfile = (String) session.getAttribute("noProfile");
+            if (noProfile != null || !noProfile.equals("")) {
+                response.sendRedirect("welcome");
+                session.setAttribute("noProfile", null);
+                return;
+            }
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/editPatient.jsp").forward(request, response);
@@ -205,36 +211,26 @@ public class EditPatientServlet extends HttpServlet {
             Account account = accountService.get(user_name);
             request.setAttribute("account", account);
 
-            if (account.getProfile().equals("DOCTOR")) {
-                DoctorService doctorService = new DoctorService();
-                Doctor doctor = doctorService.get(account.getAccount_id());
-                request.setAttribute("user", doctor);
-                session.setAttribute("user", account.getUser_name());
-
-            } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
-                AdministratorService administratorService = new AdministratorService();
-                Administrator administrator = administratorService.get(account.getAccount_id());
-                request.setAttribute("user", administrator);
-                session.setAttribute("user", account.getUser_name());
-                
-            } else if (account.getProfile().equals("PATIENT")) {
+            if (account.getProfile().equals("PATIENT")) {
                 PatientService patientService = new PatientService();
                 DoctorService doctorService = new DoctorService();
-                
+
                 doctors = doctorService.getAll();
                 request.setAttribute("doctors", doctors);
-                
-                
+
                 Patient patient = patientService.get(account.getAccount_id());
                 request.setAttribute("user", patient);
                 request.setAttribute("select_doctor", patient.getDoctor_id());
                 session.setAttribute("user", account.getUser_name());
+            } else {
+                session.setAttribute("noProfile", "noProfile");
+                return;
             }
 
             Account loginAccount = accountService.get(loginUser);
             request.setAttribute("loginAccount", loginAccount);
 
-            if (loginAccount.getProfile().equals("DOCTOR")) {
+             if (loginAccount.getProfile().equals("DOCTOR")) {
                 DoctorService doctorService = new DoctorService();
                 Doctor loginDoctor = doctorService.get(loginAccount.getAccount_id());
                 request.setAttribute("loginUser", loginDoctor);
@@ -242,10 +238,9 @@ public class EditPatientServlet extends HttpServlet {
                 AdministratorService administratorService = new AdministratorService();
                 Administrator loginAdministrator = administratorService.get(loginAccount.getAccount_id());
                 request.setAttribute("loginUser", loginAdministrator);
-            } else if (account.getProfile().equals("PATIENT")) {
-                PatientService patientService = new PatientService();
-                Patient loginPatient = patientService.get(loginAccount.getAccount_id());
-                request.setAttribute("loginUser", loginPatient);
+            } else {
+                session.setAttribute("noProfile", "noProfile");
+                return;
             }
         } catch (Exception ex) {
             Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
