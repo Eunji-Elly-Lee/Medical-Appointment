@@ -179,11 +179,11 @@ public class AccountService {
         return null;
     }
     
-    public Account sendAccount(String email, String firstName, String LastName, String path) throws Exception {
+    public Account sendAccount(String email, String firstName, String LastName, String path, String url) throws Exception {
         String to = email;
         String subject = "Your ID From Surpass Health Clinic";
         String template = path + "/email_templates/find_account.html";
-        String url2 = "http://localhost:8084/capstone/";
+
         AccountDB accountDB = new AccountDB();        
         Account account = null;
         AES aes = new AES();
@@ -201,7 +201,7 @@ public class AccountService {
                     tags.put("firstname", aes.decrypt(doctor.getFirst_name()));
                     tags.put("lastname", aes.decrypt(doctor.getLast_name()));
                     tags.put("id", account.getUser_name());
-                    tags.put("link", url2);
+                    tags.put("link", url);
                     tags.put("date", (new java.util.Date()).toString());
 
                     GmailService.sendMail(to, subject, template, tags);
@@ -219,7 +219,7 @@ public class AccountService {
                     tags.put("firstname", aes.decrypt(administrator.getFirst_name()));
                     tags.put("lastname", aes.decrypt(administrator.getLast_name()));
                     tags.put("id", account.getUser_name());
-                    tags.put("link", url2);
+                    tags.put("link", url);
                     tags.put("date", (new java.util.Date()).toString());
 
                     GmailService.sendMail(to, subject, template, tags);
@@ -236,7 +236,7 @@ public class AccountService {
                     tags.put("firstname", aes.decrypt(patient.getFirst_name()));
                     tags.put("lastname", aes.decrypt(patient.getLast_name()));
                     tags.put("id", account.getUser_name());
-                    tags.put("link", url2);
+                    tags.put("link", url);
                     tags.put("date", (new java.util.Date()).toString());
 
                     GmailService.sendMail(to, subject, template, tags);
