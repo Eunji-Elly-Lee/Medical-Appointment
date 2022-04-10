@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import models.*;
 import service.*;
+import sun.security.pkcs11.wrapper.Functions;
 
 /**
  *
@@ -22,8 +23,6 @@ public class ViewPatientServlet extends HttpServlet {
         String complete = (String) session.getAttribute("complete");
         String deleteCheck = (String) session.getAttribute("deleteCheck");
         String noName = (String) session.getAttribute("noName");
-
-        getAllPatient(request, response);
 
         if (complete != null) {
             request.setAttribute("message", "User information has been updated successfully.");
@@ -47,8 +46,12 @@ public class ViewPatientServlet extends HttpServlet {
                     DoctorService doctorService = new DoctorService();
                     Doctor doctor = doctorService.get(account.getAccount_id());
                     request.setAttribute("user", doctor);
+                    session.setAttribute("doctorsPatients", doctor);
+                    getAllAssignedPatient(request, response);
+                    session.setAttribute("doctorsPatients", null);
                 } else if (account.getProfile().equals("ADMIN")) {
                     AdministratorService administratorService = new AdministratorService();
+                    getAllPatient(request, response);
                     Administrator administrator = administratorService.get(account.getAccount_id());
                     request.setAttribute("user", administrator);
                 } else {
@@ -100,14 +103,17 @@ public class ViewPatientServlet extends HttpServlet {
                     try {
                         doctor = ds.get(account.getAccount_id());
                         request.setAttribute("account", account);
-                        searched_patients = ps.getAllByName(name);
+                        searched_patients = ps.getAllAssignedByName(name, doctor.getDoctor_id());
+
                     } catch (Exception ex) {
                         Logger.getLogger(ViewPatientServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                     request.setAttribute("searchedPatients", searched_patients);
                     request.setAttribute("user", doctor);
-                    getAllPatient(request, response);
+                    session.setAttribute("doctorsPatients", doctor);
+                    getAllAssignedPatient(request, response);
+                    session.setAttribute("doctorsPatients", null);
 
                     request.setAttribute("name", name);
                     request.setAttribute("searched", true);
@@ -152,14 +158,13 @@ public class ViewPatientServlet extends HttpServlet {
                 return;
             } else if (action.equals("delete")) {
                 List<Appointment> patientsAppointment = new ArrayList<>();
-                
 
                 try {
                     Patient patient = ps.get(account.getAccount_id());
                     patientsAppointment = aps.getByPatientID(patient.getPatient_id());
                     for (int i = 0; i < patientsAppointment.size(); i++) {
-                        aps.delete(patientsAppointment.get(i).getStart_date_time(), 
-                                patientsAppointment.get(i).getDoctor_id(), 
+                        aps.delete(patientsAppointment.get(i).getStart_date_time(),
+                                patientsAppointment.get(i).getDoctor_id(),
                                 patientsAppointment.get(i).getPatient_id());
                     }
                     ps.delete(patient.getAccount_id());
@@ -186,6 +191,24 @@ public class ViewPatientServlet extends HttpServlet {
 
         try {
             patients = ps.getAll();
+        } catch (Exception ex) {
+            Logger.getLogger(ViewPatientServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        request.setAttribute("patients", patients);
+    }
+
+    public void getAllAssignedPatient(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        PatientService ps = new PatientService();
+
+        List<Patient> patients = new ArrayList<>();
+
+        try {
+            Doctor doctor = (Doctor) session.getAttribute("doctorsPatients");
+            patients = ps.getAllByDoctor(doctor.getDoctor_id());
+
         } catch (Exception ex) {
             Logger.getLogger(ViewPatientServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
