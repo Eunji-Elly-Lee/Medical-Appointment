@@ -63,6 +63,20 @@ public class PatientService {
         }
         return decryptedPatients;
     }
+    
+    public List<Patient> getAllAssignedByName(String name, int doctor_id) throws Exception {
+        PatientDB patientDB = new PatientDB();
+        List<Patient> patients = patientDB.getAllByDoctor(doctor_id);
+        List<Patient> decryptedPatients = new ArrayList<Patient>();
+        
+        for (int i = 0; i < patients.size(); i++) {
+            Patient patient = decodingPatient(patients.get(i));
+            if(patient.getFirst_name().toLowerCase().contains(name.toLowerCase()) || patient.getLast_name().toLowerCase().contains(name.toLowerCase())){
+                decryptedPatients.add(patient);
+            }
+        }
+        return decryptedPatients;
+    }
 
     public Patient get(int account_id) throws Exception {
         PatientDB patientDB = new PatientDB();
