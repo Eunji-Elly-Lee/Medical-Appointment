@@ -1,4 +1,3 @@
-
 package servlets;
 
 import java.io.IOException;
@@ -27,21 +26,27 @@ public class EditStaffServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user_name");
         String selectedUser = (String) session.getAttribute("selectedUser");
 
-        if (user_name == null || user_name.equals("")) {
+        if (user_name == null || user_name.equals("") || selectedUser == null ) {
             response.sendRedirect("welcome");
             return;
         } else if (selectedUser != null) {
             displayInformation(request, selectedUser);
             //session.setAttribute("loginUser", null);
             session.setAttribute("selectedUser", null);
-        } else {
+        } else if (user_name != null || user_name.equals("")) {
             displayInformation(request, user_name);
             session.setAttribute("editCheck", null);
-        }
+            String noProfile = (String) session.getAttribute("noProfile");
+            if (noProfile != null || !noProfile.equals("")) {
+                response.sendRedirect("welcome");
+                session.setAttribute("noProfile", null);
+                return;
+            }
+        } 
 
         getServletContext().getRequestDispatcher("/WEB-INF/editStaff.jsp").forward(request, response);
         return;
@@ -50,7 +55,7 @@ public class EditStaffServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         String user_name = (String) session.getAttribute("user");
 
         String first_name = request.getParameter("first_name");
@@ -183,12 +188,11 @@ public class EditStaffServlet extends HttpServlet {
             return;
         }
     }
-    
+
     private void displayInformation(HttpServletRequest request, String user_name) {
         HttpSession session = request.getSession();
         AccountService accountService = new AccountService();
         String loginUser = (String) session.getAttribute("user_name");
-        List<Doctor> doctors = new ArrayList();
 
         try {
             Account account = accountService.get(user_name);
@@ -205,36 +209,22 @@ public class EditStaffServlet extends HttpServlet {
                 Administrator administrator = administratorService.get(account.getAccount_id());
                 request.setAttribute("user", administrator);
                 session.setAttribute("user", account.getUser_name());
-                
-            } else if (account.getProfile().equals("PATIENT")) {
-                PatientService patientService = new PatientService();
-                DoctorService doctorService = new DoctorService();
-                
-                doctors = doctorService.getAll();
-                request.setAttribute("doctors", doctors);
-                
-                
-                Patient patient = patientService.get(account.getAccount_id());
-                request.setAttribute("user", patient);
-                request.setAttribute("select_doctor", patient.getDoctor_id());
-                session.setAttribute("user", account.getUser_name());
+
+            } else {
+                session.setAttribute("noProfile", "noProfile");
+                return;
             }
 
             Account loginAccount = accountService.get(loginUser);
             request.setAttribute("loginAccount", loginAccount);
 
-            if (loginAccount.getProfile().equals("DOCTOR")) {
-                DoctorService doctorService = new DoctorService();
-                Doctor loginDoctor = doctorService.get(loginAccount.getAccount_id());
-                request.setAttribute("loginUser", loginDoctor);
-            } else if (loginAccount.getProfile().equals("ADMIN") || loginAccount.getProfile().equals("SYSADMIN")) {
+            if (loginAccount.getProfile().equals("SYSADMIN")) {
                 AdministratorService administratorService = new AdministratorService();
                 Administrator loginAdministrator = administratorService.get(loginAccount.getAccount_id());
                 request.setAttribute("loginUser", loginAdministrator);
-            } else if (account.getProfile().equals("PATIENT")) {
-                PatientService patientService = new PatientService();
-                Patient loginPatient = patientService.get(loginAccount.getAccount_id());
-                request.setAttribute("loginUser", loginPatient);
+            } else {
+                session.setAttribute("noProfile", "noProfile");
+                return;
             }
         } catch (Exception ex) {
             Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
