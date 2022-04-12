@@ -240,6 +240,8 @@ public class AccountService {
                     tags.put("date", (new java.util.Date()).toString());
 
                     GmailService.sendMail(to, subject, template, tags);
+                }else {
+                    return null;
                 } 
             }
 
