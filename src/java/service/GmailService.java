@@ -12,16 +12,17 @@ import javax.naming.*;
  * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
  */
 public class GmailService {
+
     public static void sendMail(String to, String subject, String template, HashMap<String, String> tags) throws Exception {
         // {{firstname}} -> Anne
         // {{date}} -> Oct. 28
         String body = "";
-        
+
         try {
             // read whole template into a single variable (body)
             BufferedReader br = new BufferedReader(new FileReader(new File(template)));
             String line = br.readLine();
-            
+
             while (line != null) {
                 body += line;
                 line = br.readLine();
@@ -44,11 +45,16 @@ public class GmailService {
         Context env = (Context) new InitialContext().lookup("java:comp/env");
         String username = (String) env.lookup("webmail-username");
         String password = (String) env.lookup("webmail-password");
+        
+        String host = "smtp.gmail.com";
 
         Properties props = new Properties();
         props.put("mail.transport.protocol", "smtps");
-        props.put("mail.smtps.host", "smtp.gmail.com");
+        props.put("mail.smtps.host", host);
         props.put("mail.smtps.port", 465);
+//        props.put("mail.smtps.ssl.enable", "true");
+//        props.put("mail.smtps.ssl.trust", host);
+
         props.put("mail.smtps.auth", "true");
         props.put("mail.smtps.quitwait", "false");
         Session session = Session.getDefaultInstance(props);
@@ -57,7 +63,7 @@ public class GmailService {
         // create a message
         Message message = new MimeMessage(session);
         message.setSubject(subject);
-        
+
         if (bodyIsHTML) {
             message.setContent(body, "text/html");
         } else {
