@@ -135,6 +135,7 @@
                     <br>
                     <h3>${resetPwd}</h3>
                     <h3>${resetMessage}</h3>
+                    <h3>${resetMessage2}</h3>
                 </div>
 
                 <div class="accountForm">
