@@ -97,21 +97,22 @@ public class ViewStaffServlet extends HttpServlet {
                     List<Patient> patients = new ArrayList<>();
 
                     try {
-                        //----------------------------   Delete Appointment ---------------------------------    
                         Doctor doctor = ds.get(account.getAccount_id());
                         doctorsAppointment = aps.getByDoctorID(doctor.getDoctor_id());
-
-                        for (int i = 0; i < doctorsAppointment.size(); i++) {
-                            aps.update(1234567, doctorsAppointment.get(i).getStart_date_time(),
-                                   doctorsAppointment.get(i).getPatient_id(), doctorsAppointment.get(i).getDuration(),
-                                   doctorsAppointment.get(i).getType(), doctorsAppointment.get(i).getReason(),
-                                   doctorsAppointment.get(i).getPatient_attended());
+                        
+                        //----------------------------   Delete Appointment ---------------------------------    
+                        
+                        for (int i = 0; i < doctorsAppointment.size(); i++) {                            
+                            aps.delete(doctorsAppointment.get(i).getStart_date_time(), 
+                                    doctorsAppointment.get(i).getDoctor_id(),
+                                    doctorsAppointment.get(i).getPatient_id());
                         }
+                        
                         //----------------------------   Delete Availability ---------------------------------                        
                         doctorsAvailability = avs.getAllByDoctorId(doctor.getDoctor_id());
 
                         for (int i = 0; i < doctorsAvailability.size(); i++) {
-                            avs.delete(doctorsAvailability.get(i).getDoctor_id());
+                            avs.deleteBySchedule(doctorsAvailability.get(i).getDoctor_id(),doctorsAvailability.get(i).getStart_date_time());
                         }
                         
                         //-------------------   Change the doctor for all patients ---------------------------    
@@ -124,7 +125,7 @@ public class ViewStaffServlet extends HttpServlet {
                                     patients.get(i).getAccount_id(),patients.get(i).getGender(), patients.get(i).getBirth_date(), 
                                     patients.get(i).getStreet_address(), patients.get(i).getCity(), 
                                     patients.get(i).getProvince(), patients.get(i).getPostal_code());
-                        }
+                        } 
                         
                         ds.delete(account.getAccount_id());
                         as.delete(account.getUser_name());
