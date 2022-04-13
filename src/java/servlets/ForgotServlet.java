@@ -67,15 +67,12 @@ public class ForgotServlet extends HttpServlet {
 
                 getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
                 return;
-            } else if (forgotAccount != null && forgotAccount.getReset_password_uuid() != null) {
-                request.setAttribute("resetMessage", "You already have the email to find your account. Check your email again.");
-                getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
-                return;
-            } else if (forgotAccount == null) {
+            } else {
                 Account account2 = accountService.resetPassword(email, path, url);
                 if (account2 != null) {
                     session.setAttribute("forgotAccount", account2);
                     request.setAttribute("resetMessage", "We sent an email to your email address.");
+                    request.setAttribute("resetMessage2", "(If you haven't got the email, please check your junk mail.)");
                     getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
                     return;
                 } else {
@@ -136,6 +133,7 @@ public class ForgotServlet extends HttpServlet {
 
                     if (checkAccount != null) {
                         request.setAttribute("resetPwd", "We sent an email to your email address.");
+                        request.setAttribute("resetMessage2", "(If you haven't got the email, please check your junk mail.)");
                         getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
                         return;
 
