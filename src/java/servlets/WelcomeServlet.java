@@ -28,6 +28,7 @@ public class WelcomeServlet extends HttpServlet {
         if (request.getParameter("logout") != null) {
             session.invalidate();
             session = request.getSession();
+            session.setAttribute("home_url", url);
         } else {
             if (user_name != null && !user_name.equals("")) {
                 AccountService accountService = new AccountService();
