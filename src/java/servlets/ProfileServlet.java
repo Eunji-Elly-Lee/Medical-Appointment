@@ -101,18 +101,45 @@ public class ProfileServlet extends HttpServlet {
 //                && check_regex_city == true && check_postal_code == true && check_birth_date == true) {
 //            regex_all_check = true;
 //        }
-        p = Pattern.compile(regexNewPassword);
-        m = p.matcher(password);
+//        p = Pattern.compile(regexNewPassword);
+//        m = p.matcher(password);
         //added
-        boolean check_password = m.matches();
+//        boolean check_password = m.matches();
         p = Pattern.compile(regex_birth_date);
         m = p.matcher(birth_date);
         boolean check_birth_date = m.matches();
         
 
         if (check_first_name == true && check_last_name == true && check_phone_name == true && check_regex_email == true
-                && check_regex_city == true && check_postal_code == true && check_birth_date == true && check_password == true) {
+                && check_regex_city == true && check_postal_code == true && check_birth_date == true) {
+            //newly added 4/10/2022
             regex_all_check = true;
+
+            boolean passwordIsEmpty = true;
+            if (password != null && !password.equals("") && password.equals(repassword)) {
+                passwordIsEmpty = false; //not empty
+            } 
+            
+            if (!password.equals(repassword)){
+             passwordIsEmpty = true;
+              regex_all_check = false;
+              System.out.println("works");
+                          request.setAttribute("message", "Password does not match");
+
+            }
+
+            if (passwordIsEmpty == false) { 
+                p = Pattern.compile(regexNewPassword);
+                m = p.matcher(password);
+                boolean check_password = m.matches();
+                if (check_password == true) {
+                    regex_all_check = true;
+                } else {
+                    regex_all_check = false;
+                    request.setAttribute("passPatternErrorMessage", "*Must contain one number, one uppercase and lowercase letter, one special character and be 6 or more characters");
+
+                }
+            }
         }
 
         if (regex_all_check == false || first_name == null || first_name.equals("") || last_name == null || last_name.equals("")
@@ -133,8 +160,6 @@ public class ProfileServlet extends HttpServlet {
 
                 if (password != null && !password.equals("") && password.equals(repassword)) {
                     accountService.update(account.getAccount_id(), user_name, password, account.getProfile());
-                }else if(check_password == false) {
-                 request.setAttribute("passPatternErrorMessage", "*Must contain one number, one uppercase and lowercase letter, one special character and be 6 or more characters");
                 }
 
                 if (account.getProfile().equals("DOCTOR")) {
