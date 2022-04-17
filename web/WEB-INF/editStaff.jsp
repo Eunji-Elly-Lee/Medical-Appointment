@@ -246,11 +246,11 @@
 
                 <div class="profileForm">
                     <div class="form_heading">
-                        <h2>Edit your account</h2>
-                        <p>Please enter your information for your account.</p>
+                        <h2>Edit staff's account</h2>
+                        <p>Please enter staff's information.</p>
                     </div>
 
-                    <form action="edit_patient" method="post">
+                    <form action="edit_staff" method="post">
                         <div class="container">
                             <div class="row align-items-start">
                                 <div class="col-lg-5">
