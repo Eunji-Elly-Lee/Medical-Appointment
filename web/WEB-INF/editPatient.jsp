@@ -246,8 +246,8 @@
 
                 <div class="profileForm">
                     <div class="form_heading">
-                        <h2>Edit your account</h2>
-                        <p>Please enter your information for your account.</p>
+                        <h2>Edit patient's account</h2>
+                        <p>Please enter patient's information.</p>
                     </div>
 
                     <form action="edit_patient" method="post">
