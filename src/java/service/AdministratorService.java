@@ -24,8 +24,8 @@ public class AdministratorService {
     }
     
      public void setAllDataEncrypt() throws Exception {
-        AdministratorDB doctorDB = new AdministratorDB();
-        List<Administrator> admins = doctorDB.getAll();
+        AdministratorDB administratorDB = new AdministratorDB();
+        List<Administrator> admins = administratorDB.getAll();
         for (int i = 0; i < admins.size(); i++) {
             this.update(admins.get(i).getAdmin_id(), admins.get(i).getFirst_name(), 
                     admins.get(i).getLast_name(), admins.get(i).getEmail(), admins.get(i).getMobile_phone(), admins.get(i).getAlt_phone(), 
@@ -43,24 +43,24 @@ public class AdministratorService {
         return decryptedAdmin;
     }
     
-    public void insert(int doctor_id, String first_name, String last_name, String email, String mobile_phone,
+    public void insert(int admin_id, String first_name, String last_name, String email, String mobile_phone,
             String alt_phone, String pref_contact_type, int account_id, String gender, String birth_date,
             String street_address, String city, String province, String postal_code) throws Exception {
         AES aes = new AES();
         AdministratorDB administratorDB = new AdministratorDB();
         
-        Administrator administrator = new Administrator(doctor_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email), aes.encrypt(mobile_phone), aes.encrypt(alt_phone),
+        Administrator administrator = new Administrator(admin_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email), aes.encrypt(mobile_phone), aes.encrypt(alt_phone),
                 pref_contact_type, account_id, gender, birth_date, aes.encrypt(street_address), aes.encrypt(city), aes.encrypt(province), aes.encrypt(postal_code));
         administratorDB.insert(administrator);
     }
     
-    public void update(int doctor_id, String first_name, String last_name, String email, String mobile_phone,
+    public void update(int admin_id, String first_name, String last_name, String email, String mobile_phone,
             String alt_phone, String pref_contact_type, int account_id, String gender, String birth_date,
             String street_address, String city, String province, String postal_code) throws Exception {
         AES aes = new AES();
         AdministratorDB administratorDB = new AdministratorDB();
         
-        Administrator administrator = new Administrator(doctor_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email), aes.encrypt(mobile_phone), aes.encrypt(alt_phone),
+        Administrator administrator = new Administrator(admin_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email), aes.encrypt(mobile_phone), aes.encrypt(alt_phone),
                 pref_contact_type, account_id, gender, birth_date, aes.encrypt(street_address), aes.encrypt(city), aes.encrypt(province), aes.encrypt(postal_code));
         administratorDB.update(administrator);
     }
@@ -83,7 +83,7 @@ public class AdministratorService {
         return decodedAdmin;
     }
     
-     public Administrator encodingDoctor(Administrator admin) {
+     public Administrator encodingAdmin(Administrator admin) {
         AES aes = new AES();
         Administrator encodedAdmin = null;
 
