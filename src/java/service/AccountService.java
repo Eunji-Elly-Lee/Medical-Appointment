@@ -70,19 +70,33 @@ public class AccountService {
         String to = email;
         String subject = "Surpass Health Clinic Reset Password";
         String template = path + "/email_templates/reset_password.html";
-        String link = url + "?uuid=" + uuid;
+        String link = "";
         AccountDB accountDB = new AccountDB();
         Account account = null;
         AES aes = new AES();
         
         try {
             account = accountDB.getByEmail(email);
-
+        } catch (Exception ex) {
+            Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+        if(account.getReset_password_uuid() == null){
+            link = url + "?uuid=" + uuid;
+        } else {
+          link = url + "?uuid=" + account.getReset_password_uuid();
+        }
+        
+        
+        try {
             if (account.getProfile().equals("DOCTOR")) {
                 DoctorDB doctorDB = new DoctorDB();
                 Doctor doctor = doctorDB.get(account.getAccount_id());
                 
-                account.setReset_password_uuid(uuid);
+                if(account.getReset_password_uuid() == null){
+                    account.setReset_password_uuid(uuid);
+                }
                 accountDB.update(account);
 
                 HashMap<String, String> tags = new HashMap<>();
@@ -96,7 +110,9 @@ public class AccountService {
                 AdministratorDB administratorDB = new AdministratorDB();
                 Administrator administrator = administratorDB.get(account.getAccount_id());
 
-                account.setReset_password_uuid(uuid);
+                if(account.getReset_password_uuid() == null){
+                    account.setReset_password_uuid(uuid);
+                }
                 accountDB.update(account);
 
                 HashMap<String, String> tags = new HashMap<>();
@@ -110,7 +126,9 @@ public class AccountService {
                 PatientDB patientDB = new PatientDB();
                 Patient patient = patientDB.get(account.getAccount_id());
 
-                account.setReset_password_uuid(uuid);
+                if(account.getReset_password_uuid() == null){
+                    account.setReset_password_uuid(uuid);
+                }
                 accountDB.update(account);
 
                 HashMap<String, String> tags = new HashMap<>();
