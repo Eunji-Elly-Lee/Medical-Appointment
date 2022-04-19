@@ -35,6 +35,7 @@ public class ForgotServlet extends HttpServlet {
             }
 
             if (forgotAccount == null) {
+                request.setAttribute("resetMessage", "You should re-send email to find password.");
                 getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
                 return;
             } else if (forgotAccount.getReset_password_uuid() != null) {
@@ -42,7 +43,8 @@ public class ForgotServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/WEB-INF/resetNewPassword.jsp").forward(request, response);
                     return;
                 } else {
-                    getServletContext().getRequestDispatcher("/WEB-INF/welcome.jsp").forward(request, response);
+                    request.setAttribute("resetMessage", "You should re-send email to find password.");
+                    getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
                     return;
                 }
             }
@@ -68,6 +70,7 @@ public class ForgotServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
                 return;
             } else {
+
                 Account account2 = accountService.resetPassword(email, path, url);
                 if (account2 != null) {
                     session.setAttribute("forgotAccount", account2);
