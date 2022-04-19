@@ -37,7 +37,7 @@ public class DoctorService {
 
     public List<Doctor> getAllByName(String name) throws Exception {
         DoctorDB doctorDB = new DoctorDB();
-        List<Doctor> doctors = doctorDB.getAllByName(name);
+        List<Doctor> doctors = doctorDB.getAll();
         List<Doctor> decryptedDoctors = new ArrayList<Doctor>();
         for (int i = 0; i < doctors.size(); i++) {
             Doctor doctor = decodingDoctor(doctors.get(i));
