@@ -19,8 +19,9 @@ public class WelcomeServlet extends HttpServlet {
             throws ServletException, IOException {
         // Must use once to encrypt all sensitive data       
         //allDataEncrypted(request, response);
-        allPasswordEncrypted(request, response);
+        //allPasswordEncrypted(request, response);
         HttpSession session = request.getSession();
+
         String user_name = (String) session.getAttribute("user_name");
         String url = request.getRequestURL().toString();
         session.setAttribute("home_url", url);
