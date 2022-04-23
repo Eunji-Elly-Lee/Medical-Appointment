@@ -15,7 +15,8 @@ public class Account {
     public Account() {
     }
     
-    public Account(int account_id, String user_name, String password, String profile, String reset_password_uuid, String salt) {
+    public Account(int account_id, String user_name, String password,
+            String profile, String reset_password_uuid, String salt) {
         this.account_id = account_id;
         this.user_name = user_name;
         this.password = password;
