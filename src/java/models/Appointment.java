@@ -75,20 +75,6 @@ public class Appointment {
         this.patient_attended = patient_attended;
     }
     
-    public String getType_toString(int id) {
-        String typeString = "";
-        
-        if (type ==1) {
-            typeString= "Regular";
-        }else if(type==2){
-            typeString ="Annual Physical";
-        }else{
-            typeString = "Urgent Care";
-        }
-        
-        return typeString;
-    }
-    
     @Override
     public String toString() {
         return "Appointment{" +
