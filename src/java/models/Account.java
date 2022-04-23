@@ -25,7 +25,7 @@ public class Account {
     }
     
     public Account(int account_id, String user_name, String password) {
-           this.account_id = account_id;
+        this.account_id = account_id;
         this.user_name = user_name;
         this.password = password;
     }
