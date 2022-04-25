@@ -1,11 +1,7 @@
 package service;
 
-import dataaccess.AES;
-import dataaccess.AdministratorDB;
-import dataaccess.PatientDB;
-import java.util.ArrayList;
-import java.util.List;
-import javax.crypto.SecretKey;
+import dataaccess.*;
+import java.util.*;
 import models.Administrator;
 
 /**
@@ -17,22 +13,24 @@ public class AdministratorService {
         AdministratorDB administratorDB = new AdministratorDB();
         List<Administrator> administrators = administratorDB.getAll();
         List<Administrator> decryptedAdmins = new ArrayList<Administrator>();
+        
         for (int i = 0; i < administrators.size(); i++) {
             decryptedAdmins.add(decodingAdmin(administrators.get(i)));
         }
+        
         return decryptedAdmins;
     }
     
      public void setAllDataEncrypt() throws Exception {
         AdministratorDB administratorDB = new AdministratorDB();
         List<Administrator> admins = administratorDB.getAll();
+        
         for (int i = 0; i < admins.size(); i++) {
             this.update(admins.get(i).getAdmin_id(), admins.get(i).getFirst_name(), 
                     admins.get(i).getLast_name(), admins.get(i).getEmail(), admins.get(i).getMobile_phone(), admins.get(i).getAlt_phone(), 
                     admins.get(i).getPref_contact_type(), admins.get(i).getAccount_id(), admins.get(i).getGender(), 
                     admins.get(i).getBirth_date(), admins.get(i).getStreet_address(), admins.get(i).getCity(), admins.get(i).getProvince(), 
-                    admins.get(i).getPostal_code());
-            
+                    admins.get(i).getPostal_code());            
         }
     }
     
@@ -40,6 +38,7 @@ public class AdministratorService {
         AdministratorDB administratorDB = new AdministratorDB();
         Administrator administrator = administratorDB.get(account_id);
         Administrator decryptedAdmin = decodingAdmin(administrator);
+        
         return decryptedAdmin;
     }
     
@@ -49,8 +48,9 @@ public class AdministratorService {
         AES aes = new AES();
         AdministratorDB administratorDB = new AdministratorDB();
         
-        Administrator administrator = new Administrator(admin_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email), aes.encrypt(mobile_phone), aes.encrypt(alt_phone),
-                pref_contact_type, account_id, gender, birth_date, aes.encrypt(street_address), aes.encrypt(city), aes.encrypt(province), aes.encrypt(postal_code));
+        Administrator administrator = new Administrator(admin_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email),
+                aes.encrypt(mobile_phone), aes.encrypt(alt_phone), pref_contact_type, account_id, gender, birth_date,
+                aes.encrypt(street_address), aes.encrypt(city), aes.encrypt(province), aes.encrypt(postal_code));
         administratorDB.insert(administrator);
     }
     
@@ -60,15 +60,15 @@ public class AdministratorService {
         AES aes = new AES();
         AdministratorDB administratorDB = new AdministratorDB();
         
-        Administrator administrator = new Administrator(admin_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email), aes.encrypt(mobile_phone), aes.encrypt(alt_phone),
-                pref_contact_type, account_id, gender, birth_date, aes.encrypt(street_address), aes.encrypt(city), aes.encrypt(province), aes.encrypt(postal_code));
+        Administrator administrator = new Administrator(admin_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email),
+                aes.encrypt(mobile_phone), aes.encrypt(alt_phone), pref_contact_type, account_id, gender, birth_date,
+                aes.encrypt(street_address), aes.encrypt(city), aes.encrypt(province), aes.encrypt(postal_code));
         administratorDB.update(administrator);
     }
     
     public void delete(int account_id) throws Exception {
-        Administrator administrator = get(account_id);
         AdministratorDB administratorDB = new AdministratorDB();
-        administratorDB.delete(administrator);
+        administratorDB.delete(account_id);
     }
 
     public Administrator decodingAdmin(Administrator admin) {
