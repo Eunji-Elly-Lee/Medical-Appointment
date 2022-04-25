@@ -166,27 +166,26 @@ public class AdministratorDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE administrator SET admin_id = ?, first_name = ?, last_name = ?, email = ?, " +
+        String sql = "UPDATE administrator SET first_name = ?, last_name = ?, email = ?, " +
                 "mobile_phone = ?, alt_phone = ?, pref_contact_type = ?, account_id = ?, gender = ?, " +
-                "birth_date = ?, street_address = ?, city = ?, province = ?, postal_code = ? WHERE account_id = ?";
+                "birth_date = ?, street_address = ?, city = ?, province = ?, postal_code = ? WHERE admin_id = ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, administrator.getAdmin_id());
-            ps.setString(2, administrator.getFirst_name());
-            ps.setString(3, administrator.getLast_name());
-            ps.setString(4, administrator.getEmail());  
-            ps.setString(5, administrator.getMobile_phone());
-            ps.setString(6, administrator.getAlt_phone());
-            ps.setString(7, administrator.getPref_contact_type());
-            ps.setInt(8, administrator.getAccount_id());
-            ps.setString(9, administrator.getGender());
-            ps.setString(10, administrator.getBirth_date());
-            ps.setString(11, administrator.getStreet_address());
-            ps.setString(12, administrator.getCity());
-            ps.setString(13, administrator.getProvince());
-            ps.setString(14, administrator.getPostal_code());
-            ps.setInt(15, administrator.getAccount_id());
+            ps.setString(1, administrator.getFirst_name());
+            ps.setString(2, administrator.getLast_name());
+            ps.setString(3, administrator.getEmail());  
+            ps.setString(4, administrator.getMobile_phone());
+            ps.setString(5, administrator.getAlt_phone());
+            ps.setString(6, administrator.getPref_contact_type());
+            ps.setInt(7, administrator.getAccount_id());
+            ps.setString(8, administrator.getGender());
+            ps.setString(9, administrator.getBirth_date());
+            ps.setString(10, administrator.getStreet_address());
+            ps.setString(11, administrator.getCity());
+            ps.setString(12, administrator.getProvince());
+            ps.setString(13, administrator.getPostal_code());
+            ps.setInt(14, administrator.getAdmin_id());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -194,7 +193,7 @@ public class AdministratorDB {
         }
     }
     
-    public void delete(Administrator administrator) throws Exception {
+    public void delete(int account_id) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
@@ -202,7 +201,7 @@ public class AdministratorDB {
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, administrator.getAccount_id());
+            ps.setInt(1, account_id);
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
