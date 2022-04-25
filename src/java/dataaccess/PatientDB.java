@@ -234,6 +234,7 @@ public class PatientDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM patient WHERE patient_id = ?";
+        
         try{
             ps = con.prepareStatement(sql);
             ps.setInt(1, patient_id);
@@ -259,7 +260,7 @@ public class PatientDB {
                         email, mobile_phone, alt_phone, pref_contact_type, doctor_id, account_id,
                         gender, birth_date, street_address, city, province, postal_code);
             }
-        }finally {
+        } finally {
             DBUtil.closeResultSet(rs);
             DBUtil.closePreparedStatement(ps);
             cp.freeConnection(con);
@@ -306,29 +307,28 @@ public class PatientDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE patient SET patient_id = ?, healthcare_id = ?, first_name = ?, last_name = ?, email = ?, " +
+        String sql = "UPDATE patient SET healthcare_id = ?, first_name = ?, last_name = ?, email = ?, " +
                 "mobile_phone = ?, alt_phone = ?, pref_contact_type = ?, doctor_id = ?, account_id = ?, gender = ?, " +
-                "birth_date = ?, street_address = ?, city = ?, province = ?, postal_code = ? WHERE account_id = ?";
+                "birth_date = ?, street_address = ?, city = ?, province = ?, postal_code = ? WHERE patient_id = ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, patient.getPatient_id());
-            ps.setString(2, patient.getHealthcare_id());
-            ps.setString(3, patient.getFirst_name());
-            ps.setString(4, patient.getLast_name());
-            ps.setString(5, patient.getEmail());  
-            ps.setString(6, patient.getMobile_phone());
-            ps.setString(7, patient.getAlt_phone());
-            ps.setString(8, patient.getPref_contact_type());
-            ps.setInt(9, patient.getDoctor_id());
-            ps.setInt(10, patient.getAccount_id());
-            ps.setString(11, patient.getGender());
-            ps.setString(12, patient.getBirth_date());
-            ps.setString(13, patient.getStreet_address());
-            ps.setString(14, patient.getCity());
-            ps.setString(15, patient.getProvince());
-            ps.setString(16, patient.getPostal_code());
-            ps.setInt(17, patient.getAccount_id());
+            ps.setString(1, patient.getHealthcare_id());
+            ps.setString(2, patient.getFirst_name());
+            ps.setString(3, patient.getLast_name());
+            ps.setString(4, patient.getEmail());  
+            ps.setString(5, patient.getMobile_phone());
+            ps.setString(6, patient.getAlt_phone());
+            ps.setString(7, patient.getPref_contact_type());
+            ps.setInt(8, patient.getDoctor_id());
+            ps.setInt(9, patient.getAccount_id());
+            ps.setString(10, patient.getGender());
+            ps.setString(11, patient.getBirth_date());
+            ps.setString(12, patient.getStreet_address());
+            ps.setString(13, patient.getCity());
+            ps.setString(14, patient.getProvince());
+            ps.setString(15, patient.getPostal_code());
+            ps.setInt(16, patient.getPatient_id());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -336,7 +336,7 @@ public class PatientDB {
         }
     }
     
-    public void delete(Patient patient) throws Exception {
+    public void delete(int account_id) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
@@ -344,7 +344,7 @@ public class PatientDB {
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, patient.getAccount_id());
+            ps.setInt(1, account_id);
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
