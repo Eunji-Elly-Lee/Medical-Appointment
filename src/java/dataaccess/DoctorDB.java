@@ -249,27 +249,26 @@ public class DoctorDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE doctor SET doctor_id = ?, first_name = ?, last_name = ?, email = ?, " +
+        String sql = "UPDATE doctor SET first_name = ?, last_name = ?, email = ?, " +
                 "mobile_phone = ?, alt_phone = ?, pref_contact_type = ?, account_id = ?, gender = ?, " +
-                "birth_date = ?, street_address = ?, city = ?, province = ?, postal_code = ? WHERE account_id = ?";
+                "birth_date = ?, street_address = ?, city = ?, province = ?, postal_code = ? WHERE doctor_id = ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, doctor.getDoctor_id());
-            ps.setString(2, doctor.getFirst_name());
-            ps.setString(3, doctor.getLast_name());
-            ps.setString(4, doctor.getEmail());  
-            ps.setString(5, doctor.getMobile_phone());
-            ps.setString(6, doctor.getAlt_phone());
-            ps.setString(7, doctor.getPref_contact_type());
-            ps.setInt(8, doctor.getAccount_id());
-            ps.setString(9, doctor.getGender());
-            ps.setString(10, doctor.getBirth_date());
-            ps.setString(11, doctor.getStreet_address());
-            ps.setString(12, doctor.getCity());
-            ps.setString(13, doctor.getProvince());
-            ps.setString(14, doctor.getPostal_code());
-            ps.setInt(15, doctor.getAccount_id());
+            ps.setString(1, doctor.getFirst_name());
+            ps.setString(2, doctor.getLast_name());
+            ps.setString(3, doctor.getEmail());  
+            ps.setString(4, doctor.getMobile_phone());
+            ps.setString(5, doctor.getAlt_phone());
+            ps.setString(6, doctor.getPref_contact_type());
+            ps.setInt(7, doctor.getAccount_id());
+            ps.setString(8, doctor.getGender());
+            ps.setString(9, doctor.getBirth_date());
+            ps.setString(10, doctor.getStreet_address());
+            ps.setString(11, doctor.getCity());
+            ps.setString(12, doctor.getProvince());
+            ps.setString(13, doctor.getPostal_code());
+            ps.setInt(14, doctor.getDoctor_id());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -277,7 +276,7 @@ public class DoctorDB {
         }
     }
     
-    public void delete(Doctor doctor) throws Exception {
+    public void delete(int account_id) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
@@ -285,7 +284,7 @@ public class DoctorDB {
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, doctor.getAccount_id());
+            ps.setInt(1, account_id);
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
