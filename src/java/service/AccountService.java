@@ -88,7 +88,6 @@ public class AccountService {
           link = url + "?uuid=" + account.getReset_password_uuid();
         }
         
-        
         try {
             if (account.getProfile().equals("DOCTOR")) {
                 DoctorDB doctorDB = new DoctorDB();
@@ -97,6 +96,7 @@ public class AccountService {
                 if(account.getReset_password_uuid() == null){
                     account.setReset_password_uuid(uuid);
                 }
+                
                 accountDB.update(account);
 
                 HashMap<String, String> tags = new HashMap<>();
@@ -113,6 +113,7 @@ public class AccountService {
                 if(account.getReset_password_uuid() == null){
                     account.setReset_password_uuid(uuid);
                 }
+                
                 accountDB.update(account);
 
                 HashMap<String, String> tags = new HashMap<>();
@@ -129,6 +130,7 @@ public class AccountService {
                 if(account.getReset_password_uuid() == null){
                     account.setReset_password_uuid(uuid);
                 }
+                
                 accountDB.update(account);
 
                 HashMap<String, String> tags = new HashMap<>();
@@ -139,8 +141,6 @@ public class AccountService {
 
                 GmailService.sendMail(to, subject, template, tags);
             }
-
-            //GmailService.sendMail(email, "NotesKeeper Password", "Hello, To reset your password, please click this link : ", false);
         } catch (Exception ex) {
             Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -177,19 +177,22 @@ public class AccountService {
         if (account.getProfile().equals("DOCTOR")) {
             Doctor doctor = doctorDB.get(aes.encrypt(email));
             
-            if (doctor.getFirst_name().equals(aes.encrypt(firstName)) && doctor.getLast_name().equals(aes.encrypt(lastName))) {
+            if (doctor.getFirst_name().equals(aes.encrypt(firstName)) &&
+                    doctor.getLast_name().equals(aes.encrypt(lastName))) {
                 return account;
             }
         } else if (account.getProfile().equals("PATIENT")) {
             Patient patient = patientDB.get(aes.encrypt(email));
             
-            if (patient.getFirst_name().equals(aes.encrypt(firstName)) && patient.getLast_name().equals(aes.encrypt(lastName))) {
+            if (patient.getFirst_name().equals(aes.encrypt(firstName)) &&
+                    patient.getLast_name().equals(aes.encrypt(lastName))) {
                 return account;
             }
         } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
             Administrator administrator = administratorDB.get(aes.encrypt(email));
             
-            if (administrator.getFirst_name().equals(aes.encrypt(firstName)) && administrator.getLast_name().equals(aes.encrypt(lastName))) {
+            if (administrator.getFirst_name().equals(aes.encrypt(firstName)) &&
+                    administrator.getLast_name().equals(aes.encrypt(lastName))) {
                 return account;
             }
         }
@@ -214,7 +217,8 @@ public class AccountService {
                 Doctor doctor = doctorDB.get(account.getAccount_id());
 
                 if (doctor.getFirst_name().equals(aes.encrypt(firstName)) &&
-                        doctor.getLast_name().equals(aes.encrypt(LastName)) && doctor.getEmail().equals(aes.encrypt(email))) {      
+                        doctor.getLast_name().equals(aes.encrypt(LastName)) &&
+                        doctor.getEmail().equals(aes.encrypt(email))) {      
                     HashMap<String, String> tags = new HashMap<>();
                     tags.put("firstname", aes.decrypt(doctor.getFirst_name()));
                     tags.put("lastname", aes.decrypt(doctor.getLast_name()));
@@ -226,13 +230,13 @@ public class AccountService {
                 } else {
                     return null;
                 }
-
             } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
                 AdministratorDB administratorDB = new AdministratorDB();
                 Administrator administrator = administratorDB.get(account.getAccount_id());
 
                 if (administrator.getFirst_name().equals(aes.encrypt(firstName)) &&
-                        administrator.getLast_name().equals(aes.encrypt(LastName)) && administrator.getEmail().equals(aes.encrypt(email))) {
+                        administrator.getLast_name().equals(aes.encrypt(LastName)) &&
+                        administrator.getEmail().equals(aes.encrypt(email))) {
                     HashMap<String, String> tags = new HashMap<>();
                     tags.put("firstname", aes.decrypt(administrator.getFirst_name()));
                     tags.put("lastname", aes.decrypt(administrator.getLast_name()));
@@ -249,7 +253,8 @@ public class AccountService {
                 Patient patient = patientDB.get(account.getAccount_id());
 
                 if (patient.getFirst_name().equals(aes.encrypt(firstName)) &&
-                        patient.getLast_name().equals(aes.encrypt(LastName)) && patient.getEmail().equals(aes.encrypt(email))) {
+                        patient.getLast_name().equals(aes.encrypt(LastName)) &&
+                        patient.getEmail().equals(aes.encrypt(email))) {
                     HashMap<String, String> tags = new HashMap<>();
                     tags.put("firstname", aes.decrypt(patient.getFirst_name()));
                     tags.put("lastname", aes.decrypt(patient.getLast_name()));
@@ -262,8 +267,6 @@ public class AccountService {
                     return null;
                 } 
             }
-
-            //GmailService.sendMail(email, "NotesKeeper Password", "Hello, To reset your password, please click this link : ", false);
         } catch (Exception ex) {
             Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
             return null;
