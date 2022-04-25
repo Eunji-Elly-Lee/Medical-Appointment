@@ -112,7 +112,7 @@ public class AccountDB {
         AES aes = new AES();
         
         if (doctorDB.get(aes.encrypt(email)) != null){
-           Doctor doctor = doctorDB.get(aes.encrypt(email));
+            Doctor doctor = doctorDB.get(aes.encrypt(email));
             account = accountDB.get(doctor.getAccount_id());
         } else if (patientDB.get(aes.encrypt(email)) != null){
             Patient patient = patientDB.get(aes.encrypt(email));
@@ -144,7 +144,7 @@ public class AccountDB {
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
         String sql = "INSERT INTO account "
-                + "(account_id, user_name, password, profile, reset_password_uuid, salt)"
+                + "(account_id, user_name, password, profile, reset_password_uuid, salt) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
@@ -166,18 +166,17 @@ public class AccountDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE account SET account_id = ?, user_name = ?, " +
-                "password = ?, profile = ?, reset_password_uuid = ?, salt = ? WHERE account_id = ?";
+        String sql = "UPDATE account SET user_name = ?, password = ?, " +
+                "profile = ?, reset_password_uuid = ?, salt = ? WHERE account_id = ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, account.getAccount_id());
-            ps.setString(2, account.getUser_name());
-            ps.setString(3, account.getPassword());
-            ps.setString(4, account.getProfile());
-            ps.setString(5, account.getReset_password_uuid());
-            ps.setString(6, account.getSalt());
-            ps.setInt(7, account.getAccount_id());
+            ps.setString(1, account.getUser_name());
+            ps.setString(2, account.getPassword());
+            ps.setString(3, account.getProfile());
+            ps.setString(4, account.getReset_password_uuid());
+            ps.setString(5, account.getSalt());
+            ps.setInt(6, account.getAccount_id());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
