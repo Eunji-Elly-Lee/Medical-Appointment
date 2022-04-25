@@ -1,9 +1,7 @@
 package service;
 
-import dataaccess.AES;
-import dataaccess.DoctorDB;
-import java.util.ArrayList;
-import java.util.List;
+import dataaccess.*;
+import java.util.*;
 import models.Doctor;
 
 /**
@@ -11,27 +9,28 @@ import models.Doctor;
  * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
  */
 public class DoctorService {
-
     public List<Doctor> getAll() throws Exception {
         DoctorDB doctorDB = new DoctorDB();
         List<Doctor> doctors = doctorDB.getAll();
         List<Doctor> decryptedDoctors = new ArrayList<Doctor>();
+        
         for (int i = 0; i < doctors.size(); i++) {
             decryptedDoctors.add(decodingDoctor(doctors.get(i)));
         }
+        
         return decryptedDoctors;
     }
     
     public void setAllDataEncrypt() throws Exception {
         DoctorDB doctorDB = new DoctorDB();
         List<Doctor> doctors = doctorDB.getAll();
+        
         for (int i = 0; i < doctors.size(); i++) {
             this.update(doctors.get(i).getDoctor_id(), doctors.get(i).getFirst_name(), 
                     doctors.get(i).getLast_name(), doctors.get(i).getEmail(), doctors.get(i).getMobile_phone(), doctors.get(i).getAlt_phone(), 
                     doctors.get(i).getPref_contact_type(), doctors.get(i).getAccount_id(), doctors.get(i).getGender(), 
                     doctors.get(i).getBirth_date(), doctors.get(i).getStreet_address(), doctors.get(i).getCity(), doctors.get(i).getProvince(), 
-                    doctors.get(i).getPostal_code());
-            
+                    doctors.get(i).getPostal_code());            
         }
     }
 
@@ -39,12 +38,16 @@ public class DoctorService {
         DoctorDB doctorDB = new DoctorDB();
         List<Doctor> doctors = doctorDB.getAll();
         List<Doctor> decryptedDoctors = new ArrayList<Doctor>();
+        
         for (int i = 0; i < doctors.size(); i++) {
             Doctor doctor = decodingDoctor(doctors.get(i));
-            if(doctor.getFirst_name().toLowerCase().contains(name.toLowerCase()) || doctor.getLast_name().toLowerCase().contains(name.toLowerCase())){
+            
+            if(doctor.getFirst_name().toLowerCase().contains(name.toLowerCase()) ||
+                    doctor.getLast_name().toLowerCase().contains(name.toLowerCase())){
                 decryptedDoctors.add(doctor);
             }
         }
+        
         return decryptedDoctors;
     }
 
@@ -52,6 +55,7 @@ public class DoctorService {
         DoctorDB doctorDB = new DoctorDB();
         Doctor doctor = doctorDB.get(account_id);
         Doctor decryptedDoctor = decodingDoctor(doctor);
+        
         return decryptedDoctor;
     }
 
@@ -59,6 +63,7 @@ public class DoctorService {
         DoctorDB doctorDB = new DoctorDB();
         Doctor doctor = doctorDB.getByDoctorID(doctor_id);
         Doctor decryptedDoctor = decodingDoctor(doctor);
+        
         return decryptedDoctor;
     }
 
@@ -67,8 +72,10 @@ public class DoctorService {
             String street_address, String city, String province, String postal_code) throws Exception {
         AES aes = new AES();
         DoctorDB doctorDB = new DoctorDB();
-        Doctor doctor = new Doctor(doctor_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email), aes.encrypt(mobile_phone), aes.encrypt(alt_phone),
-                pref_contact_type, account_id, gender, birth_date, aes.encrypt(street_address), aes.encrypt(city), aes.encrypt(province), aes.encrypt(postal_code));
+        
+        Doctor doctor = new Doctor(doctor_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email),
+                aes.encrypt(mobile_phone), aes.encrypt(alt_phone), pref_contact_type, account_id, gender, birth_date,
+                aes.encrypt(street_address), aes.encrypt(city), aes.encrypt(province), aes.encrypt(postal_code));
         doctorDB.insert(doctor);
     }
 
@@ -77,15 +84,16 @@ public class DoctorService {
             String street_address, String city, String province, String postal_code) throws Exception {
         AES aes = new AES();
         DoctorDB doctorDB = new DoctorDB();
-        Doctor doctor = new Doctor(doctor_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email), aes.encrypt(mobile_phone), aes.encrypt(alt_phone),
-                pref_contact_type, account_id, gender, birth_date, aes.encrypt(street_address), aes.encrypt(city), aes.encrypt(province), aes.encrypt(postal_code));
+        
+        Doctor doctor = new Doctor(doctor_id, aes.encrypt(first_name), aes.encrypt(last_name), aes.encrypt(email),
+                aes.encrypt(mobile_phone), aes.encrypt(alt_phone), pref_contact_type, account_id, gender, birth_date,
+                aes.encrypt(street_address), aes.encrypt(city), aes.encrypt(province), aes.encrypt(postal_code));
         doctorDB.update(doctor);
     }
 
     public void delete(int account_id) throws Exception {
-        Doctor doctor = get(account_id);
         DoctorDB doctorDB = new DoctorDB();
-        doctorDB.delete(doctor);
+        doctorDB.delete(account_id);
     }
 
     public Doctor decodingDoctor(Doctor doctor) {
@@ -111,5 +119,4 @@ public class DoctorService {
 
         return encodedDoctor;
     }
-
 }
