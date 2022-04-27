@@ -89,15 +89,14 @@ public class AppointmentTypeDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE appointment_type SET type = ?, description = ?, " +
+        String sql = "UPDATE appointment_type SET description = ?, " +
                 "std_duration = ? WHERE type = ?";
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, appointmentType.getType());
-            ps.setString(2, appointmentType.getDescription());
-            ps.setInt(3, appointmentType.getStd_duration());
-            ps.setInt(4, appointmentType.getType());
+            ps.setString(1, appointmentType.getDescription());
+            ps.setInt(2, appointmentType.getStd_duration());
+            ps.setInt(3, appointmentType.getType());
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
@@ -105,7 +104,7 @@ public class AppointmentTypeDB {
         }
     }
     
-    public void delete(AppointmentType appointmentType) throws Exception {
+    public void delete(int type) throws Exception {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
@@ -113,7 +112,7 @@ public class AppointmentTypeDB {
         
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, appointmentType.getType());
+            ps.setInt(1, type);
             ps.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(ps);
