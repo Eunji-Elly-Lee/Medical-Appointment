@@ -69,6 +69,5 @@ public class AppointmentService {
     public void delete (String time, int doctor_id, int patient_id) throws Exception {
         AppointmentDB appointmentDB = new AppointmentDB();
         appointmentDB.delete(time, doctor_id, patient_id);
-    }    
-
+    }
 }
