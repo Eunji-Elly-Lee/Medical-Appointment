@@ -34,8 +34,7 @@ public class AppointmentTypeService {
     }
     
     public void delete(int type) throws Exception {
-        AppointmentType appointmentType = get(type);
         AppointmentTypeDB appointmentTypeDB = new AppointmentTypeDB();
-        appointmentTypeDB.delete(appointmentType);
+        appointmentTypeDB.delete(type);
     }
 }
