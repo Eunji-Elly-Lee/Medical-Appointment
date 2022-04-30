@@ -1,2 +1,1 @@
-# Medical-Appointment
-Medical Appointment Web Application (Capstone Project)
+![main page](/web/img/main.png)
