@@ -96,13 +96,9 @@ public class ViewAppointmentServlet extends HttpServlet {
                 } else if (account.getProfile().equals("PATIENT")) {
                     Patient patient = patientService.get(account.getAccount_id());
                     request.setAttribute("user", patient);
-                    //add jihoon
                     request.setAttribute("step", 1);
-                    //end jihoon
                     
                     List<Appointment> allAppointments = as.getByPatientID(patient.getPatient_id());
-                    //change type    jihoon                    
-                    // add  jihoon
                     ArrayList<Appointment> pastAppointments = new ArrayList();
                     ArrayList<Appointment> futuerAppointments = new ArrayList();
 
@@ -111,13 +107,11 @@ public class ViewAppointmentServlet extends HttpServlet {
                         LocalDate beginDate = LocalDate.parse(allAppointments.get(i).getStart_date_time().substring(0, 10), df);
                          
                         if (beginDate.isBefore(tomorrow)) {
-                            //jihoon  for history
                             pastAppointments.add(allAppointments.get(i));
                         } else {
                             futuerAppointments.add(allAppointments.get(i));
                         }
                     }
-                    //end  jihoon
                     
                     request.setAttribute("pastAppointments", pastAppointments);
                     request.setAttribute("futuerAppointments", futuerAppointments);
@@ -151,8 +145,7 @@ public class ViewAppointmentServlet extends HttpServlet {
         DoctorService ds = new DoctorService();
         AppointmentService aps = new AppointmentService();
         
-        try {      
-            //add jihoon
+        try {
             String action = request.getParameter("action");          
             boolean active = false;
             
@@ -188,8 +181,7 @@ public class ViewAppointmentServlet extends HttpServlet {
                     request.setAttribute("doctorName", doctor.getFirst_name() + " " + doctor.getLast_name());
                     active = true;  
                     
-                    break;
-            
+                    break;            
                 case "edit":
                     String date = request.getParameter("date");  
                     String time = request.getParameter("time");  
@@ -202,8 +194,7 @@ public class ViewAppointmentServlet extends HttpServlet {
             if (active){   
                 getServletContext().getRequestDispatcher("/WEB-INF/viewAppointment.jsp").forward(request, response);
                 return; 
-            } 
-            //end jihoon
+            }
            
             response.sendRedirect("edit_appointment");
             return;
