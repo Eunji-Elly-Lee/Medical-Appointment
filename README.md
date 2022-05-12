@@ -1,8 +1,8 @@
 ## SAIT IT Program Capstone Project
 
 ![main page](/web/img/main_page.png)
-![main page](/web/img/booking_page.png)
-![main page](/web/img/staff_page.png)
+![booking page](/web/img/booking_page.png)
+![staff page](/web/img/staff_page.png)
 
 This is an web application Surpass Health Clinic. It is designed to make it easy for patients to book appointments at any time and anywhere, without having to call or visit the clinic.
 
