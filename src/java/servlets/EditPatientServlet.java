@@ -27,7 +27,6 @@ public class EditPatientServlet extends HttpServlet {
             return;
         } else if (selectedUser != null) {
             displayInformation(request, selectedUser);
-            //session.setAttribute("loginUser", null);
             session.setAttribute("selectedUser", null);
         } else if (user_name != null || user_name.equals("")) {
             displayInformation(request, user_name);
@@ -65,7 +64,6 @@ public class EditPatientServlet extends HttpServlet {
         String province = request.getParameter("province");
 
         boolean regex_all_check = false;
-        // 2022/03/22   add  start point
         String regex_first_name = "[a-zA-Z\\-]{1,25}";
         String regex_last_name = "[a-zA-Z\\-]{1,25}";
         String regex_phone_number = "^(\\+\\d{1}\\s)?\\(?\\d{3}\\)?\\d{3}\\d{4}$";
