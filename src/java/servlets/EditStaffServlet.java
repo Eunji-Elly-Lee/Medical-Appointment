@@ -1,25 +1,13 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.logging.*;
+import java.util.regex.*;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import models.Account;
-import models.Administrator;
-import models.Doctor;
-import models.Patient;
-import service.AccountService;
-import service.AdministratorService;
-import service.DoctorService;
-import service.PatientService;
+import javax.servlet.http.*;
+import models.*;
+import service.*;
 
 public class EditStaffServlet extends HttpServlet {
 
@@ -35,7 +23,6 @@ public class EditStaffServlet extends HttpServlet {
             return;
         } else if (selectedUser != null) {
             displayInformation(request, selectedUser);
-            //session.setAttribute("loginUser", null);
             session.setAttribute("selectedUser", null);
         } else if (user_name != null || user_name.equals("")) {
             displayInformation(request, user_name);
@@ -72,7 +59,6 @@ public class EditStaffServlet extends HttpServlet {
         String province = request.getParameter("province");
 
         boolean regex_all_check = false;
-        // 2022/03/22   add  start point
         String regex_first_name = "[a-zA-Z\\-]{1,25}";
         String regex_last_name = "[a-zA-Z\\-]{1,25}";
         String regex_phone_number = "^(\\+\\d{1}\\s)?\\(?\\d{3}\\)?\\d{3}\\d{4}$";
@@ -230,5 +216,4 @@ public class EditStaffServlet extends HttpServlet {
             Logger.getLogger(WelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }
