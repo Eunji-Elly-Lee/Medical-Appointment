@@ -59,7 +59,6 @@ public class ProfileServlet extends HttpServlet {
         String province = request.getParameter("province");
 
         boolean regex_all_check = false;
-        // 2022/03/22   add  start point
         String regex_first_name = "[a-zA-Z\\-]{1,25}";
         String regex_last_name = "[a-zA-Z\\-]{1,25}";
         String regex_phone_number = "^(\\+\\d{1}\\s)?\\(?\\d{3}\\)?\\d{3}\\d{4}$";
@@ -93,18 +92,6 @@ public class ProfileServlet extends HttpServlet {
         m = p.matcher(postal_code);
         boolean check_postal_code = m.matches();
 
-//        p = Pattern.compile(regex_birth_date);
-//        m = p.matcher(birth_date);
-//        boolean check_birth_date = m.matches();
-//
-//        if (check_first_name == true && check_last_name == true && check_phone_name == true && check_regex_email == true
-//                && check_regex_city == true && check_postal_code == true && check_birth_date == true) {
-//            regex_all_check = true;
-//        }
-//        p = Pattern.compile(regexNewPassword);
-//        m = p.matcher(password);
-        //added
-//        boolean check_password = m.matches();
         p = Pattern.compile(regex_birth_date);
         m = p.matcher(birth_date);
         boolean check_birth_date = m.matches();
@@ -112,32 +99,30 @@ public class ProfileServlet extends HttpServlet {
 
         if (check_first_name == true && check_last_name == true && check_phone_name == true && check_regex_email == true
                 && check_regex_city == true && check_postal_code == true && check_birth_date == true) {
-            //newly added 4/10/2022
             regex_all_check = true;
-
             boolean passwordIsEmpty = true;
+
             if (password != null && !password.equals("") && password.equals(repassword)) {
                 passwordIsEmpty = false; //not empty
             } 
             
             if (!password.equals(repassword)){
-             passwordIsEmpty = true;
-              regex_all_check = false;
-              System.out.println("works");
-                          request.setAttribute("message", "Password does not match");
-
+                passwordIsEmpty = true;
+                regex_all_check = false;
+                request.setAttribute("message", "Password does not match");
             }
 
             if (passwordIsEmpty == false) { 
                 p = Pattern.compile(regexNewPassword);
                 m = p.matcher(password);
+
                 boolean check_password = m.matches();
+
                 if (check_password == true) {
                     regex_all_check = true;
                 } else {
                     regex_all_check = false;
                     request.setAttribute("passPatternErrorMessage", "*Must contain one number, one uppercase and lowercase letter, one special character and be 6 or more characters");
-
                 }
             }
         }
@@ -235,13 +220,11 @@ public class ProfileServlet extends HttpServlet {
                 Doctor doctor = doctorService.get(account.getAccount_id());
                 request.setAttribute("user", doctor);
                 session.setAttribute("user", account.getUser_name());
-
             } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
                 AdministratorService administratorService = new AdministratorService();
                 Administrator administrator = administratorService.get(account.getAccount_id());
                 request.setAttribute("user", administrator);
                 session.setAttribute("user", account.getUser_name());
-
             } else if (account.getProfile().equals("PATIENT")) {
                 PatientService patientService = new PatientService();
                 Patient patient = patientService.get(account.getAccount_id());
