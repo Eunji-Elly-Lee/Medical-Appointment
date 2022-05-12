@@ -1,28 +1,18 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.logging.*;
+import java.util.regex.*;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import models.Account;
-import models.Administrator;
-import models.Appointment;
-import models.Doctor;
-import models.Patient;
-import service.AccountService;
-import service.AdministratorService;
-import service.AppointmentService;
-import service.DoctorService;
-import service.PatientService;
+import javax.servlet.http.*;
+import models.*;
+import service.*;
 
+/**
+ *
+ * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
+ */
 public class EditPatientServlet extends HttpServlet {
 
     @Override
