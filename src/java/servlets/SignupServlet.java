@@ -83,7 +83,6 @@ public class SignupServlet extends HttpServlet {
 
         for (char c : phoneEntered.toCharArray()) {
             if (phoneEntered.length() != 10) {
-
                 checkNum = false;
             } else if (!Character.isDigit(c)) {
                 checkNum = false;
@@ -93,7 +92,6 @@ public class SignupServlet extends HttpServlet {
         for (char c : phoneAltEntered.toCharArray()) {
             if (phoneAltEntered.length() != 10) {
                 checkNumAlt = false;
-
             } else if (!Character.isDigit(c)) {
                 checkNumAlt = false;
             }
@@ -112,10 +110,9 @@ public class SignupServlet extends HttpServlet {
         }
 
         String regexEmail = "^[^\\s@]+@([^\\s@.,]+\\.)+[^\\s@.,]{2,}$";
-
-        String regexPostal = "^(?![DFIOQUWZ])[A-Z]{1}[0-9]{1}(?![DFIOQU])[A-Z]{1}[ ]{1}[0-9]{1}(?![DFIOQU])[A-Z]{1}[0-9]{1}$";
-        
+        String regexPostal = "^(?![DFIOQUWZ])[A-Z]{1}[0-9]{1}(?![DFIOQU])[A-Z]{1}[ ]{1}[0-9]{1}(?![DFIOQU])[A-Z]{1}[0-9]{1}$";        
         String regexPassword = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,}$";
+        
         boolean checkEmail = true;
         boolean checkPostal = true;
         boolean checkPassword = true;
