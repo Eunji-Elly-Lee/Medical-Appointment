@@ -9,6 +9,10 @@ import javax.servlet.http.*;
 import models.*;
 import service.*;
 
+/**
+ *
+ * @author Kevin, Samia, Fied, Yisong, Jihoon, Jonghan, Elly
+ */
 public class EditStaffServlet extends HttpServlet {
 
     @Override
