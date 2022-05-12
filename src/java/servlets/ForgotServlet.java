@@ -6,8 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import models.Account;
 import service.AccountService;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 /**
  *
@@ -98,10 +97,9 @@ public class ForgotServlet extends HttpServlet {
             if (newPassword != null && !newPassword.equals("") && resetConfirmPassword != null && !resetConfirmPassword.equals("")
                     && newPassword.equals(resetConfirmPassword)) {
                 accountService.changePassword(forgotAccount.getReset_password_uuid(), newPassword);
-
-//                session.removeAttribute("account");
                 request.setAttribute("message", "You have successfully changed your password.");
                 session.setAttribute("forgotAccount", null);
+
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 return;
             } else if (newPassword != null && !newPassword.equals("") && resetConfirmPassword != null && !resetConfirmPassword.equals("")
@@ -137,9 +135,9 @@ public class ForgotServlet extends HttpServlet {
                     if (checkAccount != null) {
                         request.setAttribute("resetPwd", "We sent an email to your email address.");
                         request.setAttribute("resetMessage2", "(If you haven't got the email, please check your junk mail.)");
+                        
                         getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
                         return;
-
                     } else {
                         request.setAttribute("resetPwd", "Check account information again.");
 
