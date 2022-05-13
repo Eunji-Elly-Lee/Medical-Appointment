@@ -10,7 +10,7 @@ import javax.servlet.http.*;
  */
 public class AuthentificationFilter implements Filter {
 
-   @Override
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
