@@ -105,7 +105,7 @@ public class AccountService {
                 tags.put("link", link);
                 tags.put("date", (new java.util.Date()).toString());
 
-                GmailService.sendMail(to, subject, template, tags);
+                JavaMailService.sendMail(to, subject, template, tags);
             } else if (account.getProfile().equals("ADMIN") || account.getProfile().equals("SYSADMIN")) {
                 AdministratorDB administratorDB = new AdministratorDB();
                 Administrator administrator = administratorDB.get(account.getAccount_id());
@@ -122,7 +122,7 @@ public class AccountService {
                 tags.put("link", link);
                 tags.put("date", (new java.util.Date()).toString());
 
-                GmailService.sendMail(to, subject, template, tags);
+                JavaMailService.sendMail(to, subject, template, tags);
             } else if (account.getProfile().equals("PATIENT")) {
                 PatientDB patientDB = new PatientDB();
                 Patient patient = patientDB.get(account.getAccount_id());
@@ -139,7 +139,7 @@ public class AccountService {
                 tags.put("link", link);
                 tags.put("date", (new java.util.Date()).toString());
 
-                GmailService.sendMail(to, subject, template, tags);
+                JavaMailService.sendMail(to, subject, template, tags);
             }
         } catch (Exception ex) {
             Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
@@ -226,7 +226,7 @@ public class AccountService {
                     tags.put("link", url);
                     tags.put("date", (new java.util.Date()).toString());
 
-                    GmailService.sendMail(to, subject, template, tags);
+                    JavaMailService.sendMail(to, subject, template, tags);
                 } else {
                     return null;
                 }
@@ -244,7 +244,7 @@ public class AccountService {
                     tags.put("link", url);
                     tags.put("date", (new java.util.Date()).toString());
 
-                    GmailService.sendMail(to, subject, template, tags);
+                    JavaMailService.sendMail(to, subject, template, tags);
                 } else {
                     return null;
                 }
@@ -262,7 +262,7 @@ public class AccountService {
                     tags.put("link", url);
                     tags.put("date", (new java.util.Date()).toString());
 
-                    GmailService.sendMail(to, subject, template, tags);
+                    JavaMailService.sendMail(to, subject, template, tags);
                 }else {
                     return null;
                 } 
