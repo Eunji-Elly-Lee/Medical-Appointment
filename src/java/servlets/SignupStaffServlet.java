@@ -246,35 +246,41 @@ public class SignupStaffServlet extends HttpServlet {
             request.setAttribute("user", administrator);
             
             if (insertInfo == true) {
-                if (staffTypeEntered.equals("DOCTOR")) {
-                    as.insert(0, usernameEntered, passEntered, "DOCTOR");
-                    Account newAccount = as.getAll().get(as.getAll().size() - 1);
-                    ds.insert(0, firstEntered, lastEntered, emailEntered, phoneEntered,
-                            phoneAltEntered, prefferedEntered, newAccount.getAccount_id(), genderEntered,
-                            birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
-                } else if (staffTypeEntered.equals("ADMIN")) {
-                    as.insert(0, usernameEntered, passEntered, "ADMIN");
-                    Account newAccount = as.getAll().get(as.getAll().size() - 1);
-                    ads.insert(0, firstEntered, lastEntered, emailEntered, phoneEntered,
-                            phoneAltEntered, prefferedEntered, newAccount.getAccount_id(), genderEntered,
-                            birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
-                } 
+                Account checkAccount = as.get(usernameEntered);
                 
-                request.setAttribute("signup_username", "");
-                request.setAttribute("signup_firstname", "");
-                request.setAttribute("signup_lastname", "");
-                request.setAttribute("signup_phonenum", "");
-                request.setAttribute("signup_email", "");
-                request.setAttribute("signup_phonenum_alt", "");
-                request.setAttribute("signup_birth_date", ""); 
-                request.setAttribute("staff_type_radio", "");
-                request.setAttribute("gender_radio", "");
-                request.setAttribute("prefered_notification_radio", "");
-                request.setAttribute("signup_address", "");   
-                request.setAttribute("signup_city", ""); 
-                request.setAttribute("signup_state_province", ""); 
-                request.setAttribute("signup_postal", "");
-                request.setAttribute("message", "New staff has beed updated successfully.");   
+                if (checkAccount != null) {
+                    request.setAttribute("message", "This username already exists. Please choose the other.");
+                } else {
+                    if (staffTypeEntered.equals("DOCTOR")) {
+                        as.insert(0, usernameEntered, passEntered, "DOCTOR");
+                        Account newAccount = as.getAll().get(as.getAll().size() - 1);
+                        ds.insert(0, firstEntered, lastEntered, emailEntered, phoneEntered,
+                                phoneAltEntered, prefferedEntered, newAccount.getAccount_id(), genderEntered,
+                                birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
+                    } else if (staffTypeEntered.equals("ADMIN")) {
+                        as.insert(0, usernameEntered, passEntered, "ADMIN");
+                        Account newAccount = as.getAll().get(as.getAll().size() - 1);
+                        ads.insert(0, firstEntered, lastEntered, emailEntered, phoneEntered,
+                                phoneAltEntered, prefferedEntered, newAccount.getAccount_id(), genderEntered,
+                                birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
+                    } 
+
+                    request.setAttribute("signup_username", "");
+                    request.setAttribute("signup_firstname", "");
+                    request.setAttribute("signup_lastname", "");
+                    request.setAttribute("signup_phonenum", "");
+                    request.setAttribute("signup_email", "");
+                    request.setAttribute("signup_phonenum_alt", "");
+                    request.setAttribute("signup_birth_date", ""); 
+                    request.setAttribute("staff_type_radio", "");
+                    request.setAttribute("gender_radio", "");
+                    request.setAttribute("prefered_notification_radio", "");
+                    request.setAttribute("signup_address", "");   
+                    request.setAttribute("signup_city", ""); 
+                    request.setAttribute("signup_state_province", ""); 
+                    request.setAttribute("signup_postal", "");
+                    request.setAttribute("message", "New staff has beed updated successfully.");   
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(SignupServlet.class.getName()).log(Level.SEVERE, null, ex);
