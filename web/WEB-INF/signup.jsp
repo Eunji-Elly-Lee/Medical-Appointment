@@ -363,7 +363,7 @@
                         
                         <div class="register_btn">
                             <input type="submit" value="Register">
-                            <input type="button" value="Cancel">
+                            <a href="welcome"><input type="button" value="Cancel"></a>
                         </div>
                     </form>
                 </div>
