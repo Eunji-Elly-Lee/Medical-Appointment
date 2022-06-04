@@ -253,6 +253,7 @@
                             <c:choose>
                                 <c:when test="${account.profile == 'PATIENT' && appointment.type == '4'}">
                                     <input type="text" value="New Patient Meeting" readonly>
+                                    <input type="hidden" name ="type" value="4">
                                 </c:when>
                                 <c:otherwise>
                                     <select name="type">
