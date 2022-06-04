@@ -11,7 +11,7 @@ public class ConnectionPool {
     private ConnectionPool() {
         try {
             InitialContext ic = new InitialContext();
-            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc:mysql://database-1.cd5xn7occm9a.ca-central-1.rds.amazonaws.com:3306/userdb");
+            dataSource = (DataSource) ic.lookup("");
         } catch (NamingException e) {
             System.out.println(e);
         }
