@@ -224,7 +224,15 @@
                 <div class="edit">
                     <div class="form_heading">
                         <h2>Edit Appointment</h2>
-                        <p>Please edit the type and reason for appointment in the form below</p>
+                        
+                        <c:choose>
+                            <c:when test="${account.profile == 'PATIENT' && appointment.type == '4'}">
+                                <p>Please edit the reason for appointment in the form below</p>
+                            </c:when>
+                            <c:otherwise>
+                                <p>Please edit the type and reason for appointment in the form below</p>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
 
                     <form class="edit_form" action="edit_appointment" method="post">
@@ -242,32 +250,36 @@
                         </div>
                         <div>
                             <label for="type">Type</label>
-                            <select name="type">
-                                <c:if test="${appointment.type == '1'}">
-                                    <option value="1" selected>Regular</option>
-                                    <option value="2" >Annual Physical</option>
-                                    <option value="3" >Urgent Care</option>
-                                    <option value="4" >New Patient Meeting</option>
-                                </c:if>
-                                <c:if test="${appointment.type == '2'}">
-                                    <option value="1" >Regular</option>
-                                    <option value="2" selected>Annual Physical</option>
-                                    <option value="3" >Urgent Care</option>
-                                    <option value="4" >New Patient Meeting</option>
-                                </c:if>
-                                <c:if test="${appointment.type == '3'}">
-                                    <option value="1" >Regular</option>
-                                    <option value="2" >Annual Physical</option>
-                                    <option value="3" selected>Urgent Care</option>
-                                    <option value="4" >New Patient Meeting</option>
-                                </c:if>
-                                <c:if test="${appointment.type == '4'}">
-                                    <option value="1" >Regular</option>
-                                    <option value="2" >Annual Physical</option>
-                                    <option value="3" >Urgent Care</option>
-                                    <option value="4" selected>New Patient Meeting</option>
-                                </c:if>
-                            </select>
+                            <c:choose>
+                                <c:when test="${account.profile == 'PATIENT' && appointment.type == '4'}">
+                                    <input type="text" value="New Patient Meeting" readonly>
+                                </c:when>
+                                <c:otherwise>
+                                    <select name="type">
+                                        <c:if test="${appointment.type == '1'}">
+                                            <option value="1" selected>Regular</option>
+                                            <option value="2" >Annual Physical</option>
+                                            <option value="3" >Urgent Care</option>
+                                        </c:if>
+                                        <c:if test="${appointment.type == '2'}">
+                                            <option value="1" >Regular</option>
+                                            <option value="2" selected>Annual Physical</option>
+                                            <option value="3" >Urgent Care</option>
+                                        </c:if>
+                                        <c:if test="${appointment.type == '3'}">
+                                            <option value="1" >Regular</option>
+                                            <option value="2" >Annual Physical</option>
+                                            <option value="3" selected>Urgent Care</option>
+                                        </c:if>
+                                        <c:if test="${account.profile != 'PATIENT' && appointment.type == '4'}">
+                                            <option value="1" >Regular</option>
+                                            <option value="2" >Annual Physical</option>
+                                            <option value="3" >Urgent Care</option>
+                                            <option value="4" selected>New Patient Meeting</option>
+                                        </c:if>
+                                    </select>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                         <div>
                             <label for="reason">Appointment Reason</label>
