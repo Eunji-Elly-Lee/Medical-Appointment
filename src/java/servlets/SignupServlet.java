@@ -263,14 +263,28 @@ public class SignupServlet extends HttpServlet {
             }
             
             if (insertInfo == true) {
-                as.insert(0, usernameEntered, passEntered, "PATIENT");
-                Account newAccount = as.getAll().get(as.getAll().size()-1);
+                Account checkAccount = as.get(usernameEntered);
                 
-                ps.insert(0, healthCareNumber, firstEntered, lastEntered, emailEntered, phoneEntered,
-                        phoneAltEntered, prefferedEntered, 1234567, newAccount.getAccount_id(), genderEntered,
+                if (checkAccount != null) {
+                    Patient patient = new Patient(0,  healthCareNumber,  firstEntered, lastEntered ,  emailEntered,
+                        phoneEntered , phoneAltEntered, prefferedEntered, 1234567, 4618, genderEntered,
                         birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
-                
-                request.setAttribute("message", "Your account has beed registered successfully.");  
+                    request.setAttribute("patient", patient);
+
+                    Account new_account = new Account(0, usernameEntered, passEntered);
+                    request.setAttribute("new_account", new_account);
+                   
+                    request.setAttribute("message", "This username already exists. Please choose the other.");
+                } else {
+                    as.insert(0, usernameEntered, passEntered, "PATIENT");
+                    Account newAccount = as.getAll().get(as.getAll().size()-1);
+
+                    ps.insert(0, healthCareNumber, firstEntered, lastEntered, emailEntered, phoneEntered,
+                            phoneAltEntered, prefferedEntered, 1234567, newAccount.getAccount_id(), genderEntered,
+                            birthEntered, streetEntered, cityEntered, provinceEntered, postalEntered);
+
+                    request.setAttribute("message", "Your account has beed registered successfully.");  
+                }                
             } else {
                 Patient patient = new Patient(0,  healthCareNumber,  firstEntered, lastEntered ,  emailEntered,
                      phoneEntered , phoneAltEntered, prefferedEntered, 1234567, 4618, genderEntered,
