@@ -6,7 +6,7 @@
 
 This is an web application Surpass Health Clinic. It is designed to make it easy for patients to book appointments at any time and anywhere, without having to call or visit the clinic.
 
-#### [View Application](http://3.96.237.87:8080/capstone/)
+#### [View Application](http://3.96.237.87:8080/Medical-Appointment/)
 
 Its users will have one of four roles and will be provided with different functions depending on their roles.
 
@@ -20,8 +20,7 @@ Its users will have one of four roles and will be provided with different functi
 - Fully responsive website across all devices
 - Restrictions on page entry according to role authority
 - High security from encryption of all stored data
-- Created in Apache Tomcat server with NetBeans
-- Running and deploying using AWS
+- Created using NetBeans
 
 ## Used skills
 - HTML, CSS, and Bootstrap
@@ -29,4 +28,6 @@ Its users will have one of four roles and will be provided with different functi
 - JavaBeans and JSTL
 - JavaMail
 - Model-View-Controller Pattern and Filter
+- Encryption using AES, SHA-256, and Salt
 - MySQL and JDBC driver
+- AWS and Apache Tomcat
