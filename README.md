@@ -6,7 +6,7 @@
 
 This is a web application for Surpass Health Clinic. It is designed to make it easy for patients to book appointments at any time and anywhere, without having to call or visit the clinic.
 
-#### [View Application](http://3.96.237.87:8080/Medical-Appointment/)
+#### [View Application](https://sorry-updating.netlify.app/)
 
 Its users will have one of four roles and will be provided with different functions depending on their roles.
 
