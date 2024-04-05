@@ -1,33 +1,44 @@
-## SAIT IT Program Capstone Project
+## Medical Clinic Appointment Web Application
 
 ![main page](/web/img/main_page.png)
 ![booking page](/web/img/booking_page.png)
 ![staff page](/web/img/staff_page.png)
 
-This is a web application for Surpass Health Clinic. It is designed to make it easy for patients to book appointments at any time and anywhere, without having to call or visit the clinic.
+This web application empowers patients of Surpass Health Clinic to conveniently schedule appointments online, eliminating the need for phone calls or clinic visits. Patients can book appointments anytime, anywhere, streamlining the appointment scheduling process.
 
-#### [View Application](https://sorry-updating.netlify.app/)
+### User Roles and Access Control
 
-Its users will have one of four roles and will be provided with different functions depending on their roles.
+The application implements a robust role-based access control system, enabling distinct functionalities for various user types:
 
-1. Patient: a patient can book an appointment at the available time of their doctor.
-2. Doctor: a doctor can register available dates and times to match their shifts and book an appointment with their patient.
-3. Administrator: an administrator can book their appointments on behalf of all patients and doctors and manage patient attendance.
-4. System administrator: a system administrator will be responsible for managing staff and maintaining data.
+- **Patient**: Books appointments with their doctor at available times, fostering increased autonomy and flexibility
+- **Doctor**: Manages their schedule by registering available appointment slots aligned with their shifts and has the ability to directly schedule appointments with their patients
+- **Administrator**: Facilitates appointment scheduling on behalf of patients and doctors, ensuring smooth clinic operations and manages patient attendance records
+- **System Administrator**: Possesses comprehensive control, overseeing staff management, data maintenance, and system security
 
-## Features
-- Warm and bright mood from light blue and green
-- Fully responsive website across all devices
-- Restrictions on page entry according to role authority
-- High security from encryption of all stored data
-- Created using NetBeans
+### Features
 
-## Used skills
-- HTML, CSS, and Bootstrap
-- Java Servlet and JSP
-- JavaBeans and JSTL
-- JavaMail
-- Model-View-Controller Pattern and Filter
-- Encryption using AES, SHA-256, and Salt
-- MySQL and JDBC driver
-- AWS and Apache Tomcat
+- **Welcoming Interface**: A calming atmosphere is created through a light blue and green color scheme, fostering a sense of ease and trust for patients scheduling appointments.
+- **Responsive Design**: The application seamlessly adapts to any device, ensuring a consistent and optimal user experience across desktop computers, tablets, and smartphones.
+- **Secured Access**: Granular access controls prevent unauthorized actions. Users can only access functionalities aligned with their designated role.
+- **Enhanced Security**: High-level security safeguards user data through robust encryption with AES, SHA-256, and Salt, protecting patient privacy and clinic information.
+
+### Technologies Used
+
+The application was created using NetBeans, and it leverages the following technologies:
+
+**Front-End**:
+
+- HTML, and CSS: Used for creating the user interface and ensuring a visually appealing design
+
+**Back-End**:
+
+- Java Servlet and JSP: Used for handling server-side logic and generating dynamic content
+- JavaBeans and JSTL: Manage data and simplify JSP page development
+- JavaMail: Integrates email functionality for notifications and communication
+- Model-View-Controller (MVC) Pattern and Filter: Adopted for organizing the application's structure and implementing pre-processing logic
+- Encryption (AES, SHA-256, and Salt): Implements multi-layered encryption to safeguard sensitive data
+- MySQL and JDBC Driver: Utilized for interacting with the database, managing data, and executing SQL queries
+
+<br />
+
+This readme file provides a comprehensive overview of the Medical Clinic Appointment web application. For further details or inquiries, feel free to reach out!
